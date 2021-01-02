@@ -11,3 +11,6 @@ Páginas referentes del mercado:
   abcrockinstrumentosmusicales.com
   musicalmonroe.com.ar
   falabella.com.ar/falabella-ar/category/cat80085/Instrumentos-musicales
+Estas páginas fueron seleccionadas porque:
+1. Venden instrumentos musicales similares a los que pretndemoos ofrecer en nuestra página para la venta.
+2. Son las primeras que aparecen en el buscador de Google.
