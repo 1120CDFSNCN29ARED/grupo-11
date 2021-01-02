@@ -5,9 +5,9 @@ Miembros del equipo: Chritian Duic, Mariano Acevedo, Diego Iribarren
 
 Páginas referentes del mercado:
   beckcasademusica.com.ar
-  falabella.com.ar/falabella-ar/category/cat80085/Instrumentos-musicales
   kemuelmusica.com
   lacasadelinstrumentomusical.com.ar
   famusic.com.ar/instrumentos
   abcrockinstrumentosmusicales.com
-  https://musicalmonroe.com.ar/
+  musicalmonroe.com.ar
+  falabella.com.ar/falabella-ar/category/cat80085/Instrumentos-musicales
