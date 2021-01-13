@@ -3,22 +3,31 @@
 -TEMATICA DEL MARKET PLACE
 
  Tema: instrumentos musicales
+ 
  Público "target": personas aficionadas y musicos que quieren comprar instrumentos musicales de buena calidad
 
 -INTEGRANTES DEL EQUIPO
 
  Chritian Duic:
+ 
  Mariano Acevedo: Adentrarme al mundo de la programacion para poder desarrollarme profesionalmente.
+ 
  Diego Iribarren:
 
 -REFERENCIAS DEL MERCADO
 
   beckcasademusica.com.ar
+  
   kemuelmusica.com
+  
   lacasadelinstrumentomusical.com.ar
+  
   famusic.com.ar/instrumentos
+  
   abcrockinstrumentosmusicales.com
+  
   musicalmonroe.com.ar
+  
   falabella.com.ar/falabella-ar/category/cat80085/Instrumentos-musicales
   
   Estas páginas fueron seleccionadas porque:
