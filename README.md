@@ -6,6 +6,8 @@
  
  Público "target": personas aficionadas y musicos que quieren comprar instrumentos musicales de buena calidad
 
+
+
 -INTEGRANTES DEL EQUIPO
 
  Chritian Duic:
@@ -13,6 +15,8 @@
  Mariano Acevedo: Adentrarme al mundo de la programacion para poder desarrollarme profesionalmente.
  
  Diego Iribarren:
+
+
 
 -REFERENCIAS DEL MERCADO
 
