@@ -14,7 +14,7 @@
  
  Mariano Acevedo: Adentrarme al mundo de la programacion para poder desarrollarme profesionalmente.
  
- Diego Iribarren:
+ Diego Iribarren: vocación por emprender, usando las herramientas de la programaación web
 
 
 
