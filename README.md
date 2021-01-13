@@ -10,7 +10,8 @@
 
 -INTEGRANTES DEL EQUIPO
 
- Chritian Duic:
+ Chritian Duic: Desarrollador de software hace 4 años (.NET y MSQL principalmente). 
+ Quiero expandir el universo de tecnologias que manejo para poder participar en mas proyectos en mi trabajo y para tener mas posibilidades en futuras busquedas.
  
  Mariano Acevedo: Adentrarme al mundo de la programacion para poder desarrollarme profesionalmente.
  
