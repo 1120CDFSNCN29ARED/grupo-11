@@ -1,0 +1,12 @@
+/* GENERAL */
+main {margin:0; display: flex; justify-content:center; align-items: center;}
+
+#carrito {position: absolute;width:80%;}
+#carrito {border: solid 3px blue; background-color: lightblue}
+#carrito #logo {width: 20%;}
+#carrito .producto {width: 90%;padding:15px ;border: red 2px dotted;margin: 15px auto 15px;}
+#carrito .producto {display:flex;justify-content:space-around;padding:15px ;border: red 2px dotted;}
+#carrito .producto #nombre {width: 50%}
+#carrito .producto #cantidad {width: 10%}
+#carrito .producto #precio-un {width: 10%}
+#carrito .producto #precio-total {width: 10%}
