@@ -8,3 +8,5 @@ main form input, main form button {padding: 5px 10px;border-radius: 10%;font-wei
 main form div#button {display: flex; justify-content: space-between}
 #tapar-el-fondo div {background-color:var(--primary-background);opacity:70%;}
 #tapar-el-fondo div {height:100%;width:100%;position: absolute;z-index:1;}
+#google-facebook {display:flex; justify-content: space-around;padding:10px 0 0;}
+#google-facebook img {height: 30px}
