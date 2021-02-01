@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 
-app.listen(3010, () => console.log('Servidor funcionando...'))
+app.listen(3000, () => console.log('Servidor funcionando...'))
 let path = require('path')
 app.use(express.static(path.resolve('public')));
 
