@@ -1,12 +1,25 @@
 /* GENERAL */
 main {margin:0; display: flex; justify-content:center; align-items: center;}
 
-#carrito {position: absolute;width:80%;}
+#carrito {position: absolute;width:90%;padding-bottom: 10px;}
 #carrito {border: solid 3px blue; background-color: lightblue}
-#carrito #logo {width: 20%;}
-#carrito .producto {width: 90%;padding:15px ;border: red 2px dotted;margin: 15px auto 15px;}
-#carrito .producto {display:flex;justify-content:space-around;padding:15px ;border: red 2px dotted;}
-#carrito .producto #nombre {width: 50%}
-#carrito .producto #cantidad {width: 10%}
-#carrito .producto #precio-un {width: 10%}
-#carrito .producto #precio-total {width: 10%}
+
+#carrito #encabezado {display:flex; justify-content: space-between;}
+#carrito #encabezado .logo-carrito {font-size: 1.5rem;padding: 20px 0 10px 20px;}
+#carrito #encabezado #total {display: flex;}
+
+#carrito .productos {width: 90%; padding:15px; margin: 15px auto 15px;}
+#carrito .productos {display:flex;justify-content:space-between;align-items: center;}
+#carrito .productos {border: gray 2px solid;}
+
+#carrito .productos .imagen-de-producto {width:10%}
+#carrito .productos .nombre-de-producto {width: 25%; font-size:1rem; font-weight: bold;}
+
+#carrito .productos #cantidad-y-flechas {width: 10%; display:flex; align-items: center; justify-content: space-between;}
+#carrito .productos #up-down {display:flex; flex-direction: column;}
+
+#carrito .productos #cantidad {width: 70%; font-size: 2rem; text-align:right;}
+#carrito .productos .título {font-size:1rem; font-weight:bold; text-align:center; margin-bottom: 5px;}
+#carrito .productos .valor {font-size: 1.2rem;}
+
+#carrito .fa-trash-alt {font-size: 1.1rem;}
