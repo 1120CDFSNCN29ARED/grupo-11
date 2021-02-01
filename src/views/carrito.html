@@ -45,11 +45,9 @@
             </a>
         </div>
         <div id="shop-cart-container" class="flex-container">
-            <form action="/" method="GET">
-                <button type="submit" id="shop-cart-button">
-                    <i class="fas fa-shopping-basket"></i>
-                </button>
-            </form>
+            <a href="/carrito">
+                <button id="shop-cart-button"><i class="fas fa-shopping-basket"></i></button>
+            </a>
         </div>
         <div id="profile-container" class="flex-container">
             <form action="/" method="GET">
@@ -64,7 +62,7 @@
         <section id="carrito">
             <div id="encabezado"><!--ENCABEZADO-->
                 <i class="fas fa-shopping-basket logo-carrito"></i>
-                <div>
+                <div> <!--IMPORTE TOTAL Y PAGAR-->
                     <div id="total">
                         <p>Importe a pagar:</p>
                         <p>$ 3.000.000</p>
@@ -100,7 +98,7 @@
             </div>
             <div class="productos">
                 <img src="/images/products/taylor-210ce-plus.jpg" alt="taylor-210ce-plus" class="imagen-de-producto">
-                <p class="nombre-de-producto">Taylor-210ce-plus</p>
+                <p class="nombre-de-producto">Taylor 210ce plus</p>
                 <div id="cantidad-y-flechas"> <!--CANTIDAD-->
                     <p id="cantidad">10</p>
                     <div id="up-down">
