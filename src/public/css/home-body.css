@@ -25,9 +25,7 @@ main {
 
 .product {
     width: 45%;
-    margin: auto;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    margin: 0px auto;
     background-color: var(--white);
 }
 

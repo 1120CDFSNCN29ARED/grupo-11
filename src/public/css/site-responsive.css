@@ -11,6 +11,7 @@
     }
 
     #menu-button-container {
+        width: 100%;
         order: 5;
         justify-content: flex-start;
         padding-top: 1em;
@@ -55,10 +56,6 @@
     #shop-cart-container,
     #profile-container{
         width: 5%;
-    }
-
-    #menu-button-container {
-        width: 100%;
     }
 
     #search-form {
