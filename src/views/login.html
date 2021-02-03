@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,14 +10,16 @@
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/site.css">
     <link rel="stylesheet" href="/css/site-header.css">
-    <link rel="stylesheet" href="/css/home-body.css">
     <link rel="stylesheet" href="/css/site-footer.css">
     <link rel="stylesheet" href="/css/site-responsive.css">
-    <link rel="stylesheet" href="/css/home-responsive.css">
-    <title>Guitar Shop</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Login</title>
 </head>
 
 <body>
+    <section id="tapar-el-fondo">
+        <div></div>
+    </section>
     <header id="site-header">
         <div class="top-header flex-container">
             <div id="menu-button-container" class="flex-container">
@@ -62,98 +64,27 @@
             </div>
         </div>
     </header>
-    <section>
-        <img src="/images/baner-image-1.jpg" alt="baner" class="banner-image">
-    </section>
     <main>
-        <section class="products-group">
-            <div class="section-header flex-container">
-                <p class="section-title">Mas vendidos</p>
-                <p class="view-more">Ver todos</p>
+        <form action="" method="POST">
+            <div>
+                <!--Dirección de mail-->
+                <input type="email" name="e-mail" placeholder="Dirección de mail">
             </div>
-            <div class="section-products flex-container">
-                <article class="product">
-                    <div class="product-image-container">
-                        <img src="/images/products/fender-stratocaster.jpg" alt="fender stratocaster" class="product-image">
-                    </div>
-                    <div class="product-information">
-                        <p class="product-description">Fender Stratocaster</p>
-                        <p class="product-price">$ 100.000</p>
-                    </div>
-                </article>
-                <article class="product">
-                    <div class="product-image-container">
-                        <img src="/images/products/taylor-gs-mini.jpg" alt="taylor gs mini" class="product-image">
-                    </div>
-                    <div class="product-information">
-                        <p class="product-description">Taylor GS Mini</p>
-                        <p class="product-price">$ 75.000</p>
-                    </div>
-                </article>
-                <article class="product hidden-product">
-                    <div class="product-image-container">
-                        <img src="/images/products/fender-telecaster.jpg" alt="fender telecaster" class="product-image">
-                    </div>
-                    <div class="product-information">
-                        <p class="product-description">Fender Telecaster</p>
-                        <p class="product-price">$110.000</p>
-                    </div>
-                </article>
-                <article class="product hidden-product">
-                    <div class="product-image-container">
-                        <img src="/images/products/jackson-king-v.jpg" alt="jackson king v" class="product-image">
-                    </div>
-                    <div class="product-information">
-                        <p class="product-description">Jackson King V</p>
-                        <p class="product-price">$80.000</p>
-                    </div>
-                </article>
+            <div>
+                <!--Contraseña-->
+                <input type="password" name="password" placeholder="Contraseña">
             </div>
-        </section>
-        <section class="products-group">
-            <div class="section-header flex-container">
-                <p class="section-title">Novedades</p>
-                <p class="view-more">Ver todos</p>
+            <div id="button">
+                <!--Buttons-->
+                <button type="submit">Enviar</button>
+                <button type="reset">Borrar</button>
             </div>
-            <div class="section-products flex-container">
-                <article class="product">
-                    <div class="product-image-container">
-                        <img src="/images/products/gibson-les-paul.jpg" alt="gibson les paul" class="product-image">
-                    </div>
-                    <div class="product-information">
-                        <p class="product-description">Gibson Les Paul</p>
-                        <p class="product-price">$ 100.000</p>
-                    </div>
-                </article>
-                <article class="product">
-                    <div class="product-image-container">
-                        <img src="/images/products/fender-precision.jpg" alt="fender precision" class="product-image">
-                    </div>
-                    <div class="product-information">
-                        <p class="product-description">Fender Precision</p>
-                        <p class="product-price">$80.000</p>
-                    </div>
-                </article>
-                <article class="product hidden-product">
-                    <div class="product-image-container">
-                        <img src="/images/products/gibson-sg.jpg" alt="gibson sg" class="product-image">
-                    </div>
-                    <div class="product-information">
-                        <p class="product-description">Gibson SG</p>
-                        <p class="product-price">$100.000</p>
-                    </div>
-                </article>
-                <article class="product hidden-product">
-                    <div class="product-image-container">
-                        <img src="/images/products/taylor-210ce-plus.jpg" alt="taylor 210ce plus" class="product-image">
-                    </div>
-                    <div class="product-information">
-                        <p class="product-description">Taylor 210ce Plus</p>
-                        <p class="product-price">$90.000</p>
-                    </div>
-                </article>
+            <div id="google-facebook">
+                <img src="/images/Google.png" alt="Google">
+                <img src="/images/facebook-icon.svg" alt="Facebook">
             </div>
-        </section>
+        </form>
+        <img src="/images/baner-image-1.jpg" alt="baner" class="banner-image">
     </main>
     <footer id="site-footer">
         <div id="footer-main-section">
