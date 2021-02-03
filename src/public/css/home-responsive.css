@@ -1,0 +1,16 @@
+/* MEDIA QUERY */
+@media (min-width: 768px) {    
+    .hidden-product {
+        display: initial;
+    }
+    
+    .product {
+        width: 23%;
+    }
+}
+  
+@media (min-width: 1200px) {    
+    .product:hover {
+        box-shadow: 0px 10px 10px rgb(100, 100, 100);
+    }
+}
