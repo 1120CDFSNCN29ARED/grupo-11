@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guitar store</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="/css/site-header.css">
+    <link rel="stylesheet" href="/css/site-footer.css">
+    <link rel="stylesheet" href="/css/site-responsive.css">
+    <link rel="stylesheet" href="/css/detalle-producto.css">
+    <title>Guitar Shop</title>
+</head>
+
+<body>
+    <header id="site-header">
+        <div class="top-header flex-container">
+            <div id="menu-button-container" class="flex-container">
+                <button id="menu-button">
+                    <i class="fa fa-bars burger"></i>
+                </button>
+                <div id="nav-bar">
+                    <ul id="menu" class="flex-container">
+                        <li><a href="#" class="menu-options">Guitarras electricas</a></li>
+                        <li><a href="#" class="menu-options">Guitarras acusticas</a></li>
+                        <li><a href="#" class="menu-options">Bajos</a></li>
+                        <li><a href="#" class="menu-options">Teclados</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="search-container" class="flex-container">
+                <form action="/" method="GET" class="flex-container" id="search-form">
+                    <input type="text" name="search-value" id="search-value">
+                    <button type="submit" id="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+            <div id="logo-container" class="flex-container">
+                <a href="/" class="flex-container">
+                    <img src="/images/logo.svg" alt="Logo guitar shop" id="logo">
+                </a>
+            </div>
+            <div id="shop-cart-container" class="flex-container">
+                <a href="/carrito" class="flex-container">
+                    <button type="submit" id="shop-cart-button">
+                        <i class="fas fa-shopping-basket"></i>
+                    </button>
+                </a>
+            </div>
+            <div id="profile-container" class="flex-container">
+                <a href="/" class="flex-container">
+                    <button type="submit" id="profile-button">
+                        <i class="fas fa-user"></i>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <form action="/" action="GET">
+            <section>
+                <div class="contenedor-padre">
+                    <div class="producto">
+                        <h2>Guitarra Electrica</h2>
+                    </div>
+                    <div class="carrito">
+                        <button class="icono-carrito"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                    <div class="img">
+                        <article>
+                            <img src="/images/products/fender-stratocaster.jpg" width="100%" alt="imagenes de Guitarra">
+                        </article>
+                    </div>
+                    <div class="descripcion-contenedor">
+                        <article class="descripcion">
+                            <div class="caracteristica">
+                                <h4>Caracteristicas Tecnicas</h4>
+                            </div>
+                            <div class="detalle">
+                                <p>
+                                    Guitarra electrica | Tipo STR | Diap, Rosewood | 3 micrófonos simples | Sunburts
+                                    With Brown Outline
+                                </p>
+                            </div>
+                            <div class="precio">
+                                <p>3000$</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </main>
+    <footer id="site-footer">
+        <div id="footer-main-section">
+            <section id="information">
+                <p class="footer-title">INFORMACIÓN</p>
+                <article class="information-elements">
+                    <a href="/" class="link">
+                        <p>Inicio</p>
+                    </a>
+                </article>
+                <article class="information-elements">
+                    <a href="/" class="link">
+                        <p>Sobre nosotros</p>
+                    </a>
+                </article>
+                <article class="information-elements">
+                    <a href="/" class="link">
+                        <p>Contacto</p>
+                    </a>
+                </article>
+                <article class="information-elements">
+                    <a href="/" class="link">
+                        <p>Poloticas de privacidad</p>
+                    </a>
+                </article>
+            </section>
+            <section id="social-networks">
+                <article>
+                    <p class="footer-title">GUITAR SHOP</p>
+                    <p>Seguinos en las redes</p>
+                    <a href="https://www.facebook.com/" class="link">
+                        <img src="/images/facebook-icon.svg" alt="facebook" class="social-network-icon">
+                    </a>
+                    <a href="https://www.instagram.com/" class="link">
+                        <img src="/images/instagram-icon.png" alt="instagram" class="social-network-icon">
+                    </a>
+                </article>
+            </section>
+            <section id="newsletter">
+                <article>
+                    <p class="footer-title">NEWSLETTER</p>
+                    <p>Recibi ofertas y novedades en tu mail</p>
+                    <form action="/" method="GET" id="newsletter-form" class="flex-container">
+                        <input type="text" name="name" id="name" placeholder="Nombre" class="newsletter-input">
+                        <input type="text" name="email" id="email" placeholder="Email" class="newsletter-input">
+                        <button type="submit" id="newsletter-button">SUSCRIBIRME</button>
+                    </form>
+                </article>
+            </section>
+        </div>
+        <section id="copyright">
+            <p>© 2021 Guitar Shop - Todos los derechos reservados.</p>
+        </section>
+    </footer>
+</body>
+
+</html>
