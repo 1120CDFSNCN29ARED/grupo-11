@@ -21,9 +21,9 @@ app.get('/login', (req, res) => {
 });
 
 app.get("/registro", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "./views/registro.html"));
+    res.sendFile(path.resolve(__dirname, "views/registro.html"));
 });
 
 app.get("/detalle-producto", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "./views/detalle-producto.html"));
+    res.sendFile(path.resolve(__dirname, "views/detalle-producto.html"));
 });
