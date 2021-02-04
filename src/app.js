@@ -6,24 +6,10 @@ const staticFolder = path.resolve(__dirname, "./public");
 
 app.use(express.static(staticFolder));
 
-app.listen(3000, () => console.log('Servidor funcionando...'));
+app.listen(3000, () => console.log('Servidor funcionando en puerto 3000...'));
 
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'views/index.html'))
-});
-
-app.get('/carrito', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'views/carrito.html'))
-});
-
-app.get('/login', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'views/login.html'))
-});
-
-app.get("/registro", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "views/registro.html"));
-});
-
-app.get("/detalle-producto", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "views/detalle-producto.html"));
-});
+app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, 'views/index.html')));
+app.get('/carrito', (req, res) => res.sendFile(path.resolve(__dirname, 'views/carrito.html')));
+app.get('/login', (req, res) => res.sendFile(path.resolve(__dirname, 'views/login.html')));
+app.get("/registro", (req, res) => res.sendFile(path.resolve(__dirname, "views/registro.html")));
+app.get("/detalle-producto", (req, res) => res.sendFile(path.resolve(__dirname, "views/detalle-producto.html")));

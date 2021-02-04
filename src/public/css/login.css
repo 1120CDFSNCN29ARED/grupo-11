@@ -1,13 +1,58 @@
 /* GENERAL */
-main {margin:0; display: flex; justify-content:center; align-items: center;}
+main {
+    margin:0;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
 
-main form {padding: 20px 30px; z-index: 2;background-color:gray;}
-main form {position:absolute}
-main form div {padding: 10px 0px;}
-main form input {border: none;}
-main form input, main form button {padding: 5px 10px;border-radius: 10%;font-weight: bold;}
-main form div#button {display: flex; justify-content: space-between}
-#tapar-el-fondo div {background-color:var(--primary-background);opacity:70%;}
-#tapar-el-fondo div {height:100%;width:100%;position: absolute;z-index:1;}
-main #google-facebook {display:flex; justify-content: space-around;padding:10px 0 0;}
-main #google-facebook img {height: 30px}
+main form {
+    padding: 20px 30px;
+    z-index: 2;
+    background-color:gray;
+}
+
+main form {
+    position:absolute;
+}
+
+main form div {
+    padding: 10px 0px;
+}
+
+main form input {
+    border: none;
+}
+
+main form input, main form button {
+    padding: 5px 10px;
+    border-radius: 10%;
+    font-weight: bold;
+}
+
+main form div#button {
+    display: flex;
+    justify-content: space-between;
+}
+
+#tapar-el-fondo div {
+    background-color:var(--primary-background);
+    opacity:70%;
+}
+
+#tapar-el-fondo div {
+    height:100%;
+    width:100%;
+    position: absolute;
+    z-index:1;
+}
+
+main #google-facebook {
+    display:flex;
+    justify-content: space-around;
+    padding:10px 0 0;
+}
+
+main #google-facebook img {
+    height: 30px;
+}
