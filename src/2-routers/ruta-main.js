@@ -3,6 +3,7 @@ const controladorMain = require('../1-controllers/controlador-main')
 
 const router = express.Router();
 
-router.get('/:id', controladorMain.index);
+router.get('/', controladorMain.home);
+router.get('/:id', controladorMain.main);
 
 module.exports = router;
