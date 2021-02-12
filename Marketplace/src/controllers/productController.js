@@ -1,10 +1,10 @@
 let path = require('path')
 
-const controlador = {
+const controller = {
 	detalle: (req, res) => {
-		// this method should check the received id
+		// this method receives the product id
 		res.sendFile(path.resolve(__dirname, '../views/product/detalle-producto.html'))
 	},
 };
 
-module.exports = controlador;
+module.exports = controller;

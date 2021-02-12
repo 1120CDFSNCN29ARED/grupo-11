@@ -1,6 +1,6 @@
 let path = require('path')
 
-const controlador = {
+const controller = {
 	carrito: (req, res) => {
 		res.sendFile(path.resolve(__dirname, '../views/carrito.html'))
 	},
@@ -15,4 +15,4 @@ const controlador = {
 	},
 };
 
-module.exports = controlador;
+module.exports = controller;
