@@ -2,6 +2,7 @@
 #site-header {
     background-color: var(--secondary-background);
     width: 100%;
+    z-index: 3;
 }
 
 .fixed  {

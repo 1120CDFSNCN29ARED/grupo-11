@@ -4,6 +4,7 @@
     width: 100%;
     color: var(--white);
     padding: 1em;
+    z-index: 3;
 }
 
 .link {
