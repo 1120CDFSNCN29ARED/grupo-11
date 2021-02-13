@@ -17,44 +17,19 @@
                 <p class="view-more">Ver todos</p>
             </div>
             <div class="section-products flex-container">
+                <% for (const instrumento of masVendidos) { %>
                 <article class="product">
                     <div class="product-image-container">
                         <a href="/detalle-producto">
-                            <img src="/images/products/fender-stratocaster.jpg" alt="fender stratocaster" class="product-image">
+                            <img src= "/images/products/<%= instrumento.imagen %>" alt= <%= instrumento.título %> class="product-image">
                         </a>
                     </div>
                     <div class="product-information">
-                        <p class="product-description">Fender Stratocaster</p>
-                        <p class="product-price">$ 100.000</p>
+                        <p class="product-description"><%= instrumento.título %></p>
+                        <p class="product-price">$ <%= instrumento.precio %></p>
                     </div>
                 </article>
-                <article class="product">
-                    <div class="product-image-container">
-                        <img src="/images/products/taylor-gs-mini.jpg" alt="taylor gs mini" class="product-image">
-                    </div>
-                    <div class="product-information">
-                        <p class="product-description">Taylor GS Mini</p>
-                        <p class="product-price">$ 75.000</p>
-                    </div>
-                </article>
-                <article class="product hidden-product">
-                    <div class="product-image-container">
-                        <img src="/images/products/fender-telecaster.jpg" alt="fender telecaster" class="product-image">
-                    </div>
-                    <div class="product-information">
-                        <p class="product-description">Fender Telecaster</p>
-                        <p class="product-price">$110.000</p>
-                    </div>
-                </article>
-                <article class="product hidden-product">
-                    <div class="product-image-container">
-                        <img src="/images/products/jackson-king-v.jpg" alt="jackson king v" class="product-image">
-                    </div>
-                    <div class="product-information">
-                        <p class="product-description">Jackson King V</p>
-                        <p class="product-price">$80.000</p>
-                    </div>
-                </article>
+                <% } %> 
             </div>
         </section>
         <section class="products-group">
@@ -63,42 +38,19 @@
                 <p class="view-more">Ver todos</p>
             </div>
             <div class="section-products flex-container">
-                <article class="product">
+                <% for (const instrumento of novedades) { %>
+                    <article class="product">
                     <div class="product-image-container">
-                        <img src="/images/products/gibson-les-paul.jpg" alt="gibson les paul" class="product-image">
+                        <a href="/detalle-producto">
+                            <img src= "/images/products/<%= instrumento.imagen %>" alt= <%= instrumento.título %> class="product-image">
+                        </a>
                     </div>
                     <div class="product-information">
-                        <p class="product-description">Gibson Les Paul</p>
-                        <p class="product-price">$ 100.000</p>
+                        <p class="product-description"><%= instrumento.título %></p>
+                        <p class="product-price">$ <%= instrumento.precio %></p>
                     </div>
                 </article>
-                <article class="product">
-                    <div class="product-image-container">
-                        <img src="/images/products/fender-precision.jpg" alt="fender precision" class="product-image">
-                    </div>
-                    <div class="product-information">
-                        <p class="product-description">Fender Precision</p>
-                        <p class="product-price">$80.000</p>
-                    </div>
-                </article>
-                <article class="product hidden-product">
-                    <div class="product-image-container">
-                        <img src="/images/products/gibson-sg.jpg" alt="gibson sg" class="product-image">
-                    </div>
-                    <div class="product-information">
-                        <p class="product-description">Gibson SG</p>
-                        <p class="product-price">$100.000</p>
-                    </div>
-                </article>
-                <article class="product hidden-product">
-                    <div class="product-image-container">
-                        <img src="/images/products/taylor-210ce-plus.jpg" alt="taylor 210ce plus" class="product-image">
-                    </div>
-                    <div class="product-information">
-                        <p class="product-description">Taylor 210ce Plus</p>
-                        <p class="product-price">$90.000</p>
-                    </div>
-                </article>
+                <% } %>
             </div>
         </section>
     </main>
