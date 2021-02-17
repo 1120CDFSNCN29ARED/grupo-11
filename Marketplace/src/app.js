@@ -9,6 +9,7 @@ app.use(express.static(staticFolder));
 
 app.set("view engine", "ejs");
 app.set('views', [
+                    path.resolve(__dirname, './views'), 
                     path.resolve(__dirname, './views/partials'), 
                     path.resolve(__dirname, './views/product'), 
                     path.resolve(__dirname, './views/user')
