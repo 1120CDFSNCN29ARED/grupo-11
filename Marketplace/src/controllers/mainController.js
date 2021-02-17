@@ -3,22 +3,22 @@ const fs = require('fs');
 
 const controller = {
 	carrito: (req, res) => {
-		res.sendFile(path.resolve(__dirname, '../views/carrito.html'));
+		res.render('carrito');
 	},
 	index: (req, res) => {
 		const masVendidos = GetFileData('masVendidos.json');
 		const novedades = GetFileData('novedades.json');
-		res.sendFile(path.resolve(__dirname, '../views/index.html'),
+		res.render('index',
 					{
 						'masVendidos':masVendidos, 
 						'novedades':novedades
 					});
 	},
 	login: (req, res) => {
-		res.sendFile(path.resolve(__dirname, '../views/user/login.html'));
+		res.render('login');
 	},
 	registro: (req, res) => {
-		res.sendFile(path.resolve(__dirname, '../views/user/registro.html'));
+		res.render('registro');
 	},
 };
 
