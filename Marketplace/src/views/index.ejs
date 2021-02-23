@@ -1,0 +1,59 @@
+<%- include('preHead') %>
+<head>
+    <%- include('head') %>
+    <link rel="stylesheet" href="/css/home-body.css">
+    <link rel="stylesheet" href="/css/home-responsive.css">
+    <title>Guitar Shop</title>
+</head>
+<body>
+    <%- include('header') %>
+    <section>
+        <img src="/images/baner-image-1.jpg" alt="baner" class="banner-image">
+    </section>
+    <main>
+        <section class="products-group">
+            <div class="section-header flex-container">
+                <p class="section-title">Mas vendidos</p>
+                <p class="view-more">Ver todos</p>
+            </div>
+            <div class="section-products flex-container">
+                <% for (const instrumento of masVendidos) { %>
+                <article class="product">
+                    <div class="product-image-container">
+                        <a href="/detalle-producto">
+                            <img src="/images/products/<%= instrumento.imagen %>" alt= <%= instrumento.título %> class="product-image">
+                        </a>
+                    </div>
+                    <div class="product-information">
+                        <p class="product-description"><%= instrumento.título %></p>
+                        <p class="product-price">$ <%= instrumento.precio %></p>
+                    </div>
+                </article>
+                <% } %> 
+            </div>
+        </section>
+        <section class="products-group">
+            <div class="section-header flex-container">
+                <p class="section-title">Novedades</p>
+                <p class="view-more">Ver todos</p>
+            </div>
+            <div class="section-products flex-container">
+                <% for (const instrumento of novedades) { %>
+                    <article class="product">
+                    <div class="product-image-container">
+                        <a href="/detalle-producto">
+                            <img src="/images/products/<%= instrumento.imagen %>" alt= <%= instrumento.título %> class="product-image">
+                        </a>
+                    </div>
+                    <div class="product-information">
+                        <p class="product-description"><%= instrumento.título %></p>
+                        <p class="product-price">$ <%= instrumento.precio %></p>
+                    </div>
+                </article>
+                <% } %>
+            </div>
+        </section>
+    </main>
+    <%- include('footer') %>
+</body>    
+</html>
