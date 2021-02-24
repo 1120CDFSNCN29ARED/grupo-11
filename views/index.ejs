@@ -1,0 +1,19 @@
+<%- include('preHead') %>
+<head>
+    <%- include('head') %>
+    <link rel="stylesheet" href="/css/home-body.css">
+    <link rel="stylesheet" href="/css/home-responsive.css">
+    <title>Guitar Shop</title>
+</head>
+<body>
+    <%- include('header') %>
+    <section>
+        <img src="/images/baner-image-1.jpg" alt="baner" class="banner-image">
+    </section>
+    <main>
+        <%- include("index-productos", {titulo: "Más vendidos", BD: masVendidos}) %>
+        <%- include("index-productos", {titulo: "Novedades", BD: novedades}) %>
+    </main>
+    <%- include('footer') %>
+</body>    
+</html>

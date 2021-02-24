@@ -4,14 +4,14 @@ const rutaMain = require('./routers/main');
 const rutaProducto = require('./routers/product');
 
 const app = express();
-const staticFolder = path.resolve(__dirname, "../public");
+const staticFolder = path.resolve(__dirname, "./public");
 app.use(express.static(staticFolder));
 
 app.set("view engine", "ejs");
 app.set('views', [
                     path.resolve(__dirname, './views'), 
-                    path.resolve(__dirname, './views/partials'), 
-                    path.resolve(__dirname, './views/product'), 
+                    path.resolve(__dirname, './views/basic'), 
+                    path.resolve(__dirname, './views/others'), 
                     path.resolve(__dirname, './views/user')
                 ]);
 

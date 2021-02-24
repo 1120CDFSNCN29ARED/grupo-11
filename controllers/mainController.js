@@ -8,11 +8,10 @@ const controller = {
 	index: (req, res) => {
 		const masVendidos = GetFileData('masVendidos.json');
 		const novedades = GetFileData('novedades.json');
-		res.render('index',
-					{
-						'masVendidos':masVendidos, 
-						'novedades':novedades
-					});
+		res.render('index', {
+			'masVendidos':masVendidos, 
+			'novedades':novedades,
+		});
 	},
 	login: (req, res) => {
 		res.render('login');
