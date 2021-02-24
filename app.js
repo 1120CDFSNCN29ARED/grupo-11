@@ -18,4 +18,4 @@ app.set('views', [
 app.listen(3000, () => console.log('Servidor funcionando en puerto 3000...'));
 
 app.use('/', rutaMain);
-app.use('/product', rutaProducto);
+app.use('/producto', rutaProducto);

@@ -7,7 +7,7 @@
         <% for (const instrumento of BD) { %>
         <article class="product">
             <div class="product-image-container">
-                <a href="/producto/<%= instrumento.id %>">
+                <a href="/producto/<%= instrumento.vinculo %>">
                     <img src="/images/products/<%= instrumento.imagen %>" alt= <%= instrumento.título %> class="product-image">
                 </a>
             </div>

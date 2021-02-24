@@ -3,6 +3,7 @@
       "id": 1,
       "título": "Fender Stratocaster",
       "precio": 100000,
+      "vinculo": "Fender-Stratocaster",
       "imagen": "fender-stratocaster.jpg"
     },
     {

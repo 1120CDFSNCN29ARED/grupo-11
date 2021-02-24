@@ -12,14 +12,14 @@
             <section>
                 <div class="contenedor-padre">
                     <div class="producto">
-                        <h2>Guitarra Electrica</h2>
+                        <h2><%= producto.título %></h2>
                     </div>
                     <div class="carrito">
                         <button class="icono-carrito"><i class="fas fa-shopping-cart"></i></button>
                     </div>
                     <div class="img">
                         <article>
-                            <img src="/images/products/fender-stratocaster.jpg" width="100%" alt="imagenes de Guitarra">
+                            <img src="/images/products/<%= producto.imagen %>" width="100%" alt="<%= producto.título %>">
                         </article>
                     </div>
                     <div class="descripcion-contenedor">
@@ -34,7 +34,7 @@
                                 </p>
                             </div>
                             <div class="precio">
-                                <p>3000$</p>
+                                <p>$ <%= toThousand(producto.precio) %></p>
                             </div>
                         </article>
                     </div>

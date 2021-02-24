@@ -1,5 +1,6 @@
 let path = require('path');
 const fs = require('fs');
+const toThousand = (n) => {return n.toLocaleString("es-AR", {maximumFractionDigits: 0})}
 
 const controller = {
 	carrito: (req, res) => {
@@ -9,8 +10,9 @@ const controller = {
 		const masVendidos = GetFileData('masVendidos.json');
 		const novedades = GetFileData('novedades.json');
 		res.render('index', {
-			'masVendidos':masVendidos, 
-			'novedades':novedades,
+			masVendidos,
+			novedades,
+			toThousand,
 		});
 	},
 	login: (req, res) => {
