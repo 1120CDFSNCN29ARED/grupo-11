@@ -11,10 +11,11 @@
             if (titulo == "Novedades") {campo = instrumento.novedades};
             if (campo) { %>
                 <article class="product">
-                    <div class="product-image-container">
+                    <div>
                         <a href="/producto/<%= instrumento.vinculo %>">
                             <img src="/images/products/<%= instrumento.imagen %>" alt="<%= instrumento.nombre %>" class="product-image">
                         </a>
+                        <i class="fas fa-shopping-basket"></i>
                     </div>
                     <div class="product-information">
                         <p class="product-description"><%= instrumento.nombre %></p>
