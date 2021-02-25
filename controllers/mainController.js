@@ -7,11 +7,9 @@ const controller = {
 		res.render('carrito');
 	},
 	index: (req, res) => {
-		const masVendidos = GetFileData('masVendidos.json');
-		const novedades = GetFileData('novedades.json');
+		const productos = GetFileData('productos.json');
 		res.render('index', {
-			masVendidos,
-			novedades,
+			productos,
 			toThousand,
 		});
 	},

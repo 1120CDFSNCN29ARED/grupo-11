@@ -4,18 +4,24 @@
         <p class="view-more">Ver todos</p>
     </div>
     <div class="section-products flex-container">
-        <% for (const instrumento of BD) { %>
-        <article class="product">
-            <div class="product-image-container">
-                <a href="/producto/<%= instrumento.vinculo %>">
-                    <img src="/images/products/<%= instrumento.imagen %>" alt= <%= instrumento.título %> class="product-image">
-                </a>
-            </div>
-            <div class="product-information">
-                <p class="product-description"><%= instrumento.título %></p>
-                <p class="product-price">$ <%= instrumento.precio %></p>
-            </div>
-        </article>
+        <% 
+        let campo=false;
+        for (const instrumento of productos) {;
+            if (titulo == "Más vendidos") {campo = instrumento.masVendido};
+            if (titulo == "Novedades") {campo = instrumento.novedades};
+            if (campo) { %>
+                <article class="product">
+                    <div class="product-image-container">
+                        <a href="/producto/<%= instrumento.vinculo %>">
+                            <img src="/images/products/<%= instrumento.imagen %>" alt="<%= instrumento.nombre %>" class="product-image">
+                        </a>
+                    </div>
+                    <div class="product-information">
+                        <p class="product-description"><%= instrumento.nombre %></p>
+                        <p class="product-price">$ <%= toThousand(instrumento.precio) %></p>
+                    </div>
+                </article>
+            <% } %>
         <% } %> 
     </div>
 </section>
