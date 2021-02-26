@@ -3,6 +3,9 @@ const productController = require('../controllers/productController')
 
 const router = express.Router();
 
-router.get('/:id', productController.detalle);
+router.get('/:id/detalle', productController.detalle);
+router.delete('/:id/eliminar', productController.eliminar);
+//router.get('/:id/editar', productController.editar_form);
+//router.put('/:id/editar', productController.editar_update);
 
 module.exports = router;
