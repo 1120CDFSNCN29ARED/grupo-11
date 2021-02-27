@@ -4,46 +4,35 @@
     <link rel="stylesheet" href="/css/products/producto-detalle.css">
     <title>Detalle de Productos</title>
 </head>
-
 <body>
     <%- include('header') %>
     <main>
-        <div class="contenedor-padre">
-            <div class="producto">
-                <h2><%= producto.nombre %></h2>
+        <form action="/producto/<%= producto.id %>/editar?_method=PUT" method="POST">
+            <div class="col-12 col-md-6">
+                <label for="nombre" class="form-label">Nombre del producto:</label>
+                <input name="nombre" type="text" id="name" value="<%= producto.nombre %>" class="form-input">
             </div>
-            <div class="carrito">
-                <button class="icono-carrito"><i class="fas fa-shopping-cart"></i></button>
+            <div class="col-12 col-md-6">
+                <label for="precio" class="form-label">Precio:</label>
+                <input name="precio" type="text" id="price" value="$ <%= toThousand(producto.precio) %>" class="form-input">
             </div>
-            <div class="img">
-                <article>
-                    <img src="/images/products/<%= producto.imagen %>" width="100%" alt="<%= producto.nombre %>">
-                </article>
+            <div class="col-12 col-md-6">
+                <label for="categoría" class="form-label">Categoría:</label>
+                <select name="categoría" id="category" class="form-input">
+                    <option value="">Elegí</option>
+                    <option value="electrica" <%= producto.categoría == "Guitarra Eléctrica" ? "selected" : "" %>>Guitarra Eléctrica</option>
+                    <option value="clasica" <%= producto.categoría == "Guitarra Clásica" ? "selected" : "" %>>Guitarra Clásica</option>
+                </select>
             </div>
-            <div class="descripcion-contenedor">
-                <article class="descripcion">
-                    <div class="caracteristica">
-                        <h4>Caracteristicas Tecnicas</h4>
-                    </div>
-                    <div class="detalle">
-                        <p><%= producto.descripción %></p>
-                    </div>
-                    <div class="precio">
-                        <p>$ <%= toThousand(producto.precio) %></p>
-                    </div>
-                    <div class="flex-container">
-                        <form  action="/producto/<%= producto.id %>/editar" method="GET">
-                            <button id="modificar" type="submit">Modificar</button>
-                        </form>
-                        <form  action="/producto/<%= producto.id %>/eliminar?_method=DELETE" method="POST">
-                            <button id="eliminar" type="submit">Eliminar</button>
-                        </form>
-                    </div>
-                </article>
+            <div class="col-12">
+                <label for="descripción" class="form-label">Descripción:</label>
+                <textarea name="descripción" placeholder="Escribir..." id="description" class="form-input"><%= producto.descripción %></textarea>
             </div>
-        </div>            
+            <div class="col-12">
+                <button type="submit" class="buy-now-button">Guardar los cambios</button>
+            </div>
+        </form>
     </main>
     <%- include('footer') %>
 </body>
-
 </html>

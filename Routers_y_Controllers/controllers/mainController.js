@@ -22,7 +22,7 @@ const controller = {
 };
 
 function GetFileData(fileName) {
-	const fileRoute = path.resolve(__dirname, '../database/' + fileName)
+	const fileRoute = path.resolve(__dirname, '../../database/' + fileName)
 	const data = fs.readFileSync(fileRoute, { encoding: "utf-8" });
 	return JSON.parse(data);
 }

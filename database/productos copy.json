@@ -5,7 +5,7 @@
       "descripción": "",
       "masVendido": true,
       "novedades": false,
-      "categoría": "Guitarra  Eléctrica",
+      "categoría": "Guitarra Eléctrica",
       "precio": 100000,
       "vinculo": "Fender-Stratocaster",
       "imagen": "fender-stratocaster.jpg"
@@ -16,7 +16,7 @@
       "descripción": "",
       "masVendido": true,
       "novedades": false,
-      "categoría": "Guitarra  Clásica",
+      "categoría": "Guitarra Clásica",
       "precio": 75000,
       "vinculo": "Taylor-GS-Mini",
       "imagen": "taylor-gs-mini.jpg"
@@ -27,7 +27,7 @@
       "descripción": "",
       "masVendido": true,
       "novedades": false,
-      "categoría": "Guitarra  Eléctrica",
+      "categoría": "Guitarra Eléctrica",
       "precio": 110000,
       "vinculo": "Fender-Telecaster",
       "imagen": "fender-telecaster.jpg"
@@ -38,7 +38,7 @@
       "descripción": "",
       "masVendido": true,
       "novedades": false,
-      "categoría": "Guitarra  Eléctrica",
+      "categoría": "Guitarra Eléctrica",
       "precio": 80000,
       "vinculo": "Jackson-King-V",
       "imagen": "jackson-king-v.jpg"
@@ -49,7 +49,7 @@
       "descripción": "",
       "masVendido": false,
       "novedades": true,
-      "categoría": "Guitarra  Eléctrica",
+      "categoría": "Guitarra Eléctrica",
       "precio": 100000,
       "vinculo": "Gibson-Les-Paul",
       "imagen": "gibson-les-paul.jpg"
@@ -60,7 +60,7 @@
       "descripción": "",
       "masVendido": false,
       "novedades": true,
-      "categoría": "Guitarra  Eléctrica",
+      "categoría": "Guitarra Eléctrica",
       "precio": 80000,
       "vinculo": "Fender-Precision",
       "imagen": "fender-precision.jpg"
@@ -71,7 +71,7 @@
       "descripción": "",
       "masVendido": false,
       "novedades": true,
-      "categoría": "Guitarra  Eléctrica",
+      "categoría": "Guitarra Eléctrica",
       "precio": 100000,
       "vinculo": "Fender-Telecaster",
       "imagen": "gibson-sg.jpg"
@@ -82,7 +82,7 @@
       "descripción": "",
       "masVendido": false,
       "novedades": true,
-      "categoría": "Guitarra  Clásica",
+      "categoría": "Guitarra Clásica",
       "precio": 90000,
       "vinculo": "Taylor-210ce-Plus",
       "imagen": "taylor-210ce-plus.jpg"
