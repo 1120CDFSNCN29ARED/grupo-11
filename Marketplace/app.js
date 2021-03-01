@@ -10,8 +10,8 @@ app.use(express.static(staticFolder));
 app.set("view engine", "ejs");
 app.set('views', [
                     path.resolve(__dirname, './views'), 
-                    path.resolve(__dirname, './views/basic'), 
-                    path.resolve(__dirname, './views/others'), 
+                    path.resolve(__dirname, './views/partials'), 
+                    path.resolve(__dirname, './views/products'), 
                     path.resolve(__dirname, './views/user')
                 ]);
 
