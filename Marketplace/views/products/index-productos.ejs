@@ -1,0 +1,21 @@
+<section class="products-group">
+    <div class="section-header flex-container">
+        <p class="section-title"><%= titulo %> </p>
+        <p class="view-more">Ver todos</p>
+    </div>
+    <div class="section-products flex-container">
+        <% for (const instrumento of BD) { %>
+        <article class="product">
+            <div class="product-image-container">
+                <a href="/producto/<%= instrumento.vinculo %>">
+                    <img src="/images/products/<%= instrumento.imagen %>" alt= <%= instrumento.título %> class="product-image">
+                </a>
+            </div>
+            <div class="product-information">
+                <p class="product-description"><%= instrumento.título %></p>
+                <p class="product-price">$ <%= instrumento.precio %></p>
+            </div>
+        </article>
+        <% } %> 
+    </div>
+</section>
