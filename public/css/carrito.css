@@ -1,18 +1,13 @@
 /* GENERAL */
 main {
-    margin:0;
     display: flex;
     justify-content:center;
     align-items: center;
 }
 
 #carrito {
-    position: absolute;
-    width:90%;
+    margin: 20px auto;
     padding-bottom: 10px;
-}
-
-#carrito {
     border: solid 3px blue;
     background-color: lightblue;
 }
