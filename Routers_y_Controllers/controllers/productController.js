@@ -19,18 +19,6 @@ const controller = {
 		});
 	},
 	
-	eliminar: (req, res) => {
-		const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
-		let ID = req.params.id;
-		let indice = products.findIndex(n => {return n.id == ID})
-		//*** Eliminar ***
-		products.splice(indice,1)
-		fs.writeFileSync(productsFilePath, JSON.stringify(products));
-		//****************
-		res.redirect("/");
-
-	},
-
 	editar_form: (req,res) => {
 		const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 		let ID = req.params.id;
@@ -38,6 +26,18 @@ const controller = {
 			return n.id == ID;
 		})
 		res.render('producto-editar', {producto, ID, toThousand});
+	},
+
+	eliminar: (req, res) => {
+		const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+		let ID = req.params.id;
+		let indice = products.findIndex(n => {return n.id == ID})
+		//*** Eliminar ***
+		products.splice(indice,1)
+		fs.writeFileSync(productsFilePath, JSON.stringify(products,null,4));
+		//****************
+		res.redirect("/");
+
 	},
 
 	editar_update: (req, res) => {
@@ -48,17 +48,20 @@ const controller = {
 			return n.id == ID
 		});
 		let indice = productos.indexOf(producto)
+		let price = req.body.precio;
+		price = price.replace(".", "");
+		price = price.replace(",", ".");
+		price = price.replace("$", "");
+		price = price.replace(" ", "");
 		const actualizado = {
 			...producto,
 			...req.body,
-			//precio: Number(req.body.precio),
+			precio: Number(price),
 		};
 		productos[indice] = actualizado
-		res.send(ID + "" + req.body)
-		fs.writeFileSync(productsFilePath, JSON.stringify(productos));
+		fs.writeFileSync(productsFilePath, JSON.stringify(productos,null,4));
 		res.redirect("/producto/" + ID + "/detalle");
 	},
-
 };
 
 module.exports = controller;

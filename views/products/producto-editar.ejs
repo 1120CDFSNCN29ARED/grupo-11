@@ -19,9 +19,8 @@
             <div class="col-12 col-md-6">
                 <label for="categoría" class="form-label">Categoría:</label>
                 <select name="categoría" id="category" class="form-input">
-                    <option value="">Elegí</option>
-                    <option value="electrica" <%= producto.categoría == "Guitarra Eléctrica" ? "selected" : "" %>>Guitarra Eléctrica</option>
-                    <option value="clasica" <%= producto.categoría == "Guitarra Clásica" ? "selected" : "" %>>Guitarra Clásica</option>
+                    <option value="Guitarra Eléctrica" <%= producto.categoría == "Guitarra Eléctrica" ? "selected" : "" %>>Guitarra Eléctrica</option>
+                    <option value="Guitarra Clásica" <%= producto.categoría == "Guitarra Clásica" ? "selected" : "" %>>Guitarra Clásica</option>
                 </select>
             </div>
             <div class="col-12">

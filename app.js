@@ -10,7 +10,7 @@ const app = express();
 
 // ************ Middlewares ************
 const staticFolder = path.resolve(__dirname, "./public");
-app.use(express.static(staticFolder));  // Necesario para los archivos estáticos en el folder /public
+app.use(express.static(staticFolder));  // Necesario para acceder a los archivos estáticos en /public
 app.use(methodOverride('_method'));     // Para poder usar el method="POST" en el formulario por PUT y DELETE
 app.use(express.urlencoded({extended:false})); // Necesario para subir una imagen o un archivo
 app.use(express.json());
@@ -19,7 +19,7 @@ app.use(express.json());
 app.set("view engine", "ejs");
 app.set('views', [
     path.resolve(__dirname, './views'), 
-    path.resolve(__dirname, './views/basic'), 
+    path.resolve(__dirname, './views/partials'), 
     path.resolve(__dirname, './views/products'),
     path.resolve(__dirname, './views/user')
 ]);

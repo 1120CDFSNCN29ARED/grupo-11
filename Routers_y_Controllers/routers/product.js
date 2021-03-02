@@ -22,7 +22,6 @@ const uploadFile = multer({storage});
 router.get('/:id/detalle', productController.detalle);
 router.delete('/:id/eliminar', productController.eliminar);
 router.get('/:id/editar', productController.editar_form);
-router.post('/:id/editar', (req, res)=> res.send(req.body));
-//router.put('/:id/editar', productController.editar_update);
+router.put('/:id/editar', productController.editar_update);
 
 module.exports = router;
