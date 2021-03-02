@@ -34,7 +34,7 @@ const controller = {
 		let indice = products.findIndex(n => {return n.id == ID})
 		//*** Eliminar ***
 		products.splice(indice,1)
-		fs.writeFileSync(productsFilePath, JSON.stringify(products,null,4));
+		fs.writeFileSync(productsFilePath, JSON.stringify(products,null,2));
 		//****************
 		res.redirect("/");
 
@@ -59,7 +59,7 @@ const controller = {
 			precio: Number(price),
 		};
 		productos[indice] = actualizado
-		fs.writeFileSync(productsFilePath, JSON.stringify(productos,null,4));
+		fs.writeFileSync(productsFilePath, JSON.stringify(productos,null,2));
 		res.redirect("/producto/" + ID + "/detalle");
 	},
 };
