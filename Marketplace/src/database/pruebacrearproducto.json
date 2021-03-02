@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "nombre": "Fender Stratocaster",
+        "descripción": "",
+        "masVendido": true,
+        "novedades": false,
+        "categoría": "Guitarra  Eléctrica",
+        "precio": 100000,
+        "vinculo": "Fender-Stratocaster",
+        "imagen": "fender-stratocaster.jpg"
+    },
+    {
+        "id": 2,
+        "nombre": "Taylor GS Mini",
+        "descripción": "",
+        "masVendido": true,
+        "novedades": false,
+        "categoría": "Guitarra  Clásica",
+        "precio": 75000,
+        "vinculo": "Taylor-GS-Mini",
+        "imagen": "taylor-gs-mini.jpg"
+    },
+    {
+        "id": 3,
+        "nombre": "Fender Telecaster",
+        "descripción": "",
+        "masVendido": true,
+        "novedades": false,
+        "categoría": "Guitarra  Eléctrica",
+        "precio": 110000,
+        "vinculo": "Fender-Telecaster",
+        "imagen": "fender-telecaster.jpg"
+    },
+    {
+        "id": 4,
+        "name": "sgwg",
+        "file": "taylor-gs-mini.jpg",
+        "price": "54353",
+        "description": "jhffdjr"
+    }
+]

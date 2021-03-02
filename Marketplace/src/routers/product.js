@@ -5,11 +5,10 @@ const productController = require('../controllers/productController');
 
 router.get('/detalle-producto/:id', productController.detalle);
 
-/*** CREAR PRODUCTO ***/ 
-router.get('/crear-producto', productController.crearProducto); 
- 
+router.get('/crear-producto/', productController.crearProducto); 
+router.post('/', productController.guardarProducto);
 
-/*** EDITAR PRODUCTO ***/ 
+
 router.get('/editar-producto/:id', productController.editarProducto); 
 
 
