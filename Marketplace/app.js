@@ -27,5 +27,6 @@ app.set('views', [
 
 app.listen(3000, () => console.log('Servidor funcionando en puerto 3000...'));
 
+app.use(methodOverride('_method'));
 app.use('/', rutaMain);
 app.use('/producto', rutaProducto);
