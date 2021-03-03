@@ -1,4 +1,3 @@
-// ************ Requires ************
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
@@ -18,9 +17,9 @@ const storage = multer.diskStorage({
 })
 const uploadFile = multer({storage});
 
-// *********** Router ***************
-router.get('/:id/detalle', productController.detalle);
+router.get('/:id', productController.detalle);
 router.delete('/:id/eliminar', productController.eliminar);
+router.get('/crear-producto', productController.crear);
 router.get('/:id/editar', productController.editar_form);
 router.put('/:id/editar', productController.editar_update);
 
