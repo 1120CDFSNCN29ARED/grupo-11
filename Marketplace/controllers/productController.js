@@ -10,6 +10,12 @@ const controller = {
 		let producto = products.find(producto => producto.id == req.params.id);
 		
 		res.render('producto-detalle', { producto, toThousand });
+	},	
+	editar_form: (req,res) => {
+		const products = GetFileObject(productsFilePath);
+		let producto = products.find(producto => producto.id == req.params.id);
+
+		res.render('producto-editar', { producto, toThousand});
 	},
 	eliminar: (req, res) => {
 		const products = GetFileObject(productsFilePath);
@@ -35,20 +41,24 @@ const controller = {
 		const productId = req.params.id;
 		let producto = productos.find(producto => producto.id == productId);
 		let indice = productos.indexOf(producto)
+		let price = SanitizePrice(req.body.precio);
 		const actualizado = {
 			...producto,
 			...req.body,
-			//precio: Number(req.body.precio),
+			precio: Number(price),
 		};
 		productos[indice] = actualizado
-		res.send(productId + "" + req.body)
-		fs.writeFileSync(productsFilePath, JSON.stringify(productos));
-		res.redirect("/producto/" + productId + "/detalle");
+		fs.writeFileSync(productsFilePath, JSON.stringify(productos, null, 2));
+		res.redirect("/producto/" + productId);
 	},
 };
 
 function GetFileObject(filePath) {
 	return JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+}
+
+function SanitizePrice(priceString) {
+	return priceString.replace(".", "").replace(",", ".").replace("$", "").replace(" ", "");
 }
 
 module.exports = controller;
