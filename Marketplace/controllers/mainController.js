@@ -7,11 +7,21 @@ const controller = {
 		res.render('carrito');
 	},
 	index: (req, res) => {
-		const masVendidos = GetFileData('masVendidos.json');
-		const novedades = GetFileData('novedades.json');
+		const productos = GetFileData('productos.json');
+
+		let seccionesProductos = [
+			{
+				titulo: "Mas vendidos",
+				productos: productos.filter(x => x.masVendido)
+			},
+			{
+				titulo: "Novedades",
+				productos: productos.filter(x => x.novedades)
+			}
+		];
+		
 		res.render('index', {
-			masVendidos,
-			novedades,
+			seccionesProductos,
 			toThousand,
 		});
 	},
