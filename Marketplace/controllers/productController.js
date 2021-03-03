@@ -29,7 +29,22 @@ const controller = {
 		let producto = products.find(producto => producto.id == req.params.id);
 		
 		res.render('producto-editar', { producto, toThousand });
-	}
+	},
+	editar_update: (req, res) => {
+		const productos = GetFileObject(productsFilePath);
+		const productId = req.params.id;
+		let producto = productos.find(producto => producto.id == productId);
+		let indice = productos.indexOf(producto)
+		const actualizado = {
+			...producto,
+			...req.body,
+			//precio: Number(req.body.precio),
+		};
+		productos[indice] = actualizado
+		res.send(productId + "" + req.body)
+		fs.writeFileSync(productsFilePath, JSON.stringify(productos));
+		res.redirect("/producto/" + productId + "/detalle");
+	},
 };
 
 function GetFileObject(filePath) {

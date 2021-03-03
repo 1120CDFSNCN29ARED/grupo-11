@@ -15,9 +15,9 @@ app.set('views', [
                     path.resolve(__dirname, './views/products'), 
                     path.resolve(__dirname, './views/user')
                 ]);
-app.use(methodOverride('_method'));
 
 app.listen(3000, () => console.log('Servidor funcionando en puerto 3000...'));
 
+app.use(methodOverride('_method'));
 app.use('/', rutaMain);
 app.use('/producto', rutaProducto);
