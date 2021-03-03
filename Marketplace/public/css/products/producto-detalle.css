@@ -1,6 +1,7 @@
 .contenedor-padre {
 	display: flex;
 	flex-wrap: wrap;
+	padding-top: 20px;
 }
 
 .producto {
