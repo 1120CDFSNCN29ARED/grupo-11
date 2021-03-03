@@ -1,11 +1,9 @@
-// ************ Requires ************
 const express = require("express");
 const path = require("path");
 const rutaMain = require('./routers/main');
 const rutaProducto = require('./routers/product');
 const methodOverride = require('method-override');
 
-// ************ express() ************
 const app = express();
 
 // ************ Middlewares ************

@@ -27,9 +27,7 @@
     "novedades": false,
     "categoria": "Guitarra  Eléctrica",
     "precio": 110000,
-    "imagen": "fender-telecaster.jpg",
-    "categoría": "Guitarra Eléctrica",
-    "descripción": ""
+    "imagen": "fender-telecaster.jpg"
   },
   {
     "id": 4,

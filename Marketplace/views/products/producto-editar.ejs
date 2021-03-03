@@ -17,15 +17,15 @@
                 <input name="precio" type="text" id="price" value="$ <%= toThousand(producto.precio) %>" class="form-input">
             </div>
             <div class="col-12 col-md-6">
-                <label for="categoría" class="form-label">Categoría:</label>
-                <select name="categoría" id="category" class="form-input">
+                <label for="categoria" class="form-label">Categoría:</label>
+                <select name="categoria" id="category" class="form-input">
                     <option value="Guitarra Eléctrica" <%= producto.categoría == "Guitarra Eléctrica" ? "selected" : "" %>>Guitarra Eléctrica</option>
                     <option value="Guitarra Clásica" <%= producto.categoría == "Guitarra Clásica" ? "selected" : "" %>>Guitarra Clásica</option>
                 </select>
             </div>
             <div class="col-12">
-                <label for="descripción" class="form-label">Descripción:</label>
-                <textarea name="descripción" placeholder="Escribir..." id="description" class="form-input"><%= producto.descripción %></textarea>
+                <label for="descripcion" class="form-label">Descripción:</label>
+                <textarea name="descripcion" placeholder="Escribir..." id="description" class="form-input"><%= producto.descripción %></textarea>
             </div>
             <div class="col-12">
                 <button type="submit" class="buy-now-button">Guardar los cambios</button>
