@@ -1,18 +1,21 @@
 // ************ Requires ************
 const express = require("express");
 const path = require("path");
-const rutaMain = require('./Routers_y_Controllers/routers/main');
-const rutaProducto = require('./Routers_y_Controllers/routers/product');
-const methodOverride = require('method-override'); // Para poder usar los métodos PUT y DELETE
+const rutaMain = require('./routers/main');
+const rutaProducto = require('./routers/product');
+const methodOverride = require('method-override');
 
 // ************ express() ************
 const app = express();
 
 // ************ Middlewares ************
 const staticFolder = path.resolve(__dirname, "./public");
-app.use(express.static(staticFolder));  // Necesario para acceder a los archivos estáticos en /public
-app.use(methodOverride('_method'));     // Para poder usar el method="POST" en el formulario por PUT y DELETE
-app.use(express.urlencoded({extended:false})); // Necesario para subir una imagen o un archivo
+// Necesario para acceder a los archivos estáticos en /public
+app.use(express.static(staticFolder));
+// Para poder usar el method="POST" en el formulario por PUT y DELETE
+app.use(methodOverride('_method'));
+// Necesario para subir una imagen o un archivo
+app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
 // ************ Carpetas de views **********
