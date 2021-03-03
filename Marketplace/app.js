@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
-const rutaMain = require('./Routers_y_Controllers/routers/main');
-const rutaProducto = require('./Routers_y_Controllers/routers/product');
+const rutaMain = require('./routers/main');
+const rutaProducto = require('./routers/product');
 const methodOverride = require('method-override');
 
 const app = express();
@@ -10,11 +10,12 @@ app.use(express.static(staticFolder));
 
 app.set("view engine", "ejs");
 app.set('views', [
-    path.resolve(__dirname, './views'), 
-    path.resolve(__dirname, './views/basic'), 
-    path.resolve(__dirname, './views/products'),
-    path.resolve(__dirname, './views/user')
-]);
+                    path.resolve(__dirname, './views'), 
+                    path.resolve(__dirname, './views/partials'), 
+                    path.resolve(__dirname, './views/products'), 
+                    path.resolve(__dirname, './views/user')
+                ]);
+app.use(methodOverride('_method'));
 
 app.listen(3000, () => console.log('Servidor funcionando en puerto 3000...'));
 

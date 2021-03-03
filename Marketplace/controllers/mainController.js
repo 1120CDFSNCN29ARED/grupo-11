@@ -8,8 +8,20 @@ const controller = {
 	},
 	index: (req, res) => {
 		const productos = GetFileData('productos.json');
+
+		let seccionesProductos = [
+			{
+				titulo: "Mas vendidos",
+				productos: productos.filter(x => x.masVendido)
+			},
+			{
+				titulo: "Novedades",
+				productos: productos.filter(x => x.novedades)
+			}
+		];
+		
 		res.render('index', {
-			productos,
+			seccionesProductos,
 			toThousand,
 		});
 	},
