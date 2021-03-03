@@ -8,8 +8,20 @@ const controller = {
 	},
 	index: (req, res) => {
 		const productos = GetFileData('productos.json');
+
+		let seccionesProductos = [
+			{
+				titulo: "Mas vendidos",
+				productos: productos.filter(x => x.masVendido)
+			},
+			{
+				titulo: "Novedades",
+				productos: productos.filter(x => x.novedades)
+			}
+		];
+		
 		res.render('index', {
-			productos,
+			seccionesProductos,
 			toThousand,
 		});
 	},
@@ -22,7 +34,7 @@ const controller = {
 };
 
 function GetFileData(fileName) {
-	const fileRoute = path.resolve(__dirname, '../../database/' + fileName)
+	const fileRoute = path.resolve(__dirname, '../database/' + fileName)
 	const data = fs.readFileSync(fileRoute, { encoding: "utf-8" });
 	return JSON.parse(data);
 }
