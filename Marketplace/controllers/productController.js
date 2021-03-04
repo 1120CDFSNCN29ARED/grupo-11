@@ -17,7 +17,7 @@ const controller = {
 		
 		//*** Eliminar ***//
 		products.splice(indice,1)
-		fs.writeFileSync(productsFilePath, JSON.stringify(products), { encoding: "utf-8" });
+		fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2));
 		
 		res.redirect("/");
 	},
