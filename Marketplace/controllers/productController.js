@@ -10,12 +10,6 @@ const controller = {
 		let producto = products.find(producto => producto.id == req.params.id);
 		
 		res.render('producto-detalle', { producto, toThousand });
-	},	
-	editar_form: (req,res) => {
-		const products = GetFileObject(productsFilePath);
-		let producto = products.find(producto => producto.id == req.params.id);
-
-		res.render('producto-editar', { producto, toThousand});
 	},
 	eliminar: (req, res) => {
 		const products = GetFileObject(productsFilePath);
@@ -23,20 +17,20 @@ const controller = {
 		
 		//*** Eliminar ***//
 		products.splice(indice,1)
-		fs.writeFileSync(productsFilePath, JSON.stringify(products), { encoding: "utf-8" });
+		fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2));
 		
 		res.redirect("/");
 	},
 	crear: (req, res) => {
 		res.render('crear-producto');
-	},	
+	},
 	editar: (req, res) => {
 		const products = GetFileObject(productsFilePath);
 		let producto = products.find(producto => producto.id == req.params.id);
 		
 		res.render('producto-editar', { producto, toThousand });
 	},
-	editar_update: (req, res) => {
+	update: (req, res) => {
 		const productos = GetFileObject(productsFilePath);
 		const productId = req.params.id;
 		let producto = productos.find(producto => producto.id == productId);
@@ -50,7 +44,20 @@ const controller = {
 		productos[indice] = actualizado
 		fs.writeFileSync(productsFilePath, JSON.stringify(productos, null, 2));
 		res.redirect("/producto/" + productId);
-	},
+	},	
+	guardarProducto:(req, res) =>{
+		const productos = GetFileObject(productsFilePath);
+		const nuevoId = productos.length > 0 ? productos[productos.length - 1].id + 1 : 1;
+
+		const newProduct = {
+			id: nuevoId,
+			...req.body,
+		};
+
+		producto.push(newProduct);
+		fs.writeFileSync(productoFilePath, JSON.stringify(producto, null, 2));
+		res.redirect('/');
+	}
 };
 
 function GetFileObject(filePath) {

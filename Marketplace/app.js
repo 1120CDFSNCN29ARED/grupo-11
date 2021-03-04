@@ -13,7 +13,7 @@ app.use(express.static(staticFolder));
 // Para poder usar el method="POST" en el formulario por PUT y DELETE
 app.use(methodOverride('_method'));
 // Necesario para subir una imagen o un archivo
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 // ************ Carpetas de views **********
