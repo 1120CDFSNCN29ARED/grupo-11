@@ -19,9 +19,9 @@ const uploadFile = multer({storage});
 
 router.get('/:id', productController.detalle);
 router.delete('/:id/eliminar', productController.eliminar);
-router.get('/crear-producto/', productController.crearProducto); 
+router.get('/crear-producto/', productController.crear); 
 router.post('/', productController.guardarProducto);
-router.get('/:id/editar', productController.editar_form);
-router.put('/:id/editar', productController.editar_update);
+router.get('/:id/editar', productController.editar);
+router.put('/:id/editar', productController.update);
 
 module.exports = router;

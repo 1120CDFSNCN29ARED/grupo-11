@@ -10,12 +10,6 @@ const controller = {
 		let producto = products.find(producto => producto.id == req.params.id);
 		
 		res.render('producto-detalle', { producto, toThousand });
-	},	
-	editar_form: (req,res) => {
-		const products = GetFileObject(productsFilePath);
-		let producto = products.find(producto => producto.id == req.params.id);
-
-		res.render('producto-editar', { producto, toThousand});
 	},
 	eliminar: (req, res) => {
 		const products = GetFileObject(productsFilePath);
@@ -29,14 +23,14 @@ const controller = {
 	},
 	crear: (req, res) => {
 		res.render('crear-producto');
-	},	
+	},
 	editar: (req, res) => {
 		const products = GetFileObject(productsFilePath);
 		let producto = products.find(producto => producto.id == req.params.id);
 		
 		res.render('producto-editar', { producto, toThousand });
 	},
-	editar_update: (req, res) => {
+	update: (req, res) => {
 		const productos = GetFileObject(productsFilePath);
 		const productId = req.params.id;
 		let producto = productos.find(producto => producto.id == productId);
