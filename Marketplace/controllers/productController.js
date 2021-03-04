@@ -17,7 +17,7 @@ const controller = {
 		
 		//*** Eliminar ***//
 		products.splice(indice,1)
-		fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2));
+		WriteFile(productsFilePath, productos);
 		
 		res.redirect("/");
 	},
@@ -42,7 +42,7 @@ const controller = {
 			precio: Number(price),
 		};
 		productos[indice] = actualizado
-		fs.writeFileSync(productsFilePath, JSON.stringify(productos, null, 2));
+		WriteFile(productsFilePath, productos);
 		res.redirect("/producto/" + productId);
 	},	
 	guardarProducto:(req, res) =>{
@@ -52,10 +52,12 @@ const controller = {
 		const newProduct = {
 			id: nuevoId,
 			...req.body,
+			masVendido: false,
+			novedades: false
 		};
 
-		producto.push(newProduct);
-		fs.writeFileSync(productoFilePath, JSON.stringify(producto, null, 2));
+		productos.push(newProduct);
+		WriteFile(productsFilePath, productos);
 		res.redirect('/');
 	}
 };
@@ -66,6 +68,10 @@ function GetFileObject(filePath) {
 
 function SanitizePrice(priceString) {
 	return priceString.replace(".", "").replace(",", ".").replace("$", "").replace(" ", "");
+}
+
+function WriteFile(filePath, content) {
+	fs.writeFileSync(filePath, JSON.stringify(content, null, 2));
 }
 
 module.exports = controller;
