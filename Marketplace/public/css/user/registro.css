@@ -1,0 +1,48 @@
+main form h1 {
+	text-align: center;
+	padding-top: 10px;
+}
+
+.titulo {
+	text-align: center;
+	font-weight: bold;
+	width: 50%;
+	padding: 10px;
+	font-size: 20px;
+}
+
+.input {
+	width: 50%;
+	border-radius: 5px;
+	padding: 10px;
+
+}
+
+.box {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 10px;
+}
+
+.button { 
+	padding: 10px;
+	border-radius: 5px;
+	font-size: 14px;
+	border: none;
+	background-color: #232f3e;
+	color: white;
+}
+
+.contenedor-redes{
+	text-align: center;
+}
+
+.redes-sociales{
+	font-size: 40px;
+	color:blue;
+	padding: 30px;
+	border-radius: 50%;
+	background-color:#ebebeb;
+	border: none;
+}

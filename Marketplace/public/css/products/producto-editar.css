@@ -1,0 +1,42 @@
+main {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+main form {
+    margin: 20px auto;
+    padding: 20px 30px;
+    background-color:gray;
+	border-radius: 10px;
+}
+
+main form div {
+    padding: 10px 0px;
+}
+
+main form label {
+	color: honeydew ;
+}
+
+main form input {
+    border: none;
+    width: 100%;
+	color: dimgray;
+}
+
+main form input, main form button {
+    padding: 5px 10px;
+    border-radius: 10%;
+    font-weight: bold;
+}
+
+main form #button {
+	display: flex;
+	justify-content: center;
+}
+
+main form #description {
+	width: 300px;
+}
+
