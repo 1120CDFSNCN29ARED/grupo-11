@@ -1,0 +1,47 @@
+<%- include('preHead') %>
+<head>
+    <%- include('head') %>
+    <link rel="stylesheet" href="/css/crear-producto.css">
+    <title>Detalle de Productos</title>
+</head>
+
+<body>
+    <%- include('header') %>
+    <main>
+        <form action="/producto" method="POST">
+            <h1>CREAR PRODUCTO</h1>
+            <div>
+                <div class="box">
+                    <label for="nombre">Nombre del Producto</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ej: Fender Telecaster" class="form-input">
+                </div>
+                <div class="box">
+                    <label for="categoria" class="form-label">Categoría:</label>
+                    <select name="categoria" id="category" class="form-input">
+                        <option value="Guitarra Eléctrica">Guitarra Eléctrica</option>
+                        <option value="Guitarra Clásica">Guitarra Clásica</option>
+                        <option value="Bajo">Bajo</option>
+                    </select>
+                </div>
+                <div class="box" >
+                    <label for="precio">Precio</label>
+                    <input type="number" id="precio" name="precio" placeholder="Ej: 5678" class="form-input">
+                </div>
+                <div class="box" >
+                    <label for="descripcion">Descripción</label>
+                    <textarea name="descripcion" id="descripcion" class="form-input"></textarea>
+                </div>
+                <div class="box">
+                    <label for="image">Imagen</label>
+                    <input type="file" id="imagen" name="imagen" placeholder="file" class="form-input"  accept="image/png, image/jpeg">
+                </div>
+                <div class="box">
+                    <button class="button" type="submit">Guardar Producto</button>
+                </div>
+            </div>
+        </form>
+    </main>
+    <%- include('footer') %>
+</body>
+
+</html>

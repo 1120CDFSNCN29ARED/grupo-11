@@ -1,0 +1,38 @@
+<%- include('preHead') %>
+<head>
+    <%- include('head') %>
+    <link rel="stylesheet" href="/css/products/producto-editar.css">
+    <title>Detalle de Productos</title>
+</head>
+<body>
+    <%- include('header') %>
+    <main>
+        <form action="/producto/<%= producto.id %>/editar?_method=PUT" method="POST">
+            <div>
+                <label for="nombre">Nombre del producto:</label>
+                <input name="nombre" type="text" id="name" value="<%= producto.nombre %>">
+            </div>
+            <div>
+                <label for="precio">Precio:</label>
+                <input name="precio" type="text" id="price" value="$ <%= toThousand(producto.precio) %>">
+            </div>
+            <div>
+                <label for="categoria" class="form-label">Categoría:</label>
+                <select name="categoria" id="category" class="form-input">
+                    <option value="Guitarra Eléctrica" <%= producto.categoría == "Guitarra Eléctrica" ? "selected" : "" %>>Guitarra Eléctrica</option>
+                    <option value="Guitarra Clásica" <%= producto.categoría == "Guitarra Clásica" ? "selected" : "" %>>Guitarra Clásica</option>
+                    <option value="Bajo" <%= producto.categoría == "Bajo" ? "selected" : "" %>>Bajo</option>
+                </select>
+            </div>
+            <div>
+                <label for="descripcion" class="form-label">Descripción:</label>
+                <textarea name="descripcion" placeholder="Escribir..." id="description" class="form-input"><%= producto.descripción %></textarea>
+            </div>
+            <div id="button">
+                <button type="submit">Guardar los cambios</button>
+            </div>
+        </form>
+    </main>
+    <%- include('footer') %>
+</body>
+</html>
