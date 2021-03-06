@@ -17,11 +17,11 @@ const storage = multer.diskStorage({
 })
 const uploadFile = multer({storage});
 
-router.get('/crear', productController.crear); 
+router.get('/crear', productController.crearForm);
+router.post('/', productController.crearGuardar);
 router.get('/:id', productController.detalle);
-router.get('/:id/editar', productController.editar);
-router.post('/', productController.guardarProducto);
-router.put('/:id/editar', productController.update);
+router.get('/:id/editar', productController.editarForm);
+router.put('/:id/editar', productController.editarGuardar);
 router.delete('/:id/eliminar', productController.eliminar);
 
 module.exports = router;
