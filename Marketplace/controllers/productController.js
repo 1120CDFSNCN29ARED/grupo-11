@@ -21,16 +21,16 @@ const controller = {
 		
 		res.redirect("/");
 	},
-	crear: (req, res) => {
+	crearForm: (req, res) => {
 		res.render('producto-crear');
 	},
-	editar: (req, res) => {
+	editarForm: (req, res) => {
 		const products = GetFileObject(productsFilePath);
 		let producto = products.find(producto => producto.id == req.params.id);
 		
 		res.render('producto-editar', { producto, toThousand });
 	},
-	update: (req, res) => {
+	editarGuardar: (req, res) => {
 		const productos = GetFileObject(productsFilePath);
 		const productId = req.params.id;
 		let producto = productos.find(producto => producto.id == productId);
@@ -45,17 +45,15 @@ const controller = {
 		WriteFile(productsFilePath, productos);
 		res.redirect("/producto/" + productId);
 	},	
-	guardarProducto:(req, res) =>{
+	crearGuardar:(req, res) =>{
 		const productos = GetFileObject(productsFilePath);
 		const nuevoId = productos.length > 0 ? productos[productos.length - 1].id + 1 : 1;
-
 		const newProduct = {
 			id: nuevoId,
 			...req.body,
 			masVendido: false,
 			novedades: false
 		};
-
 		productos.push(newProduct);
 		WriteFile(productsFilePath, productos);
 		res.redirect('/');
