@@ -22,7 +22,7 @@ const controller = {
 		res.redirect("/");
 	},
 	crear: (req, res) => {
-		res.render('crear-producto');
+		res.render('producto-crear');
 	},
 	editar: (req, res) => {
 		const products = GetFileObject(productsFilePath);
