@@ -1,12 +1,15 @@
 const fs = require('fs');
 let path = require('path')
 const productsFilePath = path.join(__dirname, '../database/productos.json');
+const familiasFilePath = path.join(__dirname, '../database/familiasDeProductos.json')
+const imagesPath = path.join(__dirname, "../public/images/products/");
 
 const toThousand = (n) => {return n.toLocaleString("es-AR", {maximumFractionDigits: 0})}
 
 const controller = {
 	crearForm: (req, res) => {
-		res.render('producto-crear');
+		const familiasDeProductos = GetFileObject(familiasFilePath);
+		res.render('producto-crear', {familiasDeProductos});
 	},
 	crearGuardar:(req, res) =>{
 		const productos = GetFileObject(productsFilePath);
@@ -19,7 +22,7 @@ const controller = {
 		};
 		productos.push(newProduct);
 		WriteFile(productsFilePath, productos);
-		res.redirect('/');
+		res.redirect('/producto/'+newProduct.id+"/detalle");
 	},
 	detalle: (req, res) => {
 		const products = GetFileObject(productsFilePath);
@@ -46,22 +49,25 @@ const controller = {
 		};
 		productos[indice] = actualizado
 		WriteFile(productsFilePath, productos);
-		res.redirect("/producto/" + productId);
+		res.redirect("/producto/" + productId + "/detalle");
 	},	
 	eliminar: (req, res) => {
 		const products = GetFileObject(productsFilePath);
-		let indice = products.findIndex(producto => producto.id == req.params.id)
-		
-		//*** Eliminar ***//
+		let indice = products.findIndex(n => n.id == req.params.id)
+		//Eliminar la imagen
+		let imageFile = path.join(imagesPath, products[indice].imagen)
+		if (products[indice].imagen && fs.existsSync(imageFile)) {
+			fs.unlinkSync(imageFile);
+		}
+		//Eliminar el registro
 		products.splice(indice,1)
-		WriteFile(productsFilePath, productos);
-		
+		WriteFile(productsFilePath, products);
 		res.redirect("/");
 	},
 };
 
 function GetFileObject(filePath) {
-	return JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+	return JSON.parse(fs.readFileSync(filePath, 'utf-8')); //Christian, la función no funcionaba correctamente porque se estaba usando un parámtetro distinto al de la función
 }
 
 function SanitizePrice(priceString) {

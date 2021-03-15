@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const productController = require('../controllers/userController');
+const userController = require('../controllers/userController');
 const multer = require('multer');
 const path = require("path");
 
-router.get('/crear', productController.crearForm);
-router.post('/crear', productController.crearGuardar);
-router.get('/:id/detalle', productController.detalle);
-router.get('/:id/editar', productController.editarForm);
-router.put('/:id/editar', productController.editarGuardar);
-router.delete('/:id/eliminar', productController.eliminar);
+//******************* Rutas *******************
+router.get('/crear', userController.crearForm);
+router.post('/crear', userController.crearGuardar);
+router.get('/:id/detalle', userController.detalle);
+router.get('/:id/editar', userController.editarForm);
+router.put('/:id/editar', userController.editarGuardar);
+router.delete('/:id/eliminar', userController.eliminar);
 
 module.exports = router;
 

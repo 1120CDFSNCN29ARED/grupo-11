@@ -17,7 +17,8 @@ app.set('views', [
     path.resolve(__dirname, './views'), 
     path.resolve(__dirname, './views/partials'), 
     path.resolve(__dirname, './views/products'),
-    path.resolve(__dirname, './views/users')
+    path.resolve(__dirname, './views/users'),
+    path.resolve(__dirname, './views/varios'),
 ]);
 
 // ****** Conectando con el Navegador *******
@@ -25,8 +26,8 @@ app.listen(3000, () => console.log('Servidor funcionando en puerto 3000...'));
 // ************* Ruteadores ****************
 const rutaMain = require('./routers/main');
 const rutaProducto = require('./routers/product');
-const rutaUsuarios = require('./routers/usuarios');
+const rutaUsuario = require('./routers/user');
 // **************** Rutas *******************
 app.use('/', rutaMain);
 app.use('/producto', rutaProducto);
-app.use('/usuarios', rutaUsuarios);
+app.use('/usuario', rutaUsuario);
