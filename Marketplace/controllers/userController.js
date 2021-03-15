@@ -3,35 +3,37 @@ let path = require('path')
 const usersFilePath = path.join(__dirname, '../database/usuarios.json');
 const imagesPath = path.join(__dirname, "../public/images/users/");
 
-const toThousand = (n) => {return n.toLocaleString("es-AR", {maximumFractionDigits: 0})}
-
 const controller = {
+
 	crearForm: (req, res) => {
 		res.render('usuario-crear');
 	},
+
 	crearGuardar:(req, res) =>{
 		const usuarios = GetFileObject(usersFilePath);
 		const nuevoId = usuarios.length > 0 ? usuarios[usuarios.length - 1].id + 1 : 1;
-		const newProduct = {
+		const newUser = {
 			id: nuevoId,
 			...req.body,
+			imagen: req.file.filename,
 		};
 		usuarios.push(newProduct);
 		WriteFile(usersFilePath, usuarios);
-		res.redirect('/');
+		res.redirect('/usuario/'+newUser.id+"/detalle");
 	},
+
 	detalle: (req, res) => {
 		const users = GetFileObject(usersFilePath);
-		let usuario = users.find(usuario => usuario.id == req.params.id);
-		
-		res.render('usuario-detalle', { usuario, toThousand });
+		let usuario = users.find(usuario => usuario.id == req.params.id);		
+		res.render('usuario-detalle', {usuario});
 	},
+
 	editarForm: (req, res) => {
 		const users = GetFileObject(usersFilePath);
 		let usuario = users.find(usuario => usuario.id == req.params.id);
-		
 		res.render('usuario-editar', { usuario, toThousand });
 	},
+
 	editarGuardar: (req, res) => {
 		const usuarios = GetFileObject(usersFilePath);
 		const productId = req.params.id;
@@ -43,8 +45,9 @@ const controller = {
 		};
 		usuarios[indice] = actualizado
 		WriteFile(usersFilePath, usuarios);
-		res.redirect("/usuario/" + productId);
+		res.redirect("/usuario/" + userId + "/detalle");
 	},	
+
 	eliminar: (req, res) => {
 		const users = GetFileObject(usersFilePath);
 		let indice = users.findIndex(n => n.id == req.params.id)
@@ -61,7 +64,7 @@ const controller = {
 };
 
 function GetFileObject(filePath) {
-	return JSON.parse(fs.readFileSync(FilePath, 'utf-8'));
+	return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 }
 
 function WriteFile(filePath, content) {
