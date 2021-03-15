@@ -12,9 +12,6 @@
             <div class="usuario">
                 <h2><%= usuario.nombre %></h2>
             </div>
-            <div class="carrito">
-                <button class="icono-carrito"><i class="fas fa-shopping-cart"></i></button>
-            </div>
             <div class="img">
                 <article>
                     <img src="/images/users/<%= usuario.imagen %>" width="100%" alt="<%= usuario.nombre %>">
@@ -23,13 +20,10 @@
             <div class="descripcion-contenedor">
                 <article class="descripcion">
                     <div class="caracteristica">
-                        <h4>Características Técnicas</h4>
+                        <h4>Descripción</h4>
                     </div>
                     <div class="detalle">
                         <p><%= usuario.descripción %></p>
-                    </div>
-                    <div class="precio">
-                        <p>$ <%= toThousand(usuario.precio) %></p>
                     </div>
                     <div class="flex-container">
                         <a href="/usuario/<%= usuario.id %>/editar" class="action-button edit">

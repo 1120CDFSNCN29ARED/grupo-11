@@ -19,9 +19,7 @@
             <div>
                 <label for="categoria" class="form-label">Categoría:</label>
                 <select name="categoria" id="category" class="form-input">
-                    <option value="Guitarra Eléctrica" <%= usuario.categoría == "Guitarra Eléctrica" ? "selected" : "" %>>Guitarra Eléctrica</option>
-                    <option value="Guitarra Clásica" <%= usuario.categoría == "Guitarra Clásica" ? "selected" : "" %>>Guitarra Clásica</option>
-                    <option value="Bajo" <%= usuario.categoría == "Bajo" ? "selected" : "" %>>Bajo</option>
+                    <option value="" <%= usuario.categoría == "" ? "selected" : "" %>></option>
                 </select>
             </div>
             <div>
