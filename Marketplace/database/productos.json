@@ -5,7 +5,7 @@
     "descripcion": "",
     "masVendido": true,
     "novedades": false,
-    "categoria": "Guitarra Eléctrica",
+    "categoria": "Guitarras Eléctricas",
     "precio": 100000,
     "imagen": "fender-stratocaster.jpg"
   },
@@ -15,7 +15,7 @@
     "descripcion": "",
     "masVendido": true,
     "novedades": false,
-    "categoria": "Guitarra Clásica",
+    "categoria": "Guitarras Clásicas",
     "precio": 75000,
     "imagen": "taylor-gs-mini.jpg"
   },
@@ -25,7 +25,7 @@
     "descripcion": "",
     "masVendido": true,
     "novedades": false,
-    "categoria": "Guitarra Eléctrica",
+    "categoria": "Guitarras Eléctricas",
     "precio": 110000,
     "imagen": "fender-telecaster.jpg"
   },
@@ -35,7 +35,7 @@
     "descripcion": "",
     "masVendido": true,
     "novedades": false,
-    "categoria": "Guitarra Eléctrica",
+    "categoria": "Guitarras Eléctricas",
     "precio": 80000,
     "imagen": "jackson-king-v.jpg"
   },
@@ -45,7 +45,7 @@
     "descripcion": "",
     "masVendido": false,
     "novedades": true,
-    "categoria": "Guitarra Eléctrica",
+    "categoria": "Guitarras Eléctricas",
     "precio": 100000,
     "imagen": "gibson-les-paul.jpg"
   },
@@ -55,7 +55,7 @@
     "descripcion": "",
     "masVendido": false,
     "novedades": true,
-    "categoria": "Bajo",
+    "categoria": "Bajos",
     "precio": 80000,
     "imagen": "fender-precision.jpg"
   },
@@ -65,7 +65,7 @@
     "descripcion": "",
     "masVendido": false,
     "novedades": true,
-    "categoria": "Guitarra Eléctrica",
+    "categoria": "Guitarras Eléctricas",
     "precio": 100000,
     "imagen": "gibson-sg.jpg"
   },
@@ -75,8 +75,18 @@
     "descripcion": "",
     "masVendido": false,
     "novedades": true,
-    "categoria": "Guitarra Clásica",
+    "categoria": "Guitarras Clásicas",
     "precio": 90000,
     "imagen": "taylor-210ce-plus.jpg"
+  },
+  {
+    "id": 10,
+    "nombre": "Guitarra de madera",
+    "categoria": "Guitarras Clásicas",
+    "precio": 10000,
+    "descripcion": "Si la pintaran, parecería de verdad...",
+    "masVendido": false,
+    "novedades": true,
+    "imagen": "1615828054014.jpg"
   }
 ]

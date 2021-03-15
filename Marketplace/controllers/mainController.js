@@ -3,9 +3,11 @@ const fs = require('fs');
 const toThousand = (n) => {return n.toLocaleString("es-AR", {maximumFractionDigits: 0})}
 
 const controller = {
+
 	carrito: (req, res) => {
 		res.render('carrito');
 	},
+
 	index: (req, res) => {
 		const productos = GetFileData('productos.json');
 
@@ -20,16 +22,16 @@ const controller = {
 			}
 		];
 		
+		let categoriaProductos = GetFileData('categoriasDeProductos.json');
 		res.render('index', {
 			seccionesProductos,
 			toThousand,
+			categoriaProductos
 		});
 	},
+
 	login: (req, res) => {
 		res.render('login');
-	},
-	registro: (req, res) => {
-		res.render('registro');
 	},
 };
 
