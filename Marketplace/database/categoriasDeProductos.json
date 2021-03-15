@@ -1,10 +1,14 @@
 [
     {
-        "nombre": "Guitarras eléctricas",
+        "nombre": "Guitarras Eléctricas",
         "link": ""
     },
     {
-        "nombre": "Guitarras acusticas",
+        "nombre": "Guitarras Acústicas",
+        "link": ""
+    },
+    {
+        "nombre": "Guitarras Clásicas",
         "link": ""
     },
     {

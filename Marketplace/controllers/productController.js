@@ -1,41 +1,48 @@
 const fs = require('fs');
 let path = require('path')
 const productsFilePath = path.join(__dirname, '../database/productos.json');
-const familiasFilePath = path.join(__dirname, '../database/familiasDeProductos.json')
+const categoriasFilePath = path.join(__dirname, '../database/categoriasDeProductos.json')
 const imagesPath = path.join(__dirname, "../public/images/products/");
 
 const toThousand = (n) => {return n.toLocaleString("es-AR", {maximumFractionDigits: 0})}
 
 const controller = {
+
 	crearForm: (req, res) => {
-		const familiasDeProductos = GetFileObject(familiasFilePath);
-		res.render('producto-crear', {familiasDeProductos});
+		const categoriasDeProductos = GetFileObject(categoriasFilePath);
+		res.render('producto-crear', {categoriasDeProductos});
 	},
+
 	crearGuardar:(req, res) =>{
 		const productos = GetFileObject(productsFilePath);
 		const nuevoId = productos.length > 0 ? productos[productos.length - 1].id + 1 : 1;
+		let price = SanitizePrice(req.body.precio);
 		const newProduct = {
 			id: nuevoId,
 			...req.body,
+			precio: Number(price),
 			masVendido: false,
-			novedades: false
+			novedades: true,
+			imagen: req.file.filename,
 		};
 		productos.push(newProduct);
 		WriteFile(productsFilePath, productos);
 		res.redirect('/producto/'+newProduct.id+"/detalle");
 	},
+
 	detalle: (req, res) => {
 		const products = GetFileObject(productsFilePath);
 		let producto = products.find(producto => producto.id == req.params.id);
-		
 		res.render('producto-detalle', { producto, toThousand });
 	},
+
 	editarForm: (req, res) => {
 		const products = GetFileObject(productsFilePath);
 		let producto = products.find(producto => producto.id == req.params.id);
-		
-		res.render('producto-editar', { producto, toThousand });
+		const categoriasDeProductos = GetFileObject(categoriasFilePath);
+		res.render('producto-editar', {producto, toThousand, categoriasDeProductos});
 	},
+
 	editarGuardar: (req, res) => {
 		const productos = GetFileObject(productsFilePath);
 		const productId = req.params.id;
@@ -51,6 +58,7 @@ const controller = {
 		WriteFile(productsFilePath, productos);
 		res.redirect("/producto/" + productId + "/detalle");
 	},	
+
 	eliminar: (req, res) => {
 		const products = GetFileObject(productsFilePath);
 		let indice = products.findIndex(n => n.id == req.params.id)
