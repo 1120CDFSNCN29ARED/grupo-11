@@ -1,10 +1,35 @@
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-<link rel="stylesheet" href="/css/common/normalize.css">
-<link rel="stylesheet" href="/css/common/site.css">
-<link rel="stylesheet" href="/css/common/site-header.css">
-<link rel="stylesheet" href="/css/common/site-footer.css">
-<link rel="stylesheet" href="/css/common/site-responsive.css">
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+
+    <!-- Estilos para todas las páginas -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/common/normalize.css">
+    <link rel="stylesheet" href="/css/common/site.css">
+    <link rel="stylesheet" href="/css/common/site-header.css">
+    <link rel="stylesheet" href="/css/common/site-footer.css">
+    <link rel="stylesheet" href="/css/common/site-responsive.css">
+
+    <!-- Estilos personalizados -->
+    <% if (titulo == "Guitar Shop") { %>
+        <link rel="stylesheet" href="/css/home-body.css">
+        <link rel="stylesheet" href="/css/home-responsive.css">
+    <% } %>
+    <% if (titulo == "Login") { %><link rel="stylesheet" href="/css/user/login.css"><% } %>
+    <% if (titulo == "Carrito de Compras") { %><link rel="stylesheet" href="/css/user/carrito.css"><% } %>
+    <% if (titulo == "Registro") { %><link rel="stylesheet" href="/css/user/registro.css"><% } %>
+    <% if (titulo == "Detalle del usuario") { %><link rel="stylesheet" href="/css/users/usuario-detalle.css"><% } %>
+    <% if (titulo == "Editar el Usuario") { %><link rel="stylesheet" href="/css/users/usuario-editar.css"><% } %>
+    <% if (titulo == "Alta de Producto") { %><link rel="stylesheet" href="/css/products/producto-crear.css"><% } %>
+    <% if (titulo == "Detalle del Producto") { %><link rel="stylesheet" href="/css/products/producto-detalle.css"><% } %>
+    <% if (titulo == "Editar el Producto") { %><link rel="stylesheet" href="/css/products/producto-editar.css"><% } %>
+    
+    <!-- Título de la página -->
+    <title><%= titulo %></title>
+
+</head>

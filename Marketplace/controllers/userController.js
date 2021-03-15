@@ -6,7 +6,8 @@ const imagesPath = path.join(__dirname, "../public/images/users/");
 const controller = {
 
 	crearForm: (req, res) => {
-		res.render('usuario-crear');
+		let titulo = "Registro"
+		res.render('usuario-crear', {titulo});
 	},
 
 	crearGuardar:(req, res) =>{
@@ -23,15 +24,17 @@ const controller = {
 	},
 
 	detalle: (req, res) => {
+		let titulo = "Detalle del usuario"
 		const users = GetFileObject(usersFilePath);
 		let usuario = users.find(usuario => usuario.id == req.params.id);		
-		res.render('usuario-detalle', {usuario});
+		res.render('usuario-detalle', {usuario, titulo});
 	},
 
 	editarForm: (req, res) => {
+		let titulo = "Editar el Usuario"
 		const users = GetFileObject(usersFilePath);
 		let usuario = users.find(usuario => usuario.id == req.params.id);
-		res.render('usuario-editar', { usuario, toThousand });
+		res.render('usuario-editar', {usuario, toThousand, titulo});
 	},
 
 	editarGuardar: (req, res) => {
