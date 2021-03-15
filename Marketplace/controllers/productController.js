@@ -5,32 +5,35 @@ const productsFilePath = path.join(__dirname, '../database/productos.json');
 const toThousand = (n) => {return n.toLocaleString("es-AR", {maximumFractionDigits: 0})}
 
 const controller = {
+	crearForm: (req, res) => {
+		res.render('producto-crear');
+	},
+	crearGuardar:(req, res) =>{
+		const productos = GetFileObject(productsFilePath);
+		const nuevoId = productos.length > 0 ? productos[productos.length - 1].id + 1 : 1;
+		const newProduct = {
+			id: nuevoId,
+			...req.body,
+			masVendido: false,
+			novedades: false
+		};
+		productos.push(newProduct);
+		WriteFile(productsFilePath, productos);
+		res.redirect('/');
+	},
 	detalle: (req, res) => {
 		const products = GetFileObject(productsFilePath);
 		let producto = products.find(producto => producto.id == req.params.id);
 		
 		res.render('producto-detalle', { producto, toThousand });
 	},
-	eliminar: (req, res) => {
-		const products = GetFileObject(productsFilePath);
-		let indice = products.findIndex(producto => producto.id == req.params.id)
-		
-		//*** Eliminar ***//
-		products.splice(indice,1)
-		WriteFile(productsFilePath, productos);
-		
-		res.redirect("/");
-	},
-	crear: (req, res) => {
-		res.render('crear-producto');
-	},
-	editar: (req, res) => {
+	editarForm: (req, res) => {
 		const products = GetFileObject(productsFilePath);
 		let producto = products.find(producto => producto.id == req.params.id);
 		
 		res.render('producto-editar', { producto, toThousand });
 	},
-	update: (req, res) => {
+	editarGuardar: (req, res) => {
 		const productos = GetFileObject(productsFilePath);
 		const productId = req.params.id;
 		let producto = productos.find(producto => producto.id == productId);
@@ -45,21 +48,16 @@ const controller = {
 		WriteFile(productsFilePath, productos);
 		res.redirect("/producto/" + productId);
 	},	
-	guardarProducto:(req, res) =>{
-		const productos = GetFileObject(productsFilePath);
-		const nuevoId = productos.length > 0 ? productos[productos.length - 1].id + 1 : 1;
-
-		const newProduct = {
-			id: nuevoId,
-			...req.body,
-			masVendido: false,
-			novedades: false
-		};
-
-		productos.push(newProduct);
+	eliminar: (req, res) => {
+		const products = GetFileObject(productsFilePath);
+		let indice = products.findIndex(producto => producto.id == req.params.id)
+		
+		//*** Eliminar ***//
+		products.splice(indice,1)
 		WriteFile(productsFilePath, productos);
-		res.redirect('/');
-	}
+		
+		res.redirect("/");
+	},
 };
 
 function GetFileObject(filePath) {

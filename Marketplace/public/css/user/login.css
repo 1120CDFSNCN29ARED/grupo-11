@@ -21,7 +21,7 @@ main form input {
 
 main form input, main form button {
     padding: 5px 10px;
-    border-radius: 10%;
+    border-radius: 12px;
     font-weight: bold;
 }
 
