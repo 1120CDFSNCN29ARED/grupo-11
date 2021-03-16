@@ -1,0 +1,21 @@
+h1 {text-align: center;padding-top: 20px;font-size: 2em;}
+#formulario {display: grid;grid-template-columns: 1fr 1fr;gap: 5px 0px;width: 65%;margin: auto}
+
+.box {text-align: center;padding: 5px;}
+.titulo {margin: auto;text-align: center;font-weight: bold;padding: 5px;font-size: 1.2em;cursor: pointer;}
+
+.formulario__grupo-input {position: relative;}
+.input {border-radius: 5px;padding: 10px;text-align: center;}
+.titulo, .input {width: 80%;}
+.formulario__validacion-estado {position: absolute;right: 13%;top: 12px;font-size: 1.2em;}
+.input-error {font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size: 1rem;}
+
+#boton-registro {grid-column: span 2;margin-top: 20px;}
+.button {padding: 10px;display: flex;margin: auto;border-radius: 5px;font-size: 14px;border: none;background-color: #232f3e;color: white;}
+.contenedor-redes{text-align: center;}
+.redes-sociales{font-size: 30px;color:blue;padding: 20px;border-radius: 50%;background-color:#ebebeb;border: none;}
+
+@media (max-width: 768px) {
+    #formulario {grid-template-columns: 1fr;}
+    #boton-registro {grid-column: span 1;}
+}
