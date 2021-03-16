@@ -17,11 +17,13 @@ const controller = {
 	},
 
 	crearGuardar:(req, res) => {
+		let coincidencia = req.body.contrasena == req.body.contrasena2
 		const resultValidation = validationResult(req);
-		if (resultValidation.errors.length > 0) {
+		if (resultValidation.errors.length > 0 || !coincidencia) {
 			return res.render('usuario-crear', {
 				errors: resultValidation.mapped(),
 				oldData: req.body,
+				coincidencia,
 				titulo: "Registro"
 			});
 		}
