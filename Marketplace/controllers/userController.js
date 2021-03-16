@@ -10,7 +10,7 @@ const controller = {
 		res.render('usuario-crear', {titulo});
 	},
 
-	crearGuardar:(req, res) =>{
+	crearGuardar:(req, res) => {
 		const usuarios = GetFileObject(usersFilePath);
 		const nuevoId = usuarios.length > 0 ? usuarios[usuarios.length - 1].id + 1 : 1;
 		const newUser = {
@@ -18,9 +18,9 @@ const controller = {
 			...req.body,
 			imagen: req.file.filename,
 		};
-		usuarios.push(newProduct);
+		usuarios.push(newUser);
 		WriteFile(usersFilePath, usuarios);
-		res.redirect('/usuario/'+newUser.id+"/detalle");
+		res.redirect('/usuario/'+ nuevoId +"/detalle");
 	},
 
 	detalle: (req, res) => {

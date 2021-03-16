@@ -14,7 +14,7 @@ const controller = {
 		res.render('producto-crear', {categoriasDeProductos, titulo});
 	},
 
-	crearGuardar:(req, res) =>{
+	crearGuardar:(req, res) => {
 		const productos = GetFileObject(productsFilePath);
 		const nuevoId = productos.length > 0 ? productos[productos.length - 1].id + 1 : 1;
 		let price = SanitizePrice(req.body.precio);

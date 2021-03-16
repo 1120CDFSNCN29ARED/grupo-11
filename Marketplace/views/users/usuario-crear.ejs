@@ -3,7 +3,7 @@
     <%- include('header') %>
     <main>
         <h1>Registre su usuario</h1>
-        <form action="/usuario/crear" method="POST" id="formulario">
+        <form action="/usuario/crear" method="POST" id="formulario" enctype="multipart/form-data">
 
             <!-- Grupo Nombre -->
             <section class="box" id="grupo_nombre">
@@ -67,7 +67,7 @@
 
             <!-- Submit -->
             <section id="boton-registro">
-                <button class="button" type="submit">Registrarse</button>
+                <button class="button" type="submit">Envíe los datos</button>
                 <div class="contenedor-redes">
                     <a href="https://www.facebook.com/">
                         <button class="redes-sociales">

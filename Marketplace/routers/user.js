@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require("path");
 const userController = require(path.join(__dirname,'../controllers/userController'));
-const uploadFile = require(path.join(__dirname,'../Middlewares/multer'));
+const uploadFile = require(path.join(__dirname,'../Middlewares/multerUsers'));
 
 //******************* Rutas *******************
 router.get('/crear', userController.crearForm);
