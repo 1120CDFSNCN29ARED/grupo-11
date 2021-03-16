@@ -9,7 +9,7 @@ router.get('/crear', userController.crearForm);
 router.post('/crear', uploadFile.single("imagen"), userController.crearGuardar);
 router.get('/:id/detalle', userController.detalle);
 router.get('/:id/editar', userController.editarForm);
-router.put('/:id/editar', userController.editarGuardar);
+router.put('/:id/editar', uploadFile.single("imagen"), userController.editarGuardar);
 router.delete('/:id/eliminar', userController.eliminar);
 
 module.exports = router;

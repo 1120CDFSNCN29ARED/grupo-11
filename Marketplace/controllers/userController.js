@@ -1,5 +1,6 @@
 const fs = require('fs');
 let path = require('path')
+const bcryptjs = require('bcryptjs')
 const usersFilePath = path.join(__dirname, '../database/usuarios.json');
 const imagesPath = path.join(__dirname, "../public/images/users/");
 
@@ -13,18 +14,20 @@ const controller = {
 	crearGuardar:(req, res) => {
 		const usuarios = GetFileObject(usersFilePath);
 		const nuevoId = usuarios.length > 0 ? usuarios[usuarios.length - 1].id + 1 : 1;
-		const newUser = {
+		const nuevoUsuario = {
 			id: nuevoId,
 			...req.body,
+			contrasena: bcryptjs.hashSync(req.body.contrasena, 10),
 			imagen: req.file.filename,
 		};
-		usuarios.push(newUser);
+		delete nuevoUsuario.contrasena2
+		usuarios.push(nuevoUsuario);
 		WriteFile(usersFilePath, usuarios);
 		res.redirect('/usuario/'+ nuevoId +"/detalle");
 	},
 
 	detalle: (req, res) => {
-		let titulo = "Detalle del usuario"
+		let titulo = "Detalle del Usuario"
 		const users = GetFileObject(usersFilePath);
 		let usuario = users.find(usuario => usuario.id == req.params.id);		
 		res.render('usuario-detalle', {usuario, titulo});
@@ -34,21 +37,30 @@ const controller = {
 		let titulo = "Editar el Usuario"
 		const users = GetFileObject(usersFilePath);
 		let usuario = users.find(usuario => usuario.id == req.params.id);
-		res.render('usuario-editar', {usuario, toThousand, titulo});
+		res.render('usuario-editar', {usuario, titulo});
 	},
 
 	editarGuardar: (req, res) => {
 		const usuarios = GetFileObject(usersFilePath);
-		const productId = req.params.id;
-		let usuario = usuarios.find(usuario => usuario.id == productId);
+		const ID = req.params.id;
+		let usuario = usuarios.find(n => n.id == ID);
 		let indice = usuarios.indexOf(usuario)
 		const actualizado = {
 			...usuario,
 			...req.body,
 		};
+		if (req.file) {
+			//Eliminar la imagen original
+			let imageFile = path.join(imagesPath, usuario.imagen)
+			if (usuario.imagen && fs.existsSync(imageFile)) {
+				fs.unlinkSync(imageFile);
+			};
+			//Cambiar el nombre de la imagen
+			actualizado.imagen = req.file.filename;
+		};
 		usuarios[indice] = actualizado
 		WriteFile(usersFilePath, usuarios);
-		res.redirect("/usuario/" + userId + "/detalle");
+		res.redirect("/usuario/" + ID + "/detalle");
 	},	
 
 	eliminar: (req, res) => {

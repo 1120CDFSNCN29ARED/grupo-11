@@ -8,38 +8,18 @@
   },
   {
     "id": 2,
-    "nombre": "",
-    "apellido": "",
-    "mail": "diegoiribarren2015@gmail.com",
-    "contrasena": "ttt",
-    "contrasena2": "",
-    "imagen": "1615899963839.jpg"
+    "nombre": "Diego",
+    "apellido": "Iribarren",
+    "email": "diegoiribarren2015@gmail.com",
+    "contrasena": "$2a$10$iUqZz2qxCRltI9ixaOVCbezuTGIxUZqm5Qh8.a6gFZ.Bu7hPbuCOe",
+    "imagen": "1615911493969.jpg"
   },
   {
     "id": 3,
-    "nombre": "Diego",
-    "apellido": "Iribarren",
-    "mail": "diegoiribarren2015@gmail.com",
-    "contrasena": "jimbo",
-    "contrasena2": "jimbo",
-    "imagen": "1615899986928.jpg"
-  },
-  {
-    "id": 4,
-    "nombre": "Diego",
-    "apellido": "Iribarren",
-    "mail": "diegoiribarren2015@gmail.com",
-    "contrasena": "ttt",
-    "contrasena2": "",
-    "imagen": "1615900357735.jpg"
-  },
-  {
-    "id": 5,
-    "nombre": "Diego",
-    "apellido": "Iribarren",
-    "mail": "diegoiribarren2015@gmail.com",
-    "contrasena": "ttt",
-    "contrasena2": "",
-    "imagen": "1615903093352.jpg"
+    "nombre": "Ine",
+    "apellido": "Crespi",
+    "email": "inecrespi@gmail.com",
+    "contrasena": "$2a$10$fNVrWlTfKkKe5J3byePl5ukQqDu//ZS8Hx176ofLEvx69iT/2fECu",
+    "imagen": "1615914832774.jpg"
   }
 ]
