@@ -21,5 +21,21 @@
     "email": "inecrespi@gmail.com",
     "contrasena": "$2a$10$fNVrWlTfKkKe5J3byePl5ukQqDu//ZS8Hx176ofLEvx69iT/2fECu",
     "imagen": "1615914832774.jpg"
+  },
+  {
+    "id": 4,
+    "nombre": "Diego",
+    "apellido": "Iribarren",
+    "email": "diegoiribarren2015@gmail.com",
+    "contrasena": "$2a$10$Wogv0eNCtDZchT2SuiA2yOq3aW4n8HDfbQytD8rsTzsRNkbMKy9ae",
+    "imagen": "1615931194322.jpg"
+  },
+  {
+    "id": 5,
+    "nombre": "Diego",
+    "apellido": "Iribarren",
+    "email": "diegoiribarren2015@gmail.com",
+    "contrasena": "$2a$10$fUMeDZcusJX4Rq3xpP6.Y.Tckr1q0kAJzkizIZ8f2sHMlVvcGrT7a",
+    "imagen": "1615931245734.jpg"
   }
 ]

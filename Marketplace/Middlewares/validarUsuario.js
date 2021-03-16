@@ -17,10 +17,11 @@ module.exports = [
 		,
 	body('contrasena')
 		.notEmpty().withMessage('Tienes que escribir una contraseña').bail()
-		.isLength({min:6, max:12}).withMessage("Debe tener entre 6 y 12 caracteres")
+		.isLength({min:6, max:12}).withMessage("Debe tener entre 6 y 12 caracteres").bail()
 		,
 	body('contrasena2')
 		.notEmpty().withMessage('Tienes que escribir una contraseña').bail()
+		.isLength({min:6, max:12}).withMessage("Debe tener entre 6 y 12 caracteres").bail()
 		,
 	body('imagen').custom((value, {req}) => {
 		let file = req.file;
