@@ -1,9 +1,14 @@
+// Requires ***********************************
 const fs = require('fs');
 let path = require('path')
 const bcryptjs = require('bcryptjs')
+const {validationResult} = require('express-validator');
+
+// Arhivos y Paths ****************************
 const usersFilePath = path.join(__dirname, '../database/usuarios.json');
 const imagesPath = path.join(__dirname, "../public/images/users/");
 
+// Controlador ********************************
 const controller = {
 
 	crearForm: (req, res) => {
@@ -12,6 +17,15 @@ const controller = {
 	},
 
 	crearGuardar:(req, res) => {
+		const resultValidation = validationResult(req);
+		if (resultValidation.errors.length > 0) {
+			return res.render('usuario-crear', {
+				errors: resultValidation.mapped(),
+				oldData: req.body,
+				titulo: "Registro"
+			});
+		}
+
 		const usuarios = GetFileObject(usersFilePath);
 		const nuevoId = usuarios.length > 0 ? usuarios[usuarios.length - 1].id + 1 : 1;
 		const nuevoUsuario = {

@@ -9,7 +9,8 @@
             <section class="box" id="grupo_nombre">
                 <label for="nombre" class="titulo">Nombre</label>
                 <div class="formulario__grupo-input">
-                    <input type="text" class="input" name="nombre" id="nombre" placeholder="Ingrese su nombre">
+                    <input type="text" class="input" name="nombre" id="nombre"
+                        <% if (locals.oldData && oldData.nombre) { %>value="<%= oldData.nombre %>"<% } else { %>placeholder="Ingrese su nombre"<% } %>>
 					<i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
                 <p class="input-error">El nombre debe ser de 2 a 20 letras</p>
@@ -19,8 +20,9 @@
             <section class="box" id="grupo_apellido">
                 <label for="apellido" class="titulo">Apellido</label>
                 <div class="formulario__grupo-input">
-                    <input type="text" class="input" name="apellido" id="apellido" placeholder="Ingrese su apellido">
-					<i class="formulario__validacion-estado fas fa-times-circle"></i>
+                    <input type="text" class="input" name="apellido" id="apellido"
+                        <% if (locals.oldData && oldData.apellido) { %>value="<%= oldData.apellido %>"<% } else { %>placeholder="Ingrese su apellido"<% } %>>
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
                 <p class="input-error">El apellido debe ser de 2 a 20 letras</p>
             </section>
@@ -29,7 +31,8 @@
             <section class="box" id="grupo_email">
                 <label for="email" class="titulo">Correo Electrónico</label>
                 <div class="formulario__grupo-input">
-                    <input type="email" class="input" name="email" id="email" placeholder="Ingrese su Correo Electrónico">
+                    <input type="text" class="input" name="email" id="email"
+                        <% if (locals.oldData && oldData.email) { %>value="<%= oldData.email %>"<% } else { %>placeholder="Ingrese su Correo Electrónico"<% } %>>
 					<i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
                 <p class="input-error">Debe ser una dirección de mail válida</p>
@@ -49,7 +52,8 @@
             <section class="box" id="grupo_contrasena">
                 <label for="contrasena" class="titulo">Contraseña</label>
                 <div class="formulario__grupo-input">
-                    <input type="password" class="input" name="contrasena" id="contrasena">
+                    <input type="password" class="input" name="contrasena" id="contrasena"
+                        <% if (locals.oldData && oldData.contrasena) { %>value="<%= oldData.contrasena %>"<% } %>>
 					<i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
 				<p class="input-error">La contraseña debe tener de 4 a 12 dígitos</p>
@@ -59,7 +63,8 @@
             <section class="box" id="grupo_contrasena2">
                 <label for="contrasena2" class="titulo">Repita su Contraseña</label>
                 <div class="formulario__grupo-input">
-                    <input type="password" class="input" name="contrasena2" id="contrasena2">
+                    <input type="password" class="input" name="contrasena2" id="contrasena2"
+                        <% if (locals.oldData && oldData.contrasena2) { %>value="<%= oldData.contrasena2 %>"<% } %>>
 					<i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
 				<p class="input-error">Ambas contraseñas deben coincidir</p>
