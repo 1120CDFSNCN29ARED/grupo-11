@@ -8,7 +8,7 @@
 <body>
     <%- include('header') %>
     <main>
-        <form action="/producto" method="POST" enctype="multipart/form-data">
+        <form action="/producto/crear" method="POST" enctype="multipart/form-data">
             <h1>CREAR PRODUCTO</h1>
             <div>
                 <div class="box">
@@ -18,9 +18,9 @@
                 <div class="box">
                     <label for="categoria" class="form-label">Categoría</label>
                     <select name="categoria" id="category" class="form-input">
-                        <option value="Guitarra Eléctrica">Guitarra Eléctrica</option>
-                        <option value="Guitarra Clásica">Guitarra Clásica</option>
-                        <option value="Bajo">Bajo</option>
+                        <% for (let n of categoriasDeProductos) { %>
+                        <option value="<%= n.nombre %>"><%= n.nombre %></option>
+                        <% } %>
                     </select>
                 </div>
                 <div class="box" >

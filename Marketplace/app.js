@@ -1,8 +1,6 @@
 // ************** Requires *************
 const express = require("express");
 const path = require("path");
-const rutaMain = require('./routers/main');
-const rutaProducto = require('./routers/product');
 const methodOverride = require('method-override');
 
 const app = express();
@@ -19,11 +17,17 @@ app.set('views', [
     path.resolve(__dirname, './views'), 
     path.resolve(__dirname, './views/partials'), 
     path.resolve(__dirname, './views/products'),
-    path.resolve(__dirname, './views/user')
+    path.resolve(__dirname, './views/users'),
+    path.resolve(__dirname, './views/varios'),
 ]);
 
 // ****** Conectando con el Navegador *******
 app.listen(3000, () => console.log('Servidor funcionando en puerto 3000...'));
-// *************** Rutas ******************
+// ************* Ruteadores ****************
+const rutaMain = require('./routers/main');
+const rutaProducto = require('./routers/product');
+const rutaUsuario = require('./routers/user');
+// **************** Rutas *******************
 app.use('/', rutaMain);
 app.use('/producto', rutaProducto);
+app.use('/usuario', rutaUsuario);
