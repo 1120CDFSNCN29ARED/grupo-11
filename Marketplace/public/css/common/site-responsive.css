@@ -11,8 +11,7 @@
     }
 
     #menu-button-container {
-        width: 100%;
-        order: 5;
+        flex-wrap: nowrap;
         justify-content: flex-start;
         padding-top: 1em;
         padding-left: 2em;
@@ -20,6 +19,7 @@
     
     #menu-button {
         font-size: 2em;
+        margin-right: 30px;
     }
 
     #nav-bar,
@@ -29,7 +29,7 @@
 
     #nav-bar {
         width: 95%;
-        padding-left: 2em;
+        
         display: flex;
         flex-wrap: wrap;
         align-content: center;
@@ -50,7 +50,7 @@
     }
 
     #search-container {
-        width: 60%;
+        width: 30%;
     }
     
     #shop-cart-container,
