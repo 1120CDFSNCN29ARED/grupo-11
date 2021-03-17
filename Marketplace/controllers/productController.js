@@ -14,8 +14,9 @@ const controller = {
 		const newProduct = {
 			id: nuevoId,
 			...req.body,
-			masVendido: false,
-			novedades: false
+			imagen: req.file.filename,
+            masVendido: false,
+			novedades: false,
 		};
 		productos.push(newProduct);
 		WriteFile(productsFilePath, productos);
@@ -49,11 +50,11 @@ const controller = {
 		res.redirect("/producto/" + productId);
 	},	
 	eliminar: (req, res) => {
-		const products = GetFileObject(productsFilePath);
-		let indice = products.findIndex(producto => producto.id == req.params.id)
+		const productos = GetFileObject(productsFilePath);
+		let indice = productos.findIndex(producto => producto.id == req.params.id)
 		
 		//*** Eliminar ***//
-		products.splice(indice,1)
+		productos.splice(indice,1)
 		WriteFile(productsFilePath, productos);
 		
 		res.redirect("/");
