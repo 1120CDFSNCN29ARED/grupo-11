@@ -12,12 +12,10 @@ const imagesPath = path.join(__dirname, "../public/images/users/");
 module.exports = {
 
 	crearForm: (req, res) => {
-		let usuarioEnBD = null
-		let coincidencia = true
 		res.render('usuario-crear', {
 			usuario: null,
-			usuarioEnBD,
-			coincidencia,
+			usuarioEnBD: null,
+			coincidencia: true,
 			titulo: "Registro"
 		});
 	},
