@@ -4,60 +4,7 @@
     <main>
         <h1>Edite su usuario</h1>
         <form action="/usuario/<%= usuario.id %>/editar?_method=PUT" method="POST" id="formulario" enctype="multipart/form-data">
-            <!-- Grupo Nombre -->
-            <section class="box" id="grupo_nombre">
-                <label for="nombre" class="titulo">Nombre</label>
-                <div class="formulario__grupo-input">
-                    <input type="text" class="input" name="nombre" id="nombre" value="<%= usuario.nombre %>">
-					<i class="formulario__validacion-estado fas fa-times-circle"></i>
-                </div>
-                <p class="input-error">El nombre debe ser de 2 a 20 letras</p>
-            </section>
-            <!-- Grupo Apellido -->
-            <section class="box" id="grupo_apellido">
-                <label for="apellido" class="titulo">Apellido</label>
-                <div class="formulario__grupo-input">
-                    <input type="text" class="input" name="apellido" id="apellido" value="<%= usuario.apellido %>">
-					<i class="formulario__validacion-estado fas fa-times-circle"></i>
-                </div>
-                <p class="input-error">El apellido debe ser de 2 a 20 letras</p>
-            </section>
-
-            <!-- Grupo Email -->
-            <section class="box" id="grupo_email">
-                <label for="email" class="titulo">Correo Electrónico</label>
-                <div class="formulario__grupo-input">
-                    <input type="email" class="input" name="email" id="email" value="<%= usuario.email %>">
-					<i class="formulario__validacion-estado fas fa-times-circle"></i>
-                </div>
-                <p class="input-error">Debe ser una dirección de mail válida</p>
-                <p class="input-error">Este mail ya figura en nuestra base de datos</p>
-            </section>
-
-            <!-- Grupo Imagen de perfil -->
-            <section class="box" id="grupo_imagen">
-                <label for="imagen" class="titulo">Imagen de perfil</label>
-                <div class="formulario__grupo-input">
-                    <input type="file" class="input" name="imagen" id="imagen">
-                </div>
-            </section>
-
-            <!-- Submit -->
-            <section id="boton-registro">
-                <button class="button" type="submit">Envíe los datos</button>
-                <div class="contenedor-redes">
-                    <a href="https://www.facebook.com/">
-                        <button class="redes-sociales">
-                            <i class="fab fa-facebook-square"></i>
-                        </button>
-                    </a>
-                    <a href="https://accounts.google.com/">
-                        <button class="redes-sociales">
-                            <i class="fab fa-google"></i>
-                        </button>
-                    </a>
-                </div>    
-            </section>
+            <%- include('registroUsuario') %>
         </form>
     </main>
     <%- include('footer') %>
