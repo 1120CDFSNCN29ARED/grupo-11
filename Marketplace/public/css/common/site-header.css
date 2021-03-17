@@ -54,3 +54,9 @@ header {
 .banner-image {
     width: 100%;
 }
+
+/* Menú de Login */
+header #menu-login {position: absolute;right: 20px;top: 90px;z-index: 2;}
+header #menu-login {border-radius: 10px; border: solid 1px var(--secondary-background); background-color: var(--primary-background); }
+header #menu-login a {padding: 8px 16px;text-decoration: none; display: block;}
+header #menu-login a {color:var(--gray);font-weight: bold;font-family: 'Lora', serif;}

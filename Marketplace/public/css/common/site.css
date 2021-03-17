@@ -30,3 +30,6 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.dropdown-content {display: none;}
+.mostrar {display: block;}
