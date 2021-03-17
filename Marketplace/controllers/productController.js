@@ -9,8 +9,9 @@ const toThousand = (n) => {return n.toLocaleString("es-AR", {maximumFractionDigi
 const controller = {
 
 	crearForm: (req, res) => {
+		let titulo = "Alta de Producto"
 		const categoriasDeProductos = GetFileObject(categoriasFilePath);
-		res.render('producto-crear', {categoriasDeProductos});
+		res.render('producto-crear', {categoriasDeProductos, titulo});
 	},
 
 	crearGuardar:(req, res) =>{
@@ -31,16 +32,18 @@ const controller = {
 	},
 
 	detalle: (req, res) => {
+		let titulo = "Detalle del Producto"
 		const products = GetFileObject(productsFilePath);
 		let producto = products.find(producto => producto.id == req.params.id);
-		res.render('producto-detalle', { producto, toThousand });
+		res.render('producto-detalle', {producto, toThousand, titulo});
 	},
 
 	editarForm: (req, res) => {
+		let titulo = "Editar el Producto"
 		const products = GetFileObject(productsFilePath);
 		let producto = products.find(producto => producto.id == req.params.id);
 		const categoriasDeProductos = GetFileObject(categoriasFilePath);
-		res.render('producto-editar', {producto, toThousand, categoriasDeProductos});
+		res.render('producto-editar', {producto, toThousand, categoriasDeProductos, titulo});
 	},
 
 	editarGuardar: (req, res) => {
