@@ -2,7 +2,7 @@
 const express = require("express");
 const path = require("path");
 const methodOverride = require('method-override');
-
+const fs = require('fs');
 const app = express();
 
 // ************ Middlewares ************
@@ -10,6 +10,11 @@ app.use(express.static(path.resolve(__dirname, "./public"))); // Para acceder a 
 app.use(methodOverride('_method')); // Para poder usar el method="POST" en el formulario por PUT y DELETE
 app.use(express.urlencoded({extended: false})); // Para poder subir una imagen o un archivo
 app.use(express.json()); // ¿Para poder usar los métodos de JSON, para leer y guardar?
+
+// ************ Variables **************
+function GetFileObject(filePath) {return JSON.parse(fs.readFileSync(filePath, 'utf-8'))}
+const categoriasDeProductos = GetFileObject('./database/categoriasDeProductos.json');
+app.locals.categoriasDeProductos = categoriasDeProductos
 
 // ************ Carpetas de views **********
 app.set("view engine", "ejs");

@@ -2,7 +2,7 @@
 <section class="box" id="grupo_nombre">
     <label for="nombre" class="titulo">Nombre</label>
     <div class="formulario__grupo-input">
-        <input type="text" class="input" name="nombre" id="nombre" placeholder="Ingrese su nombre"
+        <input type="text" class="input" name="nombre" placeholder="Ingrese su nombre"
             value="<%= locals.oldData ? oldData.nombre :
                         usuario ? usuario.nombre :
             null %>">
@@ -11,8 +11,6 @@
     </div>
     <% if (locals.errores && errores.nombre) { %>
         <p class="criterio input-error"><%= errores.nombre.msg %></p>
-    <% } else { %>
-        <p class="criterio">El nombre debe ser de 2 a 20 letras</p>
     <% } %>
 </section>
 
@@ -20,7 +18,7 @@
 <section class="box" id="grupo_apellido">
     <label for="apellido" class="titulo">Apellido</label>
     <div class="formulario__grupo-input">
-        <input type="text" class="input" name="apellido" id="apellido" placeholder="Ingrese su apellido"
+        <input type="text" class="input" name="apellido" placeholder="Ingrese su apellido"
             value="<%= locals.oldData ? oldData.apellido : 
                         usuario ? usuario.apellido :
             null %>">
@@ -29,8 +27,6 @@
     </div>
     <% if (locals.errores && errores.apellido) { %>
         <p class="criterio input-error"><%= errores.apellido.msg %></p>
-    <% } else { %>
-        <p class="criterio">El apellido debe ser de 2 a 20 letras</p>
     <% } %>
 </section>
 
@@ -38,7 +34,7 @@
 <section class="box" id="grupo_email">
     <label for="email" class="titulo">Correo Electrónico</label>
     <div class="formulario__grupo-input">
-        <input type="text" class="input" name="email" id="email" placeholder="Ingrese su Correo Electrónico"
+        <input type="text" class="input" name="email" placeholder="Ingrese su Correo Electrónico"
             value="<%= locals.oldData ? oldData.email : 
                         usuario ? usuario.email :
             null %>">
@@ -48,14 +44,9 @@
     <% if (locals.errores && errores.email) { %>
         <p class="criterio input-error"><%= errores.email.msg %></p>
     <% } else { %>
-        <p class="criterio 
-            <% if (usuarioEnBD) { %>
-                input-error">Este mail ya figura en nuestra base de datos
-            <% } else { %>
-                ">Debe ser una dirección de mail válida
-            <% } %>
-        </p>
-
+        <% if (usuarioEnBD) { %>
+            <p class="criterio input-error">Este mail ya figura en nuestra base de datos</p>
+        <% } %>
     <% } %>
 </section>
 
@@ -63,7 +54,7 @@
 <section class="box" id="grupo_imagen">
     <label for="imagen" class="titulo">Imagen de perfil</label>
     <div class="formulario__grupo-input">
-        <input type="file" class="input" name="imagen" id="imagen">
+        <input type="file" class="input" name="imagen">
         <% if (locals.errores && errores.imagen) { %><i class="fas fa-times-circle"></i><% } %>
         <% if (locals.errores && !errores.imagen) { %><i class="fas fa-check-circle"></i><% } %>
     </div>
@@ -80,7 +71,7 @@
 <section class="box" id="grupo_contrasena">
     <label for="contrasena" class="titulo">Contraseña</label>
     <div class="formulario__grupo-input">
-        <input type="password" class="input" name="contrasena" id="contrasena"
+        <input type="password" class="input" name="contrasena" 
             value="<%= locals.oldData ? oldData.contrasena : null %>">
         <% if (locals.errores && errores.contrasena) { %><i class="fas fa-times-circle"></i><% } %>
         <% if (locals.errores && !errores.contrasena) { %><i class="fas fa-check-circle"></i><% } %>
@@ -88,7 +79,9 @@
     <% if (locals.errores && errores.contrasena) { %>
         <p class="criterio input-error"><%= errores.contrasena.msg %></p>
     <% } else { %>
-        <p class="criterio">La contraseña debe tener de 6 a 12 caracteres</p>
+        <% if (!locals.errores) { %>}
+            <p class="criterio">La contraseña debe tener de 6 a 12 caracteres</p>
+        <% } %>
     <% } %>
 </section>
 
@@ -96,7 +89,7 @@
 <section class="box" id="grupo_contrasena2">
     <label for="contrasena2" class="titulo">Repita su Contraseña</label>
     <div class="formulario__grupo-input">
-        <input type="password" class="input" name="contrasena2" id="contrasena2"
+        <input type="password" class="input" name="contrasena2" 
             value="<%= locals.oldData ? oldData.contrasena2 : null %>">
         <% if (locals.errores && errores.contrasena2 || !coincidencia) { %><i class="fas fa-times-circle"></i><% } %>
         <% if (locals.errores && !errores.contrasena2 && coincidencia) { %><i class="fas fa-check-circle"></i><% } %>
@@ -104,7 +97,9 @@
     <% if (locals.errores && errores.contrasena2) { %>
         <p class="criterio input-error"><%= errores.contrasena2.msg %></p>
     <% } else { %>
-        <p class="criterio <% if (!coincidencia) { %>input-error<% } %>">Ambas contraseñas deben coincidir</p>
+        <% if (!coincidencia) { %>
+            <p class="criterio input-error">Ambas contraseñas deben coincidir</p>
+        <% } %>
     <% } %>
 </section>
 

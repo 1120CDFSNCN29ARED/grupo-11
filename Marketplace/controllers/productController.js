@@ -1,17 +1,15 @@
 const fs = require('fs');
 let path = require('path')
 const productsFilePath = path.join(__dirname, '../database/productos.json');
-const categoriasFilePath = path.join(__dirname, '../database/categoriasDeProductos.json')
 const imagesPath = path.join(__dirname, "../public/images/products/");
 
 const toThousand = (n) => {return n.toLocaleString("es-AR", {maximumFractionDigits: 0})}
 
-const controller = {
+module.exports = {
 
 	crearForm: (req, res) => {
 		let titulo = "Alta de Producto"
-		const categoriasDeProductos = GetFileObject(categoriasFilePath);
-		res.render('producto-crear', {categoriasDeProductos, titulo});
+		res.render('producto-crear', {titulo});
 	},
 
 	crearGuardar:(req, res) => {
@@ -42,8 +40,7 @@ const controller = {
 		let titulo = "Editar el Producto"
 		const products = GetFileObject(productsFilePath);
 		let producto = products.find(producto => producto.id == req.params.id);
-		const categoriasDeProductos = GetFileObject(categoriasFilePath);
-		res.render('producto-editar', {producto, toThousand, categoriasDeProductos, titulo});
+		res.render('producto-editar', {producto, toThousand, titulo});
 	},
 
 	editarGuardar: (req, res) => {
@@ -88,5 +85,3 @@ function SanitizePrice(priceString) {
 function WriteFile(filePath, content) {
 	fs.writeFileSync(filePath, JSON.stringify(content, null, 2));
 }
-
-module.exports = controller;

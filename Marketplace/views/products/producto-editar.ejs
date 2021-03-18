@@ -14,7 +14,7 @@
             <div>
                 <label for="categoria" class="form-label">Categoría:</label>
                 <select name="categoria" id="category" class="form-input">
-                    <% for (let n of categoriasDeProductos) { %>
+                    <% for (let n of locals.categoriasDeProductos) { %>
                         <option value="<%= n.nombre %>" <%= n.nombre == producto.categoria ? "selected" : "" %>><%= n.nombre %></option>
                     <% } %>
                 </select>
