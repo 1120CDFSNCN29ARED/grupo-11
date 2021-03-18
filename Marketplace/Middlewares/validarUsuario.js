@@ -5,11 +5,11 @@ const { localsName } = require('ejs');
 module.exports = [
 	body('nombre')
 		.notEmpty().withMessage('Tienes que escribir un nombre').bail()
-		.isLength({min:2, max:20}).withMessage("Debe tener entre 2 y 20 letras")
+		.isLength({min:2, max:20}).withMessage("Debe tener entre 2 y 20 letras").bail()
 		,
 	body('apellido')
-		.notEmpty().withMessage('Tienes que escribir un apellido')
-		.isLength({min:2, max:20}).withMessage("Debe tener entre 2 y 20 letras")
+		.notEmpty().withMessage('Tienes que escribir un apellido').bail()
+		.isLength({min:2, max:20}).withMessage("Debe tener entre 2 y 20 letras").bail()
 		,
 	body('email')
 		.notEmpty().withMessage('Tienes que escribir un correo electrónico').bail()
