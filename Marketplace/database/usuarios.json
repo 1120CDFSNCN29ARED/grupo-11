@@ -1,9 +1,10 @@
 [
-    {
-      "id": 1,
-      "nombre": "Juan",
-      "apellido": "Perez",
-      "email": "juanperez@gmail.com",
-      "contrasena": "$2y$10$CtqguhpulZcMtXr1.snZauNjSGC6Z62av.FL/7zxZXAC8UOvkO/bW      "
-    }
+  {
+    "id": 1,
+    "nombre": "Diego",
+    "apellido": "Iribarren",
+    "email": "diegoiribarren2015@gmail.com",
+    "contrasena": "$2a$10$UF1e9YXUziPM0Ea9JOuglelP3/45fOBDXy5PIh/pHCf7CXcLHJ1d6",
+    "imagen": "1615947373664.jpg"
+  }
 ]

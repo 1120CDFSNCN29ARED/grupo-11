@@ -22,17 +22,8 @@
         margin-right: 30px;
     }
 
-    #nav-bar,
     #search-value {
         display: initial;
-    }
-
-    #nav-bar {
-        width: 95%;
-        
-        display: flex;
-        flex-wrap: wrap;
-        align-content: center;
     }
 
     #menu {
@@ -50,7 +41,7 @@
     }
 
     #search-container {
-        width: 30%;
+        width: 45%;
     }
     
     #shop-cart-container,
@@ -94,6 +85,17 @@
         flex-wrap: wrap;
         flex-direction: row;
         justify-content: space-around;
+    }
+
+    #nav-bar {
+        width: 95%;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+    }
+
+    header #menu {
+        display: display-flex;
     }
 
     #information,

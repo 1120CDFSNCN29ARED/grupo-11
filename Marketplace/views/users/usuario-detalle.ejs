@@ -2,34 +2,29 @@
 <body>
     <%- include('header') %>
     <main>
-        <div class="contenedor-padre">
-            <div class="usuario">
-                <h2><%= usuario.nombre %></h2>
-            </div>
-            <div class="img">
-                <article>
-                    <img src="/images/users/<%= usuario.imagen %>" width="100%" alt="<%= usuario.nombre %>">
+        <section id="imagen">
+            <img src="/images/users/<%= usuario.imagen %>">
+        </section>
+        <section id="media-query">
+            <div id="datos-del-usuario">
+                <article class="contenedor">
+                    <h2>Nombre y Apellido</h2>
+                    <p class="texto"><%= usuario.nombre %> <%= usuario.apellido %></p>
+                </article>
+                <article class="contenedor">
+                    <h2>Dirección de mail</h2>
+                    <p><%= usuario.email %></p>
                 </article>
             </div>
-            <div class="descripcion-contenedor">
-                <article class="descripcion">
-                    <div class="caracteristica">
-                        <h4>Descripción</h4>
-                    </div>
-                    <div class="detalle">
-                        <p><%= usuario.descripción %></p>
-                    </div>
-                    <div class="flex-container">
-                        <a href="/usuario/<%= usuario.id %>/editar" class="action-button edit">
-                            <button id="modificar" type="submit">Modificar</button>
-                        </a>
-                        <form  action="/usuario/<%= usuario.id %>/eliminar?_method=DELETE" method="POST">
-                            <button id="eliminar" type="submit">Eliminar</button>
-                        </form>
-                    </div>
-                </article>
+            <div id="botones">
+                <a href="/usuario/<%= usuario.id %>/editar" class="action-button edit">
+                    <button id="modificar" type="submit">Modificar</button>
+                </a>
+                <form  action="/usuario/<%= usuario.id %>/eliminar?_method=DELETE" method="POST">
+                    <button id="eliminar" type="submit">Eliminar</button>
+                </form>
             </div>
-        </div>            
+        </section>
     </main>
     <%- include('footer') %>
 </body>

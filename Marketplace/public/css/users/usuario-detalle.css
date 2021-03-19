@@ -1,0 +1,16 @@
+main {display: flex;padding: 20px;justify-content: center;}
+
+main #imagen {max-width: 40vw; margin-right: 5vw;}
+main #imagen img {max-width:100%;max-height: 60vh;}
+
+main #media-query {display: flex}
+main #media-query #datos-del-usuario p {font-size: 1.2rem; margin-bottom: 20px;}
+main #media-query #botones {margin-left: 40px;display:flex;flex-direction: column;}
+main #media-query #botones button {padding: 10px;border-radius: 5px;margin: 10px;color: white;font-weight: bold;}
+main #media-query #botones button#eliminar {background-color: red;}
+main #media-query #botones button#modificar {background-color: green;}
+
+@media (max-width: 720px) {
+	main #media-query {flex-direction: column;}
+	main #media-query #botones {margin-left: 0px;align-items: center;}
+}

@@ -1,71 +1,151 @@
+// Requires ***********************************
 const fs = require('fs');
 let path = require('path')
+const bcryptjs = require('bcryptjs')
+const {validationResult} = require('express-validator');
+
+// Arhivos y Paths ****************************
 const usersFilePath = path.join(__dirname, '../database/usuarios.json');
 const imagesPath = path.join(__dirname, "../public/images/users/");
 
-const controller = {
+// Controlador ********************************
+module.exports = {
 
 	crearForm: (req, res) => {
-		let titulo = "Registro"
-		res.render('usuario-crear', {titulo});
+		res.render('usuario-crear', {
+			usuario: null,
+			usuarioEnBD: null,
+			coincidencia: true,
+			titulo: "Registro"
+		});
 	},
 
-	crearGuardar:(req, res) =>{
-		const usuarios = GetFileObject(usersFilePath);
+	crearGuardar:(req, res) => {
+		// Validar campos en general
+		let validaciones = validationResult(req);
+		// Validar campo "Repetir contraseña"
+		let coincidencia = req.body.contrasena == req.body.contrasena2
+		// Validar email con la BD
+		let usuarios = GetFileObject(usersFilePath);
+		let usuarioEnBD = mailEnBD(req.body.email,usuarios);
+		// Verificar si existe algún error de validación
+		if (validaciones.errors.length > 0 || !coincidencia || usuarioEnBD) {
+			// Borrar el archivo de imagen guardado
+			req.file ? archivo = req.file.filename : archivo=""
+			BorrarArchivoDeImagen(archivo)
+			// Regresar al formulario de crear
+			return res.render('usuario-crear', {
+				usuario: null,
+				usuarioEnBD,
+				coincidencia,
+				errores: validaciones.mapped(),
+				oldData: req.body,
+				titulo: "Registro"
+			});
+		}
+		// Preparar el registro para almacenar
+		usuarios = GetFileObject(usersFilePath);
 		const nuevoId = usuarios.length > 0 ? usuarios[usuarios.length - 1].id + 1 : 1;
-		const newUser = {
+		const nuevoUsuario = {
 			id: nuevoId,
 			...req.body,
+			contrasena: bcryptjs.hashSync(req.body.contrasena, 10),
 			imagen: req.file.filename,
 		};
-		usuarios.push(newProduct);
+		delete nuevoUsuario.contrasena2
+		usuarios.push(nuevoUsuario);
+		// Guardar el registro
 		WriteFile(usersFilePath, usuarios);
-		res.redirect('/usuario/'+newUser.id+"/detalle");
+		res.redirect('/usuario/'+ nuevoId +"/detalle");
 	},
 
 	detalle: (req, res) => {
-		let titulo = "Detalle del usuario"
-		const users = GetFileObject(usersFilePath);
-		let usuario = users.find(usuario => usuario.id == req.params.id);		
-		res.render('usuario-detalle', {usuario, titulo});
+		const usuarios = GetFileObject(usersFilePath);
+		let usuario = usuarios.find(n => n.id == req.params.id);		
+		res.render('usuario-detalle', {
+			usuario, 
+			titulo: "Detalle del Usuario"
+		});
 	},
 
 	editarForm: (req, res) => {
-		let titulo = "Editar el Usuario"
-		const users = GetFileObject(usersFilePath);
-		let usuario = users.find(usuario => usuario.id == req.params.id);
-		res.render('usuario-editar', {usuario, toThousand, titulo});
+		let usuarios = GetFileObject(usersFilePath);
+		let usuario = usuarios.find(n => n.id == req.params.id);
+		res.render('usuario-editar', {
+			usuario, 
+			usuarioEnBD: false,
+			coincidencia: true,
+			titulo: "Editar el Usuario"
+		});
 	},
 
 	editarGuardar: (req, res) => {
-		const usuarios = GetFileObject(usersFilePath);
-		const productId = req.params.id;
-		let usuario = usuarios.find(usuario => usuario.id == productId);
-		let indice = usuarios.indexOf(usuario)
+		// Datos generales
+		let ID = req.params.id;
+		let usuarios = GetFileObject(usersFilePath);
+		let usuario = usuarios.find(n => n.id == ID);
+		let indice = usuarios.findIndex(n => n.id == ID)
+		// Validar campos en general
+		let validaciones = validationResult(req);
+		// Quitar error por "Tienes que subir una imagen"
+		if (validaciones.errors.length) { 
+			indiceError = validaciones.errors.findIndex(n => n.msg == 'Tienes que subir una imagen')
+			indiceError>=0 ? validaciones.errors.splice(indiceError,1) : null
+		}
+		// Validar campo "Repetir contraseña"
+		let coincidencia = req.body.contrasena == req.body.contrasena2
+		// Validar email con la BD
+		let aux = usuarios
+		aux.splice(indice,1)
+		let usuarioEnBD = mailEnBD(req.body.email, aux);
+		// Verificar si existe algún error de validación
+		if (validaciones.errors.length || !coincidencia || usuarioEnBD) {
+			// Borrar el archivo de imagen guardado
+			req.file ? archivo = req.file.filename : archivo=""
+			BorrarArchivoDeImagen(archivo)
+			// Regresar al formulario de crear
+			return res.render('usuario-editar', {
+				usuario,
+				usuarioEnBD,
+				coincidencia,
+				errores: validaciones.mapped(),
+				oldData: req.body,
+				titulo: "Editar el Usuario"
+			});
+		}
+		// Preparar el registro para almacenar
 		const actualizado = {
 			...usuario,
 			...req.body,
+			contrasena: bcryptjs.hashSync(req.body.contrasena, 10),
+		};
+		delete actualizado.contrasena2
+		if (req.file) {
+			//Eliminar la imagen original
+			archivo = usuario.imagen
+			BorrarArchivoDeImagen(archivo)
+			//Cambiar el nombre de la imagen
+			actualizado.imagen = req.file.filename;
 		};
 		usuarios[indice] = actualizado
 		WriteFile(usersFilePath, usuarios);
-		res.redirect("/usuario/" + userId + "/detalle");
+		res.redirect("/usuario/" + ID + "/detalle");
 	},	
 
 	eliminar: (req, res) => {
-		const users = GetFileObject(usersFilePath);
-		let indice = users.findIndex(n => n.id == req.params.id)
-		//Eliminar la imagen
-		let imageFile = path.join(imagesPath, users[indice].imagen)
-		if (users[indice].imagen && fs.existsSync(imageFile)) {
-			fs.unlinkSync(imageFile);
-		}
+		let usuarios = GetFileObject(usersFilePath);
+		let indice = usuarios.findIndex(n => n.id == req.params.id)
+		// Borrar el archivo de imagen guardado
+		archivo = usuarios[indice].imagen
+		BorrarArchivoDeImagen(archivo)
 		//Eliminar el registro
-		users.splice(indice,1)
-		WriteFile(usersFilePath, users);
+		usuarios.splice(indice,1)
+		WriteFile(usersFilePath, usuarios);
 		res.redirect("/");
 	},
 };
 
+// Funciones ********************************
 function GetFileObject(filePath) {
 	return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 }
@@ -74,4 +154,14 @@ function WriteFile(filePath, content) {
 	fs.writeFileSync(filePath, JSON.stringify(content, null, 2));
 }
 
-module.exports = controller;
+function mailEnBD(texto, usuarios) {
+	let usuario = usuarios.find(n => n.email === texto);
+	return usuario;
+}
+
+function BorrarArchivoDeImagen(nombreDeArchivo) {
+	let imageFile = path.join(imagesPath, nombreDeArchivo)
+	if (nombreDeArchivo && fs.existsSync(imageFile)) {
+		fs.unlinkSync(imageFile);
+	}
+}

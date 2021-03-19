@@ -5,30 +5,30 @@ const toThousand = (n) => {return n.toLocaleString("es-AR", {maximumFractionDigi
 const controller = {
 
 	carrito: (req, res) => {
-		let titulo = "Carrito de Compras"
-		res.render('carrito', {titulo});
+		res.render('carrito', {
+			titulo: "Carrito de Compras"
+		});
 	},
 
 	index: (req, res) => {
 		const productos = GetFileData('productos.json');
-		let titulo = "Guitar Shop"
 		let seccionesProductos = [
 			{titulo: "Mas vendidos",productos: productos.filter(x => x.masVendido)},
 			{titulo: "Novedades",productos: productos.filter(x => x.novedades)}
 		];
-		
 		let categoriaProductos = GetFileData('categoriasDeProductos.json');
 		res.render('index', {
 			seccionesProductos,
 			toThousand,
 			categoriaProductos,
-			titulo,
+			titulo: "Guitar Shop"
 		});
 	},
 
 	login: (req, res) => {
-		let titulo = "Login"
-		res.render('login', {titulo});
+		res.render('login', {
+			titulo: "Login"
+		});
 	},
 };
 
