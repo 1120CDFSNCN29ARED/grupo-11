@@ -1,10 +1,18 @@
 [
   {
     "id": 1,
+    "nombre": "José",
+    "apellido": "Pérez",
+    "email": "joseperez@gmail.com",
+    "contrasena": "$2a$10$FRfhNH2pqp9KW/9rYeeSxOiRzL75L1cGM7rBSUVQG6..rAxTffIH6",
+    "imagen": "1615981820188.bmp"
+  },
+  {
+    "id": 2,
     "nombre": "Diego",
     "apellido": "Iribarren",
     "email": "diegoiribarren2015@gmail.com",
-    "contrasena": "$2a$10$UF1e9YXUziPM0Ea9JOuglelP3/45fOBDXy5PIh/pHCf7CXcLHJ1d6",
-    "imagen": "1615947373664.jpg"
+    "contrasena": "$2a$10$2r4FtQJRAADCfBS/ePrfvOm9jBiu4290KH8IX0ES2VBQAtyQ4O97.",
+    "imagen": "1615981956801.jpg"
   }
 ]

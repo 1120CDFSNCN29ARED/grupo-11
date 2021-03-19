@@ -1,5 +1,6 @@
 <header>
     <section id="site-header" class="top-header flex-container">
+        <!-- Ícono de Hamburguesa y Familias de Productos ----->
         <div id="menu-button-container" class="flex-container">
             <button id="menu-button">
                 <i class="fa fa-bars burger"></i>
@@ -13,6 +14,7 @@
                 </ul>
             </div>
         </div>
+        <!-- Opción de búsqueda rápida ------------------------>
         <div id="search-container" class="flex-container">
             <form action="/" method="GET" class="flex-container" id="search-form">
                 <input type="text" name="search-value" id="search-value">
@@ -21,11 +23,13 @@
                 </button>
             </form>
         </div>
+        <!-- Logo de la Vista --------------------------------->
         <div id="logo-container" class="flex-container">
             <a href="/" class="flex-container">
                 <img src="/images/varios/logo.svg" alt="Logo guitar shop" id="logo">
             </a>
         </div>
+        <!-- Logo de Carrito de Compras ----------------------->
         <div id="shop-cart-container" class="flex-container">
             <a href="/carrito" class="flex-container">
                 <button id="shop-cart-button">
@@ -33,12 +37,9 @@
                 </button>
             </a>
         </div>
+        <!-- Logo de Usuario ---------------------------------->
         <div id="profile-container" class="flex-container">
-            <a href="/login">
-                <button id="profile-button">
-                    <i class="fas fa-user"></i>
-                </button>
-            </a>
+            <%- include('usuarioMenu') %>
         </div>
     </section>
 </header>
