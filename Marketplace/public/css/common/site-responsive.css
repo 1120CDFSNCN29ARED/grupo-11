@@ -13,7 +13,6 @@
     #menu-button-container {
         flex-wrap: nowrap;
         justify-content: flex-start;
-        padding-top: 1em;
         padding-left: 2em;
     }
     
@@ -41,7 +40,7 @@
     }
 
     #search-container {
-        width: 45%;
+        width: 30%;
     }
     
     #shop-cart-container,
@@ -95,7 +94,8 @@
     }
 
     header #menu {
-        display: display-flex;
+        margin-bottom: 0px;
+        font-size: .9rem;
     }
 
     #information,
