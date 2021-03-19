@@ -1,4 +1,4 @@
-<i onclick="desplegable('menu-login')" class="boton-desplegable fas fa-user" id="profile-button"></i>
+<i onclick="desplegable('menu-login')" class="fas fa-user" id="profile-button"></i>
 <div id="menu-login" class="dropdown-content">
   <a href="/login">Login</a>
   <a href="#">Logout</a>
@@ -9,17 +9,15 @@
 </div>
 
 <script>
-/* When the user clicks on the button, toggle between hiding and showing the dropdown content */
+// When the user clicks on the button, toggle between hiding and showing the dropdown content
 function desplegable(n) {document.getElementById(n).classList.toggle("mostrar");}
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
-  if (!event.target.matches('.boton-desplegable')) {
+  if (!event.target.matches('.fa-user')) {
     let dropdowns = document.getElementsByClassName("dropdown-content");
-    for (let i = 0; i < dropdowns.length; i++) {
-      if (dropdowns[i].classList.contains('mostrar')) {
-        dropdowns[i].classList.remove('mostrar');
-      }
+    for (let n of dropdowns) {
+      n.classList.remove('mostrar');
     }
   }
 }

@@ -5,7 +5,6 @@
     }
 
     #logo-container {
-        padding-left: 1em;
         order: -1;
         width: 25%;
     }
@@ -13,7 +12,6 @@
     #menu-button-container {
         flex-wrap: nowrap;
         justify-content: flex-start;
-        padding-left: 2em;
     }
     
     #menu-button {
@@ -37,6 +35,8 @@
         text-decoration: none; 
         color: var(--white);
         font-weight: bold;
+        font-size: .9rem;
+        line-height: 1rem;
     }
 
     #search-container {
@@ -91,11 +91,6 @@
         display: flex;
         flex-wrap: wrap;
         align-content: center;
-    }
-
-    header #menu {
-        margin-bottom: 0px;
-        font-size: .9rem;
     }
 
     #information,
