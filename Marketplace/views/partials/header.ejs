@@ -7,10 +7,9 @@
             </button>
             <div id="nav-bar">
                 <ul id="menu" class="flex-container flex-col">
-                    <li><a href="#" class="menu-options">Guitarras eléctricas</a></li>
-                    <li><a href="#" class="menu-options">Guitarras acústicas</a></li>
-                    <li><a href="#" class="menu-options">Bajos</a></li>
-                    <li><a href="#" class="menu-options">Teclados</a></li>
+                    <% for (let n of locals.categoriasDeProductos) { %> 
+                        <li><a href="<%= n.link %>" class="menu-options"><%= n.nombre %></a></li>
+                    <% } %>
                 </ul>
             </div>
         </div>
