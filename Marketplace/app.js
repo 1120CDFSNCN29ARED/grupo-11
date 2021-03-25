@@ -1,11 +1,18 @@
 // ************** Requires *************
 const express = require("express");
+const session = require('express-session');
+const cookies = require('cookie-parser');
 const path = require("path");
 const methodOverride = require('method-override');
 const fs = require('fs');
 const app = express();
 
 // ************ Middlewares ************
+app.use(session({secret: "Secreto",
+                 resave: false,
+                 saveUninitialized: false,
+                }));         
+app.use(cookies());
 app.use(express.static(path.resolve(__dirname, "./public"))); // Para acceder a los archivos estáticos en /public
 app.use(methodOverride('_method')); // Para poder usar el method="POST" en el formulario por PUT y DELETE
 app.use(express.urlencoded({extended: false})); // Para poder subir una imagen o un archivo

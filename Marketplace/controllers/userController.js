@@ -1,7 +1,7 @@
 // Requires ***********************************
 const fs = require('fs');
-let path = require('path')
-const bcryptjs = require('bcryptjs')
+let path = require('path');
+const bcryptjs = require('bcryptjs');
 const {validationResult} = require('express-validator');
 
 // Arhivos y Paths ****************************
@@ -143,7 +143,51 @@ module.exports = {
 		WriteFile(usersFilePath, usuarios);
 		res.redirect("/");
 	},
+
+	login: (req, res) => {
+		res.render('login',{titulo: "Login"})
+	},
+
+	logeo: (req, res) => {
+		let errores = validationResult(req);
+		//res.send(errores);
+		if (errores.isEmpty()){
+		let usuarios = GetFileObject(usersFilePath);
+		let usuarioALogearse;
+		for (i = 0; i < usuarios.length; i++) {
+            if(req.body.email == usuarios[i].email) {
+              if(bcryptjs.compareSync(req.body.contrasena , usuarios[i].contrasena)){
+				usuarioALogearse = usuarios[i];
+                break;
+			    }
+		   }
+	
+		}
+		   if(usuarioALogearse == undefined){
+				return res.render("login", {errores:[
+					{msg: "Credenciales invalida"}],
+					titulo: 'Login'
+				});
+			}
+			  req.session.usuarioLogeado = usuarioALogearse;
+              let id = req.session.usuarioLogeado.id;
+			  res.redirect('/usuario/'+ id +'/detalle');
+		    }else{
+			    return res.render("login", {errores: errores.array(),
+					                        titulo: 'Login',
+											oldData:req.body
+				});   
+		}
+		
+	},   
+
+	logout: (req,res) => {
+		req.session.destroy();
+		return res.redirect('/');
+	}
 };
+	
+
 
 // Funciones ********************************
 function GetFileObject(filePath) {

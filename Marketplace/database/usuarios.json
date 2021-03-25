@@ -14,5 +14,13 @@
     "email": "diegoiribarren2015@gmail.com",
     "contrasena": "$2a$10$2r4FtQJRAADCfBS/ePrfvOm9jBiu4290KH8IX0ES2VBQAtyQ4O97.",
     "imagen": "1615981956801.jpg"
+  },
+  {
+    "id": 3,
+    "nombre": "Mariano",
+    "apellido": "Acevedo",
+    "email": "marianoezequielacevedo@hotmail.com",
+    "contrasena": "$2a$10$eEb70NO2DQZHpUQWUldN/OhwRRi6vxKtJ9WCY..wG3LIEnGx8lixW",
+    "imagen": "1616464599844.jpg"
   }
 ]
