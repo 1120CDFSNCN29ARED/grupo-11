@@ -14,13 +14,18 @@ router.get('/:id/detalle', userController.detalle);
 router.get('/:id/editar', userController.editarForm);
 router.put('/:id/editar', uploadFile.single("imagen"), validarUsuario, userController.editarGuardar);
 router.delete('/:id/eliminar', userController.eliminar);
-router.get('/login', userController.login);
+router.get('/login', userController.loginForm);
 
 router.post('/login', [
-check('email').isEmail().withMessage('Email invalido').bail(),
-check('contrasena').notEmpty().withMessage('Tienes que escribir una contraseña').bail()
-                   .isLength({min:6, max:12}).withMessage("La contraseña incorrecta").bail()
-], userController.logeo);
+    check('email')
+        .notEmpty().withMessage('Tienes que escribir una dirección de mail').bail()
+        .isEmail().withMessage('Formato de mail inválido').bail()
+        ,
+    check('contrasena')
+        .notEmpty().withMessage('Tienes que escribir una contraseña').bail()
+        .isLength({min:6, max:12}).withMessage("La contraseña debe tener de 6 a 12  caracteres").bail()
+        ,
+], userController.loginGuardar);
 
 router.get('/logout/', userController.logout);
 

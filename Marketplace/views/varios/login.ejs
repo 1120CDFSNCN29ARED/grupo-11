@@ -14,10 +14,15 @@
                 </li>  
                 <%}%>
             </ul>
-          <%}%>
+        <% } %>
+        <% if (credencialesInvalidas) { %>
+            <ul>
+                <li>Credenciales inválidas</li>
+            </ul>
+        <% } %>
         </div>
             <div><!--Dirección de mail-->
-                <input type="email" name="email" placeholder="Dirección de mail"
+                <input type="text" name="email" placeholder="Dirección de mail"
                 value="<%= locals.oldData && oldData.email ? oldData.email : '' %>">
            </div>
             <div><!--Contraseña-->

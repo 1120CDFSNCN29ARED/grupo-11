@@ -4,7 +4,7 @@ main h1 {text-align: center;padding-top: 20px;font-size: 2em;}
 #formulario .box {text-align: center;}
 #formulario .titulo {margin: auto;text-align: center;font-weight: bold;margin-top: 10px;font-size: 1.2em;cursor: pointer;}
 
-#formulario .formulario__grupo-input {position: relative;}
+#formulario .formulario-grupo-input {position: relative;}
 #formulario .input {border-radius: 15px;padding: 10px;text-align: center; border: 1px solid var(--gray);margin: 5px 0px;background-color: white;font-size: 1.2rem; }
 
 #formulario .titulo, .input {width: 80%;}
