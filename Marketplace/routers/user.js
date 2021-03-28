@@ -7,6 +7,7 @@ const userController = require(path.join(__dirname,'../controllers/userControlle
 // Middlewares
 const uploadFile = require(path.join(__dirname,'../Middlewares/multerUsuario'));
 const validarUsuario = require(path.join(__dirname,'../Middlewares/validarUsuario'));
+const validarLogin = require(path.join(__dirname,'../Middlewares/validarLogin'));
 //******************* Rutas *******************
 router.get('/crear', userController.crearForm);
 router.post('/crear', uploadFile.single("imagen"), validarUsuario, userController.crearGuardar);
@@ -15,13 +16,7 @@ router.get('/:id/editar', userController.editarForm);
 router.put('/:id/editar', uploadFile.single("imagen"), validarUsuario, userController.editarGuardar);
 router.delete('/:id/eliminar', userController.eliminar);
 router.get('/login', userController.login);
-
-router.post('/login', [
-check('email').isEmail().withMessage('Email invalido').bail(),
-check('contrasena').notEmpty().withMessage('Tienes que escribir una contraseña').bail()
-                   .isLength({min:6, max:12}).withMessage("La contraseña incorrecta").bail()
-], userController.logeo);
-
+router.post('/login', validarLogin, userController.logeo);
 router.get('/logout/', userController.logout);
 
 module.exports = router;
