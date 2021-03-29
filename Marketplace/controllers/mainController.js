@@ -1,5 +1,7 @@
 let path = require('path');
 const fs = require('fs');
+
+
 const toThousand = (n) => {return n.toLocaleString("es-AR", {maximumFractionDigits: 0})}
 
 module.exports = {
@@ -20,12 +22,6 @@ module.exports = {
 			seccionesProductos,
 			toThousand,
 			titulo: "Guitar Shop"
-		});
-	},
-
-	login: (req, res) => {
-		res.render('login', {
-			titulo: "Login"
 		});
 	},
 };

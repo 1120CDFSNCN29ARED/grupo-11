@@ -2,12 +2,26 @@
 <body>
     <%- include('header') %>
     <main>
-        <form action="/" method="GET">
+        
+        <form action="/usuario/login" method="POST">
+        <div>
+        <% if(typeof errores != 'undefined'){ %>
+            <p style="color: red">ERROR</p>
+            <ul>
+                <% for(let i = 0; i < errores.length; i++){ %>
+                <li>
+                   <%=errores[i].msg%>
+                </li>  
+                <%}%>
+            </ul>
+          <%}%>
+        </div>
             <div><!--Dirección de mail-->
-                <input type="email" name="e-mail" placeholder="Dirección de mail" required>
-            </div>
+                <input type="email" name="email" placeholder="Dirección de mail"
+                value="<%= locals.oldData && oldData.email ? oldData.email : '' %>">
+           </div>
             <div><!--Contraseña-->
-                <input type="password" name="password" placeholder="Contraseña" required>
+                <input type="password" name="contrasena" placeholder="Contraseña">
             </div>
             <div id="button"><!--'Buttons Olvidó su contraseña' y 'Registrarse'-->
                 <a href="#">
