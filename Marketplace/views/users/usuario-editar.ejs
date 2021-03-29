@@ -3,7 +3,7 @@
     <%- include('header') %>
     <main>
         <h1>Edite su usuario</h1>
-        <form action="/usuario/<%= usuario.id %>/editar?_method=PUT" method="POST" id="formulario" enctype="multipart/form-data">
+        <form action="/usuario/editar?_method=PUT" method="POST" id="formulario" enctype="multipart/form-data">
             <%- include('usuarioRegistro') %>
         </form>
     </main>
