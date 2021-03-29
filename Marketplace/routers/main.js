@@ -2,9 +2,12 @@ const express = require('express');
 const mainController = require('../controllers/mainController');
 const router = express.Router();
 
-//******************* Rutas *******************
+// Middlewares
+const avanzaSiYaEstasLogueado = require('../middlewares/avanzaSiYaEstasLogueado');
+
+// Rutas
 router.get('/', mainController.index);
-router.get('/carrito', mainController.carrito);
+router.get('/carrito', avanzaSiYaEstasLogueado, mainController.carrito);
 
 
 module.exports = router;

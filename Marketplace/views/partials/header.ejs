@@ -29,15 +29,13 @@
             </a>
         </div>
         <!-- Logo de Carrito de Compras ----------------------->
-        <% if (locals.isLogged) { %>
-            <div id="shop-cart-container" class="flex-container">
-                <a href="/carrito" class="flex-container">
-                    <button id="shop-cart-button">
-                        <i class="fas fa-shopping-basket"></i>
-                    </button>
-                </a>    
-            </div>
-        <% } %> 
+        <div id="shop-cart-container" class="flex-container">
+            <a href="/carrito" class="flex-container">
+                <button id="shop-cart-button">
+                    <i class="fas fa-shopping-basket"></i>
+                </button>
+            </a>    
+        </div>
         <!-- Logo de Usuario ---------------------------------->
         <div id="profile-container" class="flex-container">
             <%- include('usuarioMenu') %>
