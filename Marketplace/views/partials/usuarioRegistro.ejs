@@ -1,7 +1,7 @@
 <!-- Grupo Nombre -->
 <section class="box">
     <label for="nombre" class="titulo">Nombre</label>
-    <div class="formulario__grupo-input">
+    <div class="formulario-grupo-input">
         <input type="text" class="input" name="nombre" placeholder="Ingrese su nombre"
             value="<%= locals.oldData ? oldData.nombre :
                         usuario ? usuario.nombre :
@@ -17,7 +17,7 @@
 <!-- Grupo Apellido -->
 <section class="box">
     <label for="apellido" class="titulo">Apellido</label>
-    <div class="formulario__grupo-input">
+    <div class="formulario-grupo-input">
         <input type="text" class="input" name="apellido" placeholder="Ingrese su apellido"
             value="<%= locals.oldData ? oldData.apellido : 
                         usuario ? usuario.apellido :
@@ -33,7 +33,7 @@
 <!-- Grupo Email -->
 <section class="box">
     <label for="email" class="titulo">Correo Electrónico</label>
-    <div class="formulario__grupo-input">
+    <div class="formulario-grupo-input">
         <input type="text" class="input" name="email" placeholder="Ingrese su Correo Electrónico"
             value="<%= locals.oldData ? oldData.email : 
                         usuario ? usuario.email :
@@ -53,7 +53,7 @@
 <!-- Grupo Imagen de perfil -->
 <section class="box">
     <label for="imagen" class="titulo">Imagen de perfil</label>
-    <div class="formulario__grupo-input">
+    <div class="formulario-grupo-input">
         <input type="file" class="input" name="imagen">
         <% if (locals.errores && errores.imagen) { %><i class="fas fa-times-circle"></i><% } %>
         <% if (locals.errores && !errores.imagen) { %><i class="fas fa-check-circle"></i><% } %>
@@ -70,7 +70,7 @@
 <!-- Grupo Contraseña -->
 <section class="box">
     <label for="contrasena" class="titulo">Contraseña</label>
-    <div class="formulario__grupo-input">
+    <div class="formulario-grupo-input">
         <input type="password" class="input" name="contrasena" id="contrasena"
             value="<%= locals.oldData ? oldData.contrasena : null %>">
         <i onclick="mostrar('contrasena')" class="fas fa-eye-slash" id="eye"></i>
@@ -89,7 +89,7 @@
 <!-- Grupo Repetir Contraseña -->
 <section class="box">
     <label for="contrasena2" class="titulo">Repita su Contraseña</label>
-    <div class="formulario__grupo-input">
+    <div class="formulario-grupo-input">
         <input type="password" class="input" name="contrasena2" id="contrasena2"
             value="<%= locals.oldData ? oldData.contrasena2 : null %>">
         <i onclick="mostrar('contrasena2')" class="fas fa-eye-slash" id="eye"></i>

@@ -4,7 +4,7 @@ let path = require('path')
 const bcryptjs = require('bcryptjs')
 const {validationResult} = require('express-validator');
 
-// Arhivos y Paths ****************************
+// Archivos y Paths ****************************
 const usersFilePath = path.join(__dirname, '../database/usuarios.json');
 const imagesPath = path.join(__dirname, "../public/images/users/");
 
@@ -14,7 +14,7 @@ module.exports = {
 	crearForm: (req, res) => {
 		res.render('usuario-crear', {
 			usuario: null,
-			usuarioEnBD: null,
+			usuarioEnBD: false,
 			coincidencia: true,
 			titulo: "Registro"
 		});
@@ -26,8 +26,8 @@ module.exports = {
 		// Validar campo "Repetir contraseña"
 		let coincidencia = req.body.contrasena == req.body.contrasena2
 		// Validar email con la BD
-		let usuarios = GetFileObject(usersFilePath);
-		let usuarioEnBD = mailEnBD(req.body.email,usuarios);
+		let BD = GetFileObject(usersFilePath);
+		let usuarioEnBD = mailEnBD(req.body.email,BD);
 		// Verificar si existe algún error de validación
 		if (validaciones.errors.length > 0 || !coincidencia || usuarioEnBD) {
 			// Borrar el archivo de imagen guardado
@@ -44,8 +44,8 @@ module.exports = {
 			});
 		}
 		// Preparar el registro para almacenar
-		usuarios = GetFileObject(usersFilePath);
-		const nuevoId = usuarios.length > 0 ? usuarios[usuarios.length - 1].id + 1 : 1;
+		BD = GetFileObject(usersFilePath);
+		const nuevoId = BD.length > 0 ? BD[BD.length - 1].id + 1 : 1;
 		const nuevoUsuario = {
 			id: nuevoId,
 			...req.body,
@@ -53,15 +53,15 @@ module.exports = {
 			imagen: req.file.filename,
 		};
 		delete nuevoUsuario.contrasena2
-		usuarios.push(nuevoUsuario);
+		BD.push(nuevoUsuario);
 		// Guardar el registro
-		WriteFile(usersFilePath, usuarios);
+		WriteFile(usersFilePath, BD);
 		res.redirect('/usuario/'+ nuevoId +"/detalle");
 	},
 
 	detalle: (req, res) => {
-		const usuarios = GetFileObject(usersFilePath);
-		let usuario = usuarios.find(n => n.id == req.params.id);		
+		const BD = GetFileObject(usersFilePath);
+		let usuario = BD.find(n => n.id == req.params.id);		
 		res.render('usuario-detalle', {
 			usuario, 
 			titulo: "Detalle del Usuario"
@@ -69,8 +69,8 @@ module.exports = {
 	},
 
 	editarForm: (req, res) => {
-		let usuarios = GetFileObject(usersFilePath);
-		let usuario = usuarios.find(n => n.id == req.params.id);
+		let BD = GetFileObject(usersFilePath);
+		let usuario = BD.find(n => n.id == req.params.id);
 		res.render('usuario-editar', {
 			usuario, 
 			usuarioEnBD: false,
@@ -82,9 +82,9 @@ module.exports = {
 	editarGuardar: (req, res) => {
 		// Datos generales
 		let ID = req.params.id;
-		let usuarios = GetFileObject(usersFilePath);
-		let usuario = usuarios.find(n => n.id == ID);
-		let indice = usuarios.findIndex(n => n.id == ID)
+		let BD = GetFileObject(usersFilePath);
+		let usuario = BD.find(n => n.id == ID);
+		let indice = BD.findIndex(n => n.id == ID)
 		// Validar campos en general
 		let validaciones = validationResult(req);
 		// Quitar error por "Tienes que subir una imagen"
@@ -95,7 +95,7 @@ module.exports = {
 		// Validar campo "Repetir contraseña"
 		let coincidencia = req.body.contrasena == req.body.contrasena2
 		// Validar email con la BD
-		let aux = usuarios
+		let aux = BD
 		aux.splice(indice,1)
 		let usuarioEnBD = mailEnBD(req.body.email, aux);
 		// Verificar si existe algún error de validación
@@ -127,20 +127,20 @@ module.exports = {
 			//Cambiar el nombre de la imagen
 			actualizado.imagen = req.file.filename;
 		};
-		usuarios[indice] = actualizado
-		WriteFile(usersFilePath, usuarios);
+		BD[indice] = actualizado
+		WriteFile(usersFilePath, BD);
 		res.redirect("/usuario/" + ID + "/detalle");
 	},	
 
 	eliminar: (req, res) => {
-		let usuarios = GetFileObject(usersFilePath);
-		let indice = usuarios.findIndex(n => n.id == req.params.id)
+		let BD = GetFileObject(usersFilePath);
+		let indice = BD.findIndex(n => n.id == req.params.id)
 		// Borrar el archivo de imagen guardado
-		archivo = usuarios[indice].imagen
+		archivo = BD[indice].imagen
 		BorrarArchivoDeImagen(archivo)
 		//Eliminar el registro
-		usuarios.splice(indice,1)
-		WriteFile(usersFilePath, usuarios);
+		BD.splice(indice,1)
+		WriteFile(usersFilePath, BD);
 		res.redirect("/");
 	},
 };
@@ -154,8 +154,8 @@ function WriteFile(filePath, content) {
 	fs.writeFileSync(filePath, JSON.stringify(content, null, 2));
 }
 
-function mailEnBD(texto, usuarios) {
-	let usuario = usuarios.find(n => n.email === texto);
+function mailEnBD(texto, BD) {
+	let usuario = BD.find(n => n.email === texto);
 	return usuario;
 }
 
