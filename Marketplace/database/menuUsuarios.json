@@ -18,15 +18,5 @@
         "nombre": "Detalle de Usuario",
         "link": "detalle",
         "login": true
-    },
-    {
-        "nombre": "Editar el Usuario",
-        "link": "editar",
-        "login": true
-    },
-    {
-        "nombre": "Eliminar el Usuario",
-        "link": "eliminar",
-        "login": true
     }
 ]
