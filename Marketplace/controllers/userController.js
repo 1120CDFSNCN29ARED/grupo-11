@@ -172,6 +172,9 @@ module.exports = {
         });
       }
       req.session.usuarioLogeado = usuarioALogearse;
+	  if(req.body.recordar != undefined) {
+		res.cookie('recordar', usuarioALogearse.email,{maxAge: 60000})
+	  };
       let ID = usuarioALogearse.id;
       res.redirect("/usuario/" + ID + "/detalle");
     } else {
@@ -184,6 +187,7 @@ module.exports = {
   },
 
   logout: (req, res) => {
+	res.clearCookie('recordar');
     req.session.destroy();
     return res.redirect("/");
   },

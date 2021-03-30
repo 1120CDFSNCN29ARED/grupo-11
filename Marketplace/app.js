@@ -6,12 +6,14 @@ const path = require("path");
 const methodOverride = require('method-override');
 const fs = require('fs');
 const app = express();
+const cookieRecordar = require('./Middlewares/cookieRecordar');
 
 // ************ Middlewares ************
 app.use(session({secret: "Secreto",
                  resave: false,
                  saveUninitialized: false,
-                }));         
+                }));  
+app.use(cookieRecordar);                        
 app.use(cookies());
 app.use(express.static(path.resolve(__dirname, "./public"))); // Para acceder a los archivos estáticos en /public
 app.use(methodOverride('_method')); // Para poder usar el method="POST" en el formulario por PUT y DELETE
