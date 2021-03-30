@@ -10,10 +10,10 @@ const validarLogin = require(path.join(__dirname,'../Middlewares/validarLogin'))
 //******************* Rutas *******************
 router.get('/crear', userController.crearForm);
 router.post('/crear', uploadFile.single("imagen"), validarUsuario, userController.crearGuardar);
-router.get('/:id/detalle', userController.detalle);
-router.get('/:id/editar', userController.editarForm);
-router.put('/:id/editar', uploadFile.single("imagen"), validarUsuario, userController.editarGuardar);
-router.delete('/:id/eliminar', userController.eliminar);
+router.get('/detalle', userController.detalle);
+router.get('/editar', userController.editarForm);
+router.put('/editar', uploadFile.single("imagen"), validarUsuario, userController.editarGuardar);
+router.delete('/eliminar', userController.eliminar);
 router.get('/login', userController.login);
 router.post('/login', validarLogin, userController.logeo);
 router.get('/logout/', userController.logout);

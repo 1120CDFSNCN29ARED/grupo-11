@@ -22,7 +22,7 @@ module.exports = (req, res, next) => {
 }
 
 function mailEnBD(texto, BD) {
-	let usuario = BD.find((n) => n.email === texto);
+	let usuario = BD.find(n => n.email === texto);
 	return usuario;
   }
 
