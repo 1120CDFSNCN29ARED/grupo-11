@@ -1,11 +1,11 @@
 <i onclick="desplegable('menu-login')" class="fas fa-user" id="profile-button"></i>
 <div id="menu-login" class="dropdown-content">
-  <a href="/usuario/login">Login</a>
-  <a href="/usuario/Logout/">Logout</a>
-  <a href="/usuario/crear">Registrarse</a>
-  <a href="/usuario/1/detalle">Detalle de Usuario</a>
-  <a href="/usuario/1/editar">Editar el Usuario</a>
-  <a href="#">Eliminar el Usuario</a>
+
+  <% for (let n of locals.menuUsuarios) { %> 
+    <% if (n.login == locals.isLogged) { %>
+      <a href="/usuario/<%= n.link %> "><%= n.nombre %> </a>
+    <% } %>
+  <% } %>
 </div>
 
 <script>

@@ -10,6 +10,7 @@ const imagesPath = path.join(__dirname, "../public/images/users/");
 
 // Controlador ********************************
 module.exports = {
+
   crearForm: (req, res) => {
     res.render("usuario-crear", {
       usuario: null,
@@ -55,6 +56,9 @@ module.exports = {
     BD.push(nuevoUsuario);
     // Guardar el registro
     WriteFile(usersFilePath, BD);
+    // Inciar session
+    req.session.usuarioLogeado = nuevoUsuario
+    // Redireccionar
     res.redirect("/usuario/" + nuevoId + "/detalle");
   },
 
@@ -171,9 +175,12 @@ module.exports = {
           oldData: req.body,
         });
       }
+      // Iniciar session
       req.session.usuarioLogeado = usuarioALogearse;
+      // Redireccionar a Detalle de usuario
       let ID = usuarioALogearse.id;
       res.redirect("/usuario/" + ID + "/detalle");
+      // Redireccionar a Login de nuevo
     } else {
       return res.render("login", {
         errores: errores.array(),
