@@ -10,10 +10,11 @@ const imagesPath = path.join(__dirname, "../public/images/users/");
 
 // Controlador ********************************
 module.exports = {
+
   crearForm: (req, res) => {
     res.render("usuario-crear", {
       usuario: null,
-      usuarioEnBD: false,
+      mailYaUsado: false,
       coincidencia: true,
       titulo: "Registro",
     });
@@ -26,16 +27,16 @@ module.exports = {
     let coincidencia = req.body.contrasena == req.body.contrasena2;
     // Validar email con la BD
     let BD = GetFileObject(usersFilePath);
-    let usuarioEnBD = mailEnBD(req.body.email, BD);
+    let mailYaUsado = mailEnBD(req.body.email, BD);
     // Verificar si existe algún error de validación
-    if (validaciones.errors.length > 0 || !coincidencia || usuarioEnBD) {
+    if (validaciones.errors.length > 0 || !coincidencia || mailYaUsado) {
       // Borrar el archivo de imagen guardado
       req.file ? (archivo = req.file.filename) : (archivo = "");
       BorrarArchivoDeImagen(archivo);
       // Regresar al formulario de crear
       return res.render("usuario-crear", {
         usuario: null,
-        usuarioEnBD,
+        mailYaUsado,
         coincidencia,
         errores: validaciones.mapped(),
         oldData: req.body,
@@ -55,12 +56,16 @@ module.exports = {
     BD.push(nuevoUsuario);
     // Guardar el registro
     WriteFile(usersFilePath, BD);
-    res.redirect("/usuario/" + nuevoId + "/detalle");
+    // Inciar session
+    req.session.usuarioLogeado = nuevoUsuario
+    // Redireccionar
+    res.redirect("/usuario/detalle");
   },
 
   detalle: (req, res) => {
+    ID = req.session.usuarioLogeado.id
     const BD = GetFileObject(usersFilePath);
-    let usuario = BD.find((n) => n.id == req.params.id);
+    let usuario = BD.find(n => n.id == ID);
     res.render("usuario-detalle", {
       usuario,
       titulo: "Detalle del Usuario",
@@ -68,11 +73,12 @@ module.exports = {
   },
 
   editarForm: (req, res) => {
+    ID = req.session.usuarioLogeado.id
     let BD = GetFileObject(usersFilePath);
-    let usuario = BD.find((n) => n.id == req.params.id);
+    let usuario = BD.find(n => n.id == ID);
     res.render("usuario-editar", {
       usuario,
-      usuarioEnBD: false,
+      mailYaUsado: false,
       coincidencia: true,
       titulo: "Editar el Usuario",
     });
@@ -80,34 +86,30 @@ module.exports = {
 
   editarGuardar: (req, res) => {
     // Datos generales
-    let ID = req.params.id;
+    ID = req.session.usuarioLogeado.id
     let BD = GetFileObject(usersFilePath);
-    let usuario = BD.find((n) => n.id == ID);
-    let indice = BD.findIndex((n) => n.id == ID);
+    let usuario = BD.find(n => n.id == ID);
+    let indice = BD.findIndex(n => n.id == ID);
     // Validar campos en general
     let validaciones = validationResult(req);
     // Quitar error por "Tienes que subir una imagen"
     if (validaciones.errors.length) {
-      indiceError = validaciones.errors.findIndex(
-        (n) => n.msg == "Tienes que subir una imagen"
-      );
+      indiceError = validaciones.errors.findIndex(n => n.msg == "Tienes que subir una imagen");
       indiceError >= 0 ? validaciones.errors.splice(indiceError, 1) : null;
     }
     // Validar campo "Repetir contraseña"
     let coincidencia = req.body.contrasena == req.body.contrasena2;
     // Validar email con la BD
-    let aux = BD;
-    aux.splice(indice, 1);
-    let usuarioEnBD = mailEnBD(req.body.email, aux);
+    let mailYaUsado = BD.find(n => n.email == req.body.email && n.id != ID);
     // Verificar si existe algún error de validación
-    if (validaciones.errors.length || !coincidencia || usuarioEnBD) {
+    if (validaciones.errors.length || !coincidencia || mailYaUsado) {
       // Borrar el archivo de imagen guardado
       req.file ? (archivo = req.file.filename) : (archivo = "");
       BorrarArchivoDeImagen(archivo);
       // Regresar al formulario de crear
       return res.render("usuario-editar", {
         usuario,
-        usuarioEnBD,
+        mailYaUsado,
         coincidencia,
         errores: validaciones.mapped(),
         oldData: req.body,
@@ -130,19 +132,20 @@ module.exports = {
     }
     BD[indice] = actualizado;
     WriteFile(usersFilePath, BD);
-    res.redirect("/usuario/" + ID + "/detalle");
+    res.redirect("/usuario/detalle");
   },
 
   eliminar: (req, res) => {
+    ID = req.session.usuarioLogeado.id
     let BD = GetFileObject(usersFilePath);
-    let indice = BD.findIndex((n) => n.id == req.params.id);
+    let indice = BD.findIndex(n => n.id == ID);
     // Borrar el archivo de imagen guardado
     archivo = BD[indice].imagen;
     BorrarArchivoDeImagen(archivo);
     //Eliminar el registro
     BD.splice(indice, 1);
     WriteFile(usersFilePath, BD);
-    res.redirect("/");
+    res.redirect("/usuario/logout");
   },
 
   login: (req, res) => {
@@ -153,22 +156,27 @@ module.exports = {
     let errores = validationResult(req);
     if (errores.isEmpty()) {
       let usuarios = GetFileObject(usersFilePath);
+      // Verificar si el usuario está registrado
       let usuarioALogearse = usuarios.find(n => n.email == req.body.email);
-			
+      // Verificar si además coincide la contraseña
 			if (usuarioALogearse == undefined ||
 				!bcryptjs.compareSync(req.body.contrasena, usuarioALogearse.contrasena)) {
+        // En caso de error -> volver a Login
 				return res.render("login", {
 					errores: [{ msg: "Correo electronico y/o Contraseña incorrecta" }],
 					titulo: 'Login',
 					oldData: req.body
 				});
 			};
+      // Iniciar session
       req.session.usuarioLogeado = usuarioALogearse;
-	  if(req.body.recordar != undefined) {
-		res.cookie('recordar', usuarioALogearse.email,{maxAge: 60000})
-	  };
-      let ID = usuarioALogearse.id;
-      res.redirect("/usuario/" + ID + "/detalle");
+      // Cookies
+      if(req.body.recordar != undefined) {
+  	  	res.cookie('recordar', usuarioALogearse.email,{maxAge: 60000})
+	    };
+      // Redireccionar a Detalle de usuario
+      res.redirect("/usuario/detalle");
+      // Redireccionar a Login de nuevo
     } else {
       return res.render("login", {
         errores: errores.array(),
@@ -195,7 +203,7 @@ function WriteFile(filePath, content) {
 }
 
 function mailEnBD(texto, BD) {
-  let usuario = BD.find((n) => n.email === texto);
+  let usuario = BD.find(n => n.email === texto);
   return usuario;
 }
 

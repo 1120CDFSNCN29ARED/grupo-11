@@ -7,6 +7,7 @@ const methodOverride = require('method-override');
 const fs = require('fs');
 const app = express();
 const cookieRecordar = require('./Middlewares/cookieRecordar');
+const validarUserLogged = require('./middlewares/validarUserLogged');
 
 // ************ Middlewares ************
 app.use(session({secret: "Secreto",
@@ -19,11 +20,12 @@ app.use(express.static(path.resolve(__dirname, "./public"))); // Para acceder a 
 app.use(methodOverride('_method')); // Para poder usar el method="POST" en el formulario por PUT y DELETE
 app.use(express.urlencoded({extended: false})); // Para poder subir una imagen o un archivo
 app.use(express.json()); // ¿Para poder usar los métodos de JSON, para leer y guardar?
+app.use(validarUserLogged); // Para tener actualizada constantemente la variable res.locals.isLogged
 
 // ************ Variables **************
 function GetFileObject(filePath) {return JSON.parse(fs.readFileSync(filePath, 'utf-8'))}
-const categoriasDeProductos = GetFileObject('./database/categoriasDeProductos.json');
-app.locals.categoriasDeProductos = categoriasDeProductos
+app.locals.categoriasDeProductos = GetFileObject('./database/categoriasDeProductos.json');
+app.locals.menuUsuarios = GetFileObject('./database/menuUsuarios.json');
 
 // ************ Carpetas de views **********
 app.set("view engine", "ejs");
