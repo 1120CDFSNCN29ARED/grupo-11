@@ -23,7 +23,6 @@ app.use(validarUserLogged); // Para tener actualizada constantemente la variable
 // ************ Variables **************
 function GetFileObject(filePath) {return JSON.parse(fs.readFileSync(filePath, 'utf-8'))}
 app.locals.categoriasDeProductos = GetFileObject('./database/categoriasDeProductos.json');
-app.locals.menuUsuarios = GetFileObject('./database/menuUsuarios.json');
 
 // ************ Carpetas de views **********
 app.set("view engine", "ejs");
