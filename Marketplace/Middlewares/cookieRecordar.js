@@ -7,13 +7,8 @@ function cookieRecordar(req, res, next){
  if(req.cookies.recordar != undefined && req.session.usuariologeado == undefined){
     let usuarios = GetFileObject(usersFilePath);
     let usuarioALogearse;
-    for (i = 0; i < usuarios.length; i++) {
-         if(usuarios[i].email == req.cookies.recordar ){
-          usuarioALogearse = usuarios[i];
-          break;
-         }
-    }
-       req.session.usuarioLogeado = usuarioALogearse;
+    usuarioALogearse = usuarios.find(n => n.email == req.cookies.recordar);
+    req.session.usuarioLogeado = usuarioALogearse;
  }
 }
 

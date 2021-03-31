@@ -8,16 +8,15 @@
         <% if(typeof errores != 'undefined'){ %>
             <p style="color: red">ERROR</p>
             <ul>
-                <% for(let i = 0; i < errores.length; i++){ %>
+                <%  error = errores.find(n => n.msg) %>
                 <li>
-                   <%=errores[i].msg%>
+                   <%=error.msg%>
                 </li>  
-                <%}%>
             </ul>
           <%}%>
         </div>
             <div><!--Dirección de mail-->
-                <input type="email" name="email" placeholder="Dirección de mail"
+                <input type="text" name="email" placeholder="Dirección de mail"
                 value="<%= locals.oldData && oldData.email ? oldData.email : '' %>">
            </div>
             <div><!--Contraseña-->
