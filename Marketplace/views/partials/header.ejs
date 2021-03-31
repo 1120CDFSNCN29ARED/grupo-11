@@ -1,16 +1,12 @@
 <header>
     <section id="site-header" class="top-header flex-container">
-        <!-- Ícono de Hamburguesa y Familias de Productos ----->
+        <!-- Ícono de Hamburguesa (Categorías) ----->
         <div id="menu-button-container" class="flex-container">
-            <button id="menu-button">
-                <i class="fa fa-bars burger"></i>
-            </button>
-            <div id="nav-bar">
-                <ul id="menu" class="flex-container flex-col">
-                    <% for (let n of locals.categoriasDeProductos) { %> 
-                        <li><a href="<%= n.link %>" class="menu-options"><%= n.nombre %></a></li>
-                    <% } %>
-                </ul>
+            <i onclick="desplegable('menu-categorias')" class="fas fa-bars" id="categoria-button"></i>
+            <div id="menu-categorias" class="dropdown-content">
+                <% for (let n of locals.categoriasDeProductos) { %> 
+                    <a href="<%= n.link %>" class="menu-options"><%= n.nombre %></a>
+                <% } %>
             </div>
         </div>
         <!-- Opción de búsqueda rápida ------------------------>
@@ -38,7 +34,31 @@
         </div>
         <!-- Logo de Usuario ---------------------------------->
         <div id="profile-container" class="flex-container">
-            <%- include('usuarioMenu') %>
+            <i onclick="desplegable('menu-usuario')" class="fas fa-user" id="profile-button"></i>
+            <div id="menu-usuario" class="dropdown-content">
+                <% if (locals.isLogged) { %>
+                    <a href="/usuario/detalle">Detalle de Usuario</a>
+                    <a href="/usuario/logout">Logout</a>
+                <% } else { %>
+                    <a href="/usuario/login">Login</a>
+                    <a href="/usuario/crear">Registrarse</a>
+                <% } %>
+            </div>
         </div>
     </section>
 </header>
+
+<script>
+    // When the user clicks on the button, toggle between hiding and showing the dropdown content
+    function desplegable(n) {document.getElementById(n).classList.toggle("mostrar");}
+    
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+      if (!event.target.matches('#profile-button') && !event.target.matches('#categoria-button')) {
+        let dropdowns = document.getElementsByClassName("dropdown-content");
+        for (let n of dropdowns) {
+          n.classList.remove('mostrar');
+        }
+      }
+    }
+</script>
