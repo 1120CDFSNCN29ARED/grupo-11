@@ -156,26 +156,24 @@ module.exports = {
     let errores = validationResult(req);
     if (errores.isEmpty()) {
       let usuarios = GetFileObject(usersFilePath);
-      let usuarioALogearse;
-      for (i = 0; i < usuarios.length; i++) {
-        if (
-          req.body.email == usuarios[i].email &&
-          bcryptjs.compareSync(req.body.contrasena, usuarios[i].contrasena)
-        ) {
-          usuarioALogearse = usuarios[i];
-          break;
-        }
-      }
-
-      if (usuarioALogearse == undefined) {
-        return res.render("login", {
-          errores: [{ msg: "Correo electronico y/o Contraseña incorrecta" }],
-          titulo: "Login",
-          oldData: req.body,
-        });
-      }
+      // Verificar si el usuario está registrado
+      let usuarioALogearse = usuarios.find(n => n.email == req.body.email);
+      // Verificar si además coincide la contraseña
+			if (usuarioALogearse == undefined ||
+				!bcryptjs.compareSync(req.body.contrasena, usuarioALogearse.contrasena)) {
+        // En caso de error -> volver a Login
+				return res.render("login", {
+					errores: [{ msg: "Correo electronico y/o Contraseña incorrecta" }],
+					titulo: 'Login',
+					oldData: req.body
+				});
+			};
       // Iniciar session
       req.session.usuarioLogeado = usuarioALogearse;
+      // Cookies
+      if(req.body.recordar != undefined) {
+  	  	res.cookie('recordar', usuarioALogearse.email,{maxAge: 60000})
+	    };
       // Redireccionar a Detalle de usuario
       res.redirect("/usuario/detalle");
       // Redireccionar a Login de nuevo
@@ -189,6 +187,7 @@ module.exports = {
   },
 
   logout: (req, res) => {
+	res.clearCookie('recordar');
     req.session.destroy();
     return res.redirect("/");
   },

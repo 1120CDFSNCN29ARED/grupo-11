@@ -43,3 +43,11 @@ main #google-facebook {
 main #google-facebook img {
     height: 30px;
 }
+
+#recordar {
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    width: 40%;
+}
+
