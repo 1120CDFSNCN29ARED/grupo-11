@@ -7,10 +7,11 @@
         <% if(typeof errores != 'undefined'){ %>
             <p style="color: red">ERROR</p>
             <ul>
-                <%  error = errores.find(n => n.msg) %>
-                <li>
-                   <%=error.msg%>
-                </li>  
+                <% for(let i = 0; i < errores.length; i++){ %>
+                    <li>
+                       <%=errores[i].msg%>
+                    </li>  
+                <%}%>
             </ul>
           <%}%>
         </div>
