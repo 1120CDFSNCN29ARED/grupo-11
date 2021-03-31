@@ -9,26 +9,12 @@
         width: 25%;
     }
 
-    #menu-button-container {
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-    }
-    
-    #menu-button {
+    #categoria-button {
         font-size: 2em;
-        margin-right: 30px;
     }
 
     #search-value {
         display: initial;
-    }
-
-    #menu {
-        font-size: 1.2em;
-        width: 100%;
-        list-style-type: none;
-        padding: 0px;
-        justify-content: space-evenly;
     }
 
     .menu-options {
@@ -84,13 +70,6 @@
         flex-wrap: wrap;
         flex-direction: row;
         justify-content: space-around;
-    }
-
-    #nav-bar {
-        width: 95%;
-        display: flex;
-        flex-wrap: wrap;
-        align-content: center;
     }
 
     #information,
