@@ -1,11 +1,13 @@
 const express = require('express');
-const mainController = require('../controllers/mainController')
-
+const mainController = require('../controllers/mainController');
 const router = express.Router();
 
+// Middlewares
+const soloUsuarios = require('../middlewares/soloUsuarios');
+
+// Rutas
 router.get('/', mainController.index);
-router.get('/carrito', mainController.carrito);
-router.get('/login', mainController.login);
-router.get('/registro', mainController.registro);
+router.get('/carrito', soloUsuarios, mainController.carrito);
+
 
 module.exports = router;

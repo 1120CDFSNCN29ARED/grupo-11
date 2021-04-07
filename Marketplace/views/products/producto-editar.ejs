@@ -1,9 +1,4 @@
-<%- include('preHead') %>
-<head>
-    <%- include('head') %>
-    <link rel="stylesheet" href="/css/products/producto-editar.css">
-    <title>Detalle de Productos</title>
-</head>
+<%- include('head') %>
 <body>
     <%- include('header') %>
     <main>
@@ -19,9 +14,9 @@
             <div>
                 <label for="categoria" class="form-label">Categoría:</label>
                 <select name="categoria" id="category" class="form-input">
-                    <option value="Guitarra Eléctrica" <%= producto.categoría == "Guitarra Eléctrica" ? "selected" : "" %>>Guitarra Eléctrica</option>
-                    <option value="Guitarra Clásica" <%= producto.categoría == "Guitarra Clásica" ? "selected" : "" %>>Guitarra Clásica</option>
-                    <option value="Bajo" <%= producto.categoría == "Bajo" ? "selected" : "" %>>Bajo</option>
+                    <% for (let n of locals.categoriasDeProductos) { %>
+                        <option value="<%= n.nombre %>" <%= n.nombre == producto.categoria ? "selected" : "" %>><%= n.nombre %></option>
+                    <% } %>
                 </select>
             </div>
             <div>

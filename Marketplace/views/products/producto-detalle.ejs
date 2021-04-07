@@ -1,10 +1,4 @@
-<%- include('preHead') %>
-<head>
-    <%- include('head') %>
-    <link rel="stylesheet" href="/css/products/producto-detalle.css">
-    <title>Detalle de Productos</title>
-</head>
-
+<%- include('head') %>
 <body>
     <%- include('header') %>
     <main>
@@ -23,10 +17,11 @@
             <div class="descripcion-contenedor">
                 <article class="descripcion">
                     <div class="caracteristica">
-                        <h4>Características Técnicas</h4>
+                        <h4>Descripción</h4>
                     </div>
                     <div class="detalle">
-                        <p><%= producto.descripción %></p>
+                        <p><%= producto.categoria %></p>
+                        <p><%= producto.descripcion %></p>
                     </div>
                     <div class="precio">
                         <p>$ <%= toThousand(producto.precio) %></p>

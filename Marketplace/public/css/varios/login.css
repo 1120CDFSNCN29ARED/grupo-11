@@ -21,7 +21,7 @@ main form input {
 
 main form input, main form button {
     padding: 5px 10px;
-    border-radius: 10%;
+    border-radius: 12px;
     font-weight: bold;
 }
 
@@ -43,3 +43,11 @@ main #google-facebook {
 main #google-facebook img {
     height: 30px;
 }
+
+#recordar {
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    width: 40%;
+}
+

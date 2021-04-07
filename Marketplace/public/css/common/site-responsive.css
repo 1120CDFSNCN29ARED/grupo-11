@@ -5,52 +5,28 @@
     }
 
     #logo-container {
-        padding-left: 1em;
         order: -1;
         width: 25%;
     }
 
-    #menu-button-container {
-        width: 100%;
-        order: 5;
-        justify-content: flex-start;
-        padding-top: 1em;
-        padding-left: 2em;
-    }
-    
-    #menu-button {
+    #categoria-button {
         font-size: 2em;
     }
 
-    #nav-bar,
     #search-value {
         display: initial;
-    }
-
-    #nav-bar {
-        width: 95%;
-        padding-left: 2em;
-        display: flex;
-        flex-wrap: wrap;
-        align-content: center;
-    }
-
-    #menu {
-        font-size: 1.2em;
-        width: 100%;
-        list-style-type: none;
-        padding: 0px;
-        justify-content: space-evenly;
     }
 
     .menu-options {
         text-decoration: none; 
         color: var(--white);
         font-weight: bold;
+        font-size: .9rem;
+        line-height: 1rem;
     }
 
     #search-container {
-        width: 60%;
+        width: 30%;
     }
     
     #shop-cart-container,

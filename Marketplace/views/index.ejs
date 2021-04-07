@@ -1,15 +1,32 @@
-<%- include('preHead') %>
-<head>
-    <%- include('head') %>
-    <link rel="stylesheet" href="/css/home-body.css">
-    <link rel="stylesheet" href="/css/home-responsive.css">
-    <title>Guitar Shop</title>
-</head>
+<%- include('head') %>
 <body>
     <%- include('header') %>
     <main>
-        <%- include('banner') %>
-        <%- include("index-productos") %>
+        <img id="banner" src="/images/varios/banner-vigente.jpg" alt="baner" class="banner-image">
+        <% for (const seccion of seccionesProductos) { %>
+            <section class="products-group">
+                <div class="section-header flex-container">
+                    <p class="section-title"><%= seccion.titulo %> </p>
+                    <p class="view-more">Ver todos</p>
+                </div>
+                <div class="section-products flex-container">
+                    <% for (const instrumento of seccion.productos) { %>
+                        <article class="product">
+                            <div class="product-image-container">
+                                <a href="/producto/<%= instrumento.id %>/detalle">
+                                    <img src="/images/products/<%= instrumento.imagen %>" alt="<%= instrumento.nombre %>" class="product-image">
+                                </a>
+                                <i class="fas fa-shopping-basket"></i>
+                            </div>
+                            <div class="product-information">
+                                <p class="product-description"><%= instrumento.nombre %></p>
+                                <p class="product-price">$ <%= toThousand(instrumento.precio) %></p>
+                            </div>
+                        </article>
+                    <% } %> 
+                </div>
+            </section>
+        <% } %> 
     </main>
     <%- include('footer') %>
 </body>    

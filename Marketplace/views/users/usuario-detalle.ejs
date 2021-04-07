@@ -1,0 +1,32 @@
+<%- include('head') %>
+<body>
+    <%- include('header') %>
+    <main> 
+        <section id="imagen">
+            <img src="/images/users/<%= usuario.imagen %>">
+        </section>
+        <section id="media-query">
+            <div id="datos-del-usuario">
+                <article class="contenedor">
+                    <h2>Nombre y Apellido</h2>
+                    <p class="texto"><%= usuario.nombre %> <%= usuario.apellido %></p>
+                </article>
+                <article class="contenedor">
+                    <h2>Dirección de mail</h2>
+                    <p><%= usuario.email %></p>
+                </article>
+            </div>
+            <div id="botones">
+                <a href="/usuario/editar" class="action-button edit">
+                    <button id="modificar" type="submit">Modificar</button>
+                </a>
+                <form  action="/usuario/eliminar?_method=DELETE" method="POST">
+                    <button id="eliminar" type="submit">Eliminar</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <%- include('footer') %>
+</body>
+
+</html>
