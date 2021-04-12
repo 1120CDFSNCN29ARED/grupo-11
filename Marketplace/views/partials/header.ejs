@@ -24,7 +24,7 @@
                 <img src="/images/varios/logo.svg" alt="Logo guitar shop" id="logo">
             </a>
         </div>
-        <!-- Logo de Carrito de Compras ----------------------->
+        <!-- Logo de Carrito de Compras ---------------------------->
         <div id="shop-cart-container" class="flex-container">
             <a href="/carrito" class="flex-container">
                 <button id="shop-cart-button">
@@ -32,9 +32,23 @@
                 </button>
             </a>    
         </div>
-        <!-- Logo de Usuario ---------------------------------->
+        <!-- Logo de Usuario o Avatar ------------------------------>
         <div id="profile-container" class="flex-container">
-            <i onclick="desplegable('menu-usuario')" class="fas fa-user" id="profile-button"></i>
+            <% if(locals.isLogged) { %>
+                <img
+                    src="/images/users/<%= locals.usuarioLogeado.imagen %>"
+                    onclick="desplegable('menu-usuario')"
+                    class="boton-desplegable"
+                    id="imagenUsuario"
+                >
+            <% } else { %>
+                <i
+                    onclick="desplegable('menu-usuario')"
+                    class="boton-desplegable fas fa-user" id="profile-button"
+                >
+                </i>
+            <% } %>
+            <!--<i onclick="desplegable('menu-usuario')" class="fas fa-user" id="profile-button"></i>-->
             <div id="menu-usuario" class="dropdown-content">
                 <% if (locals.isLogged) { %>
                     <a href="/usuario/detalle">Detalle de Usuario</a>
@@ -54,7 +68,7 @@
     
     // Close the dropdown if the user clicks outside of it
     window.onclick = function(event) {
-      if (!event.target.matches('#profile-button') && !event.target.matches('#categoria-button')) {
+      if (!event.target.matches('.boton-desplegable')) {
         let dropdowns = document.getElementsByClassName("dropdown-content");
         for (let n of dropdowns) {
           n.classList.remove('mostrar');
