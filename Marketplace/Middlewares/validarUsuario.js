@@ -23,17 +23,4 @@ module.exports = [
 		.notEmpty().withMessage('Tienes que escribir una contraseña').bail()
 		.isLength({min:6, max:12}).withMessage("La contraseña debe tener de 6 a 12 caracteres").bail()
 		,
-	body('imagen').custom((value, {req}) => {
-		let file = req.file;
-		let acceptedExtensions = ['.jpg', '.png', '.gif', '.bmp'];
-		if (!file) {
-			throw new Error('Tienes que subir una imagen');
-		} else {
-			let fileExtension = path.extname(file.originalname);
-			if (!acceptedExtensions.includes(fileExtension)) {
-				throw new Error(`Las extensiones de archivo permitidas son ${acceptedExtensions.join(', ')}`);
-			}
-		}
-		return true;
-	}),
 ]
