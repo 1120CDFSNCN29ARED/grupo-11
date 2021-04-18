@@ -1,13 +1,13 @@
 main {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
 }
 
 main form {
     margin: 20px auto;
     padding: 20px 30px;
-    background-color:gray;
+    background-color: gray;
 }
 
 main form div {
@@ -19,7 +19,8 @@ main form input {
     width: 100%;
 }
 
-main form input, main form button {
+main form input,
+main form button {
     padding: 5px 10px;
     border-radius: 12px;
     font-weight: bold;
@@ -35,9 +36,9 @@ main form div#button {
 }
 
 main #google-facebook {
-    display:flex;
+    display: flex;
     justify-content: space-around;
-    padding:10px 0 0;
+    padding: 10px 0 0;
 }
 
 main #google-facebook img {
@@ -50,4 +51,3 @@ main #google-facebook img {
     align-items: center;
     width: 40%;
 }
-
