@@ -162,12 +162,12 @@ function ObtenerUsuarios() {
 
 function ObtenerUsuarioPorId(id) {
     const usuarios = ObtenerUsuarios();
-    return usuarios.find((x) => x.id == id);
+    return usuarios.find(x => x.id == id);
 }
 
 function ObtenerUsuarioPorEmail(email) {
     const usuarios = ObtenerUsuarios();
-    return usuarios.find((x) => x.email == email);
+    return usuarios.find(x => x.email == email);
 }
 
 function CrearUsuario(formBody, file) {
@@ -193,7 +193,7 @@ function GuardarUsuarios(content) {
 function ActualizarUsuario(id, formBody, file) {
     const usuarios = ObtenerUsuarios();
     const usuario = ObtenerUsuarioPorId(id);
-    let indice = usuarios.findIndex((n) => n.id == id);
+    let indice = usuarios.findIndex(n => n.id == id);
     // Preparar el registro para almacenar
     const actualizado = {
         ...usuario,
@@ -224,7 +224,7 @@ function EliminarUsuario(id) {
 function MailYaExistente(formBody, id) {
     const usuarios = ObtenerUsuarios();
     return (
-        usuarios.find((n) => n.email === formBody.email && n.id != id) !=
+        usuarios.find(n => n.email === formBody.email && n.id != id) !=
         undefined
     );
 }
