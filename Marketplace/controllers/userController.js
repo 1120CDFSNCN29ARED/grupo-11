@@ -7,209 +7,231 @@ const { validationResult } = require("express-validator");
 // Archivos y Paths ****************************
 const usersFilePath = path.join(__dirname, "../database/usuarios.json");
 const imagesPath = path.join(__dirname, "../public/images/users/");
+const errorRepeticionContrasena = "Ambas contraseñas deben coincidir";
+const errorEmailRegistrado = "Este mail ya esta registrado";
 
 // Controlador ********************************
 module.exports = {
+    crearForm: (req, res) => {
+        res.render("usuario-crear", { titulo: "Registro" });
+    },
 
-  crearForm: (req, res) => {
-    res.render("usuario-crear", {
-      usuario: null,
-      mailYaUsado: false,
-      coincidencia: true,
-      titulo: "Registro",
-    });
-  },
+    crearGuardar: (req, res) => {
+        // Validar campos en general
+        let validaciones = validationResult(req);
 
-  crearGuardar: (req, res) => {
-    // Validar campos en general
-    let validaciones = validationResult(req);
-    // Validar campo "Repetir contraseña"
-    let coincidencia = req.body.contrasena == req.body.contrasena2;
-    // Validar email con la BD
-    let BD = GetFileObject(usersFilePath);
-    let mailYaUsado = mailEnBD(req.body.email, BD);
-    // Verificar si existe algún error de validación
-    if (validaciones.errors.length > 0 || !coincidencia || mailYaUsado) {
-      // Borrar el archivo de imagen guardado
-      req.file ? (archivo = req.file.filename) : (archivo = "");
-      BorrarArchivoDeImagen(archivo);
-      // Regresar al formulario de crear
-      return res.render("usuario-crear", {
-        usuario: null,
-        mailYaUsado,
-        coincidencia,
-        errores: validaciones.mapped(),
-        oldData: req.body,
-        titulo: "Registro",
-      });
-    }
-    // Preparar el registro para almacenar
-    BD = GetFileObject(usersFilePath);
-    const nuevoId = BD.length > 0 ? BD[BD.length - 1].id + 1 : 1;
-    const nuevoUsuario = {
-      id: nuevoId,
-      ...req.body,
-      contrasena: bcryptjs.hashSync(req.body.contrasena, 10),
-      imagen: req.file.filename,
-    };
-    delete nuevoUsuario.contrasena2;
-    BD.push(nuevoUsuario);
-    // Guardar el registro
-    WriteFile(usersFilePath, BD);
-    // Inciar session
-    req.session.usuarioLogeado = nuevoUsuario
-    // Redireccionar
-    res.redirect("/usuario/detalle");
-  },
+        if (req.body.contrasena != req.body.contrasena2) {
+            validaciones.errors.push({
+                msg: errorRepeticionContrasena,
+                param: "contrasena2",
+            });
+        }
 
-  detalle: (req, res) => {
-    ID = req.session.usuarioLogeado.id
-    const BD = GetFileObject(usersFilePath);
-    let usuario = BD.find(n => n.id == ID);
-    res.render("usuario-detalle", {
-      usuario,
-      titulo: "Detalle del Usuario",
-    });
-  },
+        if (ObtenerUsuarioPorEmail(req.body.email)) {
+            validaciones.errors.push({
+                msg: errorEmailRegistrado,
+                param: "email",
+            });
+        }
 
-  editarForm: (req, res) => {
-    ID = req.session.usuarioLogeado.id
-    let BD = GetFileObject(usersFilePath);
-    let usuario = BD.find(n => n.id == ID);
-    res.render("usuario-editar", {
-      usuario,
-      mailYaUsado: false,
-      coincidencia: true,
-      titulo: "Editar el Usuario",
-    });
-  },
+        if (validaciones.errors.length > 0) {
+            if (req.file) {
+                BorrarArchivoDeImagen(req.file.filename);
+            }
 
-  editarGuardar: (req, res) => {
-    // Datos generales
-    ID = req.session.usuarioLogeado.id
-    let BD = GetFileObject(usersFilePath);
-    let usuario = BD.find(n => n.id == ID);
-    let indice = BD.findIndex(n => n.id == ID);
-    // Validar campos en general
-    let validaciones = validationResult(req);
-    // Quitar error por "Tienes que subir una imagen"
-    if (validaciones.errors.length) {
-      indiceError = validaciones.errors.findIndex(n => n.msg == "Tienes que subir una imagen");
-      indiceError >= 0 ? validaciones.errors.splice(indiceError, 1) : null;
-    }
-    // Validar campo "Repetir contraseña"
-    let coincidencia = req.body.contrasena == req.body.contrasena2;
-    // Validar email con la BD
-    let mailYaUsado = BD.find(n => n.email == req.body.email && n.id != ID);
-    // Verificar si existe algún error de validación
-    if (validaciones.errors.length || !coincidencia || mailYaUsado) {
-      // Borrar el archivo de imagen guardado
-      req.file ? (archivo = req.file.filename) : (archivo = "");
-      BorrarArchivoDeImagen(archivo);
-      // Regresar al formulario de crear
-      return res.render("usuario-editar", {
-        usuario,
-        mailYaUsado,
-        coincidencia,
-        errores: validaciones.mapped(),
-        oldData: req.body,
-        titulo: "Editar el Usuario",
-      });
-    }
-    // Preparar el registro para almacenar
-    const actualizado = {
-      ...usuario,
-      ...req.body,
-      contrasena: bcryptjs.hashSync(req.body.contrasena, 10),
-    };
-    delete actualizado.contrasena2;
-    if (req.file) {
-      //Eliminar la imagen original
-      archivo = usuario.imagen;
-      BorrarArchivoDeImagen(archivo);
-      //Cambiar el nombre de la imagen
-      actualizado.imagen = req.file.filename;
-    }
-    BD[indice] = actualizado;
-    WriteFile(usersFilePath, BD);
-    res.redirect("/usuario/detalle");
-  },
+            // Regresar al formulario de crear
+            return res.render("usuario-crear", {
+                errores: validaciones.mapped(),
+                oldData: req.body,
+                titulo: "Registro",
+            });
+        }
 
-  eliminar: (req, res) => {
-    ID = req.session.usuarioLogeado.id
-    let BD = GetFileObject(usersFilePath);
-    let indice = BD.findIndex(n => n.id == ID);
-    // Borrar el archivo de imagen guardado
-    archivo = BD[indice].imagen;
-    BorrarArchivoDeImagen(archivo);
-    //Eliminar el registro
-    BD.splice(indice, 1);
-    WriteFile(usersFilePath, BD);
-    res.redirect("/usuario/logout");
-  },
+        const usuario = CrearUsuario(req.body, req.file);
 
-  login: (req, res) => {
-    res.render("login", { titulo: "Login" });
-  },
+        // Inciar session
+        req.session.usuarioLogeado = usuario;
 
-  logeo: (req, res) => {
-    let errores = validationResult(req);
-    if (errores.isEmpty()) {
-      let usuarios = GetFileObject(usersFilePath);
-      // Verificar si el usuario está registrado
-      let usuarioALogearse = usuarios.find(n => n.email == req.body.email);
-      // Verificar si además coincide la contraseña
-			if (usuarioALogearse == undefined ||
-				!bcryptjs.compareSync(req.body.contrasena, usuarioALogearse.contrasena)) {
-        // En caso de error -> volver a Login
-				return res.render("login", {
-					errores: [{ msg: "Correo electronico y/o Contraseña incorrecta" }],
-					titulo: 'Login',
-					oldData: req.body
-				});
-			};
-      // Iniciar session
-      req.session.usuarioLogeado = usuarioALogearse;
-      // Cookies
-      if(req.body.recordar != undefined) {
-  	  	res.cookie('recordar', usuarioALogearse.email,{maxAge: 60000})
-	    };
-      // Redireccionar a Detalle de usuario
-      res.redirect("/usuario/detalle");
-      // Redireccionar a Login de nuevo
-    } else {
-      return res.render("login", {
-        errores: errores.array(),
-        titulo: "Login",
-        oldData: req.body,
-      });
-    }
-  },
+        res.redirect("/usuario/detalle");
+    },
 
-  logout: (req, res) => {
-	res.clearCookie('recordar');
-    req.session.destroy();
-    return res.redirect("/");
-  },
+    detalle: (req, res) => {
+        let usuario = ObtenerUsuarioPorId(req.session.usuarioLogeado.id);
+        res.render("usuario-detalle", {
+            usuario,
+            titulo: "Detalle del Usuario",
+        });
+    },
+
+    editarForm: (req, res) => {
+        let usuario = ObtenerUsuarioPorId(req.session.usuarioLogeado.id);
+        res.render("usuario-editar", {
+            usuario,
+            titulo: "Editar el Usuario",
+        });
+    },
+
+    editarGuardar: (req, res) => {
+        let validaciones = validationResult(req);
+
+        if (req.body.contrasena != req.body.contrasena2) {
+            validaciones.errors.push({
+                msg: errorRepeticionContrasena,
+                param: "contrasena2",
+            });
+        }
+
+        if (MailYaExistente(req.body, req.session.usuarioLogeado.id)) {
+            validaciones.errors.push({
+                msg: errorEmailRegistrado,
+                param: "email",
+            });
+        }
+
+        if (validaciones.errors.length) {
+            if (req.file) {
+                BorrarArchivoDeImagen(req.file.filename);
+            }
+            let usuario = ObtenerUsuarioPorId(req.session.usuarioLogeado.id);
+            return res.render("usuario-editar", {
+                usuario,
+                errores: validaciones.mapped(),
+                oldData: req.body,
+                titulo: "Editar el Usuario",
+            });
+        }
+
+        ActualizarUsuario(req.session.usuarioLogeado.id, req.body, req.file);
+
+        res.redirect("/usuario/detalle");
+    },
+
+    eliminar: (req, res) => {
+        EliminarUsuario(req.session.usuarioLogeado.id);
+        res.redirect("/usuario/logout");
+    },
+
+    login: (req, res) => {
+        res.render("login", { titulo: "Login" });
+    },
+
+    logeo: (req, res) => {
+        let errores = validationResult(req);
+        if (errores.isEmpty()) {
+            let usuario = ObtenerUsuarioPorEmail(req.body.email);
+            // Verificar si además coincide la contraseña
+            if (
+                usuario == undefined ||
+                !bcryptjs.compareSync(req.body.contrasena, usuario.contrasena)
+            ) {
+                return res.render("login", {
+                    errores: [
+                        { msg: "Correo electronico y/o contraseña incorrecta" },
+                    ],
+                    titulo: "Login",
+                    oldData: req.body,
+                });
+            }
+            // Iniciar session
+            req.session.usuarioLogeado = usuario;
+            // Cookies
+            if (req.body.recordar != undefined) {
+                res.cookie("recordar", usuario.email, { maxAge: 60000 });
+            }
+            res.redirect("/usuario/detalle");
+        } else {
+            return res.render("login", {
+                errores: errores.array(),
+                titulo: "Login",
+                oldData: req.body,
+            });
+        }
+    },
+
+    logout: (req, res) => {
+        res.clearCookie("recordar");
+        req.session.destroy();
+        return res.redirect("/");
+    },
 };
 
 // Funciones ********************************
-function GetFileObject(filePath) {
-  return JSON.parse(fs.readFileSync(filePath, "utf-8"));
+function ObtenerUsuarios() {
+    return JSON.parse(fs.readFileSync(usersFilePath, "utf-8"));
 }
 
-function WriteFile(filePath, content) {
-  fs.writeFileSync(filePath, JSON.stringify(content, null, 2));
+function ObtenerUsuarioPorId(id) {
+    const usuarios = ObtenerUsuarios();
+    return usuarios.find((x) => x.id == id);
 }
 
-function mailEnBD(texto, BD) {
-  let usuario = BD.find(n => n.email === texto);
-  return usuario;
+function ObtenerUsuarioPorEmail(email) {
+    const usuarios = ObtenerUsuarios();
+    return usuarios.find((x) => x.email == email);
+}
+
+function CrearUsuario(formBody, file) {
+    const usuarios = ObtenerUsuarios();
+    const nuevoId =
+        usuarios.length > 0 ? usuarios[usuarios.length - 1].id + 1 : 1;
+    const nuevoUsuario = {
+        id: nuevoId,
+        ...formBody,
+        contrasena: bcryptjs.hashSync(formBody.contrasena, 10),
+        imagen: file.filename,
+    };
+    delete nuevoUsuario.contrasena2;
+    usuarios.push(nuevoUsuario);
+    GuardarUsuarios(usuarios);
+    return nuevoUsuario;
+}
+
+function GuardarUsuarios(content) {
+    fs.writeFileSync(usersFilePath, JSON.stringify(content, null, 2));
+}
+
+function ActualizarUsuario(id, formBody, file) {
+    const usuarios = ObtenerUsuarios();
+    const usuario = ObtenerUsuarioPorId(id);
+    let indice = usuarios.findIndex((n) => n.id == id);
+    // Preparar el registro para almacenar
+    const actualizado = {
+        ...usuario,
+        ...formBody,
+        contrasena: bcryptjs.hashSync(formBody.contrasena, 10),
+    };
+    delete actualizado.contrasena2;
+    if (file) {
+        //Eliminar la imagen original
+        BorrarArchivoDeImagen(usuario.imagen);
+        //Cambiar el nombre de la imagen
+        actualizado.imagen = file.filename;
+    }
+    usuarios[indice] = actualizado;
+    GuardarUsuarios(usuarios);
+}
+
+function EliminarUsuario(id) {
+    let usuarios = ObtenerUsuarios();
+    let indice = usuarios.findIndex((n) => n.id == id);
+    // Borrar el archivo de imagen guardado
+    BorrarArchivoDeImagen(usuarios[indice].imagen);
+    //Eliminar el registro
+    usuarios.splice(indice, 1);
+    GuardarUsuarios(usuarios);
+}
+
+function MailYaExistente(formBody, id) {
+    const usuarios = ObtenerUsuarios();
+    return (
+        usuarios.find((n) => n.email === formBody.email && n.id != id) !=
+        undefined
+    );
 }
 
 function BorrarArchivoDeImagen(nombreDeArchivo) {
-  let imageFile = path.join(imagesPath, nombreDeArchivo);
-  if (nombreDeArchivo && fs.existsSync(imageFile)) {
-    fs.unlinkSync(imageFile);
-  }
+    let imageFile = path.join(imagesPath, nombreDeArchivo);
+    if (nombreDeArchivo && fs.existsSync(imageFile)) {
+        fs.unlinkSync(imageFile);
+    }
 }

@@ -18,19 +18,19 @@
     }
 
     .menu-options {
-        text-decoration: none; 
+        text-decoration: none;
         color: var(--white);
         font-weight: bold;
-        font-size: .9rem;
+        font-size: 0.9rem;
         line-height: 1rem;
     }
 
     #search-container {
         width: 30%;
     }
-    
+
     #shop-cart-container,
-    #profile-container{
+    #profile-container {
         width: 5%;
     }
 
@@ -63,8 +63,8 @@
         max-width: 40%;
     }
 }
-  
-@media (min-width: 1200px) {    
+
+@media (min-width: 1200px) {
     #footer-main-section {
         display: flex;
         flex-wrap: wrap;

@@ -1,7 +1,7 @@
 /* GENERAL */
 main {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
 }
 
@@ -13,7 +13,7 @@ main {
 }
 
 #carrito #encabezado {
-    display:flex;
+    display: flex;
     justify-content: space-between;
 }
 
@@ -34,24 +34,24 @@ main {
 #carrito #encabezado #total {
     display: flex;
     justify-content: flex-end;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
 #carrito #encabezado #total h2 {
     font-size: 1.2rem;
-    margin-right:10px;
+    margin-right: 10px;
     margin-bottom: 5px;
 }
 
 #carrito #encabezado #continuar-y-pagar {
-    margin-right:10px;
+    margin-right: 10px;
     display: flex;
     justify-content: flex-end;
 }
 
 #carrito #encabezado #continuar-y-pagar button {
     font-size: 1rem;
-    padding:3px 6px;
+    padding: 3px 6px;
     margin-left: 5px;
     font-weight: bold;
     color: blue;
@@ -59,13 +59,13 @@ main {
 
 #carrito .productos {
     width: 90%;
-    padding:15px;
+    padding: 15px;
     margin: 10px auto;
 }
 
 #carrito .productos {
-    display:flex;
-    justify-content:space-between;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -74,18 +74,18 @@ main {
 }
 
 #carrito .productos .imagen-de-producto {
-    width:10%;
+    width: 10%;
 }
 
 #carrito .productos .nombre-de-producto {
     width: 25%;
-    font-size:1rem;
+    font-size: 1rem;
     font-weight: bold;
 }
 
 #carrito .productos #cantidad-y-flechas {
     width: 10%;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: space-between;
 }
@@ -93,18 +93,18 @@ main {
 #carrito .productos #cantidad {
     width: 70%;
     font-size: 1.7rem;
-    text-align:right;
+    text-align: right;
 }
 
 #carrito .productos #flechas {
-    display:flex;
+    display: flex;
     flex-direction: column;
 }
 
 #carrito .productos .título {
-    font-size:1rem;
-    font-weight:bold;
-    text-align:center;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
     margin-bottom: 5px;
 }
 
