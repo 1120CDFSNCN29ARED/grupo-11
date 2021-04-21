@@ -80,9 +80,6 @@ create table imagenes (
 	FOREIGN KEY (producto_ID) REFERENCES productos(id),
 	rutanombre VARCHAR(500) NOT NULL
 );
-ALTER TABLE carrito 
-	add FOREIGN KEY (producto_ID) REFERENCES productos(id);
-;
-ALTER TABLE ventadetalle
-	add FOREIGN KEY (producto_ID) REFERENCES productos(id);
-;
+ALTER TABLE carrito add FOREIGN KEY (producto_ID) REFERENCES productos(id);
+
+ALTER TABLE ventadetalle add FOREIGN KEY (producto_ID) REFERENCES productos(id);
