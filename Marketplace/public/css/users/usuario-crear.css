@@ -1,30 +1,109 @@
-main h1 {text-align: center;padding-top: 20px;font-size: 2em;}
-#formulario {display: grid;grid-template-columns: 1fr 1fr;gap: 5px 0px;width: 65%;margin: auto}
+main h1 {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 2em;
+}
+#formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px 0px;
+    width: 65%;
+    margin: auto;
+}
 
-#formulario .box {text-align: center;}
-#formulario .titulo {margin: auto;text-align: center;font-weight: bold;margin-top: 10px;font-size: 1.2em;cursor: pointer;}
+#formulario .box {
+    text-align: center;
+}
+#formulario .titulo {
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
 
-#formulario .formulario-grupo-input {position: relative;}
-#formulario .input {border-radius: 15px;padding: 10px;text-align: center; border: 1px solid var(--gray);margin: 5px 0px;background-color: white;font-size: 1.2rem; }
+#formulario .formulario-grupo-input {
+    position: relative;
+}
+#formulario .input {
+    border-radius: 15px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid var(--gray);
+    margin: 5px 0px;
+    background-color: white;
+    font-size: 1.2rem;
+}
 
-#formulario .titulo, .input {width: 80%;}
-#formulario .ocultar {display: none}
+#formulario .titulo,
+.input {
+    width: 80%;
+}
+#formulario .ocultar {
+    display: none;
+}
 
-#formulario .fas {position: absolute;right: 13%;top: 19px;font-size: 1.2em;}
-#formulario .fa-times-circle {color: red;}
-#formulario .fa-check-circle {color: green;}
-#formulario #eye {right: 18%}
+#formulario .fas {
+    position: absolute;
+    right: 13%;
+    top: 19px;
+    font-size: 1.2em;
+}
+#formulario .fa-times-circle {
+    color: red;
+}
+#formulario .fa-check-circle {
+    color: green;
+}
+#formulario #eye {
+    right: 18%;
+}
 
-#formulario .criterio, #formulario .input {font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
-#formulario .criterio {font-size: 1rem;margin-bottom: 0;}
-#formulario .input-error {color: red;}
+#formulario .criterio,
+#formulario .input {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+}
+#formulario .criterio {
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+#formulario .input-error {
+    color: red;
+}
 
-#formulario #boton-registro {grid-column: span 2;margin-top: 20px;}
-#formulario .button {padding: 10px;display: flex;margin: auto;border-radius: 5px;font-size: 14px;border: none;background-color: #232f3e;color: white;}
-#formulario .contenedor-redes{text-align: center;}
-#formulario .redes-sociales{font-size: 30px;color:blue;padding: 20px;border-radius: 50%;background-color:#ebebeb;border: none;}
+#formulario #boton-registro {
+    grid-column: span 2;
+    margin-top: 20px;
+}
+#formulario .button {
+    padding: 10px;
+    display: flex;
+    margin: auto;
+    border-radius: 5px;
+    font-size: 14px;
+    border: none;
+    background-color: #232f3e;
+    color: white;
+}
+#formulario .contenedor-redes {
+    text-align: center;
+}
+#formulario .redes-sociales {
+    font-size: 30px;
+    color: blue;
+    padding: 20px;
+    border-radius: 50%;
+    background-color: #ebebeb;
+    border: none;
+}
 
 @media (max-width: 768px) {
-    #formulario {grid-template-columns: 1fr;}
-    #formulario #boton-registro {grid-column: span 1;}
+    #formulario {
+        grid-template-columns: 1fr;
+    }
+    #formulario #boton-registro {
+        grid-column: span 1;
+    }
 }
