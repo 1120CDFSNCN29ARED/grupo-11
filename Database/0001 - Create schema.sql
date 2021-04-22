@@ -2,19 +2,17 @@ DROP DATABASE IF EXISTS guitar_shop;
 CREATE DATABASE guitar_shop;
 USE guitar_shop;
 
-DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`nombre` VARCHAR(100) NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`nombre` VARCHAR(500) NOT NULL,
 	`apellido` VARCHAR(500) NOT NULL,
-	`email` VARCHAR(500) NOT NULL,
+	`email` VARCHAR(500) NOT NULL UNIQUE,
 	`contrasena` VARCHAR(500) NOT NULL,
 	`avatar` VARCHAR(500) NOT NULL,
 	`rol_id` INT UNSIGNED NOT NULL,
@@ -25,14 +23,12 @@ CREATE TABLE `usuarios` (
 	FOREIGN KEY (`rol_id`) REFERENCES `roles`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS `marcas`;
 CREATE TABLE `marcas` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`nombre` VARCHAR(500) NOT NULL, 
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS `modelos`;
 CREATE TABLE `modelos` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`marca_id` INT UNSIGNED NOT NULL,
@@ -41,14 +37,12 @@ CREATE TABLE `modelos` (
 	FOREIGN KEY (`marca_id`) REFERENCES `marcas`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS `categorias`;
 CREATE TABLE `categorias` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`nombre` VARCHAR(500) NOT NULL,
 	PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS `productos`;
 CREATE TABLE `productos` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`nombre` VARCHAR(500) NOT NULL,
@@ -73,7 +67,6 @@ CREATE TABLE `productos` (
 	FOREIGN KEY (`actualizado_por`) REFERENCES `usuarios`(`id`)	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS `ventas`;
 CREATE TABLE `ventas` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`usuario_id` INT UNSIGNED NOT NULL,
@@ -84,7 +77,6 @@ CREATE TABLE `ventas` (
 	FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS `detalle_ventas`;
 CREATE TABLE `detalle_ventas` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`producto_id` INT UNSIGNED NOT NULL,
@@ -96,7 +88,6 @@ CREATE TABLE `detalle_ventas` (
 	FOREIGN KEY (`venta_id`) REFERENCES `ventas`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS `imagenes`;
 CREATE TABLE `imagenes` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`producto_id` INT UNSIGNED NOT NULL,
@@ -105,7 +96,6 @@ CREATE TABLE `imagenes` (
 	FOREIGN KEY (`producto_id`) REFERENCES `productos`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS `carrito`;
 CREATE TABLE `carrito` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`usuario_id` INT UNSIGNED NOT NULL,
