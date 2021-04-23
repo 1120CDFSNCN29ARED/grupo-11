@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-module.export = (sequelize) => {
+module.exports = (sequelize) => {
     const alias = "Categorias";
     const columns = {
         nombre: Sequelize.STRING(500)

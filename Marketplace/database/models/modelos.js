@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-module.export = (sequelize) => {
+module.exports = (sequelize) => {
     const alias = "Modelos";
     const columns = {
         marca_id: Sequelize.INTEGER,

@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-module.export = (sequelize) => {
+module.exports = (sequelize) => {
     const alias = "Ventas";
     const columns = {
         usuario_id: Sequelize.INTEGER,
@@ -10,7 +10,8 @@ module.export = (sequelize) => {
     };
     const config = {
         tableName: "ventas",
-        createdAt: 'fecha_emision'
+        createdAt: 'fecha_emision',
+        updatedAt: false
     };
 
     const Ventas = sequelize.define(alias,columns,config);
