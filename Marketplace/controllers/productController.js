@@ -1,86 +1,47 @@
 const productoRepository = require("../repositories/productoRepository");
+const imagenesRepository = require("../repositories/imagenRepository");
 const fs = require("fs");
-let path = require("path");
-const productsFilePath = path.join(__dirname, "../database/productos.json");
+const path = require("path");
 const imagesPath = path.join(__dirname, "../public/images/products/");
-
-const toThousand = (n) => {
-    return n.toLocaleString("es-AR", { maximumFractionDigits: 0 });
-};
 
 module.exports = {
     crearForm: (req, res) => {
         let titulo = "Alta de Producto";
         res.render("producto-crear", { titulo });
     },
+    crearGuardar: async (req, res) => {
+        let precio = SanitizePrice(req.body.precio);
+        let producto = await productoRepository.Crear(req.body, precio, req.session.usuarioLogeado.id);
+        await imagenesRepository.Crear(req.file.filename, producto.id);
 
-    crearGuardar: (req, res) => {
-        const productos = GetFileObject(productsFilePath);
-        const nuevoId =
-            productos.length > 0 ? productos[productos.length - 1].id + 1 : 1;
-        let price = SanitizePrice(req.body.precio);
-        const newProduct = {
-            id: nuevoId,
-            ...req.body,
-            precio: Number(price),
-            masVendido: false,
-            novedades: true,
-            imagen: req.file.filename,
-        };
-        productos.push(newProduct);
-        WriteFile(productsFilePath, productos);
-        res.redirect("/producto/" + newProduct.id + "/detalle");
+        res.redirect("/producto/" + producto.id + "/detalle");
     },
-
-    detalle: (req, res) => {
+    detalle: async (req, res) => {
         let titulo = "Detalle del Producto";
+        let producto = await productoRepository.ObtenerPorId(req.params.id);
         
-        productoRepository.ObtenerPorId(req.params.id).then(producto => {
-            return res.render("producto-detalle", { producto, toThousand, titulo });
-        });
+        return res.render("producto-detalle", { producto, toThousand, titulo });
     },
-
-    editarForm: (req, res) => {
+    editarForm: async (req, res) => {
         let titulo = "Editar el Producto";
+        let producto = await productoRepository.ObtenerPorId(req.params.id);
         
-        productoRepository.ObtenerPorId(req.params.id).then(producto => {
-            return res.render("producto-editar", { producto, toThousand, titulo });
-        });
+        return res.render("producto-editar", { producto, toThousand, titulo });
     },
+    editarGuardar: async (req, res) => {
+        let precio = SanitizePrice(req.body.precio);
+        await productoRepository.Actualizar(req.params.id, req.body, precio, req.session.usuarioLogeado.id);
 
-    editarGuardar: (req, res) => {
-        const productos = GetFileObject(productsFilePath);
-        const productId = req.params.id;
-        let producto = productos.find((producto) => producto.id == productId);
-        let indice = productos.indexOf(producto);
-        let price = SanitizePrice(req.body.precio);
-        const actualizado = {
-            ...producto,
-            ...req.body,
-            precio: Number(price),
-        };
-        productos[indice] = actualizado;
-        WriteFile(productsFilePath, productos);
-        res.redirect("/producto/" + productId + "/detalle");
+        res.redirect("/producto/" + req.params.id + "/detalle");
     },
-
-    eliminar: (req, res) => {
-        const products = GetFileObject(productsFilePath);
-        let indice = products.findIndex((n) => n.id == req.params.id);
-        //Eliminar la imagen
-        let imageFile = path.join(imagesPath, products[indice].imagen);
-        if (products[indice].imagen && fs.existsSync(imageFile)) {
-            fs.unlinkSync(imageFile);
-        }
-        //Eliminar el registro
-        products.splice(indice, 1);
-        WriteFile(productsFilePath, products);
+    eliminar: async (req, res) => {
+        await EliminarProducto(req.params.id, req.session.usuarioLogeado.id);
         res.redirect("/");
     },
 };
 
-function GetFileObject(filePath) {
-    return JSON.parse(fs.readFileSync(filePath, "utf-8")); //Christian, la función no funcionaba correctamente porque se estaba usando un parámtetro distinto al de la función
+const toThousand = (n) => {
+    return n.toLocaleString("es-AR", { maximumFractionDigits: 0 });
 }
 
 function SanitizePrice(priceString) {
@@ -91,6 +52,18 @@ function SanitizePrice(priceString) {
         .replace(" ", "");
 }
 
-function WriteFile(filePath, content) {
-    fs.writeFileSync(filePath, JSON.stringify(content, null, 2));
+async function EliminarProducto(id, idUsuario) {
+    const imagenes = await productoRepository.ObtenerImagenes(id);
+    
+    for (let imagen of imagenes) {
+        console.log(imagen);
+        let imageFile = path.join(imagesPath, imagen.ruta);
+        if (fs.existsSync(imageFile)) {
+            fs.unlinkSync(imageFile);
+        }
+
+        await imagenesRepository.Eliminar(imagen.id);
+    }
+    
+    await productoRepository.Eliminar(id, idUsuario);
 }
