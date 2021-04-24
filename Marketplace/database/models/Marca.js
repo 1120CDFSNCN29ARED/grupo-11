@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 
 module.exports = (sequelize) => {
-    const alias = "Marcas";
+    const alias = "Marca";
     const columns = {
         nombre: Sequelize.STRING(500)
     };
@@ -10,21 +10,19 @@ module.exports = (sequelize) => {
         timestamps: false
     };
 
-    const Marcas = sequelize.define(alias,columns,config);
+    const Marca = sequelize.define(alias,columns,config);
 
-    Marcas.associate = function(models) {
-        Marcas.hasMany(models.Modelos, {
+    Marca.associate = function(models) {
+        Marca.hasMany(models.Modelo, {
             as: "modelos",
             foreignKey: "marca_id"
         });
-    };
-
-    Marcas.associate = function(models) {
-        Marcas.hasMany(models.Productos, {
+        
+        Marca.hasMany(models.Producto, {
             as: "productos",
             foreignKey: "marca_id"
         });
     };
 
-    return Marcas;
+    return Marca;
 };

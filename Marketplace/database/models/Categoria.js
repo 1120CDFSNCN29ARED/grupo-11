@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 
 module.exports = (sequelize) => {
-    const alias = "Categorias";
+    const alias = "Categoria";
     const columns = {
         nombre: Sequelize.STRING(500)
     };
@@ -10,14 +10,14 @@ module.exports = (sequelize) => {
         timestamps: false
     };
 
-    const Categorias = sequelize.define(alias,columns,config);
+    const Categoria = sequelize.define(alias,columns,config);
 
-    Categorias.associate = function(models) {
-        Categorias.hasMany(models.Productos, {
+    Categoria.associate = function(models) {
+        Categoria.hasMany(models.Producto, {
             as: "productos",
             foreignKey: "categoria_id"
         });
     };
 
-    return Categorias;
+    return Categoria;
 };
