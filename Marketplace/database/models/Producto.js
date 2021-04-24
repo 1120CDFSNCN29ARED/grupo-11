@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 
 module.exports = (sequelize) => {
-    const alias = "Productos";
+    const alias = "Producto";
     const columns = {
         nombre: Sequelize.STRING(500),
         categoria_id: Sequelize.INTEGER,
@@ -23,49 +23,39 @@ module.exports = (sequelize) => {
         updatedAt: 'actualizado_en'
     };
 
-    const Productos = sequelize.define(alias,columns,config);
+    const Producto = sequelize.define(alias,columns,config);
 
-    Productos.associate = function(models) {
-        Productos.belongsTo(models.Categorias, {
-            as: "cateroria",
+    Producto.associate = function(models) {
+        Producto.belongsTo(models.Categoria, {
+            as: "caterorias",
             foreignKey: "categoria_id"
         });
-    };
-    
-    Productos.associate = function(models) {
-        Productos.belongsTo(models.Marcas, {
-            as: "marca",
+        
+        Producto.belongsTo(models.Marca, {
+            as: "marcas",
             foreignKey: "marca_id"
         });
-    };
-
-    Productos.associate = function(models) {
-        Productos.belongsTo(models.Modelo, {
-            as: "modelo",
+        
+        Producto.belongsTo(models.Modelo, {
+            as: "modelos",
             foreignKey: "modelo_id"
         });
-    };
-
-    Productos.associate = function(models) {
-        Productos.hasMany(models.Imagenes, {
+        
+        Producto.hasMany(models.Imagen, {
             as: "imagenes",
             foreignKey: "producto_id"
         });
-    };
-    
-    Productos.associate = function(models) {
-        Productos.hasMany(models.Carrito, {
-            as: "carrito",
+        
+        Producto.hasMany(models.Carrito, {
+            as: "carritos",
             foreignKey: "producto_id"
         });
-    };
-    
-    Productos.associate = function(models) {
-        Productos.hasMany(models.DetalleVentas, {
-            as: "detalleVenta",
+        
+        Producto.hasMany(models.DetalleVenta, {
+            as: "detalleVentas",
             foreignKey: "producto_id"
         });
     };
 
-    return Productos;
+    return Producto;
 };

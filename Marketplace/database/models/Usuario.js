@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 
 module.exports = (sequelize) => {
-    const alias = "Usuarios";
+    const alias = "Usuario";
     const columns = {
         nombre: Sequelize.STRING(500),
         apellido: Sequelize.STRING(500),
@@ -19,28 +19,24 @@ module.exports = (sequelize) => {
         updatedAt: 'actualizado_en'
     };
 
-    const Usuarios = sequelize.define(alias,columns,config);
+    const Usuario = sequelize.define(alias,columns,config);
     
-    Usuarios.associate = function(models) {
-        Usuarios.belongsTo(models.Roles, {
-            as: "rol",
+    Usuario.associate = function(models) {
+        Usuario.belongsTo(models.Rol, {
+            as: "roles",
             foreignKey: "rol_id"
         });
-    };
-    
-    Usuarios.associate = function(models) {
-        Usuarios.hasMany(models.Carrito, {
-            as: "carrito",
+        
+        Usuario.hasMany(models.Carrito, {
+            as: "carritos",
             foreignKey: "usuario_id"
         });
-    };
-
-    Usuarios.associate = function(models) {
-        Usuarios.hasMany(models.Ventas, {
+        
+        Usuario.hasMany(models.Venta, {
             as: "compras",
             foreignKey: "usuario_id"
         });
     };
 
-    return Usuarios;
+    return Usuario;
 };

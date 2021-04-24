@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 
 module.exports = (sequelize) => {
-    const alias = "Roles";
+    const alias = "Rol";
     const columns = {
         nombre: Sequelize.STRING(500)
     };
@@ -10,14 +10,14 @@ module.exports = (sequelize) => {
         timestamps: false
     };
 
-    const Roles = sequelize.define(alias,columns,config);
+    const Rol = sequelize.define(alias,columns,config);
 
-    Roles.associate = function(models) {
-        Roles.hasMany(models.Usuarios, {
-            as: "usaurios",
+    Rol.associate = function(models) {
+        Rol.hasMany(models.Usuario, {
+            as: "usuarios",
             foreignKey: "rol_id"
         });
     };
 
-    return Roles;
+    return Rol;
 };

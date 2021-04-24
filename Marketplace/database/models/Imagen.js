@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 
 module.exports = (sequelize) => {
-    const alias = "Imagenes";
+    const alias = "Imagen";
     const columns = {
         producto_id: Sequelize.INTEGER,
         ruta: Sequelize.STRING(500)
@@ -11,14 +11,14 @@ module.exports = (sequelize) => {
         timestamps: false
     };
 
-    const Imagenes = sequelize.define(alias,columns,config);
+    const Imagen = sequelize.define(alias,columns,config);
 
-    Imagenes.associate = function(models) {
-        Imagenes.belongsTo(models.Productos, {
-            as: "producto",
+    Imagen.associate = function(models) {
+        Imagen.belongsTo(models.Producto, {
+            as: "productos",
             foreignKey: "producto_id"
         });
     };
 
-    return Imagenes;
+    return Imagen;
 };
