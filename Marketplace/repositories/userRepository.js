@@ -1,5 +1,5 @@
 const db = require("../database/models");
-const entidad = db.Usuarios;
+const entidad = db.Usuario;
 
 module.exports = {
 };

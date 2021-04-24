@@ -1,5 +1,4 @@
-let path = require("path");
-const fs = require("fs");
+const productRepository = require("../repositories/productRepository");
 
 const toThousand = (n) => {
     return n.toLocaleString("es-AR", { maximumFractionDigits: 0 });
@@ -13,27 +12,27 @@ module.exports = {
     },
 
     index: (req, res) => {
-        const productos = GetFileData("productos.json");
-        let seccionesProductos = [
-            {
-                titulo: "Mas vendidos",
-                productos: productos.filter((x) => x.masVendido),
-            },
-            {
-                titulo: "Novedades",
-                productos: productos.filter((x) => x.novedades),
-            },
-        ];
-        res.render("index", {
-            seccionesProductos,
-            toThousand,
-            titulo: "Guitar Shop",
+        let novedadesPromise = productRepository.ObtenerNovedades();
+        let masVendidosPromise = productRepository.ObtenerMasVendidos()
+
+        Promise.all([novedadesPromise, masVendidosPromise]).then(([novedades, masVendidos]) => {
+            let seccionesProductos = [
+                {
+                    titulo: "Mas vendidos",
+                    productos: masVendidos
+                },
+                {
+                    titulo: "Novedades",
+                    productos: novedades
+                }
+            ];
+            console.log(novedades);
+
+            return res.render("index", {
+                seccionesProductos,
+                toThousand,
+                titulo: "Guitar Shop",
+            });
         });
     },
 };
-
-function GetFileData(fileName) {
-    const fileRoute = path.resolve(__dirname, "../database/" + fileName);
-    const data = fs.readFileSync(fileRoute, { encoding: "utf-8" });
-    return JSON.parse(data);
-}
