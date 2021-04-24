@@ -1,4 +1,4 @@
-const productRepository = require("../repositories/productRepository");
+const productoRepository = require("../repositories/productoRepository");
 
 const toThousand = (n) => {
     return n.toLocaleString("es-AR", { maximumFractionDigits: 0 });
@@ -12,8 +12,8 @@ module.exports = {
     },
 
     index: (req, res) => {
-        let novedadesPromise = productRepository.ObtenerNovedades();
-        let masVendidosPromise = productRepository.ObtenerMasVendidos()
+        let novedadesPromise = productoRepository.ObtenerNovedades();
+        let masVendidosPromise = productoRepository.ObtenerMasVendidos()
 
         Promise.all([novedadesPromise, masVendidosPromise]).then(([novedades, masVendidos]) => {
             let seccionesProductos = [
@@ -26,8 +26,7 @@ module.exports = {
                     productos: novedades
                 }
             ];
-            console.log(novedades);
-
+            
             return res.render("index", {
                 seccionesProductos,
                 toThousand,

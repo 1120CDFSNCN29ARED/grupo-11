@@ -1,3 +1,4 @@
+const productoRepository = require("../repositories/productoRepository");
 const fs = require("fs");
 let path = require("path");
 const productsFilePath = path.join(__dirname, "../database/productos.json");
@@ -33,20 +34,18 @@ module.exports = {
 
     detalle: (req, res) => {
         let titulo = "Detalle del Producto";
-        const products = GetFileObject(productsFilePath);
-        let producto = products.find(
-            (producto) => producto.id == req.params.id
-        );
-        res.render("producto-detalle", { producto, toThousand, titulo });
+        
+        productoRepository.ObtenerPorId(req.params.id).then(producto => {
+            return res.render("producto-detalle", { producto, toThousand, titulo });
+        });
     },
 
     editarForm: (req, res) => {
         let titulo = "Editar el Producto";
-        const products = GetFileObject(productsFilePath);
-        let producto = products.find(
-            (producto) => producto.id == req.params.id
-        );
-        res.render("producto-editar", { producto, toThousand, titulo });
+        
+        productoRepository.ObtenerPorId(req.params.id).then(producto => {
+            return res.render("producto-editar", { producto, toThousand, titulo });
+        });
     },
 
     editarGuardar: (req, res) => {
