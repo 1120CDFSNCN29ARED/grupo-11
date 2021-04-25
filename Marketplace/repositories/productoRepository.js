@@ -2,7 +2,7 @@ const db = require("../database/models");
 const entidad = db.Producto;
 
 module.exports = {
-    ObtenerPorId: async (id) => {
+    ObtenerPorId: (id) => {
         return entidad.findByPk(id, {
             include: [ "imagenes", "categoria" ]
         });
@@ -41,10 +41,10 @@ module.exports = {
             where: { id: id },
         });
     },
-    Crear: (productoData, precio, usuarioId) => {
+    Crear: (infoProducto, precio, usuarioId) => {
         return entidad.create({
-            nombre: productoData.nombre,
-            descripcion: productoData.descripcion,
+            nombre: infoProducto.nombre,
+            descripcion: infoProducto.descripcion,
             categoria_id: 1,
             marca_id: 1,
             modelo_id: 1,
@@ -55,10 +55,10 @@ module.exports = {
             creado_por: usuarioId
         });
     },
-    Actualizar: (id, productoData, precio, usuarioId) => {
+    Actualizar: (id, infoProducto, precio, usuarioId) => {
         return entidad.update({
-            nombre: productoData.nombre,
-            descripcion: productoData.descripcion,
+            nombre: infoProducto.nombre,
+            descripcion: infoProducto.descripcion,
             precio: precio,
             actualizado_por: usuarioId
         },
