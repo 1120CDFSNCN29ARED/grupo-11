@@ -11,27 +11,25 @@ module.exports = {
         });
     },
 
-    index: (req, res) => {
-        let novedadesPromise = productoRepository.ObtenerNovedades();
-        let masVendidosPromise = productoRepository.ObtenerMasVendidos()
+    index: async (req, res) => {
+        let novedades = await productoRepository.ObtenerNovedades();
+        let masVendidos = await productoRepository.ObtenerMasVendidos()
 
-        Promise.all([novedadesPromise, masVendidosPromise]).then(([novedades, masVendidos]) => {
-            let seccionesProductos = [
-                {
-                    titulo: "Mas vendidos",
-                    productos: masVendidos
-                },
-                {
-                    titulo: "Novedades",
-                    productos: novedades
-                }
-            ];
-            
-            return res.render("index", {
-                seccionesProductos,
-                toThousand,
-                titulo: "Guitar Shop",
-            });
+        let seccionesProductos = [
+            {
+                titulo: "Mas vendidos",
+                productos: masVendidos
+            },
+            {
+                titulo: "Novedades",
+                productos: novedades
+            }
+        ];
+
+        return res.render("index", {
+            seccionesProductos,
+            toThousand,
+            titulo: "Guitar Shop",
         });
     },
 };
