@@ -45,7 +45,7 @@ module.exports = {
         return entidad.create({
             nombre: infoProducto.nombre,
             descripcion: infoProducto.descripcion,
-            categoria_id: 1,
+            categoria_id: infoProducto.categoria,
             marca_id: 1,
             modelo_id: 1,
             precio: precio,
