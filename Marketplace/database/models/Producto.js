@@ -4,6 +4,7 @@ module.exports = (sequelize) => {
     const alias = "Producto";
     const columns = {
         nombre: Sequelize.STRING(500),
+        descripcion: Sequelize.STRING(500),
         categoria_id: Sequelize.INTEGER,
         marca_id: Sequelize.INTEGER,
         modelo_id: Sequelize.INTEGER,
@@ -27,7 +28,7 @@ module.exports = (sequelize) => {
 
     Producto.associate = function(models) {
         Producto.belongsTo(models.Categoria, {
-            as: "caterorias",
+            as: "categoria",
             foreignKey: "categoria_id"
         });
         
