@@ -58,6 +58,7 @@ module.exports = {
     Actualizar: (id, infoProducto, precio, usuarioId) => {
         return entidad.update({
             nombre: infoProducto.nombre,
+            categoria_id: infoProducto.categoria,
             descripcion: infoProducto.descripcion,
             precio: precio,
             actualizado_por: usuarioId

@@ -56,7 +56,6 @@ async function EliminarProducto(id, idUsuario) {
     const imagenes = await productoRepository.ObtenerImagenes(id);
     
     for (let imagen of imagenes) {
-        console.log(imagen);
         let imageFile = path.join(imagesPath, imagen.ruta);
         if (fs.existsSync(imageFile)) {
             fs.unlinkSync(imageFile);

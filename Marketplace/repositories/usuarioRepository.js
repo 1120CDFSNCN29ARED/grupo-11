@@ -20,9 +20,6 @@ module.exports = {
     EmailYaExistente: async (email, id) => {
         let cantidad = await entidad.count({
             where: {
-                id: {
-                    [Op.ne]: id
-                },
                 email: email,
                 borrado: false
             }

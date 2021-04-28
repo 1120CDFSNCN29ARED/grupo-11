@@ -17,7 +17,8 @@
                     <% for (let categoria of locals.categoriasDeProductos) { %>
                         <option value="<%= categoria.id %>" 
                             <%= categoria.id == producto.categoria.id ? "selected" : "" %>>
-                            <%= categoria.nombre %></option>
+                            <%= categoria.nombre %>
+                        </option>
                     <% } %>
                 </select>
             </div>
