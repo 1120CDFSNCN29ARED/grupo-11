@@ -7,19 +7,12 @@ const productController = require(path.join(
 ));
 
 // Middlewares
-const uploadFile = require(path.join(
-    __dirname,
-    "../middlewares/multerProducto"
-));
+const uploadFile = require(path.join(__dirname,"../middlewares/multerProducto"));
 const soloUsuarios = require("../middlewares/soloUsuarios");
 
 // Rutas
 router.get("/crear", soloUsuarios, productController.crearForm);
-router.post(
-    "/crear",
-    uploadFile.single("imagen"),
-    productController.crearGuardar
-);
+router.post("/crear",uploadFile.single("imagen"),productController.crearGuardar);
 router.get("/:id/detalle", productController.detalle);
 router.get("/:id/editar", soloUsuarios, productController.editarForm);
 router.put("/:id/editar", productController.editarGuardar);
