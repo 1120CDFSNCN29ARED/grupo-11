@@ -5,7 +5,9 @@ const entidad = db.Usuario;
 
 module.exports = {
     ObtenerPorId: (id) => {
-        return entidad.findByPk(id);
+        return entidad.findByPk(id, {
+            include: [ "roles" ]
+        });
     },
     ObtenerPorEmail: async (email) => {
         const usuarios = await entidad.findAll({
