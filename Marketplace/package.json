@@ -1,5 +1,5 @@
 {
-    "name": "guitarshop",
+    "name": "guitar-shop",
     "version": "1.0.0",
     "main": "app.js",
     "scripts": {
@@ -7,7 +7,7 @@
         "start": "nodemon -e js ./src/app.js"
     },
     "keywords": [],
-    "author": "",
+    "author": "grupo-11",
     "license": "ISC",
     "dependencies": {
         "bcryptjs": "^2.4.3",
@@ -25,5 +25,5 @@
         "nodemon": "^2.0.7",
         "sequelize-cli": "^6.2.0"
     },
-    "description": ""
+    "description": "Venta de instrumentos musicales"
 }
