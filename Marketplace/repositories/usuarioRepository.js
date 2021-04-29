@@ -23,7 +23,6 @@ module.exports = {
         let cantidad = await entidad.count({
             where: {
                 email: email,
-                borrado: false
             }
         });
 
