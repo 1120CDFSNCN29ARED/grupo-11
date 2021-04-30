@@ -29,7 +29,7 @@ module.exports = {
         return res.render("producto-editar", { producto, toThousand, titulo });
     },
     editarGuardar: async (req, res) => {
-        let precio = SanitizePrice(req.body.precio);
+        let precio = parseFloat(SanitizePrice(req.body.precio));
         await productoRepository.Actualizar(req.params.id, req.body, precio, req.session.usuarioLogeado.id);
 
         res.redirect("/producto/" + req.params.id + "/detalle");
@@ -41,7 +41,7 @@ module.exports = {
 };
 
 const toThousand = (n) => {
-    return n.toLocaleString("es-AR", { maximumFractionDigits: 0 });
+    return parseFloat(n).toLocaleString("es-AR", { maximumFractionDigits: 2 });
 }
 
 function SanitizePrice(priceString) {

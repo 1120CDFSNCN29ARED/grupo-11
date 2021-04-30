@@ -1,9 +1,5 @@
 const productoRepository = require("../repositories/productoRepository");
 
-const toThousand = (n) => {
-    return n.toLocaleString("es-AR", { maximumFractionDigits: 0 });
-};
-
 module.exports = {
     carrito: (req, res) => {
         res.render("carrito", {
@@ -33,3 +29,7 @@ module.exports = {
         });
     },
 };
+
+const toThousand = (n) => {
+    return parseFloat(n).toLocaleString("es-AR", { maximumFractionDigits: 2 });
+}
