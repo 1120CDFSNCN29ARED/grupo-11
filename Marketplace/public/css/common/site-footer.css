@@ -1,71 +1,71 @@
 /* FOOTER */
 #site-footer {
-    background-color: var(--secondary-background);
-    width: 100%;
-    color: var(--white);
-    padding: 1em;
+	background-color: var(--secondary-background);
+	width: 100%;
+	color: var(--white);
+	padding: 1em;
 }
 
 .link {
-    text-decoration: none;
-    color: var(--white);
+	text-decoration: none;
+	color: var(--white);
 }
 
 #information,
 #social-networks,
 #newsletter {
-    padding-bottom: 1em;
+	padding-bottom: 1em;
 }
 
 #newsletter {
-    width: 60%;
+	width: 60%;
 }
 
 .footer-title {
-    font-size: 1.3em;
-    font-weight: bold;
-    padding-top: 1em;
-    padding-bottom: 1em;
+	font-size: 1.3em;
+	font-weight: bold;
+	padding-top: 1em;
+	padding-bottom: 1em;
 }
 
 .information-elements {
-    padding-bottom: 0.2em;
+	padding-bottom: 0.2em;
 }
 
 .social-network-icon {
-    max-width: 2em;
-    margin: 0.2em;
-    margin-top: 0.5em;
+	max-width: 2em;
+	margin: 0.2em;
+	margin-top: 0.5em;
 }
 
 #newsletter-form {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    flex-direction: column;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	flex-direction: column;
 }
 
 .newsletter-input {
-    background-color: var(--transparent);
-    color: var(--white);
-    border: 0px;
-    border-bottom: var(--white) solid 1px;
+	background-color: var(--transparent);
+	color: var(--white);
+	border: 0px;
+	border-bottom: var(--white) solid 1px;
 }
 
 .newsletter-input,
 #newsletter-button {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
 }
 
 #newsletter-button {
-    width: 70%;
-    margin-top: 0.5em;
-    border: 0px;
-    color: var(--white);
-    background-color: var(--black);
+	width: 70%;
+	margin-top: 0.5em;
+	border: 0px;
+	color: var(--white);
+	background-color: var(--black);
 }
 
 #copyright {
-    padding-top: 1em;
-    border-top: solid 1px #ebebeb;
+	padding-top: 1em;
+	border-top: solid 1px #ebebeb;
 }
