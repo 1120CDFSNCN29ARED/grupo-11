@@ -1,33 +1,35 @@
-let path = require('path');
-const fs = require('fs');
-
-
-const toThousand = (n) => {return n.toLocaleString("es-AR", {maximumFractionDigits: 0})}
+const productoRepository = require("../repositories/productoRepository");
 
 module.exports = {
-
 	carrito: (req, res) => {
-		res.render('carrito', {
-			titulo: "Carrito de Compras"
+		res.render("carrito", {
+			titulo: "Carrito de Compras",
 		});
 	},
 
-	index: (req, res) => {
-		const productos = GetFileData('productos.json');
+	index: async (req, res) => {
+		let novedades = await productoRepository.ObtenerNovedades();
+		let masVendidos = await productoRepository.ObtenerMasVendidos()
+
 		let seccionesProductos = [
-			{titulo: "Mas vendidos", productos: productos.filter(x => x.masVendido)},
-			{titulo: "Novedades", productos: productos.filter(x => x.novedades)}
+			{
+				titulo: "Mas vendidos",
+				productos: masVendidos
+			},
+			{
+				titulo: "Novedades",
+				productos: novedades
+			}
 		];
-		res.render('index', {
+
+		return res.render("index", {
 			seccionesProductos,
 			toThousand,
-			titulo: "Guitar Shop"
+			titulo: "Guitar Shop",
 		});
 	},
 };
 
-function GetFileData(fileName) {
-	const fileRoute = path.resolve(__dirname, '../database/' + fileName)
-	const data = fs.readFileSync(fileRoute, { encoding: "utf-8" });
-	return JSON.parse(data);
+const toThousand = (n) => {
+	return parseFloat(n).toLocaleString("es-AR", { maximumFractionDigits: 2 });
 }

@@ -10,13 +10,13 @@
 }
 
 .carrito {
-	width:100%;
+	width: 100%;
 	padding: 10px;
 }
 
 .icono-carrito {
 	padding: 0px 10px;
-	border:none;
+	border: none;
 	font-size: 20px;
 }
 
@@ -25,7 +25,7 @@
 }
 
 .descripcion-contenedor {
-	width:45%;
+	width: 45%;
 	padding: 0px 10px;
 }
 
@@ -53,14 +53,14 @@
 
 .caracteristica {
 	text-align: center;
-}              
+}
 
 .detalle {
 	text-align: center;
 	font-size: 10px;
 }
 
-.precio  {
+.precio {
 	text-align: center;
 	font-size: 18px;
 	color: blue;
@@ -73,7 +73,7 @@
 
 	.carrito {
 		display: flex;
-		justify-content:space-around;
+		justify-content: space-around;
 		align-items: center;
 		width: 45%;
 	}

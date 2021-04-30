@@ -1,53 +1,53 @@
 main {
-    display: flex;
-    justify-content:center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 main form {
-    margin: 20px auto;
-    padding: 20px 30px;
-    background-color:gray;
+	margin: 20px auto;
+	padding: 20px 30px;
+	background-color: gray;
 }
 
 main form div {
-    padding: 10px 0px;
+	padding: 10px 0px;
 }
 
 main form input {
-    border: none;
-    width: 100%;
+	border: none;
+	width: 100%;
 }
 
-main form input, main form button {
-    padding: 5px 10px;
-    border-radius: 12px;
-    font-weight: bold;
+main form input,
+main form button {
+	padding: 5px 10px;
+	border-radius: 12px;
+	font-weight: bold;
 }
 
 #registrarse {
-    margin-left: 15px;
+	margin-left: 15px;
 }
 
 main form div#button {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 main #google-facebook {
-    display:flex;
-    justify-content: space-around;
-    padding:10px 0 0;
+	display: flex;
+	justify-content: space-around;
+	padding: 10px 0 0;
 }
 
 main #google-facebook img {
-    height: 30px;
+	height: 30px;
 }
 
 #recordar {
-    display: flex;
-    font-weight: bold;
-    align-items: center;
-    width: 40%;
+	display: flex;
+	font-weight: bold;
+	align-items: center;
+	width: 40%;
 }
-

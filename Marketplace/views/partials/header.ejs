@@ -1,78 +1,78 @@
 <header>
-    <section id="site-header" class="top-header flex-container">
-        <!-- Ícono de Hamburguesa (Categorías) ----->
-        <div id="menu-button-container" class="flex-container">
-            <i onclick="desplegable('menu-categorias')" class="fas fa-bars" id="categoria-button"></i>
-            <div id="menu-categorias" class="dropdown-content">
-                <% for (let n of locals.categoriasDeProductos) { %> 
-                    <a href="<%= n.link %>" class="menu-options"><%= n.nombre %></a>
-                <% } %>
-            </div>
-        </div>
-        <!-- Opción de búsqueda rápida ------------------------>
-        <div id="search-container" class="flex-container">
-            <form action="/" method="GET" class="flex-container" id="search-form">
-                <input type="text" name="search-value" id="search-value">
-                <button type="submit" id="search-button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
-        </div>
-        <!-- Imagen de la Guitarra --------------------------------->
-        <div id="logo-container" class="flex-container">
-            <a href="/" class="flex-container">
-                <img src="/images/varios/logo.svg" alt="Logo guitar shop" id="logo">
-            </a>
-        </div>
-        <!-- Logo de Carrito de Compras ---------------------------->
-        <div id="shop-cart-container" class="flex-container">
-            <a href="/carrito" class="flex-container">
-                <button id="shop-cart-button">
-                    <i class="fas fa-shopping-basket"></i>
-                </button>
-            </a>    
-        </div>
-        <!-- Logo de Usuario o Avatar ------------------------------>
-        <div id="profile-container" class="flex-container">
-            <% if(locals.isLogged) { %>
-                <img
-                    src="/images/users/<%= locals.usuarioLogeado.imagen %>"
-                    onclick="desplegable('menu-usuario')"
-                    class="boton-desplegable"
-                    id="imagenUsuario"
-                >
-            <% } else { %>
-                <i
-                    onclick="desplegable('menu-usuario')"
-                    class="boton-desplegable fas fa-user" id="profile-button"
-                >
-                </i>
-            <% } %>
-            <!--<i onclick="desplegable('menu-usuario')" class="fas fa-user" id="profile-button"></i>-->
-            <div id="menu-usuario" class="dropdown-content">
-                <% if (locals.isLogged) { %>
-                    <a href="/usuario/detalle">Detalle de Usuario</a>
-                    <a href="/usuario/logout">Logout</a>
-                <% } else { %>
-                    <a href="/usuario/login">Login</a>
-                    <a href="/usuario/crear">Registrarse</a>
-                <% } %>
-            </div>
-        </div>
-    </section>
+	<section id="site-header" class="top-header flex-container">
+		<!-- Ícono de Hamburguesa (Categorías) ----->
+		<div id="menu-button-container" class="flex-container">
+			<i onclick="desplegable('menu-categorias')" class="fas fa-bars" id="categoria-button"></i>
+			<div id="menu-categorias" class="dropdown-content">
+				<% for (let n of locals.categoriasDeProductos) { %> 
+					<a href="<%= n.link %>" class="menu-options"><%= n.nombre %></a>
+				<% } %>
+			</div>
+		</div>
+		<!-- Opción de búsqueda rápida ------------------------>
+		<div id="search-container" class="flex-container">
+			<form action="/" method="GET" class="flex-container" id="search-form">
+				<input type="text" name="search-value" id="search-value">
+				<button type="submit" id="search-button">
+					<i class="fas fa-search"></i>
+				</button>
+			</form>
+		</div>
+		<!-- Imagen de la Guitarra --------------------------------->
+		<div id="logo-container" class="flex-container">
+			<a href="/" class="flex-container">
+				<img src="/images/varios/logo.svg" alt="Logo guitar shop" id="logo">
+			</a>
+		</div>
+		<!-- Logo de Carrito de Compras ---------------------------->
+		<div id="shop-cart-container" class="flex-container">
+			<a href="/carrito" class="flex-container">
+				<button id="shop-cart-button">
+					<i class="fas fa-shopping-basket"></i>
+				</button>
+			</a>    
+		</div>
+		<!-- Logo de Usuario o Avatar ------------------------------>
+		<div id="profile-container" class="flex-container">
+			<% if(locals.isLogged) { %>
+				<img
+					src="/images/users/<%= locals.usuarioLogeado.avatar %>"
+					onclick="desplegable('menu-usuario')"
+					class="boton-desplegable"
+					id="imagenUsuario"
+				>
+			<% } else { %>
+				<i
+					onclick="desplegable('menu-usuario')"
+					class="boton-desplegable fas fa-user" id="profile-button"
+				>
+				</i>
+			<% } %>
+			<!--<i onclick="desplegable('menu-usuario')" class="fas fa-user" id="profile-button"></i>-->
+			<div id="menu-usuario" class="dropdown-content">
+				<% if (locals.isLogged) { %>
+					<a href="/usuario/detalle">Detalle de Usuario</a>
+					<a href="/usuario/logout">Logout</a>
+				<% } else { %>
+					<a href="/usuario/login">Login</a>
+					<a href="/usuario/crear">Registrarse</a>
+				<% } %>
+			</div>
+		</div>
+	</section>
 </header>
 
 <script>
-    // When the user clicks on the button, toggle between hiding and showing the dropdown content
-    function desplegable(n) {document.getElementById(n).classList.toggle("mostrar");}
-    
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
-      if (!event.target.matches('.boton-desplegable')) {
-        let dropdowns = document.getElementsByClassName("dropdown-content");
-        for (let n of dropdowns) {
-          n.classList.remove('mostrar');
-        }
-      }
-    }
+	// When the user clicks on the button, toggle between hiding and showing the dropdown content
+	function desplegable(n) {document.getElementById(n).classList.toggle("mostrar");}
+	
+	// Close the dropdown if the user clicks outside of it
+	window.onclick = function(event) {
+	  if (!event.target.matches('.boton-desplegable')) {
+		let dropdowns = document.getElementsByClassName("dropdown-content");
+		for (let n of dropdowns) {
+		  n.classList.remove('mostrar');
+		}
+	  }
+	}
 </script>
