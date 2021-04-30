@@ -13,7 +13,6 @@ module.exports = {
         const usuarios = await entidad.findAll({
             where: {
                 email: email,
-                borrado: false
             }
         });
 
