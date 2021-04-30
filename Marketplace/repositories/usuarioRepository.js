@@ -12,7 +12,7 @@ module.exports = {
     ObtenerPorEmail: async (email) => {
         const usuarios = await entidad.findAll({
             where: {
-                email: email,
+                email: email
             }
         });
 
