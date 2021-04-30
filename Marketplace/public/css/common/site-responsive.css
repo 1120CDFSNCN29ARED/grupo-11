@@ -1,80 +1,80 @@
 /* MEDIA QUERY */
 @media (min-width: 768px) {
-    #site-footer {
-        padding-left: 2em;
-    }
+	#site-footer {
+		padding-left: 2em;
+	}
 
-    #logo-container {
-        order: -1;
-        width: 25%;
-    }
+	#logo-container {
+		order: -1;
+		width: 25%;
+	}
 
-    #categoria-button {
-        font-size: 2em;
-    }
+	#categoria-button {
+		font-size: 2em;
+	}
 
-    #search-value {
-        display: initial;
-    }
+	#search-value {
+		display: initial;
+	}
 
-    .menu-options {
-        text-decoration: none;
-        color: var(--white);
-        font-weight: bold;
-        font-size: 0.9rem;
-        line-height: 1rem;
-    }
+	.menu-options {
+		text-decoration: none;
+		color: var(--white);
+		font-weight: bold;
+		font-size: 0.9rem;
+		line-height: 1rem;
+	}
 
-    #search-container {
-        width: 30%;
-    }
+	#search-container {
+		width: 30%;
+	}
 
-    #shop-cart-container,
-    #profile-container {
-        width: 5%;
-    }
+	#shop-cart-container,
+	#profile-container {
+		width: 5%;
+	}
 
-    #search-form {
-        width: 100%;
-        padding-left: 2em;
-    }
+	#search-form {
+		width: 100%;
+		padding-left: 2em;
+	}
 
-    #search-value {
-        width: 90%;
-    }
+	#search-value {
+		width: 90%;
+	}
 
-    #search-button {
-        padding-left: 0.5em;
-    }
+	#search-button {
+		padding-left: 0.5em;
+	}
 
-    #footer-main-section {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-        max-height: 20em;
-    }
+	#footer-main-section {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		max-height: 20em;
+	}
 
-    #information,
-    #social-networks {
-        height: 60%;
-    }
+	#information,
+	#social-networks {
+		height: 60%;
+	}
 
-    #newsletter {
-        max-width: 40%;
-    }
+	#newsletter {
+		max-width: 40%;
+	}
 }
 
 @media (min-width: 1200px) {
-    #footer-main-section {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: space-around;
-    }
+	#footer-main-section {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: space-around;
+	}
 
-    #information,
-    #social-networks,
-    #newsletter {
-        width: 30%;
-    }
+	#information,
+	#social-networks,
+	#newsletter {
+		width: 30%;
+	}
 }
