@@ -11,18 +11,14 @@ module.exports = {
     },
     ObtenerPorEmail: async (email) => {
         const usuarios = await entidad.findAll({
-            where: {
-                email: email
-            }
+            where: {email: email}
         });
 
         return usuarios[0];
     },
     EmailYaExistente: async (email, id) => {
         let cantidad = await entidad.count({
-            where: {
-                email: email,
-            }
+            where: {email: email}
         });
 
         return cantidad > 0;
