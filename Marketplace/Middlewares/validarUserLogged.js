@@ -1,16 +1,14 @@
-const fs = require("fs");
-let path = require("path");
+const usuarioRepository = require("../repositories/usuarioRepository");
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
     res.locals.isLogged = false;
 
-    let emailInCookie = req.cookies.userEmail;
-    let usersFilePath = path.join(__dirname, "../database/usuarios.json");
-    let BD = GetFileObject(usersFilePath);
-    let userFromCookie = mailEnBD(emailInCookie, BD);
-
-    if (userFromCookie) {
-        req.session.userLogged = userFromCookie;
+    if (req.cookies.recordar) {
+        let userFromCookie = await usuarioRepository.ObtenerPorEmail(req.cookies.recordar);
+    
+        if (userFromCookie) {
+            req.session.usuarioLogeado = userFromCookie;
+        }
     }
 
     if (req.session.usuarioLogeado) {
@@ -20,12 +18,3 @@ module.exports = (req, res, next) => {
 
     next();
 };
-
-function mailEnBD(texto, BD) {
-    let usuario = BD.find((n) => n.email === texto);
-    return usuario;
-}
-
-function GetFileObject(filePath) {
-    return JSON.parse(fs.readFileSync(filePath, "utf-8"));
-}

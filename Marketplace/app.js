@@ -4,10 +4,10 @@ const session = require("express-session");
 const cookies = require("cookie-parser");
 const path = require("path");
 const methodOverride = require("method-override");
-const fs = require("fs");
 const app = express();
 const cookieRecordar = require("./Middlewares/cookieRecordar");
 const validarUserLogged = require("./middlewares/validarUserLogged");
+const categoriaRepository = require("./repositories/categoriaRepository");
 
 // ************ Middlewares ************
 app.use(
@@ -20,14 +20,12 @@ app.use(methodOverride("_method")); // Para poder usar el method="POST" en el fo
 app.use(express.urlencoded({ extended: false })); // Para poder subir una imagen o un archivo
 app.use(express.json()); // ¿Para poder usar los métodos de JSON, para leer y guardar?
 app.use(validarUserLogged); // Para tener actualizada constantemente la variable res.locals.isLogged
-
-// ************ Variables **************
-function GetFileObject(filePath) {
-    return JSON.parse(fs.readFileSync(filePath, "utf-8"));
-}
-app.locals.categoriasDeProductos = GetFileObject(
-    "./database/categoriasDeProductos.json"
-);
+app.use(async (req, res, next) => {
+    if (!app.locals.categoriasDeProductos) {
+        app.locals.categoriasDeProductos = await categoriaRepository.ObtenerTodas();
+    }
+    next();
+});
 
 // ************ Carpetas de views **********
 app.set("view engine", "ejs");
