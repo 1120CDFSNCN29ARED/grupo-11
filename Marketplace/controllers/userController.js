@@ -18,26 +18,26 @@ module.exports = {
     crearGuardar: async (req, res) => {
         // Validar campos en general
         let validaciones = validationResult(req);
-
+		// Validar contraseña con contraseña2
         if (req.body.contrasena != req.body.contrasena2) {
             validaciones.errors.push({
                 msg: errorRepeticionContrasena,
                 param: "contrasena2",
             });
         }
-
+		// Verificar si el mail ya existe en la BD
         if (await usuarioRepository.ObtenerPorEmail(req.body.email)) {
             validaciones.errors.push({
                 msg: errorEmailRegistrado,
                 param: "email",
             });
         }
-
+		// Si hay errores de validación...
         if (validaciones.errors.length > 0) {
+			// Borrar el archivo de imagen
             if (req.file) {
                 BorrarArchivoDeImagen(req.file.filename);
             }
-
             // Regresar al formulario de crear
             return res.render("usuario-crear", {
                 errores: validaciones.mapped(),
@@ -45,12 +45,12 @@ module.exports = {
                 titulo: "Registro",
             });
         }
-        
+        // Si no hubieron errores de validación...
+		// Crear el usuario
         const usuario = await usuarioRepository.Crear(req.body, req.file.filename);
-
-        // Inciar session
+        // Iniciar la sesión
         req.session.usuarioLogeado = usuario;
-
+		// Redirigir al Detalle de Usuario
         res.redirect("/usuario/detalle");
     },
     detalle: async (req, res) => {
