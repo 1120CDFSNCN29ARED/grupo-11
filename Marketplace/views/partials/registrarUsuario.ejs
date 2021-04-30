@@ -1,148 +1,148 @@
 <!-- Grupo Nombre -->
 <section class="box">
-    <label for="nombre" class="titulo">Nombre</label>
-    <div class="formulario-grupo-input">
-        <input type="text" class="input" name="nombre" placeholder="Ingrese su nombre"
-            value="<%= locals.oldData ? oldData.nombre : null %>">
-        <% if (locals.errores) { %>
-            <% if (errores.nombre) { %>
-                <i class="fas fa-times-circle"></i>
-            <% } else { %>
-                <i class="fas fa-check-circle"></i>
-            <% } %>
-        <% } %>
-    </div>
-    <% if (locals.errores && errores.nombre) { %>
-        <p class="criterio input-error"><%= errores.nombre.msg %></p>
-    <% } %>
+	<label for="nombre" class="titulo">Nombre</label>
+	<div class="formulario-grupo-input">
+		<input type="text" class="input" name="nombre" placeholder="Ingrese su nombre"
+			value="<%= locals.oldData ? oldData.nombre : null %>">
+		<% if (locals.errores) { %>
+			<% if (errores.nombre) { %>
+				<i class="fas fa-times-circle"></i>
+			<% } else { %>
+				<i class="fas fa-check-circle"></i>
+			<% } %>
+		<% } %>
+	</div>
+	<% if (locals.errores && errores.nombre) { %>
+		<p class="criterio input-error"><%= errores.nombre.msg %></p>
+	<% } %>
 </section>
 
 <!-- Grupo Apellido -->
 <section class="box">
-    <label for="apellido" class="titulo">Apellido</label>
-    <div class="formulario-grupo-input">
-        <input type="text" class="input" name="apellido" placeholder="Ingrese su apellido"
-            value="<%= locals.oldData ? oldData.apellido : null %>">
-        <% if (locals.errores) { %>
-            <% if (errores.apellido) { %>
-                <i class="fas fa-times-circle"></i>
-            <% } else { %>
-                <i class="fas fa-check-circle"></i>
-            <% } %>
-        <% } %>
-    </div>
-    <% if (locals.errores && errores.apellido) { %>
-        <p class="criterio input-error"><%= errores.apellido.msg %></p>
-    <% } %>
+	<label for="apellido" class="titulo">Apellido</label>
+	<div class="formulario-grupo-input">
+		<input type="text" class="input" name="apellido" placeholder="Ingrese su apellido"
+			value="<%= locals.oldData ? oldData.apellido : null %>">
+		<% if (locals.errores) { %>
+			<% if (errores.apellido) { %>
+				<i class="fas fa-times-circle"></i>
+			<% } else { %>
+				<i class="fas fa-check-circle"></i>
+			<% } %>
+		<% } %>
+	</div>
+	<% if (locals.errores && errores.apellido) { %>
+		<p class="criterio input-error"><%= errores.apellido.msg %></p>
+	<% } %>
 </section>
 
 <!-- Grupo Email -->
 <section class="box">
-    <label for="email" class="titulo">Correo Electrónico</label>
-    <div class="formulario-grupo-input">
-        <input type="text" class="input" name="email" placeholder="Ingrese su Correo Electrónico"
-            value="<%= locals.oldData ? oldData.email : null %>">
-        <% if (locals.errores) { %>
-            <% if (errores.email) { %>
-                <i class="fas fa-times-circle"></i>
-            <% } else { %>
-                <i class="fas fa-check-circle"></i>
-            <% } %>
-        <% } %>
-    </div>
-    <% if (locals.errores && errores.email) { %>
-        <p class="criterio input-error"><%= errores.email.msg %></p>
-    <% } %>
+	<label for="email" class="titulo">Correo Electrónico</label>
+	<div class="formulario-grupo-input">
+		<input type="text" class="input" name="email" placeholder="Ingrese su Correo Electrónico"
+			value="<%= locals.oldData ? oldData.email : null %>">
+		<% if (locals.errores) { %>
+			<% if (errores.email) { %>
+				<i class="fas fa-times-circle"></i>
+			<% } else { %>
+				<i class="fas fa-check-circle"></i>
+			<% } %>
+		<% } %>
+	</div>
+	<% if (locals.errores && errores.email) { %>
+		<p class="criterio input-error"><%= errores.email.msg %></p>
+	<% } %>
 </section>
 
 <!-- Grupo Imagen de perfil -->
 <section class="box">
-    <label for="imagen" class="titulo">Imagen de perfil</label>
-    <div class="formulario-grupo-input">
-        <input type="file" class="input" name="imagen">
-        <% if (locals.errores) { %>
-            <% if (errores.imagen) { %>
-                <i class="fas fa-times-circle"></i>
-            <% } else { %>
-                <i class="fas fa-check-circle"></i>
-            <% } %>
-        <% } %>
-    </div>
-    <% if (locals.errores && errores.imagen) { %>
-        <p class="criterio input-error"><%= errores.imagen.msg %></p>
-    <% } else { %>
-        <p class="criterio">Tienes que subir una imagen</p>
-    <% } %>
+	<label for="imagen" class="titulo">Imagen de perfil</label>
+	<div class="formulario-grupo-input">
+		<input type="file" class="input" name="imagen">
+		<% if (locals.errores) { %>
+			<% if (errores.imagen) { %>
+				<i class="fas fa-times-circle"></i>
+			<% } else { %>
+				<i class="fas fa-check-circle"></i>
+			<% } %>
+		<% } %>
+	</div>
+	<% if (locals.errores && errores.imagen) { %>
+		<p class="criterio input-error"><%= errores.imagen.msg %></p>
+	<% } else { %>
+		<p class="criterio">Tienes que subir una imagen</p>
+	<% } %>
 </section>
 
 <!-- Grupo Contraseña -->
 <section class="box">
-    <label for="contrasena" class="titulo">Contraseña</label>
-    <div class="formulario-grupo-input">
-        <input type="password" class="input" name="contrasena" id="contrasena"
-            value="<%= locals.oldData ? oldData.contrasena : null %>">
-        <i onclick="mostrar('contrasena')" class="fas fa-eye-slash" id="eye"></i>
-        <% if (locals.errores) { %>
-            <% if (errores.contrasena) { %>
-                <i class="fas fa-times-circle"></i>
-            <% } else { %>
-                <i class="fas fa-check-circle"></i>
-            <% } %>
-        <% } %>
-    </div>
-    <% if (locals.errores && errores.contrasena) { %>
-        <p class="criterio input-error"><%= errores.contrasena.msg %></p>
-    <% } else { %>
-        <% if (!locals.errores) { %>
-            <p class="criterio">La contraseña debe tener de 6 a 12 caracteres</p>
-        <% } %>
-    <% } %>
+	<label for="contrasena" class="titulo">Contraseña</label>
+	<div class="formulario-grupo-input">
+		<input type="password" class="input" name="contrasena" id="contrasena"
+			value="<%= locals.oldData ? oldData.contrasena : null %>">
+		<i onclick="mostrar('contrasena')" class="fas fa-eye-slash" id="eye"></i>
+		<% if (locals.errores) { %>
+			<% if (errores.contrasena) { %>
+				<i class="fas fa-times-circle"></i>
+			<% } else { %>
+				<i class="fas fa-check-circle"></i>
+			<% } %>
+		<% } %>
+	</div>
+	<% if (locals.errores && errores.contrasena) { %>
+		<p class="criterio input-error"><%= errores.contrasena.msg %></p>
+	<% } else { %>
+		<% if (!locals.errores) { %>
+			<p class="criterio">La contraseña debe tener de 6 a 12 caracteres</p>
+		<% } %>
+	<% } %>
 </section>
 
 <!-- Grupo Repetir Contraseña -->
 <section class="box">
-    <label for="contrasena2" class="titulo">Repita su Contraseña</label>
-    <div class="formulario-grupo-input">
-        <input type="password" class="input" name="contrasena2" id="contrasena2"
-            value="<%= locals.oldData ? oldData.contrasena2 : null %>">
-        <i onclick="mostrar('contrasena2')" class="fas fa-eye-slash" id="eye"></i>
-        <% if (locals.errores) { %>
-            <% if (errores.contrasena2) { %>
-                <i class="fas fa-times-circle"></i>
-            <% } else { %>
-                <i class="fas fa-check-circle"></i>
-            <% } %>
-        <% } %>
-    </div>
-    <% if (locals.errores && errores.contrasena2) { %>
-        <p class="criterio input-error"><%= errores.contrasena2.msg %></p>
-    <% } %>
+	<label for="contrasena2" class="titulo">Repita su Contraseña</label>
+	<div class="formulario-grupo-input">
+		<input type="password" class="input" name="contrasena2" id="contrasena2"
+			value="<%= locals.oldData ? oldData.contrasena2 : null %>">
+		<i onclick="mostrar('contrasena2')" class="fas fa-eye-slash" id="eye"></i>
+		<% if (locals.errores) { %>
+			<% if (errores.contrasena2) { %>
+				<i class="fas fa-times-circle"></i>
+			<% } else { %>
+				<i class="fas fa-check-circle"></i>
+			<% } %>
+		<% } %>
+	</div>
+	<% if (locals.errores && errores.contrasena2) { %>
+		<p class="criterio input-error"><%= errores.contrasena2.msg %></p>
+	<% } %>
 </section>
 
 <script>
-    function mostrar(id) {
-        var cambio = document.getElementById(id);
-        if(cambio.type == "password"){
-            cambio.type = "text";$('#eye').removeClass('fa-eye-slash').addClass('fa-eye');
-        }else{
-            cambio.type = "password";$('#eye').removeClass('fa-eye').addClass('fa-eye-slash');
-        }
-    }
+	function mostrar(id) {
+		var cambio = document.getElementById(id);
+		if(cambio.type == "password"){
+			cambio.type = "text";$('#eye').removeClass('fa-eye-slash').addClass('fa-eye');
+		}else{
+			cambio.type = "password";$('#eye').removeClass('fa-eye').addClass('fa-eye-slash');
+		}
+	}
 </script>
 
 <!-- Submit -->
 <section id="boton-registro">
-    <button class="button" type="submit">Envíe los datos</button>
-    <div class="contenedor-redes">
-        <a href="https://www.facebook.com/">
-            <button class="redes-sociales">
-                <i class="fab fa-facebook-square"></i>
-            </button>
-        </a>
-        <a href="https://accounts.google.com/">
-            <button class="redes-sociales">
-                <i class="fab fa-google"></i>
-            </button>
-        </a>
-    </div>    
+	<button class="button" type="submit">Envíe los datos</button>
+	<div class="contenedor-redes">
+		<a href="https://www.facebook.com/">
+			<button class="redes-sociales">
+				<i class="fab fa-facebook-square"></i>
+			</button>
+		</a>
+		<a href="https://accounts.google.com/">
+			<button class="redes-sociales">
+				<i class="fab fa-google"></i>
+			</button>
+		</a>
+	</div>    
 </section>
