@@ -18,11 +18,6 @@ module.exports = {
 	crearGuardar: async (req, res) => {
 		// Validar campos en general
 		let validaciones = validationResult(req);
-		return res.send([
-			validaciones,
-			req.body,
-			req.file
-		])
 		// Validar contraseña con contraseña2
 		if (req.body.contrasena != req.body.contrasena2) {
 			validaciones.errors.push({
