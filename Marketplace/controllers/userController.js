@@ -8,7 +8,7 @@ const { validationResult } = require("express-validator");
 // Archivos y Paths ****************************
 const imagesPath = path.join(__dirname, "../public/images/users/");
 const errorRepeticionContrasena = "Ambas contraseñas deben coincidir";
-const errorEmailRegistrado = "Este mail ya esta registrado";
+const errorEmailRegistrado = "Este mail ya está registrado";
 
 // Controlador ********************************
 module.exports = {
@@ -77,7 +77,9 @@ module.exports = {
 			});
 		}
 		// Revisar si el email ya existe para otro usuario
-		if (await usuarioRepository.EmailYaExistente(req.body.email, req.session.usuarioLogeado.id)) {
+		var usuario = await usuarioRepository.ObtenerPorEmail(req.session.usuarioLogeado.email)
+		let revisarMail = await usuarioRepository.ObtenerPorEmail(req.body.email)
+		if (revisarMail && revisarMail.id != usuario.id) {
 			validaciones.errors.push({
 				msg: errorEmailRegistrado,
 				param: "email",
@@ -85,10 +87,7 @@ module.exports = {
 		}
 		// Acciones a tomar si existe algún error de validación
 		if (validaciones.errors.length) {
-			if (req.file) {
-				BorrarArchivoDeImagen(req.file.filename);
-			}
-			let usuario = await usuarioRepository.ObtenerPorId(req.session.usuarioLogeado.id);
+			if (req.file) {BorrarArchivoDeImagen(req.file.filename)}
 			return res.render("usuario-editar", {
 				usuario,
 				errores: validaciones.mapped(),
@@ -99,7 +98,6 @@ module.exports = {
 		// Acciones a tomar si NO existe ningún error de validación
 		let fileName = req.file ? req.file.filename : await usuarioRepository.ObtenerAvatar(req.session.usuarioLogeado.id);
 		await usuarioRepository.Actualizar(req.session.usuarioLogeado.id, req.body, fileName);
-
 		res.redirect("/usuario/detalle");
 	},
 	eliminar: async (req, res) => {
@@ -110,35 +108,25 @@ module.exports = {
 		res.render("login", { titulo: "Login" });
 	},
 	loginGrabar: async (req, res) => {
-		let errores = validationResult(req);
-		if (errores.isEmpty()) {
-			let usuario = await usuarioRepository.ObtenerPorEmail(req.body.email);
-			// Verificar si además coincide la contraseña
-			if (usuario == undefined ||
-				!bcryptjs.compareSync(req.body.contrasena, usuario.contrasena))
-			{
-				return res.render("login", {
-					errores: [
-						{ msg: "Correo electronico y/o contraseña incorrecta" },
-					],
-					titulo: "Login",
-					oldData: req.body,
-				});
-			}
-			// Iniciar session
-			req.session.usuarioLogeado = usuario;
-			// Cookies
-			if (req.body.recordar != undefined) {
-				res.cookie("recordar", usuario.email, { maxAge: 60000 });
-			}
-			res.redirect("/usuario/detalle");
-		} else {
+		let validaciones = validationResult(req);
+		if (validaciones.isEmpty()) {
+			// Verificar si el mail y la contraseña pertenecen a un usuario
+			var usuario = await usuarioRepository.ObtenerPorEmail(req.body.email);
+			if (usuario) {var contrasenaOK = bcryptjs.compareSync(req.body.contrasena, usuario.contrasena)}
+			if (!contrasenaOK) {validaciones.errors.push({msg: "Credenciales inválidas"})}
+		}
+		if (!validaciones.isEmpty()) {
 			return res.render("login", {
-				errores: errores.array(),
+				errores: validaciones.array(),
 				titulo: "Login",
 				oldData: req.body,
 			});
 		}
+		// Iniciar session
+		req.session.usuarioLogeado = usuario;
+		// Cookies
+		if (req.body.recordar != undefined) {res.cookie("recordar", usuario.email, { maxAge: 60000 });}
+		res.redirect("/usuario/detalle");
 	},
 	logout: (req, res) => {
 		res.clearCookie("recordar");

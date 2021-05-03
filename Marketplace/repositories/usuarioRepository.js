@@ -9,19 +9,10 @@ module.exports = {
 			include: [ "roles" ]
 		});
 	},
-	ObtenerPorEmail: async (email) => {
-		const usuarios = await entidad.findAll({
+	ObtenerPorEmail: (email) => {
+		return entidad.findOne({
 			where: {email: email}
 		});
-
-		return usuarios[0];
-	},
-	EmailYaExistente: async (email, id) => {
-		let cantidad = await entidad.count({
-			where: {email: email}
-		});
-
-		return cantidad > 0;
 	},
 	Crear: (infoUsuario, fileName) => {
 		return entidad.create({
