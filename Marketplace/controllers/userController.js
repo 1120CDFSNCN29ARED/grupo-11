@@ -106,10 +106,10 @@ module.exports = {
 		await EliminarUsuario(req.session.usuarioLogeado.id);
 		res.redirect("/usuario/logout");
 	},
-	login: (req, res) => {
+	loginForm: (req, res) => {
 		res.render("login", { titulo: "Login" });
 	},
-	logeo: async (req, res) => {
+	loginGrabar: async (req, res) => {
 		let errores = validationResult(req);
 		if (errores.isEmpty()) {
 			let usuario = await usuarioRepository.ObtenerPorEmail(req.body.email);
