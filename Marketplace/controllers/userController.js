@@ -69,21 +69,21 @@ module.exports = {
 	},
 	editarGuardar: async (req, res) => {
 		let validaciones = validationResult(req);
-
+		// Revisar si las contraseñas coinciden
 		if (req.body.contrasena != req.body.contrasena2) {
 			validaciones.errors.push({
 				msg: errorRepeticionContrasena,
 				param: "contrasena2",
 			});
 		}
-
+		// Revisar si el email ya existe para otro usuario
 		if (await usuarioRepository.EmailYaExistente(req.body.email, req.session.usuarioLogeado.id)) {
 			validaciones.errors.push({
 				msg: errorEmailRegistrado,
 				param: "email",
 			});
 		}
-
+		// Acciones a tomar si existe algún error de validación
 		if (validaciones.errors.length) {
 			if (req.file) {
 				BorrarArchivoDeImagen(req.file.filename);
@@ -96,7 +96,7 @@ module.exports = {
 				titulo: "Editar el Usuario",
 			});
 		}
-
+		// Acciones a tomar si NO existe ningún error de validación
 		let fileName = req.file ? req.file.filename : await usuarioRepository.ObtenerAvatar(req.session.usuarioLogeado.id);
 		await usuarioRepository.Actualizar(req.session.usuarioLogeado.id, req.body, fileName);
 
