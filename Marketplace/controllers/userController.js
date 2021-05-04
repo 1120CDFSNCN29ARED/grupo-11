@@ -96,10 +96,10 @@ module.exports = {
 			});
 		}
 		// Acciones a tomar si NO existe ningún error de validación
-		// 1. Si se cambio de avatar, borrar el archivo de imagen original
+		// 1. Si se cambió de avatar, borrar el archivo de imagen original
 		req.file ? BorrarArchivoDeImagen(usuario.avatar) : null
 		// 2. Asignarle a una variable el nombre del arhivo de imagen
-		let fileName = req.file ? req.file.filename : await usuarioRepository.ObtenerAvatar(req.session.usuarioLogeado.id);
+		let fileName = req.file ? req.file.filename : usuario.avatar;
 		// 3. Actualizar el registro en la BD
 		await usuarioRepository.Actualizar(req.session.usuarioLogeado.id, req.body, fileName);
 		// 4. Redireccionar
