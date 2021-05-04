@@ -87,9 +87,7 @@ module.exports = {
 		}
 		// Acciones a tomar si existe algún error de validación
 		if (validaciones.errors.length) {
-			if (req.file) {
-				BorrarArchivoDeImagen(req.file.filename);
-			}
+			req.file ? BorrarArchivoDeImagen(req.file.filename) : null
 			return res.render("usuario-editar", {
 				usuario,
 				errores: validaciones.mapped(),
@@ -98,8 +96,13 @@ module.exports = {
 			});
 		}
 		// Acciones a tomar si NO existe ningún error de validación
+		// 1. Si se cambio de avatar, borrar el archivo de imagen original
+		req.file ? BorrarArchivoDeImagen(usuario.avatar) : null
+		// 2. Asignarle a una variable el nombre del arhivo de imagen
 		let fileName = req.file ? req.file.filename : await usuarioRepository.ObtenerAvatar(req.session.usuarioLogeado.id);
+		// 3. Actualizar el registro en la BD
 		await usuarioRepository.Actualizar(req.session.usuarioLogeado.id, req.body, fileName);
+		// 4. Redireccionar
 		res.redirect("/usuario/detalle");
 	},
 	eliminar: async (req, res) => {
@@ -114,12 +117,8 @@ module.exports = {
 		if (validaciones.isEmpty()) {
 			// Verificar si el mail y la contraseña pertenecen a un usuario
 			var usuario = await usuarioRepository.ObtenerPorEmail(req.body.email);
-			if (usuario) {
-				var contrasenaOK = bcryptjs.compareSync(req.body.contrasena, usuario.contrasena)
-			}
-			if (!usuario || !contrasenaOK) {
-				validaciones.errors.push({msg: "Credenciales inválidas"})
-			}
+			usuario ? contrasenaOK = bcryptjs.compareSync(req.body.contrasena, usuario.contrasena) : null
+			!usuario || !contrasenaOK ? validaciones.errors.push({msg: "Credenciales inválidas"}): null
 		}
 		if (!validaciones.isEmpty()) {
 			return res.render("login", {
@@ -131,7 +130,7 @@ module.exports = {
 		// Iniciar session
 		req.session.usuarioLogeado = usuario;
 		// Cookies
-		if (req.body.recordar != undefined) {res.cookie("recordar", usuario.email, { maxAge: 60000 });}
+		req.body.recordar != undefined ? res.cookie("recordar", usuario.email, { maxAge: 60 * 60 * 1000 }) : null
 		res.redirect("/usuario/detalle");
 	},
 	logout: (req, res) => {
