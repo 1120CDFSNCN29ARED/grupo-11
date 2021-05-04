@@ -87,7 +87,9 @@ module.exports = {
 		}
 		// Acciones a tomar si existe algún error de validación
 		if (validaciones.errors.length) {
-			if (req.file) {BorrarArchivoDeImagen(req.file.filename)}
+			if (req.file) {
+				BorrarArchivoDeImagen(req.file.filename)
+			}
 			return res.render("usuario-editar", {
 				usuario,
 				errores: validaciones.mapped(),
