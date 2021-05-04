@@ -4,14 +4,14 @@
 	<main>
 		<form action="/usuario/login" method="POST">
 			<div>
-			<% if(typeof errores != 'undefined'){ %>
-				<p style="color: red">ERROR</p>
-				<ul>
-					<% for(let i = 0; i < errores.length; i++){ %>
-						<li><%=errores[i].msg%></li>  
-					<%}%>
-				</ul>
-			<%}%>
+				<% if(typeof errores != 'undefined'){ %>
+					<p style="color: red">ERROR</p>
+					<ul>
+						<% for(let i = 0; i < errores.length; i++){ %>
+							<li><%=errores[i].msg%></li>  
+						<%}%>
+					</ul>
+				<%}%>
 			</div>
 			<div><!--Dirección de mail-->
 				<input type="text" name="email" placeholder="Dirección de mail"
