@@ -8,7 +8,7 @@ const { validationResult } = require("express-validator");
 // Archivos y Paths ****************************
 const imagesPath = path.join(__dirname, "../public/images/users/");
 const errorRepeticionContrasena = "Ambas contraseñas deben coincidir";
-const errorEmailRegistrado = "Este mail ya esta registrado";
+const errorEmailRegistrado = "Este mail ya está registrado";
 
 // Controlador ********************************
 module.exports = {
