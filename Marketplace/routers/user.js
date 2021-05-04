@@ -18,8 +18,8 @@ router.get("/detalle", soloUsuarios, userController.detalle);
 router.get("/editar", soloUsuarios, userController.editarForm);
 router.put("/editar", uploadFile.single("imagen"), validarUsuario, validarImagen, userController.editarGuardar);
 router.delete("/eliminar", soloUsuarios, userController.eliminar);
-router.get("/login", soloVisitas, userController.login);
-router.post("/login", validarLogin, userController.logeo);
+router.get("/login", soloVisitas, userController.loginForm);
+router.post("/login", validarLogin, userController.loginGrabar);
 router.get("/logout", soloUsuarios, userController.logout);
 
 module.exports = router;
