@@ -115,7 +115,9 @@ module.exports = {
 			if (usuario) {
 				var contrasenaOK = bcryptjs.compareSync(req.body.contrasena, usuario.contrasena)
 			}
-			if (!usuario || !contrasenaOK) {validaciones.errors.push({msg: "Credenciales inválidas"})}
+			if (!usuario || !contrasenaOK) {
+				validaciones.errors.push({msg: "Credenciales inválidas"})
+			}
 		}
 		if (!validaciones.isEmpty()) {
 			return res.render("login", {
