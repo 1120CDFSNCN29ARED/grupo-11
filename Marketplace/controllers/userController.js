@@ -68,6 +68,7 @@ module.exports = {
 		});
 	},
 	editarGuardar: async (req, res) => {
+		var usuario = await usuarioRepository.ObtenerPorId(req.session.usuarioLogeado.id);
 		let validaciones = validationResult(req);
 		// Revisar si las contraseñas coinciden
 		if (req.body.contrasena != req.body.contrasena2) {
@@ -115,8 +116,9 @@ module.exports = {
 		if (validaciones.isEmpty()) {
 			// Verificar si el mail y la contraseña pertenecen a un usuario
 			var usuario = await usuarioRepository.ObtenerPorEmail(req.body.email);
-			usuario ? contrasenaOK = bcryptjs.compareSync(req.body.contrasena, usuario.contrasena) : null
-			!usuario || !contrasenaOK ? validaciones.errors.push({msg: "Credenciales inválidas"}): null
+			if (usuario == undefined || !bcryptjs.compareSync(req.body.contrasena, usuario.contrasena)) {
+				validaciones.errors.push({msg: "Credenciales inválidas"})
+			}
 		}
 		if (!validaciones.isEmpty()) {
 			return res.render("login", {
