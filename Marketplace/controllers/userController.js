@@ -96,7 +96,7 @@ module.exports = {
 			});
 		}
 		// Acciones a tomar si NO existe ningún error de validación
-		// 1. Si se cambió de avatar, borrar el archivo de imagen original
+		// 1. Si se cambió de avatar, borrar el original
 		req.file ? BorrarArchivoDeImagen(usuario.avatar) : null
 		// 2. Asignarle a una variable el nombre del arhivo de imagen
 		let fileName = req.file ? req.file.filename : usuario.avatar;
