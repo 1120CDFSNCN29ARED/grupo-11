@@ -77,9 +77,7 @@ module.exports = {
 			});
 		}
 		// Revisar si el email ya existe para otro usuario
-		var usuario = await usuarioRepository.ObtenerPorEmail(req.session.usuarioLogeado.email)
-		let revisarMail = await usuarioRepository.ObtenerPorEmail(req.body.email)
-		if (revisarMail && revisarMail.id != usuario.id) {
+		if (await usuarioRepository.EmailYaExistente(req.body.email, req.session.usuarioLogeado.id)) {
 			validaciones.errors.push({
 				msg: errorEmailRegistrado,
 				param: "email",

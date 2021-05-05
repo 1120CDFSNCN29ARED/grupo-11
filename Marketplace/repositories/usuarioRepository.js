@@ -14,6 +14,15 @@ module.exports = {
 			where: {email: email}
 		});
 	},
+	EmailYaExistente: async (email, id) => {
+		let cantidad = await entidad.count({
+			where: {
+				id: {[Op.ne]: id},
+				email: email,
+			}
+		});
+		return cantidad > 0;
+	},
 	Crear: (infoUsuario, fileName) => {
 		return entidad.create({
 			nombre: infoUsuario.nombre,
