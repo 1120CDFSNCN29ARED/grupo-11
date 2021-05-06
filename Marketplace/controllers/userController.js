@@ -78,7 +78,7 @@ module.exports = {
 			});
 		}
 		// Revisar si el email ya existe para otro usuario
-		if (await usuarioRepository.EmailYaExistente(req.body.email, req.session.usuarioLogeado.id)) {
+		if (await usuarioRepository.EmailYaExistente(req.body.email, usuario.id)) {
 			validaciones.errors.push({
 				msg: errorEmailRegistrado,
 				param: "email",
@@ -99,8 +99,8 @@ module.exports = {
 		req.file ? BorrarArchivoDeImagen(usuario.avatar) : null
 		// 2. Asignarle a una variable el nombre del arhivo de imagen
 		let fileName = req.file ? req.file.filename : usuario.avatar;
-		// 3. Actualizar el registro en la BD
-		await usuarioRepository.Actualizar(req.session.usuarioLogeado.id, req.body, fileName);
+		// 3. Actualizar el registro en la BD y req.session.usuario
+		req.session.usuarioLogeado = await usuarioRepository.Actualizar(usuario.id, req.body, fileName);
 		// 4. Redireccionar
 		res.redirect("/usuario/detalle");
 	},
