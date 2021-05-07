@@ -8,7 +8,7 @@ const { validationResult } = require("express-validator");
 // Archivos y Paths ****************************
 const imagesPath = path.join(__dirname, "../public/images/users/");
 const errorRepeticionContrasena = "Ambas contraseñas deben coincidir";
-const errorEmailRegistrado = "Este mail ya esta registrado";
+const errorEmailRegistrado = "Este mail ya está registrado";
 
 // Controlador ********************************
 module.exports = {
@@ -68,27 +68,25 @@ module.exports = {
 		});
 	},
 	editarGuardar: async (req, res) => {
+		var usuario = await usuarioRepository.ObtenerPorId(req.session.usuarioLogeado.id);
 		let validaciones = validationResult(req);
-
+		// Revisar si las contraseñas coinciden
 		if (req.body.contrasena != req.body.contrasena2) {
 			validaciones.errors.push({
 				msg: errorRepeticionContrasena,
 				param: "contrasena2",
 			});
 		}
-
-		if (await usuarioRepository.EmailYaExistente(req.body.email, req.session.usuarioLogeado.id)) {
+		// Revisar si el email ya existe para otro usuario
+		if (await usuarioRepository.EmailYaExistente(req.body.email, usuario.id)) {
 			validaciones.errors.push({
 				msg: errorEmailRegistrado,
 				param: "email",
 			});
 		}
-
+		// Acciones a tomar si existe algún error de validación
 		if (validaciones.errors.length) {
-			if (req.file) {
-				BorrarArchivoDeImagen(req.file.filename);
-			}
-			let usuario = await usuarioRepository.ObtenerPorId(req.session.usuarioLogeado.id);
+			req.file ? BorrarArchivoDeImagen(req.file.filename) : null
 			return res.render("usuario-editar", {
 				usuario,
 				errores: validaciones.mapped(),
@@ -96,10 +94,14 @@ module.exports = {
 				titulo: "Editar el Usuario",
 			});
 		}
-
-		let fileName = req.file ? req.file.filename : await usuarioRepository.ObtenerAvatar(req.session.usuarioLogeado.id);
-		await usuarioRepository.Actualizar(req.session.usuarioLogeado.id, req.body, fileName);
-
+		// Acciones a tomar si NO existe ningún error de validación
+		// 1. Si se cambió de avatar, borrar el original
+		req.file ? BorrarArchivoDeImagen(usuario.avatar) : null
+		// 2. Asignarle a una variable el nombre del arhivo de imagen
+		let fileName = req.file ? req.file.filename : usuario.avatar;
+		// 3. Actualizar el registro en la BD y req.session.usuario
+		req.session.usuarioLogeado = await usuarioRepository.Actualizar(usuario.id, req.body, fileName);
+		// 4. Redireccionar
 		res.redirect("/usuario/detalle");
 	},
 	eliminar: async (req, res) => {
@@ -110,35 +112,26 @@ module.exports = {
 		res.render("login", { titulo: "Login" });
 	},
 	loginGrabar: async (req, res) => {
-		let errores = validationResult(req);
-		if (errores.isEmpty()) {
-			let usuario = await usuarioRepository.ObtenerPorEmail(req.body.email);
-			// Verificar si además coincide la contraseña
-			if (usuario == undefined ||
-				!bcryptjs.compareSync(req.body.contrasena, usuario.contrasena))
-			{
-				return res.render("login", {
-					errores: [
-						{ msg: "Correo electronico y/o contraseña incorrecta" },
-					],
-					titulo: "Login",
-					oldData: req.body,
-				});
+		let validaciones = validationResult(req);
+		if (validaciones.isEmpty()) {
+			// Verificar si el mail y la contraseña pertenecen a un usuario
+			var usuario = await usuarioRepository.ObtenerPorEmail(req.body.email);
+			if (usuario == undefined || !bcryptjs.compareSync(req.body.contrasena, usuario.contrasena)) {
+				validaciones.errors.push({msg: "Credenciales inválidas"})
 			}
-			// Iniciar session
-			req.session.usuarioLogeado = usuario;
-			// Cookies
-			if (req.body.recordar != undefined) {
-				res.cookie("recordar", usuario.email, { maxAge: 60000 });
-			}
-			res.redirect("/usuario/detalle");
-		} else {
+		}
+		if (!validaciones.isEmpty()) {
 			return res.render("login", {
-				errores: errores.array(),
+				errores: validaciones.array(),
 				titulo: "Login",
 				oldData: req.body,
 			});
 		}
+		// Iniciar session
+		req.session.usuarioLogeado = usuario;
+		// Cookies
+		req.body.recordar != undefined ? res.cookie("recordar", usuario.email, { maxAge: 60 * 60 * 1000 }) : null
+		res.redirect("/usuario/detalle");
 	},
 	logout: (req, res) => {
 		res.clearCookie("recordar");
