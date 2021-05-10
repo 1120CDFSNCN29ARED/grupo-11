@@ -27,7 +27,10 @@
 	<% if (titulo == "Editar el Usuario") { %><link rel="stylesheet" href="/css/users/usuario-editar.css"><% } %>
 	<% if (titulo == "Alta de Producto") { %><link rel="stylesheet" href="/css/products/producto-crear.css"><% } %>
 	<% if (titulo == "Detalle del Producto") { %><link rel="stylesheet" href="/css/products/producto-detalle.css"><% } %>
-	<% if (titulo == "Editar el Producto") { %><link rel="stylesheet" href="/css/products/producto-editar.css"><% } %>
+	<% if (titulo == "Editar el Producto") { %>
+		<link rel="stylesheet" href="/css/products/producto-editar.css">
+		<link rel="stylesheet" href="/css/products/validacionesProducto.css">
+	<% } %>
 	
 	<!-- Título de la página -->
 	<title><%= titulo %></title>
