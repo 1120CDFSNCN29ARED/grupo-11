@@ -1,9 +1,9 @@
 // Requires ***********************************
 const productoRepository = require("../repositories/productoRepository");
+const imagenesRepository = require("../repositories/imagenRepository");
 const fs = require("fs");
 const path = require("path");
 const { validationResult } = require("express-validator");
-const imagenesRepository = require("../repositories/imagenRepository");
 const imagesPath = path.join(__dirname, "../public/images/products/");
 
 // Controlador ********************************
