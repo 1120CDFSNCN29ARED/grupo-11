@@ -1,9 +1,9 @@
 // Requires ***********************************
 const usuarioRepository = require("../repositories/usuarioRepository");
 const fs = require("fs");
-let path = require("path");
-const bcryptjs = require("bcryptjs");
+const path = require("path");
 const { validationResult } = require("express-validator");
+const bcryptjs = require("bcryptjs");
 
 // Archivos y Paths ****************************
 const imagesPath = path.join(__dirname, "../public/images/users/");

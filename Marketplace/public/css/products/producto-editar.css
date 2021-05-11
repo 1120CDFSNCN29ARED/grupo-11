@@ -9,6 +9,16 @@ main form {
 	padding: 20px 30px;
 	background-color: gray;
 	border-radius: 10px;
+	width: 700px;
+}
+
+main form .textarea {
+	margin: 10px auto 20px;
+	justify-content: center;
+}
+
+.secciones {
+	justify-content: space-between;
 }
 
 main form .modulo {
@@ -31,15 +41,10 @@ main form label {
 	color: honeydew;
 }
 
-main form input {
+main .formInput,
+main form button {
 	border: none;
 	color: dimgray;
-}
-
-main form input,
-main form button,
-main form select,
-main form textarea {
 	padding: 5px 10px;
 	border-radius: 10px;
 	font-weight: bold;
@@ -52,7 +57,19 @@ main form #button {
 }
 
 main form input,
-main form select,
-main form textarea {
-	width: 300px;
+main form select {
+	width: 180px;
 }
+
+main form textarea {
+	width: 400px;
+}
+
+/* Botón de imagen*/
+input#inputImagen {display:none}
+form #labelImagen {color: var(--azul); background-color: rgb(255, 255, 255);}
+form #divImagen label {cursor: pointer; margin-right: 0px; line-height: normal;}
+
+/* Imagen */
+form #divImagen {width: 200px;align-items: flex-start;	padding: 10px 0px;}
+#preview img {border-radius: 15px; max-width: 200px; max-height: 150px;}
