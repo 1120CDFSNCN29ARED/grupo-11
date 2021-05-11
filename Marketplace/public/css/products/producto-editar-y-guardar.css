@@ -1,4 +1,4 @@
-main {
+	main {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -9,12 +9,12 @@ main form {
 	padding: 20px 30px;
 	background-color: gray;
 	border-radius: 10px;
-	width: 700px;
+	width: 600px;
 }
 
 main form .textarea {
-	margin: 10px auto 20px;
-	justify-content: center;
+	margin: 20px auto 20px;
+	justify-content: flex-start;
 }
 
 .secciones {
@@ -26,7 +26,7 @@ main form .modulo {
 	flex-direction: row;
 	align-items: flex-start;
 	justify-content: space-between;
-	padding: 10px 0px;
+	padding: 20px 0px 0px;
 }
 
 main form h1 {
@@ -62,10 +62,10 @@ main form select {
 }
 
 main form textarea {
-	width: 400px;
+	width: 450px;
 }
 
-/* Botón de imagen*/
+/* Botón de imagen */
 input#inputImagen {display:none}
 form #labelImagen {color: var(--azul); background-color: rgb(255, 255, 255);}
 form #divImagen label {cursor: pointer; margin-right: 0px; line-height: normal;}
@@ -73,3 +73,8 @@ form #divImagen label {cursor: pointer; margin-right: 0px; line-height: normal;}
 /* Imagen */
 form #divImagen {width: 200px;align-items: flex-start;	padding: 10px 0px;}
 #preview img {border-radius: 15px; max-width: 200px; max-height: 150px;}
+
+.fa-times-circle {
+	color: white; 
+	font-weight: normal
+}

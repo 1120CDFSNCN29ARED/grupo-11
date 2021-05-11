@@ -1,8 +1,9 @@
 window.addEventListener("load", () => {
-	document.getElementById("inputImagen").onchange = function(e) {
+	document.getElementById("inputImagen").onchange = (e) => {
 		// Ocultar y mostrar elementos
 		document.getElementById("labelImagen").classList.add("ocultar")
-		document.getElementById("iconoImagenRojo").classList.add("ocultar")
+		document.getElementById("imagen").classList.add("ocultar")
+		document.getElementById("error-imagen-be").classList.add("ocultar")
 		// Creamos el objeto de la clase FileReader
 		let reader = new FileReader();
 		// Leemos el archivo subido y se lo pasamos a nuestro fileReader

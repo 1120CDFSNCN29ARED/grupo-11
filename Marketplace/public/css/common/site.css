@@ -42,3 +42,6 @@ body {
 .mostrar {
 	display: block;
 }
+.ocultar {
+	display: none;
+}

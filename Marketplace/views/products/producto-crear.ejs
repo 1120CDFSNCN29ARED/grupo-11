@@ -10,13 +10,21 @@
 						<label for="nombre">Nombre:</label>
 						<input name="nombre" type="text" id="nombre" class="formInput" 
 							value="<%= locals.oldData ? oldData.nombre : null %>">
-						<% if (locals.errores && errores.nombre) { %><i class="fas fa-times-circle"></i><% } %>
+					</div>
+					<div  id="error-nombre-be">
+						<% if (locals.errores && errores.nombre) { %>
+							<i class="fas fa-times-circle"> <%= errores.nombre.msg %></i>
+						<% } %>	
 					</div>
 					<div class="modulo">
 						<label for="precio">Precio:</label>
 						<input name="precio" type="text" id="precio" class="formInput" 
 							value="$ <%= locals.oldData ? toThousand(oldData.precio) : null %>">
-						<% if (locals.errores && errores.precio) { %><i class="fas fa-times-circle"></i><% } %>
+					</div>
+					<div id="error-precio-be">
+						<% if (locals.errores && errores.precio) { %>
+							<i class="fas fa-times-circle"> <%= errores.precio.msg %></i>
+						<% } %>	
 					</div>
 					<div class="modulo">
 						<label for="categoria" class="form-label">Categoría:</label>
@@ -31,14 +39,17 @@
 					</div>
 				</section>
 				<section>
-					<label>Imagen:</label>
-					<div class="flex-col" id="divImagen">
-						<label for="inputImagen" id="preview"></label>
-						<label for="inputImagen" class="formInput" id="labelImagen">Subí una imagen</label>
-						<input name="imagen" type="file" id="inputImagen" accept="image/*">
+					<div class="modulo">
+						<label id="imagen">Imagen:</label>
+						<div class="" id="divImagen">
+							<label for="inputImagen" id="preview"></label>
+							<label for="inputImagen" class="formInput" id="labelImagen">Subí una imagen</label>
+							<input name="imagen" type="file" id="inputImagen" accept="image/*">
+						</div>
+					</div>
+					<div id="error-imagen-be">
 						<% if (locals.errores && errores.imagen) { %>
-							<i class="fas fa-times-circle"></i>
-							<span class="mensajeError"><%= errores.imagen.msg %></span>
+							<i class="fas fa-times-circle"> <%= errores.imagen.msg %></i>
 						<% } %>
 					</div>
 				</section>
