@@ -8,7 +8,6 @@ module.exports = [
 		,
 	body("apellido")
 		.notEmpty().withMessage("Tienes que escribir un apellido").bail()
-		.isAlpha("es-ES").withMessage("Sólo se admiten letras del abecedario castellano").bail()
 		.isLength({ min: 2, max: 20 }).withMessage("El apellido debe ser de 2 a 20 letras").bail()
 		,
 	body("email")
