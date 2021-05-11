@@ -17,9 +17,9 @@
 						<% } %>	
 					</div>
 					<div class="modulo">
-						<label for="precio">Precio:</label>
+						<label for="precio">Precio (AR$):</label>
 						<input name="precio" type="text" id="precio" class="formInput" 
-							value="$ <%= locals.oldData ? toThousand(oldData.precio) : null %>">
+							value="<%= locals.oldData ? toThousand(oldData.precio) : null %>">
 					</div>
 					<div id="error-precio-be">
 						<% if (locals.errores && errores.precio) { %>
@@ -57,7 +57,7 @@
 			</div>
 			<div class="flex-row textarea">
 				<label for="descripcion" class="form-label">Descripción:</label>
-				<textarea name="descripcion" placeholder="Escribir..." id="description" class="formInput"><%= locals.oldData ? producto.descripcion : "" %></textarea>
+				<textarea name="descripcion" placeholder="Escribir..." id="description" class="formInput"><%= locals.oldData ? oldData.descripcion : "" %></textarea>
 			</div>	
 			<div id="button">
 				<button type="submit">Guardar los cambios</button>

@@ -3,7 +3,6 @@ const { body } = require("express-validator");
 module.exports = [
 	body("nombre")
 		.notEmpty().withMessage("Tienes que escribir un nombre").bail()
-		.isAlpha("es-ES").withMessage("Sólo se admiten letras del abecedario castellano").bail()
 		.isLength({ min: 2, max: 30 }).withMessage("El nombre debe ser de 2 a 30 caracteres").bail()
 		,
 	body("precio")

@@ -6,6 +6,7 @@ const { validationResult } = require("express-validator");
 const imagenesRepository = require("../repositories/imagenRepository");
 const imagesPath = path.join(__dirname, "../public/images/products/");
 
+// Controlador ********************************
 module.exports = {
 	crearForm: (req, res) => {
 		let titulo = "Crear un Producto";
@@ -22,14 +23,13 @@ module.exports = {
 			});
 		}
 		// Acciones a tomar si existe algún error de validación
-		let producto = await productoRepository.Crear(req.body, precio, req.session.usuarioLogeado.id);
 		if (validaciones.errors.length) {
 			oldData = {
 				...req.body,
 				precio: precio,
 			}
+			req.file ? BorrarArchivoDeImagen(req.file.filename) : null
 			return res.render("producto-crear", {
-				producto,
 				toThousand,
 				errores: validaciones.mapped(),
 				oldData,
@@ -38,6 +38,7 @@ module.exports = {
 		}
 		// Acciones a tomar si NO existe ningún error de validación
 		// 1. Actualizar el registro en la BD
+		let producto = await productoRepository.Crear(req.body, precio, req.session.usuarioLogeado.id);
 		await imagenesRepository.Crear(req.file.filename, producto.id);
 		// 2. Redireccionar
 		res.redirect("/producto/" + producto.id + "/detalle");
@@ -49,7 +50,7 @@ module.exports = {
 		return res.render("producto-detalle", { producto, toThousand, titulo });
 	},
 	editarForm: async (req, res) => {
-		let titulo = "Editar el Producto";
+		let titulo = "Editar un Producto";
 		let producto = await productoRepository.ObtenerPorId(req.params.id);
 		return res.render("producto-editar", { producto, toThousand, titulo });
 	},
@@ -64,15 +65,15 @@ module.exports = {
 			});
 		};
 		// Acciones a tomar si existe algún error de validación
-		let producto = await productoRepository.ObtenerPorId(req.params.id);
 		if (validaciones.errors.length) {
 			oldData = {
 				...req.body,
 				precio: precio,
 			}
+			req.file ? BorrarArchivoDeImagen(req.file.filename) : null
 			return res.render("producto-editar", {
-				producto,
 				toThousand,
+				producto: {id: req.params.id},
 				errores: validaciones.mapped(),
 				oldData,
 				titulo: "Editar un Producto",
@@ -81,6 +82,7 @@ module.exports = {
 		// Acciones a tomar si NO existe ningún error de validación
 		// 1. Actualizar el registro en la BD
 		await productoRepository.Actualizar(req.params.id, req.body, precio, req.session.usuarioLogeado.id);
+		await imagenesRepository.Actualizar(req.file.filename, req.params.id);
 		// 2. Redireccionar
 		res.redirect("/producto/" + req.params.id + "/detalle");
 	},
@@ -112,4 +114,11 @@ async function EliminarProducto(id, idUsuario) {
 		await imagenesRepository.Eliminar(imagen.id);
 	}
 	await productoRepository.Eliminar(id, idUsuario);
+}
+
+function BorrarArchivoDeImagen(nombreDeArchivo) {
+	let imageFile = path.join(imagesPath, nombreDeArchivo);
+	if (nombreDeArchivo && fs.existsSync(imageFile)) {
+		fs.unlinkSync(imageFile);
+	}
 }
