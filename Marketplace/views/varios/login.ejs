@@ -2,7 +2,7 @@
 <body>
 	<%- include('header') %>
 	<main>
-		<form action="/usuario/login" method="POST">
+		<form action="/usuario/login" method="POST" class="formulario">
 			<div>
 				<% if(typeof errores != 'undefined'){ %>
 					<p style="color: red">ERROR</p>
@@ -13,12 +13,20 @@
 					</ul>
 				<%}%>
 			</div>
-			<div><!--Dirección de mail-->
-				<input type="text" name="email" placeholder="Dirección de mail"
-				value="<%= locals.oldData && oldData.email ? oldData.email : '' %>">
+			<div class="grupo_email"><!--Dirección de mail-->
+				<div class="formulario__grupo-input">
+				     <input type="text" class="formulario__input email" name="email" placeholder="Dirección de mail"
+				      value="<%= locals.oldData && oldData.email ? oldData.email : '' %>">
+				     <i class="formulario__validacion-estado fas fa-times-circle"></i>
+			    </div>
+				<p class="formulario__input-error">Correo Electronico invalido.</p>
 		   </div>
-			<div><!--Contraseña-->
-				<input type="password" name="contrasena" placeholder="Contraseña">
+			<div class="grupo_contrasena"><!--Contraseña-->
+				<div class="formulario__grupo-input">
+				     <input type="password" class="formulario__input contrasena" name="contrasena"  placeholder="Contraseña">
+                     <i class="formulario__validacion-estado fas fa-times-circle"></i>
+				</div>
+				<p class="formulario__input-error">Escriba una contraseña.</p>
 			</div>
 			<div id="recordar">
 				<label>Recordame</label>
@@ -44,5 +52,6 @@
 		</form>
 	</main>
 	<%- include('footer') %>
+	<script src="/javascript/login.js"></script>
 </body>
 </html>
