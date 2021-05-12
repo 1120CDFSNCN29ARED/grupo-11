@@ -1,5 +1,9 @@
 // ************** Requires *************
+<<<<<<< HEAD
 require('dotenv').config();
+=======
+require("dotenv").config();
+>>>>>>> development
 const express = require("express");
 const session = require("express-session");
 const cookies = require("cookie-parser");
