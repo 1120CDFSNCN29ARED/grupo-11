@@ -3,7 +3,6 @@ window.addEventListener("load", () => {
 	let mensaje_error_nombre = document.getElementById("mensaje_error_nombre");
 	let precio = document.getElementById("precio");
 	let mensaje_error_precio = document.getElementById("mensaje_error_precio");
-	//console.log(mensaje_error_precio)
 
 	nombre.oninput = () => {
 		// Borrar el mensaje de Back-End si se cambia el input
