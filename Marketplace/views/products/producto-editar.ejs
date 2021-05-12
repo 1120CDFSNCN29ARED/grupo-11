@@ -19,7 +19,7 @@
 					<div class="modulo">
 						<label for="precio">Precio (AR$):</label>
 						<input name="precio" type="text" id="precio" class="formInput" 
-						value="$ <%= locals.oldData ? toThousand(oldData.precio) : toThousand(producto.precio) %>">
+						value="<%= locals.oldData ? toThousand(oldData.precio) : toThousand(producto.precio) %>">
 					</div>
 					<div id="error-precio-be">
 						<% if (locals.errores && errores.precio) { %>

@@ -28,6 +28,10 @@ module.exports = {
 				...req.body,
 				precio: precio,
 			}
+			validaciones.errors.push({
+				msg: "Tienes que subir una imagen",
+				param: "imagen",
+			});
 			req.file ? BorrarArchivoDeImagen(req.file.filename) : null
 			return res.render("producto-crear", {
 				toThousand,
@@ -70,6 +74,10 @@ module.exports = {
 				...req.body,
 				precio: precio,
 			}
+			validaciones.errors.push({
+				msg: "Tienes que subir una imagen",
+				param: "imagen",
+			});
 			req.file ? BorrarArchivoDeImagen(req.file.filename) : null
 			return res.render("producto-editar", {
 				toThousand,
