@@ -1,4 +1,4 @@
-window.onload = () => {
+window.addEventListener("load", () => {
 	let formInput = document.getElementsByClassName("formInput");
 	for (let i=0; i<formInput.length; i++) {
 		formInput[i].addEventListener("focus", () => {
@@ -8,4 +8,4 @@ window.onload = () => {
 			formInput[i].classList.remove("focus")
 		})
 	}
-}
+})

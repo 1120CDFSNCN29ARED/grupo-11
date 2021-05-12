@@ -79,6 +79,10 @@ form #divImagen {width: 200px;align-items: flex-start;	padding: 10px 0px;}
 	font-weight: normal
 }
 
+.error-fe {
+	color: white;
+}
+
 .focus {
 	background-color: var(--primary-background);
 }
