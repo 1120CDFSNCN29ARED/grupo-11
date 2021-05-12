@@ -18,7 +18,6 @@ window.addEventListener("load", () => {
 			mensaje_error_nombre.classList.remove("fa-times-circle")
 			mensaje_error_nombre.innerHTML = "";
 		}
-		console.log(mensaje_error_nombre);
 	}
 	precio.oninput = () => {
 		// Borrar el mensaje de Back-End si se cambia el input
@@ -33,7 +32,6 @@ window.addEventListener("load", () => {
 			mensaje_error_precio.classList.remove("fa-times-circle")
 			mensaje_error_precio.innerHTML = "";
 		}
-		console.log(mensaje_error_precio);
 	}
 
 	
