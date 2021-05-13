@@ -11,7 +11,7 @@
 						<input name="nombre" type="text" id="nombre" class="formInput" 
 						value="<%= locals.oldData ? oldData.nombre : producto.nombre %>">
 					</div>
-					<div class="error-fe" id="mensaje_error_nombre"></div>
+					<i class="error-fe fas fa-times-circle ocultar" id="mensaje_error_nombre"></i>
 					<div  id="error-nombre-be">
 						<% if (locals.errores && errores.nombre) { %>
 							<i class="fas fa-times-circle"> <%= errores.nombre.msg %></i>
@@ -22,7 +22,7 @@
 						<input name="precio" type="text" id="precio" class="formInput" 
 						value="<%= locals.oldData ? toThousand(oldData.precio) : toThousand(producto.precio) %>">
 					</div>
-					<div class="error-fe" id="mensaje_error_precio"></div>
+					<i class="error-fe fas fa-times-circle ocultar" id="mensaje_error_precio"></i>
 					<div id="error-precio-be">
 						<% if (locals.errores && errores.precio) { %>
 							<i class="fas fa-times-circle"> <%= errores.precio.msg %></i>

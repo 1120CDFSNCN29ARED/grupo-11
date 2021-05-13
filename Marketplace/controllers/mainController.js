@@ -31,5 +31,5 @@ module.exports = {
 };
 
 const toThousand = (n) => {
-	return parseFloat(n).toLocaleString("es-AR", { maximumFractionDigits: 2 });
+	return parseInt(n).toLocaleString("es-AR", { maximumFractionDigits: 0 });
 }

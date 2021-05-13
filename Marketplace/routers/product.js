@@ -11,10 +11,10 @@ const soloUsuarios = require("../middlewares/soloUsuarios");
 
 // Rutas
 router.get("/crear", soloUsuarios, productController.crearForm);
-router.post("/crear", uploadFile.single("imagen"), validarProducto, validarImagen, productController.crearGuardar);
+router.post("/crear", soloUsuarios, uploadFile.single("imagen"), validarProducto, validarImagen, productController.crearGuardar);
 router.get("/:id/detalle", productController.detalle);
 router.get("/:id/editar", soloUsuarios, productController.editarForm);
-router.put("/:id/editar", uploadFile.single("imagen"), validarProducto, validarImagen, productController.editarGuardar);
+router.put("/:id/editar", soloUsuarios, uploadFile.single("imagen"), validarProducto, validarImagen, productController.editarGuardar);
 router.delete("/:id/eliminar", soloUsuarios, productController.eliminar);
 
 module.exports = router;
