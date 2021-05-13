@@ -20,7 +20,7 @@
 					<div class="modulo">
 						<label for="precio">Precio (AR$):</label>
 						<input name="precio" type="text" id="precio" class="formInput" 
-							value="<%= locals.oldData ? (isNaN(oldData.precio) || oldData.precio == "" ? oldData.precio : (oldData.precio)) : (producto.precio) %>">
+							value="<%= locals.oldData ? oldData.precio : producto.precio %>">
 					</div>
 					<i class="error-fe fas fa-times-circle ocultar" id="mensaje_error_precio"></i>
 					<div id="error-precio-be">

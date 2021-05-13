@@ -9,7 +9,7 @@ module.exports = [
 		.isLength({ max: 10 }).withMessage("El precio debe ser más corto").bail()
 		.isNumeric().withMessage("Debés introducir solamente números").bail()
 		.custom((value, { req }) => {
-			let precio = parseFloat(SanitizePrice(req.body.precio));
+			let precio = parseFloat(req.body.precio);
 			if (precio < 100) {
 				throw new Error("El precio debe ser mayor");
 			}
@@ -17,11 +17,3 @@ module.exports = [
 		})
 		,
 ];
-
-function SanitizePrice(priceString) {
-	return priceString
-		.replace(".", "")
-		.replace(",", ".")
-		.replace("$", "")
-		.replace(" ", "");
-}
