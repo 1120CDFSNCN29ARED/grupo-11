@@ -4,6 +4,9 @@ window.addEventListener("load", () => {
 	let precio = document.getElementById("precio");
 	let mensaje_error_precio = document.getElementById("mensaje_error_precio");
 
+	nombre.onkeydown = () => {
+		mensaje_error_nombre.classList.add("ocultar")
+	}
 	nombre.onkeypress = (e) => {
 		if (nombre.value.length >= 30) {
 			e.preventDefault()
@@ -18,9 +21,11 @@ window.addEventListener("load", () => {
 		if (nombre.value.length < 2 || nombre.value.length > 30) {
 			mensaje_error_nombre.classList.remove("ocultar")
 			mensaje_error_nombre.innerHTML = " El nombre debe ser de 2 a 30 caracteres";
-		} else {
-			mensaje_error_nombre.classList.add("ocultar")
-		}
+		} else mensaje_error_nombre.classList.add("ocultar")
+	}
+
+	precio.onkeydown = () => {
+		mensaje_error_precio.classList.add("ocultar")
 	}
 	precio.onkeypress = (e) => {
 		if (precio.value.length >= 10) {
@@ -53,10 +58,7 @@ window.addEventListener("load", () => {
 			mensaje_error_precio.innerHTML = " El precio debe ser mayor"
 		} 
 		// Ocultar errores
-		else {
-			mensaje_error_precio.classList.add("ocultar")
-			mensaje_error_precio.innerHTML = "";
-		}
+		else mensaje_error_precio.classList.add("ocultar")
 	}
 
 	

@@ -13,7 +13,8 @@ module.exports = {
 		res.render("producto-crear", { titulo, toThousand });
 	},
 	crearGuardar: async (req, res) => {
-		let precio = parseFloat(SanitizePrice(req.body.precio));
+		let precio = parseFloat(req.body.precio);
+		// return res.send(precio.toString())
 		let validaciones = validationResult(req);
 		// Acciones a tomar si existe algún error de validación
 		if (validaciones.errors.length) {
@@ -22,9 +23,11 @@ module.exports = {
 				param: "imagen",
 			});
 			req.file ? BorrarArchivoDeImagen(req.file.filename) : null
+			// return res.send([req.body.precio, precio, isNaN(req.body.precio), !!precio])
 			return res.render("producto-crear", {
 				toThousand,
 				errores: validaciones.mapped(),
+				precio,
 				oldData: req.body,
 				titulo: "Crear un Producto",
 			});
@@ -48,7 +51,8 @@ module.exports = {
 		return res.render("producto-editar", { producto, toThousand, titulo });
 	},
 	editarGuardar: async (req, res) => {
-		let precio = parseFloat(SanitizePrice(req.body.precio));
+		let precio = parseFloat(req.body.precio);
+		//return res.send(precio.toString())
 		let validaciones = validationResult(req);
 		// Acciones a tomar si existe algún error de validación
 		if (validaciones.errors.length) {
@@ -62,6 +66,7 @@ module.exports = {
 				producto: {id: req.params.id},
 				errores: validaciones.mapped(),
 				oldData: req.body,
+				precio,
 				titulo: "Editar un Producto",
 			});
 		}
