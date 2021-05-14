@@ -53,6 +53,9 @@
 				<% if (locals.isLogged) { %>
 					<a href="/usuario/detalle">Detalle de Usuario</a>
 					<a href="/usuario/logout">Logout</a>
+					<% if (locals.usuarioLogeado.rol_id == 1) { %>
+						<a href="/producto/crear">Crear Producto</a>
+					<% } %>
 				<% } else { %>
 					<a href="/usuario/login">Login</a>
 					<a href="/usuario/crear">Registrarse</a>

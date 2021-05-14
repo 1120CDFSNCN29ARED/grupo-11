@@ -25,9 +25,13 @@
 	<% if (titulo == "Registro" || titulo == "Editar el Usuario") { %><link rel="stylesheet" href="/css/users/usuario-crear.css"><% } %>
 	<% if (titulo == "Detalle del Usuario") { %><link rel="stylesheet" href="/css/users/usuario-detalle.css"><% } %>
 	<% if (titulo == "Editar el Usuario") { %><link rel="stylesheet" href="/css/users/usuario-editar.css"><% } %>
-	<% if (titulo == "Alta de Producto") { %><link rel="stylesheet" href="/css/products/producto-crear.css"><% } %>
 	<% if (titulo == "Detalle del Producto") { %><link rel="stylesheet" href="/css/products/producto-detalle.css"><% } %>
-	<% if (titulo == "Editar el Producto") { %><link rel="stylesheet" href="/css/products/producto-editar.css"><% } %>
+	<% if (titulo == "Crear un Producto" || titulo == "Editar un Producto") { %>
+		<link rel="stylesheet" href="/css/products/producto-crear-y-editar.css">
+		<script src="/javascript/formatoFormularios.js"></script>
+		<script src="/javascript/validacionesProducto.js"></script>
+		<script src="/javascript/subirImagen.js"></script>
+	<% } %>
 	
 	<!-- Título de la página -->
 	<title><%= titulo %></title>

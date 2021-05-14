@@ -1,7 +1,7 @@
 // Requires ***********************************
 const usuarioRepository = require("../repositories/usuarioRepository");
 const fs = require("fs");
-let path = require("path");
+const path = require("path");
 const bcryptjs = require("bcryptjs");
 const { validationResult } = require("express-validator");
 
