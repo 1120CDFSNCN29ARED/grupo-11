@@ -50,7 +50,7 @@ CREATE TABLE `productos` (
 	`categoria_id` INT UNSIGNED NOT NULL,
 	`marca_id` INT UNSIGNED NOT NULL,
 	`modelo_id` INT UNSIGNED NOT NULL,
-	`precio` DECIMAL(13,2) UNSIGNED NOT NULL,
+	`precio` INT UNSIGNED NOT NULL,
 	`stock_disponible` INT UNSIGNED NOT NULL DEFAULT 0,
 	`mas_vendido` BOOLEAN NOT NULL DEFAULT 0 ,
 	`novedades` BOOLEAN NOT NULL DEFAULT 0,

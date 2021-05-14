@@ -13,26 +13,22 @@ module.exports = {
 		res.render("producto-crear", { titulo, toThousand });
 	},
 	crearGuardar: async (req, res) => {
-		let precio = parseFloat(SanitizePrice(req.body.precio));
+		let precio = parseFloat(req.body.precio);
+		// return res.send(precio.toString())
 		let validaciones = validationResult(req);
-		// Revisar si el precio tiene un valor válido
-		if (!precio) {
-			validaciones.errors.push({
-				msg: "Debés introducir un precio válido",
-				param: "precio",
-			});
-		}
 		// Acciones a tomar si existe algún error de validación
 		if (validaciones.errors.length) {
-			oldData = {
-				...req.body,
-				precio: precio,
-			}
+			validaciones.errors.push({
+				msg: "Tienes que subir una imagen",
+				param: "imagen",
+			});
 			req.file ? BorrarArchivoDeImagen(req.file.filename) : null
+			// return res.send([req.body.precio, precio, isNaN(req.body.precio), !!precio])
 			return res.render("producto-crear", {
 				toThousand,
 				errores: validaciones.mapped(),
-				oldData,
+				precio,
+				oldData: req.body,
 				titulo: "Crear un Producto",
 			});
 		}
@@ -55,27 +51,22 @@ module.exports = {
 		return res.render("producto-editar", { producto, toThousand, titulo });
 	},
 	editarGuardar: async (req, res) => {
-		let precio = parseFloat(SanitizePrice(req.body.precio));
+		let precio = parseFloat(req.body.precio);
+		//return res.send(precio.toString())
 		let validaciones = validationResult(req);
-		// Revisar si el precio tiene un valor válido
-		if (!precio) {
-			validaciones.errors.push({
-				msg: "Debés introducir un precio válido",
-				param: "precio",
-			});
-		};
 		// Acciones a tomar si existe algún error de validación
 		if (validaciones.errors.length) {
-			oldData = {
-				...req.body,
-				precio: precio,
-			}
+			validaciones.errors.push({
+				msg: "Tienes que subir una imagen",
+				param: "imagen",
+			});
 			req.file ? BorrarArchivoDeImagen(req.file.filename) : null
 			return res.render("producto-editar", {
 				toThousand,
 				producto: {id: req.params.id},
 				errores: validaciones.mapped(),
-				oldData,
+				oldData: req.body,
+				precio,
 				titulo: "Editar un Producto",
 			});
 		}
@@ -93,7 +84,7 @@ module.exports = {
 };
 
 const toThousand = (n) => {
-	return parseFloat(n).toLocaleString("es-AR", { maximumFractionDigits: 2 });
+	return parseInt(n).toLocaleString("es-AR", { maximumFractionDigits: 0 });
 }
 
 function SanitizePrice(priceString) {
@@ -104,8 +95,8 @@ function SanitizePrice(priceString) {
 		.replace(" ", "");
 }
 
-async function EliminarProducto(id, idUsuario) {
-	const imagenes = await productoRepository.ObtenerImagenes(id);
+async function EliminarProducto(idProducto, idUsuario) {
+	const imagenes = await productoRepository.ObtenerImagenes(idProducto);
 	for (let imagen of imagenes) {
 		let imageFile = path.join(imagesPath, imagen.ruta);
 		if (fs.existsSync(imageFile)) {
@@ -113,7 +104,7 @@ async function EliminarProducto(id, idUsuario) {
 		}
 		await imagenesRepository.Eliminar(imagen.id);
 	}
-	await productoRepository.Eliminar(id, idUsuario);
+	await productoRepository.Eliminar(idProducto, idUsuario);
 }
 
 function BorrarArchivoDeImagen(nombreDeArchivo) {

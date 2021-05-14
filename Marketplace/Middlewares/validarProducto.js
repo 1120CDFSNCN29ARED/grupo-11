@@ -2,11 +2,18 @@ const { body } = require("express-validator");
 
 module.exports = [
 	body("nombre")
-		.notEmpty().withMessage("Tienes que escribir un nombre").bail()
 		.isLength({ min: 2, max: 30 }).withMessage("El nombre debe ser de 2 a 30 caracteres").bail()
 		,
 	body("precio")
-		.notEmpty().withMessage("Tienes que escribir un precio").bail()
-		.isLength({ min: 2, max: 20 }).withMessage("El precio debe ser de 2 a 20 caracteres").bail()
+		.notEmpty().withMessage("Tenés que escribir un precio").bail()
+		.isLength({ max: 10 }).withMessage("El precio debe ser más corto").bail()
+		.isNumeric().withMessage("Debés introducir solamente números").bail()
+		.custom((value, { req }) => {
+			let precio = parseFloat(req.body.precio);
+			if (precio < 100) {
+				throw new Error("El precio debe ser mayor");
+			}
+			return true;
+		})
 		,
 ];

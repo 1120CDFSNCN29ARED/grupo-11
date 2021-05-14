@@ -32,13 +32,13 @@ module.exports = {
 
 		return producto.imagenes;
 	},
-	Eliminar: (id, usuario) => {
+	Eliminar: (idProducto, idUsuario) => {
 		return entidad.update({
 			borrado: true,
-			actualizado_por: usuario
+			actualizado_por: idUsuario
 		},
 		{
-			where: { id: id },
+			where: { id: idProducto },
 		});
 	},
 	Crear: (infoProducto, precio, usuarioId) => {
