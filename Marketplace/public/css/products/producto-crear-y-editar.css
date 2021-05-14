@@ -1,0 +1,84 @@
+	main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+main form {
+	margin: 20px auto;
+	padding: 20px 30px;
+	background-color: gray;
+	border-radius: 10px;
+	width: 600px;
+}
+
+main form .textarea {
+	margin: 20px auto 20px;
+	justify-content: flex-start;
+}
+
+.secciones {
+	justify-content: space-between;
+}
+
+main form .modulo {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: space-between;
+	padding: 20px 0px 0px;
+}
+
+main form h1 {
+	margin-top: 0;
+	color: beige;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+main form label {
+	color: honeydew;
+}
+
+main .formInput,
+main form button {
+	border: none;
+	color: dimgray;
+	padding: 5px 10px;
+	border-radius: 10px;
+	font-weight: bold;
+	margin-left: 10px;
+}
+
+main form #button {
+	display: flex;
+	justify-content: center;
+}
+
+main form input,
+main form select {
+	width: 180px;
+}
+
+main form textarea {
+	width: 450px;
+}
+
+/* Botón de imagen */
+input#inputImagen {display:none}
+form #labelImagen {color: var(--azul); background-color: rgb(255, 255, 255);}
+form #divImagen label {cursor: pointer; margin-right: 0px; line-height: normal;}
+
+/* Imagen */
+form #divImagen {width: 200px;align-items: flex-start;	padding: 10px 0px;}
+#preview img {border-radius: 15px; max-width: 200px; max-height: 150px;}
+
+.fa-times-circle {
+	color: white;
+	font-weight: normal
+}
+
+.focus {
+	background-color: var(--primary-background);
+}

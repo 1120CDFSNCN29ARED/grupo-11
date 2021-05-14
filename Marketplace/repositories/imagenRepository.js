@@ -8,6 +8,14 @@ module.exports = {
 			producto_id: productoId
 		});
 	},
+	Actualizar: (rutaImagen, productoId) =>{
+		return entidad.update({
+			ruta: rutaImagen,
+		},
+		{
+			where: { id: productoId },
+		});
+	},
 	Eliminar: (id) => {
 		return entidad.destroy({ where: { id: id }, force: true });
 	}
