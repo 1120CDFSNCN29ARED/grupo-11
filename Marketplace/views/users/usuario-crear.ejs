@@ -1,5 +1,6 @@
 <%- include('head') %>
 <script src="/javascript/ojitoContrasena.js"></script>
+<script src="/javascript/usuario-registro-editar.js"></script>
 <body>
 	<%- include('header') %>
 	<main>
@@ -87,7 +88,7 @@
 				<% if (locals.errores && errores.imagen) { %>
 					<p class="criterio input-error"><%= errores.imagen.msg %></p>
 				<% } else { %>
-					<p class="criterio">Tienes que subir una imagen.</p>
+					<p class="criterio ocultar">Tienes que subir una imagen.</p>
 				<% } %>
 			</section>
 
@@ -112,7 +113,7 @@
 					<p class="criterio input-error"><%= errores.contrasena.msg %></p>
 				<% } else { %>
 					<% if (!locals.errores) { %>
-						<p class="criterio">La contraseña debe tener de 6 a 12 caracteres</p>
+						<p class="criterio ocultar">La contraseña debe tener de 6 a 12 caracteres</p>
 					<% } %>
 				<% } %>
 			</section>
@@ -159,7 +160,6 @@
 		</form>
 	</main>
 	<%- include('footer') %>
-	<script src="/javascript/registroUsuario.js"></script>
 </body>
 
 </html>
