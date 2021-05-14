@@ -1,19 +1,8 @@
-const fs = require("fs");
-let path = require("path");
-const usersFilePath = path.join(__dirname, "../database/usuarios.json");
+const usuarioRepository = require("../repositories/usuarioRepository");
 
-module.exports = (req, res, next) => {
-	if (req.cookies && req.cookies.recordar && !req.session.usuariologeado) {
-		let usuarios = GetFileObject(usersFilePath);
-		let usuarioALogearse;
-		usuarioALogearse = usuarios.find(
-			(n) => n.email == req.cookies.recordar
-		);
-		req.session.usuarioLogeado = usuarioALogearse;
+module.exports = async (req, res, next) => {
+	if (req.cookies && req.cookies.recordar && !req.session.usuarioLogeado) {
+		req.session.usuarioLogeado = await usuarioRepository.ObtenerPorEmail(req.cookies.recordar);
 	}
 	next();
 };
-
-function GetFileObject(filePath) {
-	return JSON.parse(fs.readFileSync(filePath, "utf-8"));
-}

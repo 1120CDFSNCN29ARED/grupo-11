@@ -56,7 +56,7 @@ main h1 {
 #formulario .fa-check-circle {
 	color: green;
 }
-#formulario #eye {
+#formulario #eye, #formulario #eye2 {
 	right: 18%;
 }
 

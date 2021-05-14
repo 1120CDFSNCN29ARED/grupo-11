@@ -31,9 +31,17 @@ body {
 	flex-direction: column;
 }
 
+.flex-row {
+	display: flex;
+	flex-direction: row;
+}
+
 .dropdown-content {
 	display: none;
 }
 .mostrar {
 	display: block;
+}
+.ocultar {
+	display: none;
 }

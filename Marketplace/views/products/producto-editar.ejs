@@ -2,30 +2,64 @@
 <body>
 	<%- include('header') %>
 	<main>
-		<form action="/producto/<%= producto.id %>/editar?_method=PUT" method="POST">
-			<div>
-				<label for="nombre">Nombre del producto:</label>
-				<input name="nombre" type="text" id="name" value="<%= producto.nombre %>">
+		<form action="/producto/<%= producto.id %>/editar?_method=PUT" method="POST" enctype="multipart/form-data">
+			<h1>Editar un producto</h1>
+			<div class="flex-row secciones">
+				<section>
+					<div class="modulo">
+						<label for="nombre">Nombre:</label>
+						<input name="nombre" type="text" id="nombre" class="formInput" 
+						value="<%= locals.oldData ? oldData.nombre : producto.nombre %>">
+					</div>
+					<i class="error-fe fas fa-times-circle ocultar" id="mensaje_error_nombre"></i>
+					<div  id="error-nombre-be">
+						<% if (locals.errores && errores.nombre) { %>
+							<i class="fas fa-times-circle"> <%= errores.nombre.msg %></i>
+						<% } %>	
+					</div>
+					<div class="modulo">
+						<label for="precio">Precio (AR$):</label>
+						<input name="precio" type="text" id="precio" class="formInput" 
+							value="<%= locals.oldData ? oldData.precio : producto.precio %>">
+					</div>
+					<i class="error-fe fas fa-times-circle ocultar" id="mensaje_error_precio"></i>
+					<div id="error-precio-be">
+						<% if (locals.errores && errores.precio) { %>
+							<i class="fas fa-times-circle"> <%= errores.precio.msg %></i>
+						<% } %>	
+					</div>
+					<div class="modulo">
+						<label for="categoria" class="form-label">Categoría:</label>
+						<select name="categoria" id="category" class="formInput">
+							<% for (let n of locals.categoriasDeProductos) { %>
+								<option value="<%= n.id %>" 
+									<%= locals.oldData && oldData.categoria == n.id || !locals.oldData && n.id == producto.categoria.id ? "selected" : "" %>>
+									<%= n.nombre %>
+								</option>
+							<% } %>
+						</select>
+					</div>
+				</section>
+				<section>
+					<div class="modulo">
+						<label id="imagen">Imagen:</label>
+						<div class="" id="divImagen">
+							<label for="inputImagen" id="preview"></label>
+							<label for="inputImagen" class="formInput" id="labelImagen">Subí una imagen</label>
+							<input name="imagen" type="file" id="inputImagen" accept="image/*">
+						</div>
+					</div>
+					<div id="error-imagen-be">
+						<% if (locals.errores && errores.imagen) { %>
+							<i class="fas fa-times-circle"> <%= errores.imagen.msg %></i>
+						<% } %>
+					</div>
+				</section>
 			</div>
-			<div>
-				<label for="precio">Precio:</label>
-				<input name="precio" type="text" id="price" value="$ <%= toThousand(producto.precio) %>">
-			</div>
-			<div>
-				<label for="categoria" class="form-label">Categoría:</label>
-				<select name="categoria" id="category" class="form-input">
-					<% for (let categoria of locals.categoriasDeProductos) { %>
-						<option value="<%= categoria.id %>" 
-							<%= categoria.id == producto.categoria.id ? "selected" : "" %>>
-							<%= categoria.nombre %>
-						</option>
-					<% } %>
-				</select>
-			</div>
-			<div>
+			<div class="flex-row textarea">
 				<label for="descripcion" class="form-label">Descripción:</label>
-				<textarea name="descripcion" placeholder="Escribir..." id="description" class="form-input"><%= producto.descripcion %></textarea>
-			</div>
+				<textarea name="descripcion" placeholder="Escribir..." id="description" class="formInput"><%= locals.oldData ? oldData.descripcion : producto.descripcion %></textarea>
+			</div>	
 			<div id="button">
 				<button type="submit">Guardar los cambios</button>
 			</div>
