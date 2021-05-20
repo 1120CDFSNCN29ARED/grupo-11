@@ -52,26 +52,24 @@ module.exports = {
         res.json(respuesta);
     },
 
-	detalle: (req, res) => {
+	detalle: async (req, res) => {
         let listado = null;
-        ID = req.params.id;
-        listado = await modelosProducto.ObtenerPorId(ID);
+        listado = await modelosProducto.ObtenerPorId(req.params.id);
         // *** Proceso de la info ***
-        let producto = [];
-		listado.map(n => {
-            producto.push({
-                id: n.id,
-                nombre: n.nombre,
-                descripcion: n.descripcion,
-                categoria: n.categoria.nombre,
-                marca: n.marcas.nombre,
-                modelo: n.modelos,
-				precio: n.precio,
-				stock: n.stock_disponible,
-				imagenes: n.imagenes,
-				url: "/api/productos/" + n.id,
-            });
-        });
-
+		// Obtener el nombre y URL de las imagenes
+		let aux = []
+		listado.imagenes.map(n => aux.push(n.ruta))
+        let producto = {
+            id: listado.id,
+            nombre: listado.nombre,
+            descripcion: listado.descripcion,
+            categoria: listado.categoria.nombre,
+            marca: listado.marcas.nombre,
+            modelo: listado.modelos.nombre,
+            precio: listado.precio,
+            stock: listado.stock_disponible,
+            imagenes: aux,
+        };
+		res.json(producto);
     },
 }
