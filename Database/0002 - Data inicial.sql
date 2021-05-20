@@ -55,5 +55,5 @@ VALUES
 (5, 5, 'gibson-les-paul.jpg'),
 (6, 6, 'fender-precision.jpg'),
 (7, 7, 'gibson-sg.jpg'),
-(8, 8, 'taylor-210ce-plus.jpg');
-(9, 1, 'Fender-American-Professional-Stratocaster.png')
+(8, 8, 'taylor-210ce-plus.jpg'),
+(9, 1, 'Fender-American-Professional-Stratocaster.png');
