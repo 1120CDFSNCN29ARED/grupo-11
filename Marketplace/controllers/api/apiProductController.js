@@ -9,7 +9,7 @@ module.exports = {
         listado = await modelosProducto.ObtenerTodas();
         // *** PRODUCTOS ***
         let productos = [];
-        listado.map((n) => {
+        listado.map(n => {
             productos.push({
                 id: n.id,
                 nombre: n.nombre,
@@ -24,12 +24,11 @@ module.exports = {
             detalle: productos,
         };
         // *** CATEGORÍAS ***
-        // Listado de categorías
         listado = await modelosCategoria.ObtenerTodas();
         let categorias = [];
-        listado.map((n) => {
+        listado.map(n => {
             let aux = [];
-            n.productos.map((m) => {
+            n.productos.map(m => {
                 aux.push({
 					id: m.id,
                     nombre: m.nombre,
@@ -56,6 +55,6 @@ module.exports = {
     },
 
 	detalle: (req, res) => {
-
+		
 	},
 }
