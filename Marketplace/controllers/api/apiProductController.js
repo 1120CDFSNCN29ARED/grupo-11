@@ -8,9 +8,6 @@ module.exports = {
         let listado = null;
         listado = await modelosProducto.ObtenerTodas();
         // *** PRODUCTOS ***
-        // Cantidad de productos
-        let cantidad = {"cantidad de Productos": listado.length};
-        // Listado de productos
         let productos = [];
         listado.map((n) => {
             productos.push({
@@ -22,7 +19,10 @@ module.exports = {
                 url: "/api/productos/" + n.id,
             });
         });
-		
+        let resumenProductos = {
+            cantidad: listado.length,
+            detalle: productos,
+        };
         // *** CATEGORÍAS ***
         // Listado de categorías
         listado = await modelosCategoria.ObtenerTodas();
@@ -31,18 +31,27 @@ module.exports = {
             let aux = [];
             n.productos.map((m) => {
                 aux.push({
+					id: m.id,
                     nombre: m.nombre,
                     url: "/api/productos/" + m.id,
                 });
             });
             categorias.push({
+				id: n.id,
                 nombre: n.nombre,
-                cantidad: n.productos.length,
+                cantidad_de_productos: n.productos.length,
                 productos: aux,
             });
         });
+        let resumenCategorias = {
+            cantidad: listado.length,
+            detalle: categorias,
+        };
         // *** FINAL ***
-        let respuesta = [cantidad, categorias, productos];
+        let respuesta = {
+            productos: resumenProductos,
+            categorias: resumenCategorias,
+        };
         res.json(respuesta);
     },
 
