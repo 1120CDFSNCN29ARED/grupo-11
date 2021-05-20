@@ -8,12 +8,14 @@ module.exports = {
         // *** PRODUCTOS ***
         let productos = [];
         listado.map(n => {
+			let aux=[]
+            n.imagenes.map(m => aux.push(m.ruta));
             productos.push({
                 id: n.id,
                 nombre: n.nombre,
                 descripcion: n.descripcion,
                 categoria: n.categoria.nombre,
-                imagenes: n.imagenes,
+                imagenes: aux,
                 url: "/api/productos/" + n.id,
             });
         });
