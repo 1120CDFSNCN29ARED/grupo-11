@@ -2,6 +2,11 @@ const db = require("../database/models");
 const entidad = db.Producto;
 
 module.exports = {
+		ObtenerTodas: () => {
+		return entidad.findAll({
+			include: ["imagenes", "categoria", "marcas", "modelos"],
+		});
+	},
 	ObtenerPorId: (id) => {
 		return entidad.findByPk(id, {
 			include: [ "imagenes", "categoria" ]
