@@ -44,7 +44,9 @@ app.listen(3000, () => console.log("Servidor funcionando en puerto 3000..."));
 const rutaMain = require("./routers/main");
 const rutaProducto = require("./routers/product");
 const rutaUsuario = require("./routers/user");
+const rutaAPI = require("./routers/api");
 // **************** Rutas *******************
 app.use("/", rutaMain);
 app.use("/producto", rutaProducto);
 app.use("/usuario", rutaUsuario);
+app.use("/api", rutaAPI);
