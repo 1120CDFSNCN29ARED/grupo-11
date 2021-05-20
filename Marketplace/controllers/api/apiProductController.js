@@ -1,10 +1,10 @@
-const modelosProducto = require("../../repositories/productoRepository");
-const modelosCategoria = require("../../repositories/categoriaRepository");
+const productoRepository = require("../../repositories/productoRepository");
+const categoriaRepository = require("../../repositories/categoriaRepository");
 
 module.exports = {
 	listado: async (req, res) => {
 		let listado = null;
-		listado = await modelosProducto.ObtenerTodas();
+		listado = await productoRepository.ObtenerTodas();
 		// *** PRODUCTOS ***
 		let productos = [];
 		listado.map(n => {
@@ -24,7 +24,7 @@ module.exports = {
 			detalle: productos,
 		};
 		// *** CATEGORÍAS ***
-		listado = await modelosCategoria.ObtenerTodas();
+		listado = await categoriaRepository.ObtenerTodas();
 		let categorias = [];
 		listado.map(n => {
 			let aux = [];
@@ -56,7 +56,7 @@ module.exports = {
 
 	detalle: async (req, res) => {
 		let listado = null;
-		listado = await modelosProducto.ObtenerPorId(req.params.id);
+		listado = await productoRepository.ObtenerPorId(req.params.id);
 		// *** Proceso de la info ***
 		// Obtener el nombre y URL de las imagenes
 		let aux = []
