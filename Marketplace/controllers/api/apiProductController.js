@@ -52,7 +52,7 @@ module.exports = {
             categorias: resumenCategorias,
         };
         res.json(respuesta);
-    },
+	},
 
 	detalle: async (req, res) => {
         let listado = null;
