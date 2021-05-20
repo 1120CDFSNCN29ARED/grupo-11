@@ -1,5 +1,3 @@
-const db = require("../../database/models");
-const entidad = db.Producto;
 const modelosProducto = require("../../repositories/productoRepository");
 const modelosCategoria = require("../../repositories/categoriaRepository");
 
@@ -15,7 +13,7 @@ module.exports = {
                 nombre: n.nombre,
                 descripcion: n.descripcion,
                 categoria: n.categoria.nombre,
-                marca: n.marcas.nombre,
+                imagenes: n.imagenes,
                 url: "/api/productos/" + n.id,
             });
         });
@@ -55,6 +53,25 @@ module.exports = {
     },
 
 	detalle: (req, res) => {
-		
-	},
+        let listado = null;
+        ID = req.params.id;
+        listado = await modelosProducto.ObtenerPorId(ID);
+        // *** Proceso de la info ***
+        let producto = [];
+		listado.map(n => {
+            producto.push({
+                id: n.id,
+                nombre: n.nombre,
+                descripcion: n.descripcion,
+                categoria: n.categoria.nombre,
+                marca: n.marcas.nombre,
+                modelo: n.modelos,
+				precio: n.precio,
+				stock: n.stock_disponible,
+				imagenes: n.imagenes,
+				url: "/api/productos/" + n.id,
+            });
+        });
+
+    },
 }

@@ -9,8 +9,8 @@ module.exports = {
 	},
 	ObtenerPorId: (id) => {
 		return entidad.findByPk(id, {
-			include: [ "imagenes", "categoria" ]
-		});
+            include: ["imagenes", "categoria", "marcas", "modelos"],
+        });
 	},
 	ObtenerNovedades: () => {
 		return entidad.findAll({
