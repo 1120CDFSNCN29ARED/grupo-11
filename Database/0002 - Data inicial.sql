@@ -30,7 +30,7 @@ VALUES
 (8, 4, 'King V');
 
 INSERT INTO categorias (id, nombre)
-VALUES 
+VALUES
 (1, 'Guitarras Clásicas'),
 (2, 'Guitarras Eléctricas'),
 (3, 'Bajos');
