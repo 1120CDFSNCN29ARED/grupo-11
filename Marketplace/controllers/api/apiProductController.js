@@ -3,49 +3,49 @@ const categoriaRepository = require("../../repositories/categoriaRepository");
 
 module.exports = {
 	listado: async (req, res) => {
-		let listado = null;
-		listado = await productoRepository.ObtenerTodas();
+		let data = null;
+		data = await productoRepository.ObtenerTodas();
 		// *** PRODUCTOS ***
 		let productos = [];
-		listado.map(n => {
+		data.map(n => {
 			let aux=[]
 			n.imagenes.map(m => aux.push(m.ruta));
 			productos.push({
-				id: n.id,
-				nombre: n.nombre,
-				descripcion: n.descripcion,
-				categoria: n.categoria.nombre,
-				imagenes: aux,
-				url: "/api/productos/" + n.id,
-			});
+                id: n.id,
+                nombre: n.nombre,
+                descripcion: n.descripcion,
+                categoria: n.categoria.nombre,
+                imagenes: n.imagenes.map((m) => m.ruta),
+                url: "/api/productos/" + n.id,
+                creado: n.creado_en,
+            });
 		});
 		let resumenProductos = {
-			cantidad: listado.length,
+			cantidad: data.length,
 			detalle: productos,
 		};
 		// *** CATEGORÍAS ***
-		listado = await categoriaRepository.ObtenerTodas();
+		data = await categoriaRepository.ObtenerTodas();
 		let categorias = [];
-		listado.map(n => {
-			let aux = [];
-			n.productos.map(m => {
-				aux.push({
-					id: m.id,
-					nombre: m.nombre,
-					url: "/api/productos/" + m.id,
-				});
-			});
+		let aux={}
+		data.map(n => {
 			categorias.push({
 				id: n.id,
 				nombre: n.nombre,
 				cantidad_de_productos: n.productos.length,
-				productos: aux,
+				productos: n.productos.map(m => ({
+					id: m.id,
+					nombre: m.nombre,
+					url: "/api/productos/" + m.id,
+				})),
 			});
+			aux[n.nombre] = n.productos.length
 		});
 		let resumenCategorias = {
-			cantidad: listado.length,
-			detalle: categorias,
-		};
+            cantidad: data.length,
+            detalle: categorias,
+            totales: aux,
+        };
 		// *** FINAL ***
 		let respuesta = {
 			productos: resumenProductos,
@@ -55,23 +55,20 @@ module.exports = {
 	},
 
 	detalle: async (req, res) => {
-		let listado = null;
-		listado = await productoRepository.ObtenerPorId(req.params.id);
+		let data = null;
+		data = await productoRepository.ObtenerPorId(req.params.id);
 		// *** Proceso de la info ***
-		// Obtener el nombre y URL de las imagenes
-		let aux = []
-		listado.imagenes.map(n => aux.push(n.ruta))
 		let producto = {
-			id: listado.id,
-			nombre: listado.nombre,
-			descripcion: listado.descripcion,
-			categoria: listado.categoria.nombre,
-			marca: listado.marcas.nombre,
-			modelo: listado.modelos.nombre,
-			precio: listado.precio,
-			stock: listado.stock_disponible,
-			imagenes: aux,
-		};
+            id: data.id,
+            nombre: data.nombre,
+            descripcion: data.descripcion,
+            categoria: data.categoria.nombre,
+            marca: data.marcas.nombre,
+            modelo: data.modelos.nombre,
+            precio: data.precio,
+            stock: data.stock_disponible,
+            imagenes: data.imagenes.map(n => n.ruta),
+        };
 		res.json(producto);
 	},
 }
