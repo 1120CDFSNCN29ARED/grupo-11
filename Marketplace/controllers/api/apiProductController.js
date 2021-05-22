@@ -27,7 +27,7 @@ module.exports = {
 		// *** CATEGORÍAS ***
 		data = await categoriaRepository.ObtenerTodas();
 		let categorias = [];
-		let aux={}
+		let totales={}
 		data.map(n => {
 			categorias.push({
 				id: n.id,
@@ -39,12 +39,12 @@ module.exports = {
 					url: "/api/productos/" + m.id,
 				})),
 			});
-			aux[n.nombre] = n.productos.length
+			totales[n.nombre] = n.productos.length
 		});
 		let resumenCategorias = {
             cantidad: data.length,
             detalle: categorias,
-            totales: aux,
+            totales: totales,
         };
 		// *** FINAL ***
 		let respuesta = {
