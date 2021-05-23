@@ -2,31 +2,31 @@ const usuarioRepository = require("../../repositories/usuarioRepository");
 
 module.exports = {
 	listado: async (req, res) => {
-        let usuarios = await usuarioRepository.ObtenerTodos();
-        let usuarioRespuesta = usuarios.map(x => {
-            return {
-                id: x.id,
-                nombre: x.nombre,
+		let usuarios = await usuarioRepository.ObtenerTodos();
+		let usuarioRespuesta = usuarios.map(x => {
+			return {
+				id: x.id,
+				nombre: x.nombre,
 				email: x.email
-            }
-        });
-        let respuesta = {
-            meta: {
+			}
+		});
+		let respuesta = {
+			meta: {
 				   TotalUsuarios: usuarios.length,
 				   url: '/api/usuarios'
-			    },
-            data: usuarioRespuesta
-        };
-        res.status(200).json(respuesta);
-    },
+				},
+			data: usuarioRespuesta
+		};
+		res.status(200).json(respuesta);
+	},
 	detalle: async (req, res) => {
 		let usuario = await usuarioRepository.ObtenerPorId(req.params.id);
 		if(usuario != null){
-            let respuesta = {
-                    meta: {
-                        url: '/api/usuarios/' + req.params.id
-                    },
-                    data: {
+			let respuesta = {
+					meta: {
+						url: '/api/usuarios/' + req.params.id
+					},
+					data: {
 						id: usuario.id,
 						nombre: usuario.nombre,
 						apellido: usuario.apellido,
@@ -34,16 +34,16 @@ module.exports = {
 						avatar: usuario.avatar,
 						roles: usuario.roles
 					}
-            };
-            res.status(200).json(respuesta);    
-	    }else{
-		    let respuesta = {
-			        meta: {
-				        url: '/api/usuarios/' + req.params.id
-			        },
-			        data: "id inexistente"
 			};
-            res.status(200).json(respuesta);    
-	    }
+			res.status(200).json(respuesta);    
+		}else{
+			let respuesta = {
+					meta: {
+						url: '/api/usuarios/' + req.params.id
+					},
+					data: "id inexistente"
+			};
+			res.status(200).json(respuesta);    
+		}
 	} 
 };
