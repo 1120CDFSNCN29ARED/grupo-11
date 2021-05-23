@@ -4,7 +4,6 @@ const categoriaRepository = require("../../repositories/categoriaRepository");
 module.exports = {
 	listado: async (req, res) => {
 		let data = null;
-
 		// *** PRODUCTOS ***
 		data = await productoRepository.ObtenerTodas();
 		let productos = [];
@@ -19,12 +18,10 @@ module.exports = {
 				creado: n.creado_en,
 			});
 		});
-
 		// *** CATEGORÍAS ***
 		data = await categoriaRepository.ObtenerTodas();
 		let totales = {};
 		data.map(n => {totales[n.nombre] = n.productos.length});
-
 		// *** FINAL ***
 		let respuesta = {
 			count: productos.length,
@@ -37,7 +34,6 @@ module.exports = {
 	detalle: async (req, res) => {
 		let data = null;
 		data = await productoRepository.ObtenerPorId(req.params.id);
-		// *** Proceso de la info ***
 		let producto = {
 			id: data.id,
 			nombre: data.nombre,
