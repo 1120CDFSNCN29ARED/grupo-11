@@ -9,7 +9,6 @@ module.exports = {
 		let productos = [];
 		data.map(n => {
 			let aux=[]
-			n.imagenes.map(m => aux.push(m.ruta));
 			productos.push({
 				id: n.id,
 				nombre: n.nombre,
