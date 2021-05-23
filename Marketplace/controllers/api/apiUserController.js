@@ -23,25 +23,25 @@ module.exports = {
 		let usuario = await usuarioRepository.ObtenerPorId(req.params.id);
 		if(usuario != null){
 			let respuesta = {
-					meta: {
-						url: '/api/usuarios/' + req.params.id
-					},
-					data: {
-						id: usuario.id,
-						nombre: usuario.nombre,
-						apellido: usuario.apellido,
-						email: usuario.email,
-						avatar: usuario.avatar,
-						roles: usuario.roles
-					}
+				meta: {
+					url: '/api/usuarios/' + req.params.id
+				},
+				data: {
+					id: usuario.id,
+					nombre: usuario.nombre,
+					apellido: usuario.apellido,
+					email: usuario.email,
+					avatar: usuario.avatar,
+					roles: usuario.roles
+				}
 			};
 			res.status(200).json(respuesta);    
 		}else{
 			let respuesta = {
-					meta: {
-						url: '/api/usuarios/' + req.params.id
-					},
-					data: "id inexistente"
+				meta: {
+					url: '/api/usuarios/' + req.params.id
+				},
+				data: "id inexistente"
 			};
 			res.status(200).json(respuesta);    
 		}
