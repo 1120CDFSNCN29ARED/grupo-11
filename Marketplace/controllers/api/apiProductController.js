@@ -8,7 +8,6 @@ module.exports = {
 		// *** PRODUCTOS ***
 		let productos = [];
 		data.map(n => {
-			let aux=[]
 			productos.push({
 				id: n.id,
 				nombre: n.nombre,
