@@ -12,9 +12,9 @@ module.exports = {
 		});
 		let respuesta = {
 			meta: {
-				   TotalUsuarios: usuarios.length,
-				   url: '/api/usuarios'
-				},
+				TotalUsuarios: usuarios.length,
+				url: '/api/usuarios'
+			},
 			data: usuarioRespuesta
 		};
 		res.status(200).json(respuesta);
