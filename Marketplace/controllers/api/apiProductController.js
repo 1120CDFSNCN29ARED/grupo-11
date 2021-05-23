@@ -48,8 +48,11 @@ module.exports = {
 		};
 		// *** FINAL ***
 		let respuesta = {
-			productos: resumenProductos,
-			categorias: resumenCategorias,
+			//productos: resumenProductos,
+			//categorias: resumenCategorias,
+			count: resumenProductos.cantidad,
+			countByCategory: resumenCategorias.totales,
+			products: resumenProductos.detalle,
 		};
 		res.json(respuesta);
 	},
