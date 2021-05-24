@@ -1,13 +1,12 @@
-import Totalizers from './Totalizers';
-import LastProduct from './LastProduct';
+import '../assets/css/mainContainer.css'
+import MainSection from './MainSection';
 import Categories from './Categories';
 import Products from './Products';
 
 function MainContainer() {
   return (
-    <div>
-      <Totalizers />
-      <LastProduct />
+    <div id="main-container">
+      <MainSection />
       <Categories />
       <Products />
     </div>

@@ -1,3 +1,5 @@
+import '../assets/css/topNavBar.css';
+
 function TopNavBar() {
   return (
     <div id="top-nav-bar">
