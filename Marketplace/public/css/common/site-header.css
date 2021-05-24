@@ -92,12 +92,12 @@ header #profile-container {
 }
 
 header .imagenAncha {
-	width: auto;
 	height: 100%;
+	width: auto;
 }
 header .imagenAlta {
-	height: auto;
 	width: 100%;
+	height: auto;
 	position: absolute;
 	top: 0;
 }
