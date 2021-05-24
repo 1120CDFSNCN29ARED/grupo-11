@@ -44,7 +44,7 @@ module.exports = {
 			        },
 			        data: "id inexistente"
 			};
-            res.status(200).json(respuesta);    
-	    }
+			res.status(200).json(respuesta);    
+		}
 	} 
 };
