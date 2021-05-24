@@ -8,7 +8,7 @@ let productsData = [
     Category: 'Guitarra Electrica',
     Brand: 'Fender',
     Model: 'Stratocaster',
-    Price: 100000,
+    Price: '$ 100000',
     Stock: 10
   },
   {
@@ -17,7 +17,7 @@ let productsData = [
     Category: 'Guitarra Electrica',
     Brand: 'Gibson',
     Model: 'Les Paul',
-    Price: 110000,
+    Price: '$ 110000',
     Stock: 5
   }
 ];
@@ -25,7 +25,7 @@ let productsData = [
 function Products() {
   return (
     <div id="products-table-container">
-      <table>
+      <table id="products-table">
         <thead>
           <tr>
             <th>Nombre</th>
