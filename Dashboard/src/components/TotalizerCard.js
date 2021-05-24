@@ -1,4 +1,4 @@
-import '../assets/css/totalizerCard.css'
+import '../assets/css/totalizerCard.css';
 
 function TotalizerCard(props) {
   return (

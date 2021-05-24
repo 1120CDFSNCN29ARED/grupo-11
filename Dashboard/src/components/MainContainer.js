@@ -1,4 +1,4 @@
-import '../assets/css/mainContainer.css'
+import '../assets/css/mainContainer.css';
 import MainSection from './MainSection';
 import Categories from './Categories';
 import Products from './Products';

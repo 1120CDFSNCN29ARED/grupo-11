@@ -1,4 +1,4 @@
-import '../assets/css/totalizer.css'
+import '../assets/css/totalizer.css';
 import TotalizerCard from './TotalizerCard';
 
 let productos = {
