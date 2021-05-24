@@ -2,6 +2,7 @@ import '../assets/css/mainContainer.css';
 import MainSection from './MainSection';
 import Categories from './Categories';
 import Products from './Products';
+import Footer from './Footer';
 
 function MainContainer() {
   return (
@@ -9,6 +10,7 @@ function MainContainer() {
       <MainSection />
       <Categories />
       <Products />
+      <Footer />
     </div>
   );
 }
