@@ -7,7 +7,9 @@ module.exports = {
             return {
                 id: x.id,
                 nombre: x.nombre,
-				email: x.email
+                apellido: x.apellido,
+				email: x.email,
+				detalle: "/api/usuarios/" + x.id
             }
         });
         let respuesta = {
@@ -31,8 +33,7 @@ module.exports = {
 						nombre: usuario.nombre,
 						apellido: usuario.apellido,
 						email: usuario.email,
-						avatar: usuario.avatar,
-						roles: usuario.roles
+						avatar: usuario.avatar					
 					}
             };
             res.status(200).json(respuesta);    
