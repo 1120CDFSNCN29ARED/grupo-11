@@ -1,5 +1,7 @@
 // Requires ***********************************
 const productoRepository = require("../repositories/productoRepository");
+const marcaRepository = require("../repositories/marcaRepository");
+const modeloRepository = require("../repositories/modeloRepository");
 const imagenesRepository = require("../repositories/imagenRepository");
 const fs = require("fs");
 const path = require("path");
@@ -8,9 +10,13 @@ const imagesPath = path.join(__dirname, "../public/images/products/");
 
 // Controlador ********************************
 module.exports = {
-	crearForm: (req, res) => {
-		let titulo = "Crear un Producto";
-		res.render("producto-crear", { titulo, toThousand });
+	crearForm: async (req, res) => {
+		res.render("producto-crear-y-editar", { 
+			titulo: "Crear un Producto",
+			producto: null,
+			marcas: await marcaRepository.ObtenerTodas(),
+			modelos: await modeloRepository.ObtenerTodas(),
+		});
 	},
 	crearGuardar: async (req, res) => {
 		let precio = parseFloat(req.body.precio);
@@ -24,11 +30,11 @@ module.exports = {
 			});
 			req.file ? BorrarArchivoDeImagen(req.file.filename) : null
 			// return res.send([req.body.precio, precio, isNaN(req.body.precio), !!precio])
-			return res.render("producto-crear", {
-				toThousand,
+			return res.render("producto-crear-y-editar", {
+				producto: null,
 				errores: validaciones.mapped(),
-				precio,
 				oldData: req.body,
+				precio,
 				titulo: "Crear un Producto",
 			});
 		}
@@ -46,9 +52,12 @@ module.exports = {
 		return res.render("producto-detalle", { producto, toThousand, titulo });
 	},
 	editarForm: async (req, res) => {
-		let titulo = "Editar un Producto";
-		let producto = await productoRepository.ObtenerPorId(req.params.id);
-		return res.render("producto-editar", { producto, toThousand, titulo });
+		return res.render("producto-crear-y-editar", {
+			titulo: "Editar un Producto",
+			producto: await productoRepository.ObtenerPorId(req.params.id),
+			marca: await marcaRepository.ObtenerTodas(),
+			modelo: await modeloRepository.ObtenerTodas(),
+		});
 	},
 	editarGuardar: async (req, res) => {
 		let precio = parseFloat(req.body.precio);
@@ -61,8 +70,7 @@ module.exports = {
 				param: "imagen",
 			});
 			req.file ? BorrarArchivoDeImagen(req.file.filename) : null
-			return res.render("producto-editar", {
-				toThousand,
+			return res.render("producto-crear-y-editar", {
 				producto: {id: req.params.id},
 				errores: validaciones.mapped(),
 				oldData: req.body,
