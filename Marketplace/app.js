@@ -39,7 +39,7 @@ app.set("views", [
 ]);
 
 // ****** Conectando con el Navegador *******
-app.listen(3000, () => console.log("Servidor funcionando en puerto 3000..."));
+app.listen(3001, () => console.log("Servidor funcionando en puerto 3001..."));
 // ************* Ruteadores ****************
 const rutaMain = require("./routers/main");
 const rutaProducto = require("./routers/product");
