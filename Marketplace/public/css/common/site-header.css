@@ -88,6 +88,7 @@ header #profile-container {
 	overflow: hidden;
 	border-radius: 100%;
 	border: 1.5px solid white;
+	position: relative;
 }
 
 header .imagenAncha {
@@ -97,7 +98,8 @@ header .imagenAncha {
 header .imagenAlta {
 	height: auto;
 	width: 100%;
-	margin-top: 33%;
+	position: absolute;
+	top: 0;
 }
 header .imagenCuadrada {
 	width: 100%;
