@@ -11,33 +11,32 @@ window.addEventListener("load", () => {
 	}
 	nombre.onkeyup = () => {
 		if (mensaje_error_nombre.innerHTML == " El nombre ya no puede ser más largo") {
-			mensaje_error_nombre.innerHTML = "";
+			mensaje_error_nombre.innerHTML = ""
 			mensaje_error_nombre.classList.add("ocultar");
 		}
 	}
 	nombre.oninput = () => {
 		// Borrar el mensaje de Back-End si se cambia el input
-		document.getElementById("error-nombre-be").classList.add("ocultar");
+		document.getElementById("error-nombre-be").classList.add("ocultar")
 		// Verificar que el campo no esté vacío
 		if (nombre.value.length == 0) {
-			mensaje_error_nombre.innerHTML = " Tenés que escribir un nombre";
-			mensaje_error_nombre.classList.remove("ocultar");
-		}
-		// Verificar la longitud del valor
-		else if (nombre.value.length < 2) {
-			mensaje_error_nombre.innerHTML = " El nombre debe ser más largo";
-			mensaje_error_nombre.classList.remove("ocultar");
-		} 
-		else if (nombre.value.length > 30) {
-			mensaje_error_nombre.innerHTML = " El nombre debe ser más corto";
-			mensaje_error_nombre.classList.remove("ocultar");
-		}
-		// Ocultar errores
-		else {
-			mensaje_error_nombre.innerHTML = "";
-			mensaje_error_nombre.classList.add("ocultar");
-		}
-	};
+            mensaje_error_nombre.innerHTML = " Tenés que escribir un nombre";
+            mensaje_error_nombre.classList.remove("ocultar");
+        }
+        // Verificar la longitud del valor
+        else if (nombre.value.length < 2) {
+            mensaje_error_nombre.innerHTML = " El nombre debe ser más largo";
+            mensaje_error_nombre.classList.remove("ocultar");
+        } else if (nombre.value.length > 30) {
+            mensaje_error_nombre.innerHTML = " El nombre debe ser más corto";
+            mensaje_error_nombre.classList.remove("ocultar");
+        }
+        // Ocultar errores
+        else {
+            mensaje_error_nombre.innerHTML = "";
+            mensaje_error_nombre.classList.add("ocultar")
+        }
+	}
 
 	// --------------- PRECIO -------------------------
 	let precio = document.getElementById("precio");
