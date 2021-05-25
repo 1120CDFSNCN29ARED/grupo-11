@@ -4,16 +4,14 @@ window.addEventListener("load", () => {
 	let mensaje_error_nombre = document.getElementById("mensaje_error_nombre");
 	nombre.onkeypress = (e) => {
 		if (nombre.value.length >= 30) {
-			e.preventDefault();
-			mensaje_error_nombre.innerHTML =
-				" El nombre ya no puede ser más largo";
+			e.preventDefault()
+			mensaje_error_nombre.innerHTML =" El nombre ya no puede ser más largo";
 			mensaje_error_nombre.classList.remove("ocultar");
 		}
 	};
 	nombre.onkeyup = () => {
 		if (
-			mensaje_error_nombre.innerHTML ==
-			" El nombre ya no puede ser más largo"
+			mensaje_error_nombre.innerHTML == " El nombre ya no puede ser más largo"
 		) {
 			mensaje_error_nombre.innerHTML = "";
 			mensaje_error_nombre.classList.add("ocultar");
@@ -31,15 +29,16 @@ window.addEventListener("load", () => {
 		else if (nombre.value.length < 2) {
 			mensaje_error_nombre.innerHTML = " El nombre debe ser más largo";
 			mensaje_error_nombre.classList.remove("ocultar");
-		} else if (nombre.value.length > 30) {
-			mensaje_error_nombre.innerHTML = " El nombre debe ser más corto";
-			mensaje_error_nombre.classList.remove("ocultar");
-		}
-		// Ocultar errores
-		else {
-			mensaje_error_nombre.innerHTML = "";
-			mensaje_error_nombre.classList.add("ocultar");
-		}
+		} 
+		else if (nombre.value.length > 30) {
+            mensaje_error_nombre.innerHTML = " El nombre debe ser más corto";
+            mensaje_error_nombre.classList.remove("ocultar");
+        }
+        // Ocultar errores
+        else {
+            mensaje_error_nombre.innerHTML = "";
+            mensaje_error_nombre.classList.add("ocultar");
+        }
 	};
 
 	// --------------- PRECIO -------------------------
@@ -48,15 +47,13 @@ window.addEventListener("load", () => {
 	precio.onkeypress = (e) => {
 		if (precio.value.length >= 10) {
 			e.preventDefault();
-			mensaje_error_precio.innerHTML =
-				" El precio ya no puede ser más largo";
+			mensaje_error_precio.innerHTML = " El precio ya no puede ser más largo";
 			mensaje_error_precio.classList.remove("ocultar");
 		}
 	};
 	precio.onkeyup = () => {
 		if (
-			mensaje_error_precio.innerHTML ==
-			" El precio ya no puede ser más largo"
+			mensaje_error_precio.innerHTML == " El precio ya no puede ser más largo"
 		) {
 			mensaje_error_precio.innerHTML = "";
 			mensaje_error_precio.classList.add("ocultar");
@@ -99,8 +96,7 @@ window.addEventListener("load", () => {
 	stock.onkeypress = (e) => {
 		if (stock.value.length >= 10) {
 			e.preventDefault();
-			mensaje_error_stock.innerHTML =
-				" El stock ya no puede ser más largo";
+			mensaje_error_stock.innerHTML = " El stock ya no puede ser más largo";
 			mensaje_error_stock.classList.remove("ocultar");
 		}
 	};
@@ -142,7 +138,7 @@ window.addEventListener("load", () => {
 		}
 	};
 
-	// --------------- SEKECTORES -------------------------
+	// --------------- SELECTORES -------------------------
 	let categoria = document.getElementById("categoria");
 	categoria.oninput = () => {document.getElementById("error-categoria-be").classList.add("ocultar")}
 
