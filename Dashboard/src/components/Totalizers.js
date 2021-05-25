@@ -24,7 +24,7 @@ class Totalizers extends Component {
         
         let categorias = {
             name: "CATEGORIAS",
-            total: Object.keys(productsJson.countByCategory).length,
+            total: productsJson.countByCategory.length,
             icon: "fa-clipboard-list",
             color: "secondary",
         };

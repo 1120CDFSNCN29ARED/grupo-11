@@ -23,8 +23,13 @@ module.exports = {
 		});
 		// *** CATEGORÍAS ***
 		data = await categoriaRepository.ObtenerTodas();
-		let totales = {};
-		data.map(n => {totales[n.nombre] = n.productos.length});
+		let totales = [];
+		data.map(n => { 
+			totales.push({
+				categoria: n.nombre,
+				total: n.productos.length
+			});
+		});
 		// *** FINAL ***
 		let respuesta = {
 			count: productos.length,
