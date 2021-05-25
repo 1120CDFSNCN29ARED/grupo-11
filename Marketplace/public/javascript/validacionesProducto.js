@@ -5,7 +5,7 @@ window.addEventListener("load", () => {
 	nombre.onkeypress = (e) => {
 		if (nombre.value.length >= 30) {
 			e.preventDefault()
-			mensaje_error_nombre.innerHTML = " El nombre ya no puede ser más largo";
+			mensaje_error_nombre.innerHTML = " El nombre ya no puede ser más largo"
 			mensaje_error_nombre.classList.remove("ocultar");
 		}
 	};
