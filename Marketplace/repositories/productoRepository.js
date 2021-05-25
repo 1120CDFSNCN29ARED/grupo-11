@@ -43,15 +43,15 @@ module.exports = {
 	},
 	Crear: (infoProducto, precio, usuarioId) => {
 		return entidad.create({
-            nombre: infoProducto.nombre,
-            descripcion: infoProducto.descripcion,
-            categoria_id: infoProducto.categoria,
-            marca_id: infoProducto.marca,
-            modelo_id: infoProducto.modelo,
-            precio: precio,
-            stock_disponible: infoProducto.stock,
-            creado_por: usuarioId,
-        });
+			nombre: infoProducto.nombre,
+			descripcion: infoProducto.descripcion,
+			categoria_id: infoProducto.categoria,
+			marca_id: infoProducto.marca,
+			modelo_id: infoProducto.modelo,
+			precio: precio,
+			stock_disponible: infoProducto.stock,
+			creado_por: usuarioId,
+		});
 	},
 	Actualizar: (id, infoProducto, precio, usuarioId) => {
 		return entidad.update({
