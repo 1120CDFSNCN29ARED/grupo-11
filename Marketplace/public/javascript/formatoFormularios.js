@@ -9,3 +9,5 @@ window.addEventListener("load", () => {
 		})
 	}
 })
+
+// Para que el fondo de los inputs cambie de color cuando el cursor está en él

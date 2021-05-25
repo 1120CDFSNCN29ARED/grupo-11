@@ -4,6 +4,9 @@ const db = require("../database/models");
 const entidad = db.Usuario;
 
 module.exports = {
+	ObtenerTodos: () => {
+		return entidad.findAll();
+	},
 	ObtenerPorId: (id) => {
 		return entidad.findByPk(id, {
 			include: [ "roles" ]
