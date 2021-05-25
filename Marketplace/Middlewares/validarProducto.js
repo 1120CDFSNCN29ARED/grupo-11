@@ -18,4 +18,21 @@ module.exports = [
 			return true;
 		})
 		,
+	body("stock")
+		.notEmpty().withMessage("Tenés que escribir el stock").bail()
+		.isNumeric().withMessage("Debés introducir solamente números").bail()
+		.isLength({ max: 10 }).withMessage("El stock debe ser menor").bail()
+		.custom((value, { req }) => {
+			let stock = parseFloat(req.body.stock);
+			if (stock < 0) {
+				throw new Error("El stock debe ser mayor");
+			}
+			return true;
+		})
+		,
+	
+	body("categoria").notEmpty().withMessage("Tenés que elegir una opción").bail(),
+	body("marca").notEmpty().withMessage("Tenés que elegir una opción").bail(),
+	body("modelo").notEmpty().withMessage("Tenés que elegir una opción").bail(),
+	body("borrado").notEmpty().withMessage("Tenés que elegir una opción").bail(),
 ];

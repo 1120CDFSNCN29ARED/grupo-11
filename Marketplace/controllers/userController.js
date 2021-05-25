@@ -130,7 +130,7 @@ module.exports = {
 		// Iniciar session
 		req.session.usuarioLogeado = usuario;
 		// Cookies
-		req.body.recordar != undefined ? res.cookie("recordar", usuario.email, { maxAge: 60 * 60 * 1000 }) : null
+		req.body.recordar != undefined ? res.cookie("recordar", usuario.email, { maxAge: 24 * 60 * 60 * 1000 }) : null
 		res.redirect("/usuario/detalle");
 	},
 	logout: (req, res) => {
