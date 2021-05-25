@@ -1,49 +1,54 @@
 import React, { Component } from 'react';
+import { BASE_URL } from '../env';
 import "../assets/css/totalizer.css";
 import TotalizerCard from "./TotalizerCard";
-
-let productos = {
-    name: "PRODUCTOS",
-    total: "13",
-    icon: "fa-guitar",
-    color: "primary",
-};
-
-let categorias = {
-    name: "CATEGORIAS",
-    total: "3",
-    icon: "fa-clipboard-list",
-    color: "secondary",
-};
-
-let usuarios = {
-    name: "USUARIOS",
-    total: "7",
-    icon: "fa-user",
-    color: "tertiary",
-};
-
-let cartProps = [productos, categorias, usuarios];
 
 class Totalizers extends Component {
     constructor() {
         super();
-        this.state = null;
+        this.state = { totalizers: [] };
     }
 
     async componentDidMount() {
-        // const response = await fetch('');
-        // const totals = response.json();
+        const productsResponse = await fetch(`${ BASE_URL }/api/productos`);
+        const usersResponse = await fetch(`${ BASE_URL }/api/usuarios`);        
+        const productsJson = await productsResponse.json();
+        const usersJson = await usersResponse.json();
 
-        // this.setState();
+        let productos = {
+            name: "PRODUCTOS",
+            total: productsJson.count,
+            icon: "fa-guitar",
+            color: "primary",
+        };
+        
+        let categorias = {
+            name: "CATEGORIAS",
+            total: Object.keys(productsJson.countByCategory).length,
+            icon: "fa-clipboard-list",
+            color: "secondary",
+        };
+        
+        let usuarios = {
+            name: "USUARIOS",
+            total: usersJson.meta.TotalUsuarios,
+            icon: "fa-user",
+            color: "tertiary",
+        };
+        
+        this.setState({ totalizers: [productos, categorias, usuarios] });
     }
 
     render() {
         return (
             <div id="totalizer">
-                {cartProps.map((objets, i) => {
-                    return <TotalizerCard {...objets} key={i} />;
-                })}
+                {
+                    this.state.totalizers.length > 0 ?
+                        this.state.totalizers.map((objets, i) => {
+                            return <TotalizerCard {...objets} key={i} />;
+                        })
+                        : "Totalizadores no enocntrados"
+                }
             </div>
         );
     }
