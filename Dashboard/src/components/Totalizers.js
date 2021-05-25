@@ -47,7 +47,7 @@ class Totalizers extends Component {
                         this.state.totalizers.map((objets, i) => {
                             return <TotalizerCard {...objets} key={i} />;
                         })
-                        : "Totalizadores no enocntrados"
+                        : <TotalizerCard noData = { true } />
                 }
             </div>
         );

@@ -3,6 +3,15 @@ import "../assets/css/lastCreatedProduct.css";
 import missingImage from '../assets/images/missing-image.jpg';
 
 function LastProduct(props) {
+    if (props.noData) {
+        return (
+            <div id="last-created-product">
+                <div className="section-title">ULTIMO PRODUCTO CREADO</div>
+                <div className="product-section">Producto no encontrado</div>
+            </div>
+        );
+    }
+
     const precioWithFormat = parseInt(props.precio).toLocaleString("es-AR", {style:'currency', currency:'ARS'});
     const imageURL = props.imagenes[0] ? `${ BASE_URL }/public/images/${ props.imagenes[0] }` : missingImage;
 

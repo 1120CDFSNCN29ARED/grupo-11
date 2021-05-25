@@ -30,7 +30,7 @@ class MainSection extends Component {
                 <Totalizers />
                 {
                     this.state.ultimoProducto ?
-                        <LastProduct {...this.state.ultimoProducto} /> : "no se encontro un producto"
+                        <LastProduct {...this.state.ultimoProducto} /> : <LastProduct noData = { true } />
                 }
             </div>
         );
