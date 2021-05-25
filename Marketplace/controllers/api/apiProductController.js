@@ -17,6 +17,7 @@ module.exports = {
 				categoria: n.categoria.nombre,
 				imagenes: n.imagenes.map(m => m.ruta),
 				precio: n.precio,
+				stock: n.stock_disponible,
 				url: "/api/productos/" + n.id,
 				creado: n.creado_en,
 			});

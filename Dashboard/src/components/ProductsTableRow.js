@@ -1,15 +1,17 @@
 import "../assets/css/productsTableRow.css";
 
 function ProductsTableRow(props) {
+    const precioWithFormat = parseInt(props.precio).toLocaleString("es-AR", {style:'currency', currency:'ARS'});
+    console.log(props);
     return (
         <tr>
-            <td>{props.Name}</td>
-            <td>{props.Description}</td>
-            <td>{props.Category}</td>
-            <td>{props.Brand}</td>
-            <td>{props.Model}</td>
-            <td>{props.Price}</td>
-            <td>{props.Stock}</td>
+            <td>{props.nombre}</td>
+            <td>{props.descripcion}</td>
+            <td>{props.categoria}</td>
+            <td>{props.marca}</td>
+            <td>{props.modelo}</td>
+            <td>{precioWithFormat}</td>
+            <td>{props.stock}</td>
         </tr>
     );
 }

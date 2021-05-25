@@ -1,39 +1,21 @@
 import React, { Component } from 'react';
+import { BASE_URL } from '../env';
 import "../assets/css/products.css";
 import ProductsTableRow from "./ProductsTableRow";
-
-let productsData = [
-    {
-        Name: "Fender Stratocaster",
-        Description: "123",
-        Category: "Guitarra Electrica",
-        Brand: "Fender",
-        Model: "Stratocaster",
-        Price: "$ 100000",
-        Stock: 10,
-    },
-    {
-        Name: "Gibson Les Paul",
-        Description: "123",
-        Category: "Guitarra Electrica",
-        Brand: "Gibson",
-        Model: "Les Paul",
-        Price: "$ 110000",
-        Stock: 5,
-    },
-];
 
 class Products extends Component {
     constructor() {
         super();
-        this.state = null;
+        this.state = { products: []};
     }
 
     async componentDidMount() {
-        // const response = await fetch('');
-        // const products = await response.json();
+        const response = await fetch(`${ BASE_URL }/api/productos`);
+        const responseJson = await response.json();
 
-        // this.setState();
+        this.setState({
+            products: responseJson.products
+        });
     }
 
     render() {
@@ -52,9 +34,13 @@ class Products extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {productsData.map((row, i) => {
-                            return <ProductsTableRow {...row} key={i} />;
-                        })}
+                        {
+                            this.state.products.length > 0 ?
+                                this.state.products.map((objets, i) => {
+                                    return <ProductsTableRow {...objets} key={i} />;
+                                })
+                                : <tr></tr>
+                        }
                     </tbody>
                 </table>
             </div>
