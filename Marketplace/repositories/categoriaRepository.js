@@ -3,6 +3,8 @@ const entidad = db.Categoria;
 
 module.exports = {
 	ObtenerTodas: () => {
-		return entidad.findAll();
-	}
+		return entidad.findAll({
+			include: ["productos"],
+		});
+	},
 };

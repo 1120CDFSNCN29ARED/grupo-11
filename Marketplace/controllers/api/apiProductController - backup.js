@@ -4,8 +4,8 @@ const categoriaRepository = require("../../repositories/categoriaRepository");
 module.exports = {
 	listado: async (req, res) => {
 		let data = null;
-		// *** PRODUCTOS ***
 		data = await productoRepository.ObtenerTodas();
+		// *** PRODUCTOS ***
 		let productos = [];
 		data.map(n => {
 			productos.push({
@@ -13,20 +13,44 @@ module.exports = {
 				nombre: n.nombre,
 				descripcion: n.descripcion,
 				categoria: n.categoria.nombre,
-				imagenes: n.imagenes.map(m => m.ruta),
+				imagenes: n.imagenes.map((m) => m.ruta),
 				url: "/api/productos/" + n.id,
 				creado: n.creado_en,
 			});
 		});
+		let resumenProductos = {
+			cantidad: data.length,
+			detalle: productos,
+		};
 		// *** CATEGORÍAS ***
 		data = await categoriaRepository.ObtenerTodas();
-		let totales = {};
-		data.map(n => {totales[n.nombre] = n.productos.length});
+		let categorias = [];
+		let totales={}
+		data.map(n => {
+			categorias.push({
+				id: n.id,
+				nombre: n.nombre,
+				cantidad_de_productos: n.productos.length,
+				productos: n.productos.map(m => ({
+					id: m.id,
+					nombre: m.nombre,
+					url: "/api/productos/" + m.id,
+				})),
+			});
+			totales[n.nombre] = n.productos.length
+		});
+		let resumenCategorias = {
+			cantidad: data.length,
+			detalle: categorias,
+			totales: totales,
+		};
 		// *** FINAL ***
 		let respuesta = {
-			count: productos.length,
-			countByCategory: totales,
-			products: productos,
+			//productos: resumenProductos,
+			//categorias: resumenCategorias,
+			count: resumenProductos.cantidad,
+			countByCategory: resumenCategorias.totales,
+			products: resumenProductos.detalle,
 		};
 		res.json(respuesta);
 	},
@@ -34,6 +58,7 @@ module.exports = {
 	detalle: async (req, res) => {
 		let data = null;
 		data = await productoRepository.ObtenerPorId(req.params.id);
+		// *** Proceso de la info ***
 		let producto = {
 			id: data.id,
 			nombre: data.nombre,
