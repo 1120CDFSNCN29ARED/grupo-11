@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import "../assets/css/categoriesContainer.css";
 import CategoriesCard from "./CategoriesCard";
 
@@ -18,14 +19,28 @@ let bajo = {
 
 let categories = [guitarraElectrica, guitarraClasica, bajo];
 
-function Categories() {
-    return (
-        <div id="categories-container">
-            {categories.map((objets, i) => {
-                return <CategoriesCard {...objets} key={i} />;
-            })}
-        </div>
-    );
+class Categories extends Component {
+    constructor() {
+        super();
+        this.state = null;
+    }
+
+    async componentDidMount() {
+        // const response = await fetch('');
+        // const categories = response.json();
+
+        // this.setState();
+    }
+
+    render() {
+        return (
+            <div id="categories-container">
+                {categories.map((objets, i) => {
+                    return <CategoriesCard {...objets} key={i} />;
+                })}
+            </div>
+        );
+    };
 }
 
 export default Categories;

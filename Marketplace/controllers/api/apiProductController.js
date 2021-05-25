@@ -11,9 +11,12 @@ module.exports = {
 			productos.push({
 				id: n.id,
 				nombre: n.nombre,
+				marca: n.marcas.nombre,
+				modelo: n.modelos.nombre,
 				descripcion: n.descripcion,
 				categoria: n.categoria.nombre,
 				imagenes: n.imagenes.map(m => m.ruta),
+				precio: n.precio,
 				url: "/api/productos/" + n.id,
 				creado: n.creado_en,
 			});

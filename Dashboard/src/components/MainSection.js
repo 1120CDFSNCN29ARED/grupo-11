@@ -1,21 +1,40 @@
+import React, { Component } from 'react';
+import { BASE_URL } from '../env';
 import "../assets/css/mainSection.css";
 import Totalizers from "./Totalizers";
 import LastProduct from "./LastProduct";
 
-let ultimoProducto = {
-    name: "Fender Stratocaster",
-    image: "lalala.png",
-    description: "Esta es la descripcion del producto",
-    price: "$ 100000",
-};
+class MainSection extends Component {
+    constructor() {
+        super();
+        this.state = { ultimoProducto: null };
+    }
 
-function MainSection() {
-    return (
-        <div id="main-section">
-            <Totalizers />
-            <LastProduct {...ultimoProducto} />
-        </div>
-    );
+    async componentDidMount() {
+        const apiResponse = await fetch(`${ BASE_URL }/api/productos`);
+        const response = await apiResponse.json();
+        const products = response.products;
+
+        const lastProduct = products.reduce((accumulator, currentValue) => 
+            accumulator.id > currentValue.id ? accumulator : currentValue
+        );
+        
+        this.setState({
+            ultimoProducto: lastProduct
+        });
+    }
+
+    render() {
+        return (
+            <div id="main-section">
+                <Totalizers />
+                {
+                    this.state.ultimoProducto ?
+                        <LastProduct {...this.state.ultimoProducto} /> : "no se encontro un producto"
+                }
+            </div>
+        );
+    }
 }
 
 export default MainSection;

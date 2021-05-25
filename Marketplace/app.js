@@ -5,6 +5,7 @@ const session = require("express-session");
 const cookies = require("cookie-parser");
 const path = require("path");
 const methodOverride = require("method-override");
+const cors = require("cors");
 const app = express();
 const cookieRecordar = require("./Middlewares/cookieRecordar");
 const validarUserLogged = require("./middlewares/validarUserLogged");
@@ -20,6 +21,7 @@ app.use(express.static(path.resolve(__dirname, "./public"))); // Para acceder a 
 app.use(methodOverride("_method")); // Para poder usar el method="POST" en el formulario por PUT y DELETE
 app.use(express.urlencoded({ extended: false })); // Para poder subir una imagen o un archivo
 app.use(express.json()); // ¿Para poder usar los métodos de JSON, para leer y guardar?
+app.use(cors());
 app.use(validarUserLogged); // Para tener actualizada constantemente la variable res.locals.isLogged
 app.use(async (req, res, next) => {
     if (!app.locals.categoriasDeProductos) {

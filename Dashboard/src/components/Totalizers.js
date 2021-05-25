@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import "../assets/css/totalizer.css";
 import TotalizerCard from "./TotalizerCard";
 
@@ -24,14 +25,28 @@ let usuarios = {
 
 let cartProps = [productos, categorias, usuarios];
 
-function Totalizers() {
-    return (
-        <div id="totalizer">
-            {cartProps.map((objets, i) => {
-                return <TotalizerCard {...objets} key={i} />;
-            })}
-        </div>
-    );
+class Totalizers extends Component {
+    constructor() {
+        super();
+        this.state = null;
+    }
+
+    async componentDidMount() {
+        // const response = await fetch('');
+        // const totals = response.json();
+
+        // this.setState();
+    }
+
+    render() {
+        return (
+            <div id="totalizer">
+                {cartProps.map((objets, i) => {
+                    return <TotalizerCard {...objets} key={i} />;
+                })}
+            </div>
+        );
+    }
 }
 
 export default Totalizers;
