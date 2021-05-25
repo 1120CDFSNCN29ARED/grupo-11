@@ -49,9 +49,7 @@ window.addEventListener("load", () => {
 		}
 	};
 	precio.onkeyup = () => {
-		if (
-			mensaje_error_precio.innerHTML == " El precio ya no puede ser más largo"
-		) {
+		if (mensaje_error_precio.innerHTML == " El precio ya no puede ser más largo") {
 			mensaje_error_precio.innerHTML = "";
 			mensaje_error_precio.classList.add("ocultar");
 		}
