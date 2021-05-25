@@ -10,9 +10,7 @@ window.addEventListener("load", () => {
 		}
 	}
 	nombre.onkeyup = () => {
-		if (
-			mensaje_error_nombre.innerHTML == " El nombre ya no puede ser más largo"
-		) {
+		if (mensaje_error_nombre.innerHTML == " El nombre ya no puede ser más largo") {
 			mensaje_error_nombre.innerHTML = "";
 			mensaje_error_nombre.classList.add("ocultar");
 		}
