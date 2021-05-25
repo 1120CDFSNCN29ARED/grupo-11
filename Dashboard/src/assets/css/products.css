@@ -1,8 +1,8 @@
-#products-table-container { 
+#products-table-container {
     margin: 3em 0 0 0;
     background-color: white;
     border-radius: 0.6em;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 1.5em;
     width: 90%;
 }
@@ -20,7 +20,7 @@
     color: white;
 }
 
-#products-table td, 
+#products-table td,
 #products-table th {
     border: 1px solid #ddd;
     padding: 8px;
