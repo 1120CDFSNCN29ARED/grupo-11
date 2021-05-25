@@ -2,7 +2,6 @@ import "../assets/css/productsTableRow.css";
 
 function ProductsTableRow(props) {
     const precioWithFormat = parseInt(props.precio).toLocaleString("es-AR", {style:'currency', currency:'ARS'});
-    console.log(props);
     return (
         <tr>
             <td>{props.nombre}</td>
