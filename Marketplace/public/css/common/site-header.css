@@ -81,18 +81,21 @@ header .dropdown-content a {
 }
 
 /* Menú de Avatar */
-header #profile-container {
-	height: 70px;
-	width: 70px;
+header #seccionMenuUsuario {
+	position: relative;
 	align-self: center;
+}
+
+header #profile-container {
+	height: 60px;
+	width: 60px;
 	overflow: hidden;
 	border-radius: 100%;
 	border: 1.5px solid white;
-	position: relative;
 }
 
 header .imagenAncha {
-	height: 100%;
+	height: 104%;
 	width: auto;
 }
 header .imagenAlta {
@@ -104,4 +107,9 @@ header .imagenAlta {
 header .imagenCuadrada {
 	width: 100%;
 	height: 100%;
+}
+
+#menu-usuario {
+	width: 160px;
+	right: 0px;
 }

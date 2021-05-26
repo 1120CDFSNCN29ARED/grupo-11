@@ -33,22 +33,18 @@
 			</a>    
 		</div>
 		<!-- Logo de Usuario o Avatar ------------------------------>
-		<div id="profile-container" class="flex-container">
-			<% if(locals.isLogged) { %>
-				<img
-					src="/images/users/<%= locals.usuarioLogeado.avatar %>"
-					onclick="desplegable('menu-usuario')"
-					class="boton-desplegable"
-					id="imagenUsuario"
-				>
-			<% } else { %>
-				<i
-					onclick="desplegable('menu-usuario')"
-					class="boton-desplegable fas fa-user" id="profile-button"
-				>
-				</i>
-			<% } %>
-			<!--<i onclick="desplegable('menu-usuario')" class="fas fa-user" id="profile-button"></i>-->
+		<section id="seccionMenuUsuario">
+			<div id="profile-container" class="flex-container" onclick="desplegable('menu-usuario')">
+				<% if(locals.isLogged) { %>
+					<img
+						src="/images/users/<%= locals.usuarioLogeado.avatar %>"
+						class="boton-desplegable"
+						id="imagenUsuario"
+					>
+				<% } else { %>
+					<i class="boton-desplegable fas fa-user" id="profile-button"></i>
+				<% } %>
+			</div>
 			<div id="menu-usuario" class="dropdown-content">
 				<% if (locals.isLogged) { %>
 					<a href="/usuario/detalle">Detalle de Usuario</a>
@@ -61,6 +57,6 @@
 					<a href="/usuario/crear">Registrarse</a>
 				<% } %>
 			</div>
-		</div>
+		</section>
 	</section>
 </header>
