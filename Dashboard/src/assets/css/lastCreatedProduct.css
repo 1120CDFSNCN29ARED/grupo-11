@@ -31,6 +31,10 @@
 	width: 40%;
 }
 
+#product-image > img {
+	width: 100%;
+}
+
 #product-information {
 	padding: 1em;
 	width: 60%;

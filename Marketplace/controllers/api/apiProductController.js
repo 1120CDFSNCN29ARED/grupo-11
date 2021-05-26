@@ -15,7 +15,7 @@ module.exports = {
 				modelo: n.modelos.nombre,
 				descripcion: n.descripcion,
 				categoria: n.categoria.nombre,
-				imagenes: n.imagenes.map(m => m.ruta),
+				imagenes: n.imagenes.map(m => "/images/products/" + m.ruta),
 				precio: n.precio,
 				stock: n.stock_disponible,
 				url: "/api/productos/" + n.id,

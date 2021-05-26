@@ -16,9 +16,7 @@ function LastProduct(props) {
 		style: "currency",
 		currency: "ARS",
 	});
-	const imageURL = props.imagenes[0]
-		? `${BASE_URL}/public/images/${props.imagenes[0]}`
-		: missingImage;
+	const imageURL = props.imagenes[0] ? `${BASE_URL}${props.imagenes[0]}` : missingImage;
 
 	return (
 		<div id="last-created-product">
