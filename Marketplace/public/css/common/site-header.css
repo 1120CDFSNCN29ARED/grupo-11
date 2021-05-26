@@ -17,7 +17,7 @@ header {
 	align-content: center;
 }
 
-#menu-button-container,
+#hamburguer-container,
 #search-container,
 #shop-cart-container,
 #profile-container {
@@ -59,7 +59,7 @@ header {
 }
 
 /* Menú de Login */
-header #seccionMenuUsuario {
+header #seccionMenuDesplegable {
 	position: relative;
 	align-self: center;
 }
@@ -73,7 +73,6 @@ header #profile-container {
 
 header .dropdown-content {
 	position: absolute;
-	top: 50px;
 	z-index: 2;
 	border-radius: 10px;
 	border: solid 1px var(--secondary-background);
@@ -106,4 +105,11 @@ header .imagenCuadrada {
 #menu-usuario {
 	width: 160px;
 	right: 0px;
+	top: 50px;
+}
+
+#menu-categorias {
+	width: 170px;
+	left: 0px;
+	top: 35px;
 }

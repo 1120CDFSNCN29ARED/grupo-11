@@ -1,7 +1,5 @@
 // When the user clicks on the button, toggle between hiding and showing the dropdown content
-function desplegable(n) {document.getElementById(n).classList.toggle("mostrar");
-	console.log("línea 3")
-}
+function desplegable(n) {document.getElementById(n).classList.toggle("mostrar");}
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(e) {
