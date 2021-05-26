@@ -36,6 +36,9 @@
 		<section id="seccionMenuUsuario">
 			<div id="profile-container" class="flex-container" onclick="desplegable('menu-usuario')">
 				<% if(locals.isLogged) { %>
+					<script>
+						document.getElementById("profile-container").style.border += "1.5px solid white"
+					</script>
 					<img
 						src="/images/users/<%= locals.usuarioLogeado.avatar %>"
 						class="boton-desplegable"
