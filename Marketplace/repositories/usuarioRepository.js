@@ -59,7 +59,7 @@ module.exports = {
 		return entidad.update({
 			borrado: true,
 			actualizado_por: usuarioId
-		}, 
+		},
 		{
 			where: { id: usuarioId },
 		});
@@ -68,7 +68,5 @@ module.exports = {
 
 function BorrarArchivoDeImagen(nombreDeArchivo) {
 	let imageFile = path.join(imagesPath, nombreDeArchivo);
-	if (nombreDeArchivo && fs.existsSync(imageFile)) {
-		fs.unlinkSync(imageFile);
-	}
+	nombreDeArchivo && fs.existsSync(imageFile) ? fs.unlinkSync(imageFile) : ""
 }
