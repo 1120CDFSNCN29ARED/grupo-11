@@ -1,7 +1,7 @@
-import TopNavBar from "./TopNavBar";
-import MainContainer from "./MainContainer";
+import TopNavBar from "./1TopNavBar/TopNavBar";
+import MainContainer from "./2MainContainer/MainContainer";
 
-function App() {
+export default function App() {
 	return (
 		<div className="App">
 			<TopNavBar />
@@ -9,5 +9,3 @@ function App() {
 		</div>
 	);
 }
-
-export default App;
