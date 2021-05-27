@@ -25,7 +25,7 @@ class Categories extends Component {
 					? this.state.categories.map((objets, i) => {
 							return <CategoriesCard {...objets} key={i} />;
 					  })
-					: "Categorias no enocntradas"}
+					: "Categorias no encontradas"}
 			</div>
 		);
 	}
