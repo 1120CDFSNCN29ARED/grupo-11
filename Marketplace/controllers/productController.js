@@ -87,14 +87,6 @@ const toThousand = (n) => {
 	return parseInt(n).toLocaleString("es-AR", { maximumFractionDigits: 0 });
 }
 
-function SanitizePrice(priceString) {
-	return priceString
-		.replace(".", "")
-		.replace(",", ".")
-		.replace("$", "")
-		.replace(" ", "");
-}
-
 async function EliminarProducto(idProducto, idUsuario) {
 	const imagenes = await productoRepository.ObtenerImagenes(idProducto);
 	for (let imagen of imagenes) {
