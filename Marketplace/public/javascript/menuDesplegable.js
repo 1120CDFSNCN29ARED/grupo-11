@@ -1,14 +1,10 @@
 window.addEventListener("load", () => {
 	document
 		.getElementById("hamburguer-container")
-		.addEventListener('click', () => {
-			document.getElementById('menu-categorias').classList.toggle("mostrar")
-		})
+		.addEventListener("click", () => desplegable("menu-categorias"));
 	document
 		.getElementById("profile-container")
-		.addEventListener("click", () => {
-			document.getElementById("menu-usuario").classList.toggle("mostrar");
-		});
+		.addEventListener("click", () => desplegable("menu-usuario"));
 });
 
 // Cerrar los dropdowns en desuso
