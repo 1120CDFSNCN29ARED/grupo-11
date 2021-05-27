@@ -59,7 +59,7 @@ header {
 }
 
 /* Menú de Login */
-header #seccionMenuDesplegable {
+header .seccionMenuDesplegable {
 	position: relative;
 	align-self: center;
 }

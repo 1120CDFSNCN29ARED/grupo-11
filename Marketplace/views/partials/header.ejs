@@ -1,9 +1,9 @@
 <header>
 	<section id="site-header" class="top-header flex-container">
 		<!-- Ícono de Hamburguesa (Categorías) ----->
-		<section id="seccionMenuDesplegable">
-			<div id="hamburguer-container" class="flex-container" onclick="desplegable('menu-categorias')">
-				<i class="boton-desplegable fas fa-bars" id="categoria-button"></i>
+		<section class="seccionMenuDesplegable">
+			<div id="hamburguer-container" class="flex-container">
+				<i class="fas fa-bars" id="categoria-button"></i>
 				<div id="menu-categorias" class="dropdown-content">
 					<% for (let n of locals.categoriasDeProductos) { %> 
 						<a href="<%= n.link %>" class="menu-options"><%= n.nombre %></a>
@@ -35,19 +35,19 @@
 			</a>    
 		</div>
 		<!-- Logo de Usuario o Avatar ------------------------------>
-		<section id="seccionMenuDesplegable">
-			<div id="profile-container" class="flex-container" onclick="desplegable('menu-usuario')">
+		<section class="seccionMenuDesplegable">
+			<div id="profile-container" class="flex-container">
 				<% if(locals.isLogged) { %>
 					<script>
 						document.getElementById("profile-container").style.border += "1.5px solid white"
 					</script>
 					<img
 						src="/images/users/<%= locals.usuarioLogeado.avatar %>"
-						class="boton-desplegable"
+						class="desplegableUsuario"
 						id="imagenUsuario"
 					>
 				<% } else { %>
-					<i class="boton-desplegable fas fa-user" id="profile-button"></i>
+					<i class="desplegableUsuario fas fa-user" id="profile-button"></i>
 				<% } %>
 			</div>
 			<div id="menu-usuario" class="dropdown-content flex-col">
