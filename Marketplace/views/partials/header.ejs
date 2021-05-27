@@ -1,14 +1,16 @@
 <header>
 	<section id="site-header" class="top-header flex-container">
 		<!-- Ícono de Hamburguesa (Categorías) ----->
-		<div id="menu-button-container" class="flex-container">
-			<i onclick="desplegable('menu-categorias')" class="fas fa-bars" id="categoria-button"></i>
-			<div id="menu-categorias" class="dropdown-content">
-				<% for (let n of locals.categoriasDeProductos) { %> 
-					<a href="<%= n.link %>" class="menu-options"><%= n.nombre %></a>
-				<% } %>
+		<section class="seccionMenuDesplegable">
+			<div id="hamburguer-container" class="flex-container">
+				<i class="fas fa-bars" id="categoria-button"></i>
+				<div id="menu-categorias" class="dropdown-content">
+					<% for (let n of locals.categoriasDeProductos) { %> 
+						<a href="<%= n.link %>" class="menu-options"><%= n.nombre %></a>
+					<% } %>
+				</div>
 			</div>
-		</div>
+		</section>
 		<!-- Opción de búsqueda rápida ------------------------>
 		<div id="search-container" class="flex-container">
 			<form action="/" method="GET" class="flex-container" id="search-form">
@@ -33,23 +35,22 @@
 			</a>    
 		</div>
 		<!-- Logo de Usuario o Avatar ------------------------------>
-		<div id="profile-container" class="flex-container">
-			<% if(locals.isLogged) { %>
-				<img
-					src="/images/users/<%= locals.usuarioLogeado.avatar %>"
-					onclick="desplegable('menu-usuario')"
-					class="boton-desplegable"
-					id="imagenUsuario"
-				>
-			<% } else { %>
-				<i
-					onclick="desplegable('menu-usuario')"
-					class="boton-desplegable fas fa-user" id="profile-button"
-				>
-				</i>
-			<% } %>
-			<!--<i onclick="desplegable('menu-usuario')" class="fas fa-user" id="profile-button"></i>-->
-			<div id="menu-usuario" class="dropdown-content">
+		<section class="seccionMenuDesplegable">
+			<div id="profile-container" class="flex-container">
+				<% if(locals.isLogged) { %>
+					<script>
+						document.getElementById("profile-container").style.border += "1.5px solid white"
+					</script>
+					<img
+						src="/images/users/<%= locals.usuarioLogeado.avatar %>"
+						class="desplegableUsuario"
+						id="imagenUsuario"
+					>
+				<% } else { %>
+					<i class="desplegableUsuario fas fa-user" id="profile-button"></i>
+				<% } %>
+			</div>
+			<div id="menu-usuario" class="dropdown-content flex-col">
 				<% if (locals.isLogged) { %>
 					<a href="/usuario/detalle">Detalle de Usuario</a>
 					<a href="/usuario/logout">Logout</a>
@@ -61,6 +62,6 @@
 					<a href="/usuario/crear">Registrarse</a>
 				<% } %>
 			</div>
-		</div>
+		</section>
 	</section>
 </header>
