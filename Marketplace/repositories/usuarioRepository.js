@@ -2,6 +2,9 @@ const { Op } = require("sequelize");
 const bcryptjs = require("bcryptjs");
 const db = require("../database/models");
 const entidad = db.Usuario;
+const fs = require("fs");
+const path = require("path");
+const imagesPath = path.join(__dirname, "../public/images/users/");
 
 module.exports = {
 	ObtenerTodos: () => {
@@ -48,18 +51,24 @@ module.exports = {
 			where: { id: id },
 		});
 	},
-	Eliminar: (id, usuario) => {
+	Eliminar: (usuarioId) => {
+		entidad
+			.findByPk(usuarioId)
+			.then((n) => n.avatar)
+			.then((n) => BorrarArchivoDeImagen(n));
 		return entidad.update({
 			borrado: true,
-			actualizado_por: usuario
-		},
+			actualizado_por: usuarioId
+		}, 
 		{
-			where: { id: id },
+			where: { id: usuarioId },
 		});
 	},
-	ObtenerAvatar: async (id) => {
-		let usuario = await entidad.findByPk(id);
-
-		return usuario.avatar;
-	}
 };
+
+function BorrarArchivoDeImagen(nombreDeArchivo) {
+	let imageFile = path.join(imagesPath, nombreDeArchivo);
+	if (nombreDeArchivo && fs.existsSync(imageFile)) {
+		fs.unlinkSync(imageFile);
+	}
+}

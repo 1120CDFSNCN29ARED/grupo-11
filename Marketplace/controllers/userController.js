@@ -105,7 +105,7 @@ module.exports = {
 		res.redirect("/usuario/detalle");
 	},
 	eliminar: async (req, res) => {
-		await EliminarUsuario(req.session.usuarioLogeado.id);
+		await usuarioRepository.Eliminar(req.session.usuarioLogeado.id);
 		res.redirect("/usuario/logout");
 	},
 	loginForm: (req, res) => {
@@ -139,12 +139,6 @@ module.exports = {
 		return res.redirect("/");
 	}
 };
-
-async function EliminarUsuario(id) {
-	let avatar = await usuarioRepository.ObtenerAvatar(id);
-	await usuarioRepository.Eliminar(id);
-	BorrarArchivoDeImagen(avatar);
-}
 
 function BorrarArchivoDeImagen(nombreDeArchivo) {
 	let imageFile = path.join(imagesPath, nombreDeArchivo);
