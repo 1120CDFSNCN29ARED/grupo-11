@@ -1,7 +1,5 @@
 import "./Footer.css";
 
-function Footer() {
+export default function Footer() {
 	return <div id="footer">Todos los derechos reservados</div>;
 }
-
-export default Footer;

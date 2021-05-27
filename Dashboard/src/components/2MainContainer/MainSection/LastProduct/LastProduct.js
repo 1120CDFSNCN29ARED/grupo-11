@@ -2,7 +2,7 @@ import { BASE_URL } from "../../../env";
 import "./LastProduct.css";
 import missingImage from "./missing-image.jpg";
 
-function LastProduct(props) {
+export default function LastProduct(props) {
 	if (props.noData) {
 		return (
 			<div id="last-created-product">
@@ -39,5 +39,3 @@ function LastProduct(props) {
 		</div>
 	);
 }
-
-export default LastProduct;

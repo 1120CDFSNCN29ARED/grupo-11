@@ -3,7 +3,7 @@ import { BASE_URL } from "../../env";
 import "./Categories.css";
 import CategoriesCard from "./CategoryCard/CategoryCard";
 
-class Categories extends Component {
+export default class Categories extends Component {
 	constructor() {
 		super();
 		this.state = { categories: [] };
@@ -30,5 +30,3 @@ class Categories extends Component {
 		);
 	}
 }
-
-export default Categories;

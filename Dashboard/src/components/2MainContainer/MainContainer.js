@@ -4,7 +4,7 @@ import Footer from "./Footer/Footer";
 import MainSection from "./MainSection/MainSection";
 import Products from "./Products/Products";
 
-function MainContainer() {
+export default function MainContainer() {
 	return (
 		<div id="main-container">
 			<MainSection />
@@ -15,4 +15,4 @@ function MainContainer() {
 	);
 }
 
-export default MainContainer;
+

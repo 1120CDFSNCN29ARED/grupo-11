@@ -4,7 +4,7 @@ import "./MainSection.css";
 import LastProduct from "./LastProduct/LastProduct";
 import Totalizers from "./Totalizers/Totalizers";
 
-class MainSection extends Component {
+export default class MainSection extends Component {
 	constructor() {
 		super();
 		this.state = { ultimoProducto: null };
@@ -37,5 +37,3 @@ class MainSection extends Component {
 		);
 	}
 }
-
-export default MainSection;

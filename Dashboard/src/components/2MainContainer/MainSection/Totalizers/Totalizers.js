@@ -3,7 +3,7 @@ import { BASE_URL } from "../../../env";
 import "./Totalizer.css";
 import TotalizerCard from "./TotalizerCard/TotalizerCard";
 
-class Totalizers extends Component {
+export default class Totalizers extends Component {
 	constructor() {
 		super();
 		this.state = { totalizers: [] };
@@ -53,5 +53,3 @@ class Totalizers extends Component {
 		);
 	}
 }
-
-export default Totalizers;
