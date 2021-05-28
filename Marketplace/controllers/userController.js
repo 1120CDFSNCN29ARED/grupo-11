@@ -1,5 +1,6 @@
 // Requires ***********************************
 const usuarioRepository = require("../repositories/usuarioRepository");
+const rolesRepository = require("../repositories/rolesRepository");
 const fs = require("fs");
 const path = require("path");
 const bcryptjs = require("bcryptjs");
@@ -100,13 +101,35 @@ module.exports = {
 		// 2. Asignarle a una variable el nombre del arhivo de imagen
 		let fileName = req.file ? req.file.filename : usuario.avatar;
 		// 3. Actualizar el registro en la BD y req.session.usuario
-		req.session.usuarioLogeado = await usuarioRepository.Actualizar(usuario.id, req.body, fileName);
+		req.session.usuarioLogeado = await usuarioRepository.ActualizarPorUsuario(usuario.id, req.body, fileName);
 		// 4. Redireccionar
 		res.redirect("/usuario/detalle");
 	},
 	eliminar: async (req, res) => {
 		await EliminarUsuario(req.session.usuarioLogeado.id);
 		res.redirect("/usuario/logout");
+	},
+	adminForm: async (req, res) => {
+		let usuario = await usuarioRepository.ObtenerPorId(req.params.id);
+		let usuarios = await usuarioRepository.ObtenerTodos();
+		let roles = await rolesRepository.ObtenerTodos();
+		let imageFile = path.join(imagesPath, usuario.avatar);
+		let existeAvatar = fs.existsSync(imageFile);
+		res.render("usuario-admin", {
+			usuario,
+			usuarios,
+			roles,
+			existeAvatar,
+			titulo: "Administrar el Usuario",
+		});
+	},
+	adminGuardar: async (req, res) => {
+		let cadena = req.body.id;
+		let id = cadena.slice(cadena.lastIndexOf("/")+1)
+		// Actualizar el registro en la BD
+		await usuarioRepository.ActualizarPorAdmin(id, req.body);
+		// 4. Redireccionar
+		res.redirect("/usuario/administrar/" + id);
 	},
 	loginForm: (req, res) => {
 		res.render("login", { titulo: "Login" });
