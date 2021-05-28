@@ -12,19 +12,20 @@ module.exports = {
 			include: ["roles"],
 		});
 	},
-	ObtenerPorEmail: (email) => {
+	ObtenerPorEmailLogin: (email) => {
 		return entidad.findOne({
 			where: { email: email },
 		});
 	},
-	EmailYaExistente: async (email, id) => {
-		let cantidad = await entidad.count({
-			where: {
-				id: { [Op.ne]: id },
-				email: email,
-			},
-		});
-		return cantidad > 0;
+	EmailYaExistente: (email, id) => {
+		return entidad
+			.count({
+				where: {
+					id: { [Op.ne]: id },
+					email: email,
+				},
+			})
+			.then((n) => n > 0);
 	},
 	Crear: (infoUsuario, fileName) => {
 		return entidad.create({

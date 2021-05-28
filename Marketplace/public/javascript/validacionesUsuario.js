@@ -18,7 +18,7 @@ window.addEventListener("load", function (){
         return re.test(String(imagen).toLowerCase());
     };
 
-    function SetearIncorrecto (grupo, icono, formulario) {
+    function SetearCorrecto (grupo, icono, formulario) {
         grupo.classList.remove('formulario__grupo-incorrecto');
         grupo.classList.add('formulario__grupo-correcto');
         icono.classList.remove('fa-times-circle');
@@ -26,7 +26,7 @@ window.addEventListener("load", function (){
         formulario.classList.remove('formulario__input-error-activo');
     };
     
-    function SetearCorrecto (grupo, icono, formulario) {
+    function SetearIncorrecto (grupo, icono, formulario) {
         grupo.classList.add('formulario__grupo-incorrecto');
         grupo.classList.remove('formulario__grupo-correcto');
         icono.classList.add('fa-times-circle');
@@ -41,9 +41,9 @@ window.addEventListener("load", function (){
         let formularioNombre = document.querySelector(".grupo_nombre .formulario__input-error");
     
         if(nombre.value.length >= 2) {
-              SetearIncorrecto(grupoNombre, iconoNombre, formularioNombre);
-        }else{
-              SetearCorrecto(grupoNombre, iconoNombre, formularioNombre);
+			SetearCorrecto(grupoNombre, iconoNombre, formularioNombre);
+		}else{
+			SetearIncorrecto(grupoNombre, iconoNombre, formularioNombre);
         } 
     });
 
@@ -54,22 +54,22 @@ window.addEventListener("load", function (){
         let formularioApellido = document.querySelector(".grupo_apellido .formulario__input-error");
 
         if(apellido.value.length >= 2){
-              SetearIncorrecto(grupoApellido, iconoApellido, formularioApellido);
-        }else{
-              SetearCorrecto(grupoApellido, iconoApellido, formularioApellido);
+			SetearCorrecto(grupoApellido, iconoApellido, formularioApellido);
+		}else{
+			SetearIncorrecto(grupoApellido, iconoApellido, formularioApellido);
         } 
     })
 
     email.addEventListener('input', function (e){
-
+		document.querySelector("#be-mail").classList.add("ocultar")
         let grupoEmail= document.querySelector(".grupo_email");
-        let iconoEmail = document.querySelector(".grupo_email i");
+        let iconoEmail = document.querySelector(".grupo_email .formulario__validacion-estado");
         let formularioEmail = document.querySelector(".grupo_email .formulario__input-error");
 
         if(validateEmail(email.value)){
-              SetearIncorrecto(grupoEmail, iconoEmail, formularioEmail);
-        }else{
-              SetearCorrecto(grupoEmail, iconoEmail, formularioEmail);
+			SetearCorrecto(grupoEmail, iconoEmail, formularioEmail);
+		}else{
+			SetearIncorrecto(grupoEmail, iconoEmail, formularioEmail);
         } 
     })
 
@@ -80,9 +80,9 @@ window.addEventListener("load", function (){
         let formularioImagen = document.querySelector(".grupo_imagen .formulario__input-error");
 
         if(validateImagen(imagen.value)){
-              SetearIncorrecto(grupoImagen, iconoImagen, formularioImagen);
-        }else{
-              SetearCorrecto(grupoImagen, iconoImagen, formularioImagen);
+			SetearCorrecto(grupoImagen, iconoImagen, formularioImagen);
+		}else{
+			SetearIncorrecto(grupoImagen, iconoImagen, formularioImagen);
         }
     })
 
@@ -93,9 +93,9 @@ window.addEventListener("load", function (){
         let formularioContrasena = document.querySelector(".grupo_contrasena .formulario__input-error");
 
         if(contrasena.value.length >= 6 && contrasena.value.length <= 12){
-              SetearIncorrecto(grupoContrasena, iconoContrasena, formularioContrasena);
-        }else{
-              SetearCorrecto(grupoContrasena, iconoContrasena, formularioContrasena);
+			SetearCorrecto(grupoContrasena, iconoContrasena, formularioContrasena);
+		}else{
+			SetearIncorrecto(grupoContrasena, iconoContrasena, formularioContrasena);
         } 
     })
 
@@ -106,9 +106,9 @@ window.addEventListener("load", function (){
         let formularioContrasena2 = document.querySelector(".grupo_contrasena2 .formulario__input-error");
 
         if(contrasena2.value == contrasena.value){
-              SetearIncorrecto(grupoContrasena2, iconoContrasena2, formularioContrasena2);
-        }else{
-              SetearCorrecto(grupoContrasena2, iconoContrasena2, formularioContrasena2);   
+			SetearCorrecto(grupoContrasena2, iconoContrasena2, formularioContrasena2);   
+		}else{
+			SetearIncorrecto(grupoContrasena2, iconoContrasena2, formularioContrasena2);
         } 
     })
 
