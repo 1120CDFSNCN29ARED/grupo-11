@@ -81,13 +81,17 @@ module.exports = {
 			});
 		}
 		// Acciones a tomar si NO existe ningún error de validación
-		// 1. Eliminar el archivo de imagen obsoleto
-		let nombreImagen = await imagenesRepository.ObtenerPorProductoId(req.params.id).then(n => n.ruta);
-		BorrarArchivoDeImagen(nombreImagen);
-		// 2. Actualizar los registros de imagen y producto en la BD
-		req.file ? await imagenesRepository.Actualizar(req.file.filename, req.params.id) : "";
+		// 1. Acciones a tomar con la imagen
+		if (req.file) {
+			// Eliminar el archivo de imagen obsoleto
+			let nombreImagenObsoleta = await imagenesRepository.ObtenerPorProductoId(req.params.id).then(n => n.ruta);
+			BorrarArchivoDeImagen(nombreImagenObsoleta);
+			// Actualizar los registros de imagen en la BD
+			await imagenesRepository.Actualizar(req.file.filename, req.params.id);
+		}
+		// 2. Actualizar el registro de producto en la BD
 		await productoRepository.Actualizar(req.params.id, req.body, precio, req.session.usuarioLogeado.id);
-		// 2. Redireccionar
+		// 3. Redireccionar
 		res.redirect("/producto/" + req.params.id + "/detalle");
 	},
 	eliminar: async (req, res) => {
