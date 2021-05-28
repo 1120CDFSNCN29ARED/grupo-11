@@ -50,8 +50,13 @@ module.exports = {
 	},
 	Eliminar: (usuarioId) => {
 		return entidad.update(
-			{borrado: true, actualizado_por: usuarioId},
-			{where: { id: usuarioId }}
+			{
+				borrado: true, 
+				actualizado_por: usuarioId
+			},
+			{
+				where: { id: usuarioId }
+			}
 		);
 	},
 };
