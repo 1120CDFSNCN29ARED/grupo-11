@@ -12,7 +12,7 @@ module.exports = {
 			include: ["roles"],
 		});
 	},
-	ObtenerPorEmailLogin: (email) => {
+	ObtenerPorEmail: (email) => {
 		return entidad.findOne({
 			where: { email: email },
 		});

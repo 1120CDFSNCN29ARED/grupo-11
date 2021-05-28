@@ -121,7 +121,7 @@ module.exports = {
 		let validaciones = validationResult(req);
 		if (validaciones.isEmpty()) {
 			// Verificar si el mail y la contraseña pertenecen a un usuario
-			var usuario = await usuarioRepository.ObtenerPorEmailLogin(req.body.email);
+			var usuario = await usuarioRepository.ObtenerPorEmail(req.body.email);
 			if (usuario == undefined || !bcryptjs.compareSync(req.body.contrasena, usuario.contrasena)) {
 				validaciones.errors.push({msg: "Credenciales inválidas"})
 			} else if (usuario.borrado) {
