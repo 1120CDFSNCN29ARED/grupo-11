@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { BASE_URL } from "../env";
-import "../assets/css/categoriesContainer.css";
-import CategoriesCard from "./CategoriesCard";
+import { BASE_URL } from "../../env";
+import "./Categories.css";
+import CategoriesCard from "./CategoryCard/CategoryCard";
 
-class Categories extends Component {
+export default class Categories extends Component {
 	constructor() {
 		super();
 		this.state = { categories: [] };
@@ -25,10 +25,8 @@ class Categories extends Component {
 					? this.state.categories.map((objets, i) => {
 							return <CategoriesCard {...objets} key={i} />;
 					  })
-					: "Categorias no enocntradas"}
+					: "Categorias no encontradas"}
 			</div>
 		);
 	}
 }
-
-export default Categories;

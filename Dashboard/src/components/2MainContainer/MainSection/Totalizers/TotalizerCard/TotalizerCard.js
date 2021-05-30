@@ -1,6 +1,6 @@
-import "../assets/css/totalizerCard.css";
+import "./TotalizerCard.css";
 
-function TotalizerCard(props) {
+export default function TotalizerCard(props) {
 	if (props.noData) {
 		return (
 			<div className={`totalizer-card card-top-border-tertiary`}>
@@ -26,5 +26,3 @@ function TotalizerCard(props) {
 		</div>
 	);
 }
-
-export default TotalizerCard;

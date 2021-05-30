@@ -1,6 +1,6 @@
-import "../assets/css/categoryCard.css";
+import "./CategoryCard.css";
 
-function CategoriesCard(props) {
+export default function CategoriesCard(props) {
 	return (
 		<div className="category-card">
 			<div className="catetory-name">{props.categoria}</div>
@@ -8,5 +8,3 @@ function CategoriesCard(props) {
 		</div>
 	);
 }
-
-export default CategoriesCard;

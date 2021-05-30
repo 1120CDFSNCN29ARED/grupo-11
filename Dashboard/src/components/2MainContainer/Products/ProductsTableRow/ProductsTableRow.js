@@ -1,6 +1,6 @@
-import "../assets/css/productsTableRow.css";
+import "./productsTableRow.css";
 
-function ProductsTableRow(props) {
+export default function ProductsTableRow(props) {
 	const precioWithFormat = parseInt(props.precio).toLocaleString("es-AR", {
 		style: "currency",
 		currency: "ARS",
@@ -17,5 +17,3 @@ function ProductsTableRow(props) {
 		</tr>
 	);
 }
-
-export default ProductsTableRow;

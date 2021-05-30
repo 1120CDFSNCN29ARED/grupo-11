@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { BASE_URL } from "../env";
-import "../assets/css/products.css";
-import ProductsTableRow from "./ProductsTableRow";
+import { BASE_URL } from "../../env";
+import "./Products.css";
+import ProductsTableRow from "./ProductsTableRow/ProductsTableRow";
 
-class Products extends Component {
+export default class Products extends Component {
 	constructor() {
 		super();
 		this.state = { products: [] };
@@ -47,5 +47,3 @@ class Products extends Component {
 		);
 	}
 }
-
-export default Products;

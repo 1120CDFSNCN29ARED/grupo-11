@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { BASE_URL } from "../env";
-import "../assets/css/mainSection.css";
-import Totalizers from "./Totalizers";
-import LastProduct from "./LastProduct";
+import { BASE_URL } from "../../env";
+import "./MainSection.css";
+import LastProduct from "./LastProduct/LastProduct";
+import Totalizers from "./Totalizers/Totalizers";
 
-class MainSection extends Component {
+export default class MainSection extends Component {
 	constructor() {
 		super();
 		this.state = { ultimoProducto: null };
@@ -37,5 +37,3 @@ class MainSection extends Component {
 		);
 	}
 }
-
-export default MainSection;
