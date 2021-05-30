@@ -33,12 +33,12 @@ module.exports = (sequelize) => {
 		});
 		
 		Producto.belongsTo(models.Marca, {
-			as: "marcas",
+			as: "marca",
 			foreignKey: "marca_id"
 		});
 		
 		Producto.belongsTo(models.Modelo, {
-			as: "modelos",
+			as: "modelo",
 			foreignKey: "modelo_id"
 		});
 		

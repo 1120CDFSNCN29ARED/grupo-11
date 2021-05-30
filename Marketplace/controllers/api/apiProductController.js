@@ -11,17 +11,26 @@ module.exports = {
 			productos.push({
 				id: n.id,
 				nombre: n.nombre,
+				marca: n.marcas.nombre,
+				modelo: n.modelos.nombre,
 				descripcion: n.descripcion,
 				categoria: n.categoria.nombre,
-				imagenes: n.imagenes.map(m => m.ruta),
+				imagenes: n.imagenes.map(m => "/images/products/" + m.ruta),
+				precio: n.precio,
+				stock: n.stock_disponible,
 				url: "/api/productos/" + n.id,
 				creado: n.creado_en,
 			});
 		});
 		// *** CATEGORÍAS ***
 		data = await categoriaRepository.ObtenerTodas();
-		let totales = {};
-		data.map(n => {totales[n.nombre] = n.productos.length});
+		let totales = [];
+		data.map(n => { 
+			totales.push({
+				categoria: n.nombre,
+				total: n.productos.length
+			});
+		});
 		// *** FINAL ***
 		let respuesta = {
 			count: productos.length,

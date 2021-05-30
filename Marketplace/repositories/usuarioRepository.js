@@ -19,14 +19,15 @@ module.exports = {
 			where: { email: email },
 		});
 	},
-	EmailYaExistente: async (email, id) => {
-		let cantidad = await entidad.count({
-			where: {
-				id: { [Op.ne]: id },
-				email: email,
-			},
-		});
-		return cantidad > 0;
+	EmailYaExistente: (email, id) => {
+		return entidad
+			.count({
+				where: {
+					id: { [Op.ne]: id },
+					email: email,
+				},
+			})
+			.then((n) => n > 0);
 	},
 	Crear: (infoUsuario, fileName) => {
 		return entidad.create({
@@ -63,20 +64,15 @@ module.exports = {
 			}
 		);
 	},
-	Eliminar: (id, usuario) => {
+	Eliminar: (usuarioId) => {
 		return entidad.update(
 			{
 				borrado: true,
-				actualizado_por: usuario,
+				actualizado_por: usuarioId,
 			},
 			{
-				where: { id: id },
+				where: { id: usuarioId },
 			}
 		);
-	},
-	ObtenerAvatar: async (id) => {
-		let usuario = await entidad.findByPk(id);
-
-		return usuario.avatar;
 	},
 };

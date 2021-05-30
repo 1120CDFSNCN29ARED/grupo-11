@@ -53,7 +53,7 @@ CREATE TABLE `productos` (
 	`precio` INT UNSIGNED NOT NULL,
 	`stock_disponible` INT UNSIGNED NOT NULL DEFAULT 0,
 	`mas_vendido` BOOLEAN NOT NULL DEFAULT 0 ,
-	`novedades` BOOLEAN NOT NULL DEFAULT 0,
+	`novedades` BOOLEAN NOT NULL DEFAULT 1,
 	`creado_por` INT UNSIGNED NOT NULL,
 	`creado_en` DATE NOT NULL,
 	`actualizado_por` INT UNSIGNED NULL,

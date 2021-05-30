@@ -6,7 +6,7 @@ const userController = require(path.join(__dirname,"../controllers/userControlle
 // Middlewares
 const uploadFile = require(path.join(__dirname,"../middlewares/multerUsuario"));
 const validarUsuario = require(path.join(__dirname,"../middlewares/validarUsuario"));
-const validarImagen = require(path.join(__dirname,"../middlewares/validarImagen"));
+const validarImagenCrear = require(path.join(__dirname,"../middlewares/validarImagenCrear"));
 const validarLogin = require(path.join(__dirname,"../middlewares/validarLogin"));
 const soloVisitas = require("../middlewares/soloVisitas");
 const soloUsuarios = require("../middlewares/soloUsuarios");

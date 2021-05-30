@@ -14,7 +14,10 @@ const errorEmailRegistrado = "Este mail ya está registrado";
 // Controlador ********************************
 module.exports = {
 	crearForm: (req, res) => {
-		res.render("usuario-crear", { titulo: "Registro" });
+		res.render("usuario-crear-y-editar", { 
+			titulo: "Registro de Usuario",
+			usuario: null,
+		});
 	},
 	crearGuardar: async (req, res) => {
 		// Validar campos en general
@@ -27,7 +30,7 @@ module.exports = {
 			});
 		}
 		// Verificar si el mail ya existe en la BD
-		if (await usuarioRepository.ObtenerPorEmail(req.body.email)) {
+		if (await usuarioRepository.EmailYaExistente(req.body.email, 0)) {
 			validaciones.errors.push({
 				msg: errorEmailRegistrado,
 				param: "email",
@@ -40,10 +43,11 @@ module.exports = {
 				BorrarArchivoDeImagen(req.file.filename);
 			}
 			// Regresar al formulario de crear
-			return res.render("usuario-crear", {
+			return res.render("usuario-crear-y-editar", {
 				errores: validaciones.mapped(),
 				oldData: req.body,
-				titulo: "Registro",
+				titulo: "Registro de Usuario",
+				usuario: null,
 			});
 		}
 		// Si no hubieron errores de validación...
@@ -63,9 +67,9 @@ module.exports = {
 	},
 	editarForm: async (req, res) => {
 		let usuario = await usuarioRepository.ObtenerPorId(req.session.usuarioLogeado.id);
-		res.render("usuario-editar", {
+		res.render("usuario-crear-y-editar", {
 			usuario,
-			titulo: "Editar el Usuario",
+			titulo: "Edite su Usuario",
 		});
 	},
 	editarGuardar: async (req, res) => {
@@ -88,7 +92,7 @@ module.exports = {
 		// Acciones a tomar si existe algún error de validación
 		if (validaciones.errors.length) {
 			req.file ? BorrarArchivoDeImagen(req.file.filename) : null
-			return res.render("usuario-editar", {
+			return res.render("usuario-crear-y-editar", {
 				usuario,
 				errores: validaciones.mapped(),
 				oldData: req.body,
@@ -106,7 +110,9 @@ module.exports = {
 		res.redirect("/usuario/detalle");
 	},
 	eliminar: async (req, res) => {
-		await EliminarUsuario(req.session.usuarioLogeado.id);
+		let avatar = await usuarioRepository.ObtenerPorId(req.session.usuarioLogeado.id).then(n => n.avatar)
+		BorrarArchivoDeImagen(avatar);
+		await usuarioRepository.Eliminar(req.session.usuarioLogeado.id);
 		res.redirect("/usuario/logout");
 	},
 	adminForm: async (req, res) => {
@@ -141,6 +147,11 @@ module.exports = {
 			var usuario = await usuarioRepository.ObtenerPorEmail(req.body.email);
 			if (usuario == undefined || !bcryptjs.compareSync(req.body.contrasena, usuario.contrasena)) {
 				validaciones.errors.push({msg: "Credenciales inválidas"})
+			} else if (usuario.borrado) {
+				validaciones.errors.push({
+					msg: "El usuario está inactivado",
+					param: "email",
+				});
 			}
 		}
 		if (!validaciones.isEmpty()) {
@@ -153,7 +164,7 @@ module.exports = {
 		// Iniciar session
 		req.session.usuarioLogeado = usuario;
 		// Cookies
-		req.body.recordar != undefined ? res.cookie("recordar", usuario.email, { maxAge: 60 * 60 * 1000 }) : null
+		req.body.recordar != undefined ? res.cookie("recordar", usuario.email, { maxAge: 24 * 60 * 60 * 1000 }) : null
 		res.redirect("/usuario/detalle");
 	},
 	logout: (req, res) => {
@@ -163,15 +174,7 @@ module.exports = {
 	}
 };
 
-async function EliminarUsuario(id) {
-	let avatar = await usuarioRepository.ObtenerAvatar(id);
-	await usuarioRepository.Eliminar(id);
-	BorrarArchivoDeImagen(avatar);
-}
-
 function BorrarArchivoDeImagen(nombreDeArchivo) {
 	let imageFile = path.join(imagesPath, nombreDeArchivo);
-	if (nombreDeArchivo && fs.existsSync(imageFile)) {
-		fs.unlinkSync(imageFile);
-	}
+	nombreDeArchivo && fs.existsSync(imageFile) ? fs.unlinkSync(imageFile) : "";
 }

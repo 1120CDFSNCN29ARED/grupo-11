@@ -9,11 +9,10 @@ main form {
 	padding: 20px 30px;
 	background-color: gray;
 	border-radius: 10px;
-	width: 600px;
 }
 
 main form .textarea {
-	margin: 20px auto 20px;
+	margin: 15px auto 20px;
 	justify-content: flex-start;
 }
 
@@ -24,13 +23,13 @@ main form .textarea {
 main form .modulo {
 	display: flex;
 	flex-direction: row;
-	align-items: flex-start;
+	align-items: center;
 	justify-content: space-between;
-	padding: 20px 0px 0px;
+	padding-top: 15px;
 }
 
 main form h1 {
-	margin-top: 0;
+	margin: 0 auto;
 	color: beige;
 	display: flex;
 	flex-direction: row;
@@ -42,10 +41,11 @@ main form label {
 }
 
 main .formInput,
-main form button {
+main form button,
+main form select
+{
 	border: none;
 	color: dimgray;
-	padding: 5px 10px;
 	border-radius: 10px;
 	font-weight: bold;
 	margin-left: 10px;
@@ -61,18 +61,51 @@ main form select {
 	width: 180px;
 }
 
+main form input {padding: 3px 9px;}
+main form select {padding: 1px 5px;}
+main form button {padding: 7px;}
+
 main form textarea {
-	width: 450px;
+	width: 400px;
+	padding: 3px 5px;
 }
+
+main form .imagen {
+	align-items: center;
+	justify-content: center;
+	width: 200px; 
+	max-height: 250px;
+	margin-top: 15px;
+}
+
+#imagen {margin-bottom: 3px;}
 
 /* Botón de imagen */
 input#inputImagen {display:none}
-form #labelImagen {color: var(--azul); background-color: rgb(255, 255, 255);}
+form #labelImagen {
+	color: var(--azul); 
+	background-color: rgb(255, 255, 255); 
+	padding: 3px 5px;
+}
 form #divImagen label {cursor: pointer; margin-right: 0px; line-height: normal;}
 
 /* Imagen */
-form #divImagen {width: 200px;align-items: flex-start;	padding: 10px 0px;}
-#preview img {border-radius: 15px; max-width: 200px; max-height: 150px;}
+form #divImagen {
+	width: 100%; 
+	max-height: 100%;
+	align-items: center; 
+	justify-content: center;
+}
+#preview {
+	display: flex; 
+	align-items: center; 
+	justify-content: center;
+}
+#preview, #preview img {
+	border-radius: 15px; 
+	max-width: 100%; 
+	max-height: 100%;
+}
 
 .fa-times-circle {
 	color: white;
@@ -86,3 +119,7 @@ form #divImagen {width: 200px;align-items: flex-start;	padding: 10px 0px;}
 .focus {
 	background-color: var(--primary-background);
 }
+
+#col-vacia {width:20px}
+
+.erroresFE {color: var(--celeste-claro)}
