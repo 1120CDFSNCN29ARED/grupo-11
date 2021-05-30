@@ -1,5 +1,7 @@
 // Requires ***********************************
 const productoRepository = require("../repositories/productoRepository");
+const marcaRepository = require("../repositories/marcaRepository");
+const modeloRepository = require("../repositories/modeloRepository");
 const imagenesRepository = require("../repositories/imagenRepository");
 const fs = require("fs");
 const path = require("path");
@@ -8,9 +10,13 @@ const imagesPath = path.join(__dirname, "../public/images/products/");
 
 // Controlador ********************************
 module.exports = {
-	crearForm: (req, res) => {
-		let titulo = "Crear un Producto";
-		res.render("producto-crear", { titulo, toThousand });
+	crearForm: async (req, res) => {
+		res.render("producto-crear-y-editar", { 
+			titulo: "Crear un Producto",
+			producto: null,
+			marcas: await marcaRepository.ObtenerTodas(),
+			modelos: await modeloRepository.ObtenerTodas(),
+		});
 	},
 	crearGuardar: async (req, res) => {
 		let precio = parseFloat(req.body.precio);
@@ -23,13 +29,14 @@ module.exports = {
 				param: "imagen",
 			});
 			req.file ? BorrarArchivoDeImagen(req.file.filename) : null
-			// return res.send([req.body.precio, precio, isNaN(req.body.precio), !!precio])
-			return res.render("producto-crear", {
-				toThousand,
-				errores: validaciones.mapped(),
-				precio,
-				oldData: req.body,
+			return res.render("producto-crear-y-editar", {
 				titulo: "Crear un Producto",
+				producto: null,
+				marcas: await marcaRepository.ObtenerTodas(),
+				modelos: await modeloRepository.ObtenerTodas(),
+				errores: validaciones.mapped(),
+				oldData: req.body,
+				precio,
 			});
 		}
 		// Acciones a tomar si NO existe ningún error de validación
@@ -42,13 +49,19 @@ module.exports = {
 	detalle: async (req, res) => {
 		let titulo = "Detalle del Producto";
 		let producto = await productoRepository.ObtenerPorId(req.params.id);
-		
-		return res.render("producto-detalle", { producto, toThousand, titulo });
+		return res.render("producto-detalle", { 
+			producto,
+			toThousand,
+			titulo,
+		});
 	},
 	editarForm: async (req, res) => {
-		let titulo = "Editar un Producto";
-		let producto = await productoRepository.ObtenerPorId(req.params.id);
-		return res.render("producto-editar", { producto, toThousand, titulo });
+		return res.render("producto-crear-y-editar", {
+			titulo: "Editar un Producto",
+			producto: await productoRepository.ObtenerPorId(req.params.id),
+			marcas: await marcaRepository.ObtenerTodas(),
+			modelos: await modeloRepository.ObtenerTodas(),
+		});
 	},
 	editarGuardar: async (req, res) => {
 		let precio = parseFloat(req.body.precio);
@@ -56,25 +69,29 @@ module.exports = {
 		let validaciones = validationResult(req);
 		// Acciones a tomar si existe algún error de validación
 		if (validaciones.errors.length) {
-			validaciones.errors.push({
-				msg: "Tienes que subir una imagen",
-				param: "imagen",
-			});
 			req.file ? BorrarArchivoDeImagen(req.file.filename) : null
-			return res.render("producto-editar", {
-				toThousand,
+			return res.render("producto-crear-y-editar", {
+				titulo: "Editar un Producto",
 				producto: {id: req.params.id},
+				marcas: await marcaRepository.ObtenerTodas(),
+				modelos: await modeloRepository.ObtenerTodas(),
 				errores: validaciones.mapped(),
 				oldData: req.body,
 				precio,
-				titulo: "Editar un Producto",
 			});
 		}
 		// Acciones a tomar si NO existe ningún error de validación
-		// 1. Actualizar el registro en la BD
+		// 1. Acciones a tomar con la imagen
+		if (req.file) {
+			// Eliminar el archivo de imagen obsoleto
+			let nombreImagenObsoleta = await imagenesRepository.ObtenerPorProductoId(req.params.id).then(n => n.ruta);
+			BorrarArchivoDeImagen(nombreImagenObsoleta);
+			// Actualizar los registros de imagen en la BD
+			await imagenesRepository.Actualizar(req.file.filename, req.params.id);
+		}
+		// 2. Actualizar el registro de producto en la BD
 		await productoRepository.Actualizar(req.params.id, req.body, precio, req.session.usuarioLogeado.id);
-		await imagenesRepository.Actualizar(req.file.filename, req.params.id);
-		// 2. Redireccionar
+		// 3. Redireccionar
 		res.redirect("/producto/" + req.params.id + "/detalle");
 	},
 	eliminar: async (req, res) => {
