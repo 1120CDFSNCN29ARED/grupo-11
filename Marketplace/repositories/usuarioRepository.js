@@ -9,20 +9,20 @@ module.exports = {
 	},
 	ObtenerPorId: (id) => {
 		return entidad.findByPk(id, {
-			include: [ "roles" ]
+			include: ["roles"],
 		});
 	},
 	ObtenerPorEmail: (email) => {
 		return entidad.findOne({
-			where: {email: email}
+			where: { email: email },
 		});
 	},
 	EmailYaExistente: async (email, id) => {
 		let cantidad = await entidad.count({
 			where: {
-				id: {[Op.ne]: id},
+				id: { [Op.ne]: id },
 				email: email,
-			}
+			},
 		});
 		return cantidad > 0;
 	},
@@ -33,33 +33,32 @@ module.exports = {
 			email: infoUsuario.email,
 			contrasena: bcryptjs.hashSync(infoUsuario.contrasena, 10),
 			avatar: fileName,
-			rol_id: 2
+			rol_id: 2,
 		});
 	},
 	Actualizar: (id, infoUsuario, fileName) => {
-		return entidad.update({
-			nombre: infoUsuario.nombre,
-			apellido: infoUsuario.apellido,
-			email: infoUsuario.email,
-			contrasena: bcryptjs.hashSync(infoUsuario.contrasena, 10),
-			avatar: fileName
-		},
-		{
-			where: { id: id },
-		});
+		return entidad.update(
+			{
+				nombre: infoUsuario.nombre,
+				apellido: infoUsuario.apellido,
+				email: infoUsuario.email,
+				contrasena: bcryptjs.hashSync(infoUsuario.contrasena, 10),
+				avatar: fileName,
+			},
+			{
+				where: { id: id },
+			}
+		);
 	},
-	Eliminar: (id, usuario) => {
-		return entidad.update({
-			borrado: true,
-			actualizado_por: usuario
-		},
-		{
-			where: { id: id },
-		});
+	Eliminar: (usuarioId) => {
+		return entidad.update(
+			{
+				borrado: true,
+				actualizado_por: usuarioId,
+			},
+			{
+				where: { id: usuarioId },
+			}
+		);
 	},
-	ObtenerAvatar: async (id) => {
-		let usuario = await entidad.findByPk(id);
-
-		return usuario.avatar;
-	}
 };

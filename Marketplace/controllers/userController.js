@@ -105,7 +105,9 @@ module.exports = {
 		res.redirect("/usuario/detalle");
 	},
 	eliminar: async (req, res) => {
-		await EliminarUsuario(req.session.usuarioLogeado.id);
+		let avatar = await usuarioRepository.ObtenerPorId(req.session.usuarioLogeado.id).then(n => n.avatar)
+		BorrarArchivoDeImagen(avatar);
+		await usuarioRepository.Eliminar(req.session.usuarioLogeado.id);
 		res.redirect("/usuario/logout");
 	},
 	loginForm: (req, res) => {
@@ -140,15 +142,7 @@ module.exports = {
 	}
 };
 
-async function EliminarUsuario(id) {
-	let avatar = await usuarioRepository.ObtenerAvatar(id);
-	await usuarioRepository.Eliminar(id);
-	BorrarArchivoDeImagen(avatar);
-}
-
 function BorrarArchivoDeImagen(nombreDeArchivo) {
 	let imageFile = path.join(imagesPath, nombreDeArchivo);
-	if (nombreDeArchivo && fs.existsSync(imageFile)) {
-		fs.unlinkSync(imageFile);
-	}
+	nombreDeArchivo && fs.existsSync(imageFile) ? fs.unlinkSync(imageFile) : "";
 }
