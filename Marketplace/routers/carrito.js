@@ -10,6 +10,7 @@ router.get("/borrar-registro/:id", soloUsuarios, carritoController.eliminarRegis
 router.get("/agregar-desde-listado/:id", soloUsuarios, carritoController.agregarRegistro);
 router.get("/agregar-desde-detalle/:id", soloUsuarios, carritoController.agregarRegistro);
 router.put("/actualizar", soloUsuarios, carritoController.actualizarCarrito);
+router.get("/contador", soloUsuarios, carritoController.contador);
 router.get("/", soloUsuarios, carritoController.listado);
 
 module.exports = router;

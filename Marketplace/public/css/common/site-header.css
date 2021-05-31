@@ -111,3 +111,21 @@ header .imagenCuadrada {
 	left: 0px;
 	top: 35px;
 }
+
+#shop-cart-container {
+	position: relative;
+}
+
+#contador {
+	background-color: red;
+	color: white;
+	font-weight: bold;
+	line-height: normal;
+	font-size: 1rem;
+	position: absolute;
+	top: 17px;
+	right: 1px;
+	padding: 2px 7px;
+	border-radius: 50%;
+	border: white 1px solid
+}
