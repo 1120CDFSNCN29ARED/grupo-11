@@ -16,9 +16,12 @@ module.exports = {
 		res.redirect("/carrito")
 	},
 	actualizarCarrito:  async (req, res) => {
-		//return res.send(req.body)
 		let cantRegistros = req.body.cantRegistros;
-		await carritoRepository.ActualizarCarrito(req.body, cantRegistros);
+		for (let i = 0; i < cantRegistros; i++) {
+			carritoID = req.body["registro" + i];
+			cantidad = req.body["cantidad" + i];
+			await carritoRepository.ActualizarCarrito(carritoID, cantidad);
+		}
 		res.redirect("/carrito");
 	}
 };

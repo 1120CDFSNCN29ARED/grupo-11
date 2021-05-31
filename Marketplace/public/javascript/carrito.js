@@ -11,7 +11,6 @@ window.addEventListener("load", () => {
 		// Cambios en la cantidad
 		cantidad[i].addEventListener("input", () => {
 			cant = parseInt(cantidad[i].value);
-			console.log(cantidad)
 			cant < 0 ? (cant = 0) : "";
 			actualizar(cant, i);
 		});
