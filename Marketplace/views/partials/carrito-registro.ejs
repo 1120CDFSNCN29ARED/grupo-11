@@ -1,0 +1,25 @@
+<section class="productos">
+	<p class="borrar" id="registroID"><%= registroID %></p>
+	<img src="/images/products/<%= imagen.ruta %> " alt="fender stratocaster" class="imagen-de-producto">
+	<p class="nombre-de-producto"><%= producto.nombre %> </p>
+	<div id="cantidad-y-flechas">
+		<!--CANTIDAD-->
+		<input class="ocultar" name="registro<%= numRegistro %>" type="number" value="<%= registroID %>">
+		<input id="cantidad" name="cantidad<%= numRegistro %>" type="number" value="<%= cantidad %>">
+	</div>
+	<div class="valor">
+		<!--PRECIO UNITARIO-->
+		<p class="título">$/un.</p>
+		<p class="valor">$ <%= toThousand(producto.precio) %> </p>
+		<p class="ocultar" id="precio"><%= producto.precio %> </p>
+	</div>
+	<div class="valor">
+		<!--PRECIO TOTAL-->
+		<p class="título">Valor Total</p>
+		<p class="valor" id="valorTotal">$ <%= toThousand(cantidad * producto.precio) %> </p>
+	</div>
+	<div>
+		<!--TRASH-->
+		<i class="fas fa-trash-alt" id="eliminar"></i>
+	</div>	
+</section>
