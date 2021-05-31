@@ -5,11 +5,13 @@ const entidad = db.Usuario;
 
 module.exports = {
 	ObtenerTodos: () => {
-		return entidad.findAll();
+		return entidad.findAll({
+			include: ["rol"],
+		});
 	},
 	ObtenerPorId: (id) => {
 		return entidad.findByPk(id, {
-			include: ["roles"],
+			include: ["rol"],
 		});
 	},
 	ObtenerPorEmail: (email) => {
@@ -37,7 +39,7 @@ module.exports = {
 			rol_id: 2,
 		});
 	},
-	Actualizar: (id, infoUsuario, fileName) => {
+	ActualizarPorUsuario: (id, infoUsuario, fileName) => {
 		return entidad.update(
 			{
 				nombre: infoUsuario.nombre,
@@ -48,6 +50,17 @@ module.exports = {
 			},
 			{
 				where: { id: id },
+			}
+		);
+	},
+	ActualizarPorAdmin: (userId, infoUsuario) => {
+		return entidad.update(
+			{
+				rol_id: infoUsuario.rol_id,
+				borrado: infoUsuario.borrado,
+			},
+			{
+				where: { id: userId },
 			}
 		);
 	},

@@ -94,8 +94,6 @@ header .imagenAncha {
 header .imagenAlta {
 	width: 100%;
 	height: auto;
-	position: absolute;
-	top: 0;
 }
 header .imagenCuadrada {
 	width: 100%;
