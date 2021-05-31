@@ -43,12 +43,14 @@ app.set("views", [
 // ****** Conectando con el Navegador *******
 app.listen(3001, () => console.log("Servidor funcionando en puerto 3001..."));
 // ************* Ruteadores ****************
-const rutaMain = require("./routers/main");
 const rutaProducto = require("./routers/product");
 const rutaUsuario = require("./routers/user");
 const rutaAPI = require("./routers/api");
+const rutaCarrito = require("./routers/carrito");
+const rutaMain = require("./routers/main");
 // **************** Rutas *******************
-app.use("/", rutaMain);
 app.use("/producto", rutaProducto);
 app.use("/usuario", rutaUsuario);
 app.use("/api", rutaAPI);
+app.use("/carrito", rutaCarrito);
+app.use("/", rutaMain);

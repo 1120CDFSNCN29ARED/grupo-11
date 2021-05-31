@@ -21,7 +21,10 @@
 		<link rel="stylesheet" href="/css/home-responsive.css">
 	<% } %>
 	<% if (titulo == "Login") { %><link rel="stylesheet" href="/css/varios/login.css"><% } %>
-	<% if (titulo == "Carrito de Compras") { %><link rel="stylesheet" href="/css/varios/carrito.css"><% } %>
+	<% if (titulo == "Carrito de Compras") { %>
+		<link rel="stylesheet" href="/css/varios/carrito.css">
+		<script src="/javascript/carrito.js"></script>
+	<% } %>
 
 	<% if (titulo == "Registro de Usuario" || titulo == "Edite su Usuario") { %><link rel="stylesheet" href="/css/users/usuario-crear-y-editar.css"><% } %>
 	<% if (titulo == "Detalle del Usuario" || titulo == "Administrar el Usuario") { %><link rel="stylesheet" href="/css/users/usuario-detalle.css"><% } %>

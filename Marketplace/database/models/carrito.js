@@ -15,14 +15,15 @@ module.exports = (sequelize) => {
 	const Carrito = sequelize.define(alias,columns,config);
 
 	Carrito.associate = function(models) {
-		Carrito.belongsTo(models.Usuario, {
-			as: "usuarios",
-			foreignKey: "usuario_id"
-		});
 
 		Carrito.belongsTo(models.Producto, {
-			as: "productos",
+			as: "producto",
 			foreignKey: "producto_id"
+		});
+
+		Carrito.belongsTo(models.Imagen, {
+			as: "imagen",
+			foreignKey: "producto_id",
 		});
 	};
 

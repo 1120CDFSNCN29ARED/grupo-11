@@ -1,12 +1,6 @@
 const productoRepository = require("../repositories/productoRepository");
 
 module.exports = {
-	carrito: (req, res) => {
-		res.render("carrito", {
-			titulo: "Carrito de Compras",
-		});
-	},
-
 	index: async (req, res) => {
 		let novedades = await productoRepository.ObtenerNovedades();
 		let masVendidos = await productoRepository.ObtenerMasVendidos()
