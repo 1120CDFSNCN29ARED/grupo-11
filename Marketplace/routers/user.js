@@ -19,7 +19,7 @@ router.post(
 	soloVisitas,
 	uploadFile.single("imagen"),
 	validarUsuario,
-	validarImagen,
+	validarImagenCrear,
 	userController.crearGuardar
 );
 router.get("/detalle", soloUsuarios, userController.detalle);
@@ -29,7 +29,7 @@ router.put(
 	soloUsuarios,
 	uploadFile.single("imagen"),
 	validarUsuario,
-	validarImagen,
+	validarImagenCrear,
 	userController.editarGuardar
 );
 router.delete("/eliminar", soloUsuarios, userController.eliminar);
