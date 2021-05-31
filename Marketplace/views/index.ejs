@@ -16,7 +16,7 @@
 								<a href="/producto/<%= instrumento.id %>/detalle">
 									<img src="/images/products/<%= instrumento.imagenes[0].ruta %>" alt="<%= instrumento.nombre %>" class="product-image">
 								</a>
-								<i class="fas fa-shopping-basket"></i>
+								<a href="/carrito/agregar-desde-listado/<%= instrumento.id %>" class="fas fa-shopping-basket"></a>
 							</div>
 							<div class="product-information">
 								<p class="product-description"><%= instrumento.nombre %></p>
