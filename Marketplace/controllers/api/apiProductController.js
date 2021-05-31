@@ -5,14 +5,16 @@ module.exports = {
 	listado: async (req, res) => {
 		let data = null;
 		// *** PRODUCTOS ***
-		data = await productoRepository.ObtenerTodas();
+		data = await productoRepository
+			.ObtenerTodas()
+			.then((n) => n.filter((m) => !m.borrado));
 		let productos = [];
 		data.map(n => {
 			productos.push({
 				id: n.id,
 				nombre: n.nombre,
-				marca: n.marcas.nombre,
-				modelo: n.modelos.nombre,
+				marca: n.marca.nombre,
+				modelo: n.modelo.nombre,
 				descripcion: n.descripcion,
 				categoria: n.categoria.nombre,
 				imagenes: n.imagenes.map(m => "/images/products/" + m.ruta),
@@ -49,7 +51,7 @@ module.exports = {
 			descripcion: data.descripcion,
 			categoria: data.categoria.nombre,
 			marca: data.marcas.nombre,
-			modelo: data.modelos.nombre,
+			modelo: data.modelo.nombre,
 			precio: data.precio,
 			stock: data.stock_disponible,
 			imagenes: data.imagenes.map(n => n.ruta),

@@ -2,8 +2,10 @@ const usuarioRepository = require("../../repositories/usuarioRepository");
 
 module.exports = {
 	listado: async (req, res) => {
-        let usuarios = await usuarioRepository.ObtenerTodos();
-        let usuarioRespuesta = usuarios.map(x => {
+        let usuarios = await usuarioRepository
+			.ObtenerTodos()
+			.then((n) => n.filter((m) => !m.borrado));
+		let usuarioRespuesta = usuarios.map(x => {
             return {
                 id: x.id,
                 nombre: x.nombre,
