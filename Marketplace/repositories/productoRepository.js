@@ -4,12 +4,12 @@ const entidad = db.Producto;
 module.exports = {
 	ObtenerTodas: () => {
 		return entidad.findAll({
-			include: ["imagenes", "categoria", "marcas", "modelos"],
+			include: ["imagenes", "categoria", "marca", "modelo"],
 		});
 	},
 	ObtenerPorId: (id) => {
 		return entidad.findByPk(id, {
-			include: ["imagenes", "categoria", "marcas", "modelos"],
+			include: ["imagenes", "categoria", "marca", "modelo"],
 		});
 	},
 	ObtenerNovedades: () => {
