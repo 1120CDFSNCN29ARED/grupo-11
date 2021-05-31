@@ -50,7 +50,7 @@ module.exports = {
 			nombre: data.nombre,
 			descripcion: data.descripcion,
 			categoria: data.categoria.nombre,
-			marca: data.marcas.nombre,
+			marca: data.marca.nombre,
 			modelo: data.modelo.nombre,
 			precio: data.precio,
 			stock: data.stock_disponible,

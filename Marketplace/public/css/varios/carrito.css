@@ -115,3 +115,11 @@ main {
 #carrito .fa-trash-alt {
 	font-size: 1.1rem;
 }
+
+#carritoVacio {
+	text-align: center;
+	margin: 25px;
+	font-size: 1.2rem;
+	color: red;
+	font-weight: bold;
+}
