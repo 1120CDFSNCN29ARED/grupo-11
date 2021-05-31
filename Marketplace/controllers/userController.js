@@ -105,7 +105,8 @@ module.exports = {
 		// 2. Asignarle a una variable el nombre del arhivo de imagen
 		let fileName = req.file ? req.file.filename : usuario.avatar;
 		// 3. Actualizar el registro en la BD y req.session.usuario
-		req.session.usuarioLogeado = await usuarioRepository.ActualizarPorUsuario(usuario.id, req.body, fileName);
+		await usuarioRepository.ActualizarPorUsuario(usuario.id, req.body, fileName);
+		req.session.usuarioLogeado = await usuarioRepository.ObtenerPorId(req.session.usuarioLogeado.id);
 		// 4. Redireccionar
 		res.redirect("/usuario/detalle");
 	},
