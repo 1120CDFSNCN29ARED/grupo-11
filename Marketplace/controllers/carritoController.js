@@ -22,10 +22,10 @@ module.exports = {
 		let usuarioID = req.session.usuarioLogeado.id;
 		let productoID = parseInt(req.params.id);
 		// Definir a dónde se va a redireccionar
-		let urlOrigen = req.originalUrl.slice(9);
-		urlOrigen = urlOrigen.slice(0, urlOrigen.lastIndexOf("/"));
-		if (urlOrigen == "agregar-desde-listado") {(urlDestino = "/")} else
-		if (urlOrigen == "agregar-desde-detalle") {urlDestino = "/producto/" + productoID + "/detalle"}
+		let urlOrigen = req.originalUrl.slice(1)
+		urlOrigen = urlOrigen.slice(urlOrigen.indexOf("/")+1, urlOrigen.lastIndexOf("/"));
+		if (urlOrigen == "agregar/1") {(urlDestino = "/")} else
+		if (urlOrigen == "agregar/2") {urlDestino = "/producto/" + productoID + "/detalle"}
 		// Averiguar si el carrito ya existe
 		let avanzar = await carritoRepository.CarritoYaExistente(usuarioID, productoID).then(n => !n)
 		// Sumar al carrito
