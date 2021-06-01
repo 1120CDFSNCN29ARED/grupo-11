@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const db = require("../database/models");
 const entidad = db.Producto;
 
@@ -68,6 +69,36 @@ module.exports = {
 		},
 		{
 			where: { id: id },
+		});
+	},
+	Buscar: (categoriaId, searchValue) => {
+		let where;
+
+		if (!categoriaId && !searchValue) {
+			where = {
+				borrado: false
+			}
+		} else {
+			if (categoriaId) {
+				where = {
+					categoria_id: categoriaId,
+					borrado: false
+				}
+			}
+			
+			if (searchValue) {
+				where = {
+					nombre: {
+						[Op.like]: '%' + searchValue + '%'
+					},
+					borrado: false
+				}
+			}
+		}
+
+		return entidad.findAll({
+			where: where,
+			include: [ "imagenes" ]
 		});
 	}
 };

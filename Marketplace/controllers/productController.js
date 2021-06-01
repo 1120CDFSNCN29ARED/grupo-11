@@ -98,6 +98,27 @@ module.exports = {
 		await EliminarProducto(req.params.id, req.session.usuarioLogeado.id);
 		res.redirect("/");
 	},
+	buscar: async (req, res) => {
+		let productos
+
+		if (req.query.categoria) {
+			productos = await productoRepository.Buscar(req.query.categoria, null);
+		}
+
+		if (req.query['search-value']) {
+			productos = await productoRepository.Buscar(null, req.query['search-value']);
+		}
+
+		if (req.query['search-value'] === "") {
+			productos = await productoRepository.Buscar(null, null);
+		}
+		
+		res.render("busqueda", {
+			titulo: "Resultado busqueda",
+			toThousand,
+			productos
+		});
+	}
 };
 
 const toThousand = (n) => {
