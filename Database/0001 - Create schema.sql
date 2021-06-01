@@ -80,12 +80,12 @@ CREATE TABLE `ventas_encabezado` (
 CREATE TABLE `ventas_detalle` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`producto_id` INT UNSIGNED NOT NULL,
-	`venta_id` INT UNSIGNED NOT NULL,
+	`ventas_encabezado_id` INT UNSIGNED NOT NULL,
 	`cantidad` INT UNSIGNED NOT NULL,
 	`precio` DECIMAL(13,2) UNSIGNED NOT NULL,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`producto_id`) REFERENCES `productos`(`id`),
-	FOREIGN KEY (`venta_id`) REFERENCES `ventas_encabezado`(`id`)
+	FOREIGN KEY (`ventas_encabezado_id`) REFERENCES `ventas_encabezado`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `imagenes` (

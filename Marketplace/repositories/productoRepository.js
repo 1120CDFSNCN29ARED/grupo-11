@@ -7,8 +7,8 @@ module.exports = {
 			include: ["imagenes", "categoria", "marca", "modelo"],
 		});
 	},
-	ObtenerPorId: (id) => {
-		return entidad.findByPk(id, {
+	ObtenerPorId: (productoID) => {
+		return entidad.findByPk(productoID, {
 			include: ["imagenes", "categoria", "marca", "modelo"],
 		});
 	},
@@ -16,35 +16,30 @@ module.exports = {
 		return entidad.findAll({
 			where: {
 				novedades: true,
-				borrado: false
+				borrado: false,
 			},
-			include: [ "imagenes" ]
+			include: ["imagenes"],
 		});
 	},
 	ObtenerMasVendidos: () => {
 		return entidad.findAll({
 			where: {
 				mas_vendido: true,
-				borrado: false
+				borrado: false,
 			},
-			include: [ "imagenes" ]
+			include: ["imagenes"],
 		});
-	},
-	ObtenerImagenes: async (id) => {
-		const producto = await entidad.findByPk(id, {
-			include: [ "imagenes" ]
-		});
-
-		return producto.imagenes;
 	},
 	Eliminar: (idProducto, idUsuario) => {
-		return entidad.update({
-			borrado: true,
-			actualizado_por: idUsuario
-		},
-		{
-			where: { id: idProducto },
-		});
+		return entidad.update(
+			{
+				borrado: true,
+				actualizado_por: idUsuario,
+			},
+			{
+				where: { id: idProducto },
+			}
+		);
 	},
 	Crear: (infoProducto, precio, usuarioId) => {
 		return entidad.create({
@@ -58,16 +53,33 @@ module.exports = {
 			creado_por: usuarioId,
 		});
 	},
-	Actualizar: (id, infoProducto, precio, usuarioId) => {
-		return entidad.update({
-			nombre: infoProducto.nombre,
-			categoria_id: infoProducto.categoria,
-			descripcion: infoProducto.descripcion,
-			precio: precio,
-			actualizado_por: usuarioId
-		},
-		{
-			where: { id: id },
-		});
-	}
+	Actualizar: (productoID, infoProducto, precio, usuarioId) => {
+		return entidad.update(
+			{
+				nombre: infoProducto.nombre,
+				categoria_id: infoProducto.categoria,
+				descripcion: infoProducto.descripcion,
+				precio: precio,
+				actualizado_por: usuarioId,
+			},
+			{
+				where: { id: productoID },
+			}
+		);
+	},
+	DisminuirStock: (productoID, cantidad) => {
+		let stock_disponible = entidad
+			.findByPk(productoID)
+			.then((n) => n.stock_disponible);
+		let nuevoStock = stock_disponible - cantidad;
+		return entidad.update(
+			{
+				stock_disponible: nuevoStock,
+			},
+			{
+				where: { id: productoID },
+			}
+		);
+	},
+	
 };

@@ -63,8 +63,9 @@ module.exports = {
 		for (n of carritos) {
 			carritoID = n.id;
 			productoID = n.producto_id;
+			cantComprada = n.cantidad
 			await carritoRepository.EliminarRegistro(carritoID);
-			await productoRepository.DisminuirStock(productoID);
+			await productoRepository.DisminuirStock(productoID, cantComprada);
 		}
 	},
 
