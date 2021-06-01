@@ -57,6 +57,10 @@ img {
 	background-color: green;
 }
 
+.descripcion button#carrito {
+	background-color: var(--gray);
+}
+
 .caracteristica {
 	text-align: center;
 }
