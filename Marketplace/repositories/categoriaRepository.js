@@ -7,4 +7,7 @@ module.exports = {
 			include: ["productos"],
 		});
 	},
+	ObtenerPorId: (id) => {
+		return entidad.findByPk(id);
+	}
 };

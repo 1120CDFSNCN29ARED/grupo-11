@@ -3,6 +3,7 @@ const productoRepository = require("../repositories/productoRepository");
 const marcaRepository = require("../repositories/marcaRepository");
 const modeloRepository = require("../repositories/modeloRepository");
 const imagenesRepository = require("../repositories/imagenRepository");
+const categoriaRepository = require("../repositories/categoriaRepository");
 const fs = require("fs");
 const path = require("path");
 const { validationResult } = require("express-validator");
@@ -99,14 +100,18 @@ module.exports = {
 		res.redirect("/");
 	},
 	buscar: async (req, res) => {
-		let productos
+		let productos;
+		let resultadoBusqueda = "Resultado de la busqueda: ";
 
 		if (req.query.categoria) {
 			productos = await productoRepository.Buscar(req.query.categoria, null);
+			categoria = await categoriaRepository.ObtenerPorId(req.query.categoria);
+			resultadoBusqueda += categoria.nombre;
 		}
 
 		if (req.query['search-value']) {
 			productos = await productoRepository.Buscar(null, req.query['search-value']);
+			resultadoBusqueda += req.query['search-value'];
 		}
 
 		if (req.query['search-value'] === "") {
@@ -116,7 +121,8 @@ module.exports = {
 		res.render("busqueda", {
 			titulo: "Resultado busqueda",
 			toThousand,
-			productos
+			productos,
+			resultadoBusqueda
 		});
 	}
 };

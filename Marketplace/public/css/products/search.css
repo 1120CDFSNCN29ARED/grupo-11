@@ -8,7 +8,6 @@ main {
 	margin: auto;
 	margin-top: 2em;
 	margin-bottom: 2em;
-	padding-top: 3em;
 }
 
 .product {
@@ -43,6 +42,12 @@ main {
 	font-size: 2em;
 	font-weight: bold;
 	color: var(--price-color);
+}
+
+#search-result {
+	width: 90%;
+	margin: auto;
+	margin-top: 10em;
 }
 
 /* MEDIA QUERY */
