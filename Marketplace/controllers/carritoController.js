@@ -1,10 +1,10 @@
 // Requires ***********************************
 const productoRepository = require("../repositories/productoRepository");
 const carritoRepository = require("../repositories/carritoRepository");
+const ventasRepository = require("../repositories/ventasRepository");
 
 module.exports = {
 	listado: async (req, res) => {
-		//return res.send("listado");
 		let usuarioID = req.session.usuarioLogeado.id;
 		let carritos = await carritoRepository.ObtenerTodos(usuarioID);
 		res.render("carrito", {
@@ -14,7 +14,7 @@ module.exports = {
 		});
 	},
 
-	agregarRegistro: async (req, res) => {
+	agregarCarrito: async (req, res) => {
 		// Variables de uso general
 		let usuarioID = req.session.usuarioLogeado.id;
 		let productoID = parseInt(req.params.id);
@@ -53,21 +53,34 @@ module.exports = {
 		res.redirect("/carrito");
 	},
 
-	eliminarRegistro: async (req, res) => {
+	eliminarCarrito: async (req, res) => {
 		let carritoID = req.params.id;
 		await carritoRepository.EliminarRegistro(carritoID);
 		res.redirect("/carrito");
 	},
 
 	comprar: async (req, res) => {
-		return res.send("comprar")
 		let usuarioID = req.session.usuarioLogeado.id;
 		let carritos = await carritoRepository.ObtenerTodos(usuarioID);
+		// Obtener la cabecera de la venta
+		let numeroFC = await ventasRepository.ObtenerUltimaFC() + 1;
+		let fecha = new Date()
+		let importe = await carritoRepository.ImporteCarrito(usuarioID);
+		return res.send(importe.toString());
+		// Obtener el detalle de venta
+		let detalle = []
+		carritos.map(n => {
+			detalle.push({
+				producto_id: n.producto_id,
+				cantidad: n.cantidad,
+				precio: n.producto.precio,
+			});
+		})
 		// Eliminar el carrito y disminuir el stock
 		for (n of carritos) {
 			carritoID = n.id;
 			productoID = n.producto_id;
-			cantComprada = n.cantidad;
+			cantComprada = parseInt(n.cantidad);
 			await carritoRepository.EliminarRegistro(carritoID);
 			await productoRepository.DisminuirStock(productoID, cantComprada);
 		}

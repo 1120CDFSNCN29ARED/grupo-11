@@ -67,18 +67,14 @@ module.exports = {
 			}
 		);
 	},
-	DisminuirStock: (productoID, cantidad) => {
-		let stock_disponible = entidad
+	DisminuirStock: async (productoID, cantidad) => {
+		let stock_disponible = await entidad
 			.findByPk(productoID)
 			.then((n) => n.stock_disponible);
 		let nuevoStock = stock_disponible - cantidad;
 		return entidad.update(
-			{
-				stock_disponible: nuevoStock,
-			},
-			{
-				where: { id: productoID },
-			}
+			{stock_disponible: nuevoStock},
+			{where: { id: productoID }}
 		);
 	},
 	
