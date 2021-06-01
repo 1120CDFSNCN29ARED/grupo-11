@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
 		
 		entidad.hasMany(models.detalleVenta, {
 			as: "detalleVentas",
-			foreignKey: "ventas_encabezado_id",
+			foreignKey: "venta_encabezado_id",
 		});
 	};
 		

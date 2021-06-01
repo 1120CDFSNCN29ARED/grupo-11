@@ -63,19 +63,24 @@ module.exports = {
 		let usuarioID = req.session.usuarioLogeado.id;
 		let carritos = await carritoRepository.ObtenerTodos(usuarioID);
 		// Obtener la cabecera de la venta
-		let numeroFC = await ventasRepository.ObtenerUltimaFC() + 1;
-		let fecha = new Date()
-		let importe = await carritoRepository.ImporteCarrito(usuarioID);
-		return res.send(importe.toString());
+		let importe = await ventasRepository.ImporteCompra(usuarioID);
+		let cabeceraID = await ventasRepository.AgregarCabecera(
+			usuarioID,
+			importe
+		);
 		// Obtener el detalle de venta
-		let detalle = []
-		carritos.map(n => {
+		let detalle = [];
+		carritos.map((n) => {
 			detalle.push({
 				producto_id: n.producto_id,
+				venta_encabezado_id: cabeceraID,
 				cantidad: n.cantidad,
 				precio: n.producto.precio,
 			});
-		})
+		});
+		for (registro of detalle) {
+			await ventasRepository.AgregarDetalle(registro);
+		}
 		// Eliminar el carrito y disminuir el stock
 		for (n of carritos) {
 			carritoID = n.id;
@@ -84,15 +89,9 @@ module.exports = {
 			await carritoRepository.EliminarRegistro(carritoID);
 			await productoRepository.DisminuirStock(productoID, cantComprada);
 		}
+		res.redirect("/carrito");
 	},
 
-	contador: async (req, res) => {
-		let usuarioID = req.session.usuarioLogeado.id;
-		let contador = await carritoRepository
-			.ObtenerTodos(usuarioID)
-			.then((n) => n.length.toString());
-		return res.json(contador);
-	},
 };
 
 const toThousand = (n) => {

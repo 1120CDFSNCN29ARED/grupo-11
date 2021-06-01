@@ -4,9 +4,9 @@ module.exports = (sequelize) => {
 	const alias = "detalleVenta";
 	const columns = {
 		producto_id: Sequelize.INTEGER,
-		venta_id: Sequelize.INTEGER,
+		venta_encabezado_id: Sequelize.INTEGER,
 		cantidad: Sequelize.INTEGER,
-		precio: Sequelize.DECIMAL
+		precio: Sequelize.INTEGER,
 	};
 	const config = {
 		tableName: "ventas_detalle",
