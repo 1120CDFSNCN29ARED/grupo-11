@@ -67,7 +67,7 @@ CREATE TABLE `productos` (
 	FOREIGN KEY (`actualizado_por`) REFERENCES `usuarios`(`id`)	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ventas` (
+CREATE TABLE `ventas_encabezado` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`usuario_id` INT UNSIGNED NOT NULL,
 	`numero_factura` INT UNSIGNED NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE `ventas` (
 	FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `detalle_ventas` (
+CREATE TABLE `ventas_detalle` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`producto_id` INT UNSIGNED NOT NULL,
 	`venta_id` INT UNSIGNED NOT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE `detalle_ventas` (
 	`precio` DECIMAL(13,2) UNSIGNED NOT NULL,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`producto_id`) REFERENCES `productos`(`id`),
-	FOREIGN KEY (`venta_id`) REFERENCES `ventas`(`id`)
+	FOREIGN KEY (`venta_id`) REFERENCES `ventas_encabezado`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `imagenes` (

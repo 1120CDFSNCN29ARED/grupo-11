@@ -46,6 +46,12 @@ module.exports = {
 		res.redirect("/carrito");
 	},
 
+	comprar: async (req, res) => {
+		let usuarioID = req.session.usuarioLogeado.id;
+		let registros = await carritoRepository.ObtenerTodos(usuarioID);
+
+	},
+
 	contador: async (req, res) => {
 		let usuarioID = req.session.usuarioLogeado.id;
 		let contador = await carritoRepository
