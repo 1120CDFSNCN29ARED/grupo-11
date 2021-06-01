@@ -9,11 +9,6 @@
 	text-align: center;
 }
 
-.carrito {
-	width: 100%;
-	padding: 10px;
-}
-
 .icono-carrito {
 	padding: 0px 10px;
 	border: none;
@@ -77,15 +72,16 @@ img {
 	color: blue;
 }
 
+p {
+	line-height: 1.2rem;
+}
+
+h4, h2 {
+	margin-bottom: .5rem;
+}
+
 @media (min-width: 769px) {
 	.producto {
-		width: 45%;
-	}
-
-	.carrito {
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
 		width: 45%;
 	}
 

@@ -6,10 +6,7 @@
 			<div class="producto">
 				<h2><%= producto.nombre %></h2>
 			</div>
-			<div class="carrito">
-				<a href="/carrito/agregar/2/<%= producto.id %>">
-					<button class="icono-carrito"><i class="fas fa-shopping-cart"></i></button>
-				</a>
+			<div class="img">
 			</div>
 			<div class="img">
 				<article class="flex-row">
@@ -22,7 +19,9 @@
 						<h4>Descripción</h4>
 					</div>
 					<div class="detalle">
-						<p><%= producto.categoria.nombre %></p>
+						<p>Categoría: <%= producto.categoria.nombre %></p>
+						<p>Modelo: <%= producto.modelo.nombre %></p>
+						<p>Marca: <%= producto.marca.nombre %></p>
 						<p><%= producto.descripcion %></p>
 					</div>
 					<div class="precio">
@@ -35,6 +34,11 @@
 						<form  action="/producto/<%= producto.id %>/eliminar?_method=DELETE" method="POST">
 							<button id="eliminar" type="submit">Eliminar</button>
 						</form>
+					</div>
+					<div>
+						<a href="/carrito/agregar/2/<%= producto.id %>" class="action-button edit">
+							<button id="modificar" type="text">Agregar al Carrito</button>
+						</a>
 					</div>
 				</article>
 			</div>
