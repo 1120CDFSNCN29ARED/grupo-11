@@ -13,12 +13,10 @@ module.exports = {
 			where: { id: registroID },
 		});
 	},
-	ActualizarCarrito: (infoCarrito, cantRegistros) => {
-		for (let i = 0; i < cantRegistros; i++) {
-			entidad.update(
-				{ cantidad: infoCarrito["cantidad" + i] },
-				{ where: { id: infoCarrito["registro" + i] } }
-			);
-		}
+	ActualizarCarrito: (carritoID, cantidad) => {
+		return entidad.update(
+			{ cantidad: cantidad },
+			{ where: { id: carritoID } }
+		);
 	},
 };
