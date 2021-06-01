@@ -10,17 +10,17 @@
 					<p class="view-more">Ver todos</p>
 				</div>
 				<div class="section-products flex-container">
-					<% for (const instrumento of seccion.productos) { %>
+					<% for (const producto of seccion.productos) { %>
 						<article class="product">
 							<div class="product-image-container">
-								<a href="/producto/<%= instrumento.id %>/detalle">
-									<img src="/images/products/<%= instrumento.imagenes[0].ruta %>" alt="<%= instrumento.nombre %>" class="product-image">
+								<a href="/producto/<%= producto.id %>/detalle">
+									<img src="/images/products/<%= producto.imagenes[0].ruta %>" alt="<%= producto.nombre %>" class="product-image">
 								</a>
-								<i class="fas fa-shopping-basket"></i>
+								<a href="/carrito/agregar/1/<%= producto.id %>" class="fas fa-shopping-basket"></a>
 							</div>
 							<div class="product-information">
-								<p class="product-description"><%= instrumento.nombre %></p>
-								<p class="product-price">$ <%= toThousand(instrumento.precio) %></p>
+								<p class="product-description"><%= producto.nombre %></p>
+								<p class="product-price">$ <%= toThousand(producto.precio) %></p>
 							</div>
 						</article>
 					<% } %> 
