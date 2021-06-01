@@ -10,19 +10,19 @@ module.exports = (sequelize) => {
 		timestamps: false
 	};
 
-	const Marca = sequelize.define(alias,columns,config);
+	const entidad = sequelize.define(alias,columns,config);
+	entidad.associate = function(models) {
 
-	Marca.associate = function(models) {
-		Marca.hasMany(models.Modelo, {
+		entidad.hasMany(models.Modelo, {
 			as: "modelos",
 			foreignKey: "marca_id"
 		});
 		
-		Marca.hasMany(models.Producto, {
+		entidad.hasMany(models.Producto, {
 			as: "productos",
 			foreignKey: "marca_id"
 		});
 	};
 
-	return Marca;
+	return entidad;
 };

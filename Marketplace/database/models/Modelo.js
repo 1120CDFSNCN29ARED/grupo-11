@@ -11,19 +11,19 @@ module.exports = (sequelize) => {
 		timestamps: false
 	};
 
-	const Modelo = sequelize.define(alias,columns,config);
-	
-	Modelo.associate = function(models) {
-		Modelo.belongsTo(models.Marca, {
+	const entidad = sequelize.define(alias,columns,config);
+	entidad.associate = function(models) {
+		
+		entidad.belongsTo(models.Marca, {
 			as: "marcas",
 			foreignKey: "marca_id"
 		});
 		
-		Modelo.hasMany(models.Producto, {
+		entidad.hasMany(models.Producto, {
 			as: "productos",
 			foreignKey: "modelo_id"
 		});
 	};
 
-	return Modelo;
+	return entidad;
 };

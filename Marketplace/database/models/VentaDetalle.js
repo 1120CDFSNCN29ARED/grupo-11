@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 
 module.exports = (sequelize) => {
-	const alias = "VentaDetalle";
+	const alias = "detalleVenta";
 	const columns = {
 		producto_id: Sequelize.INTEGER,
 		venta_id: Sequelize.INTEGER,
@@ -13,19 +13,19 @@ module.exports = (sequelize) => {
 		timestamps: false,
 	};
 
-	const VentaDetalle = sequelize.define(alias,columns,config);
+	const entidad = sequelize.define(alias,columns,config);
+	entidad.associate = function(models) {
 
-	VentaDetalle.associate = function(models) {
-		VentaDetalle.belongsTo(models.VentaEncabezado, {
+		entidad.belongsTo(models.encabezadoVenta, {
 			as: "venta_encabezado",
 			foreignKey: "venta_encabezado_id",
 		});
 		
-		VentaDetalle.belongsTo(models.Producto, {
+		entidad.belongsTo(models.Producto, {
 			as: "producto",
 			foreignKey: "producto_id"
 		});
 	};
 
-	return VentaDetalle;
+	return entidad;
 };

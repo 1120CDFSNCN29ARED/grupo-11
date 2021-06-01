@@ -10,14 +10,14 @@ module.exports = (sequelize) => {
 		timestamps: false
 	};
 
-	const Rol = sequelize.define(alias,columns,config);
+	const entidad = sequelize.define(alias,columns,config);
+	entidad.associate = function(models) {
 
-	Rol.associate = function(models) {
-		Rol.hasMany(models.Usuario, {
+		entidad.hasMany(models.Usuario, {
 			as: "usuarios",
 			foreignKey: "rol_id"
 		});
 	};
 
-	return Rol;
+	return entidad;
 };

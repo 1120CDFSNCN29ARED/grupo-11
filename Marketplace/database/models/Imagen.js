@@ -11,14 +11,14 @@ module.exports = (sequelize) => {
 		timestamps: false
 	};
 
-	const Imagen = sequelize.define(alias,columns,config);
-
-	Imagen.associate = function(models) {
-		Imagen.belongsTo(models.Producto, {
+	const entidad = sequelize.define(alias,columns,config);
+	entidad.associate = function(models) {
+		
+		entidad.belongsTo(models.Producto, {
 			as: "productos",
 			foreignKey: "producto_id"
 		});
 	};
 
-	return Imagen;
+	return entidad;
 };
