@@ -10,7 +10,7 @@ router.get("/borrar-carrito/:id", soloUsuarios, carritoController.eliminarRegist
 router.get("/agregar/1/:id", soloUsuarios, carritoController.agregarRegistro);
 router.get("/agregar/2/:id", soloUsuarios, carritoController.agregarRegistro);
 router.put("/actualizar", soloUsuarios, carritoController.actualizarCarrito);
-router.get("/comprar", soloUsuarios, carritoController.listado);
+router.get("/comprar", soloUsuarios, carritoController.comprar);
 router.get("/API/contador", soloUsuarios, carritoController.contador);
 router.get("/", soloUsuarios, carritoController.listado);
 

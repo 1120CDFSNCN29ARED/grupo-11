@@ -2,7 +2,6 @@ const db = require("../database/models");
 const entidad = db.Carrito;
 
 module.exports = {
-
 	ObtenerTodos: (usuarioID) => {
 		return entidad.findAll({
 			include: ["producto", "imagen"],
@@ -35,14 +34,10 @@ module.exports = {
 		});
 	},
 
-	ActualizarCarrito: (infoCarrito, cantRegistros) => {
-		for (let i = 0; i < cantRegistros; i++) {
-			entidad.update(
-				{ cantidad: infoCarrito["cantidad" + i] },
-				{ where: { id: infoCarrito["carrito" + i] } }
-			);
-		}
-		return;
+	ActualizarCarrito: (carritoID, cantidad) => {
+		return entidad.update(
+			{ cantidad: cantidad },
+			{ where: { id: carritoID } }
+		);
 	},
-	
 };

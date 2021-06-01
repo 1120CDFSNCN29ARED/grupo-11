@@ -4,6 +4,7 @@ const carritoRepository = require("../repositories/carritoRepository");
 
 module.exports = {
 	listado: async (req, res) => {
+		//return res.send("listado");
 		let usuarioID = req.session.usuarioLogeado.id;
 		let carritos = await carritoRepository.ObtenerTodos(usuarioID);
 		res.render("carrito", {
@@ -45,7 +46,9 @@ module.exports = {
 		for (let i = 0; i < cantRegistros; i++) {
 			carritoID = req.body["carrito" + i];
 			cantidad = req.body["cantidad" + i];
-			await carritoRepository.ActualizarCarrito(carritoID, cantidad);
+			cantidad > 0
+				? await carritoRepository.ActualizarCarrito(carritoID, cantidad)
+				: await carritoRepository.EliminarRegistro(carritoID);
 		}
 		res.redirect("/carrito");
 	},
@@ -57,13 +60,14 @@ module.exports = {
 	},
 
 	comprar: async (req, res) => {
+		return res.send("comprar")
 		let usuarioID = req.session.usuarioLogeado.id;
 		let carritos = await carritoRepository.ObtenerTodos(usuarioID);
 		// Eliminar el carrito y disminuir el stock
 		for (n of carritos) {
 			carritoID = n.id;
 			productoID = n.producto_id;
-			cantComprada = n.cantidad
+			cantComprada = n.cantidad;
 			await carritoRepository.EliminarRegistro(carritoID);
 			await productoRepository.DisminuirStock(productoID, cantComprada);
 		}
