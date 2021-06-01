@@ -49,3 +49,7 @@ body {
 .grow {
 	flex-grow: 1;
 }
+
+a {
+	cursor: pointer
+}

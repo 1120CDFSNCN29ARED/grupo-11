@@ -129,3 +129,10 @@ header .imagenCuadrada {
 	border-radius: 50%;
 	border: white 1px solid
 }
+
+.fa-bars,
+.fa-search,
+.fa-shopping-basket,
+#profile-container {
+	cursor: pointer
+}

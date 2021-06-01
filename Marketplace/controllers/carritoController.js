@@ -11,31 +11,26 @@ module.exports = {
 		});
 	},
 
-	eliminarRegistro: async (req, res) => {
-		let registroID = req.params.id;
-		await carritoRepository.EliminarRegistro(registroID);
-		res.redirect("/carrito");
-	},
-
 	agregarRegistro: async (req, res) => {
 		// Variables de uso general
 		let usuarioID = req.session.usuarioLogeado.id;
 		let productoID = parseInt(req.params.id);
 		// Definir a dónde se va a redireccionar
-		let urlOrigen = req.originalUrl.slice(1)
-		urlOrigen = urlOrigen.slice(urlOrigen.indexOf("/")+1, urlOrigen.lastIndexOf("/"));
-		if (urlOrigen == "agregar/1") {(urlDestino = "/")} else
-		if (urlOrigen == "agregar/2") {urlDestino = "/producto/" + productoID + "/detalle"}
+		let urlOrigen = req.originalUrl.slice(1);
+		urlOrigen = urlOrigen.slice(urlOrigen.indexOf("/") + 1, urlOrigen.lastIndexOf("/"));
+		if (urlOrigen == "agregar/1") {urlDestino = "/"} else
+		if (urlOrigen == "agregar/2") {urlDestino = "/producto/" + productoID + "/detalle"};
 		// Averiguar si el carrito ya existe
-		let avanzar = await carritoRepository.CarritoYaExistente(usuarioID, productoID).then(n => !n)
+		let avanzar = await carritoRepository
+			.CarritoYaExistente(usuarioID, productoID)
+			.then((n) => !n);
 		// Sumar al carrito
-		avanzar ? await carritoRepository.AgregarRegistro(usuarioID, productoID) : ""
+		avanzar ? await carritoRepository.AgregarRegistro(usuarioID, productoID) : "";
 		// Redireccionar
 		return res.redirect(urlDestino);
 	},
 
 	actualizarCarrito: async (req, res) => {
-
 		let cantRegistros = req.body.cantRegistros;
 		for (let i = 0; i < cantRegistros; i++) {
 			carritoID = req.body["registro" + i];
@@ -45,10 +40,18 @@ module.exports = {
 		res.redirect("/carrito");
 	},
 
+	eliminarRegistro: async (req, res) => {
+		let registroID = req.params.id;
+		await carritoRepository.EliminarRegistro(registroID);
+		res.redirect("/carrito");
+	},
+
 	contador: async (req, res) => {
 		let usuarioID = req.session.usuarioLogeado.id;
-		let contador = await carritoRepository.ObtenerTodos(usuarioID).then(n => n.length.toString())
-		return res.json(contador)
+		let contador = await carritoRepository
+			.ObtenerTodos(usuarioID)
+			.then((n) => n.length.toString());
+		return res.json(contador);
 	},
 
 };

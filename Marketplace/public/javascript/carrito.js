@@ -5,6 +5,7 @@ window.addEventListener("load", () => {
 	let importe = document.querySelector("#importe");
 	let eliminar = document.querySelectorAll("#eliminar");
 	let registroID = document.querySelectorAll("#registroID");
+	let comprar = document.querySelector("#comprar");
 
 	// Rutinas por cada registro
 	for (let i = 0; i < cantidad.length; i++) {
@@ -13,6 +14,7 @@ window.addEventListener("load", () => {
 			cant = parseInt(cantidad[i].value);
 			cant < 0 ? (cant = 0) : "";
 			actualizar(cant, i);
+			comprar.classList.add("ocultar")
 		});
 		// Eliminar el registro
 		eliminar[i].addEventListener("click", () => {
@@ -20,7 +22,7 @@ window.addEventListener("load", () => {
 		});
 	}
 
-	// Rutina para el encabezado
+	// Importe a pagar
 	window.addEventListener("click", () => {
 		let acumulador = 0;
 		for (let i = 0; i < cantidad.length; i++) {
