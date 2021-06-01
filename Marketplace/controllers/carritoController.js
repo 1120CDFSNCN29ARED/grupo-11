@@ -1,4 +1,4 @@
-const carritoRepository = require("../repositories/carrito");
+const carritoRepository = require("../repositories/carritoCategory");
 
 module.exports = {
 	listado: async (req, res) => {
