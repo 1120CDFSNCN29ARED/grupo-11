@@ -4,10 +4,10 @@ window.addEventListener("load", () => {
 	let precio = document.querySelectorAll("#precio");
 	let importe = document.querySelector("#importe");
 	let eliminar = document.querySelectorAll("#eliminar");
-	let registroID = document.querySelectorAll("#registroID");
+	let carritoID = document.querySelectorAll("#carritoID");
 	let comprar = document.querySelector("#comprar");
 
-	// Rutinas por cada registro
+	// Rutinas por cada carrito
 	for (let i = 0; i < cantidad.length; i++) {
 		// Cambios en la cantidad
 		cantidad[i].addEventListener("input", () => {
@@ -16,9 +16,9 @@ window.addEventListener("load", () => {
 			actualizar(cant, i);
 			comprar.classList.add("ocultar")
 		});
-		// Eliminar el registro
+		// Eliminar el carrito
 		eliminar[i].addEventListener("click", () => {
-			location = "/carrito/borrar-registro/" + registroID[i].innerHTML;
+			location = "/carrito/borrar-carrito/" + carritoID[i].innerHTML;
 		});
 	}
 

@@ -10,12 +10,12 @@
 					<h1>Carrito de Compras</h1>
 				</div>
 				<div>
-					<% if (registros.length > 0) { %>
+					<% if (carritos.length > 0) { %>
 						<!--IMPORTE TOTAL Y PAGAR-->
 						<div id="total">
 							<h2>Importe a pagar:</h2>
 							<% let acumulador = 0 %> 
-							<% for (n of registros) { %>
+							<% for (n of carritos) { %>
 								<% acumulador = acumulador + n.cantidad * n.producto.precio %> 
 							<% } %> 
 							<h2 id="importe">$ <%= toThousand(acumulador) %> </h2>
@@ -30,16 +30,16 @@
 			</section>
 			<!--REGISTROS-->
 			<section>
-				<% if (registros.length > 0) { %>
-					<% let cantRegistros = registros.length %>
+				<% if (carritos.length > 0) { %>
+					<% let cantRegistros = carritos.length %>
 					<input class="ocultar" name="cantRegistros" type="number" value="<%= cantRegistros %>">
 					<% for (let i = 0; i < cantRegistros; i++) { %>
 						<%- include('carrito-registro', {
 							numRegistro: i,
-							registroID: registros[i].id,
-							cantidad: registros[i].cantidad,
-							producto: registros[i].producto, 
-							imagen: registros[i].imagen,
+							carritoID: carritos[i].id,
+							cantidad: carritos[i].cantidad,
+							producto: carritos[i].producto, 
+							imagen: carritos[i].imagen,
 							toThousand,
 						}) %>
 					<% } %>

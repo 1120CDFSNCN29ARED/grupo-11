@@ -10,9 +10,9 @@ module.exports = {
 		});
 	},
 
-	EliminarRegistro: (registroID) => {
+	EliminarRegistro: (carritoID) => {
 		return entidad.destroy({
-			where: { id: registroID },
+			where: { id: carritoID },
 		});
 	},
 
@@ -39,7 +39,7 @@ module.exports = {
 		for (let i = 0; i < cantRegistros; i++) {
 			entidad.update(
 				{ cantidad: infoCarrito["cantidad" + i] },
-				{ where: { id: infoCarrito["registro" + i] } }
+				{ where: { id: infoCarrito["carrito" + i] } }
 			);
 		}
 		return;
