@@ -1,3 +1,5 @@
+// Requires ***********************************
+const productoRepository = require("../repositories/productoRepository");
 const carritoRepository = require("../repositories/carritoRepository");
 
 module.exports = {
@@ -17,15 +19,23 @@ module.exports = {
 		let productoID = parseInt(req.params.id);
 		// Definir a dónde se va a redireccionar
 		let urlOrigen = req.originalUrl.slice(1);
-		urlOrigen = urlOrigen.slice(urlOrigen.indexOf("/") + 1, urlOrigen.lastIndexOf("/"));
-		if (urlOrigen == "agregar/1") {urlDestino = "/"} else
-		if (urlOrigen == "agregar/2") {urlDestino = "/producto/" + productoID + "/detalle"};
+		urlOrigen = urlOrigen.slice(
+			urlOrigen.indexOf("/") + 1,
+			urlOrigen.lastIndexOf("/")
+		);
+		if (urlOrigen == "agregar/1") {
+			urlDestino = "/";
+		} else if (urlOrigen == "agregar/2") {
+			urlDestino = "/producto/" + productoID + "/detalle";
+		}
 		// Averiguar si el carrito ya existe
 		let avanzar = await carritoRepository
 			.CarritoYaExistente(usuarioID, productoID)
 			.then((n) => !n);
 		// Sumar al carrito
-		avanzar ? await carritoRepository.AgregarRegistro(usuarioID, productoID) : "";
+		avanzar
+			? await carritoRepository.AgregarRegistro(usuarioID, productoID)
+			: "";
 		// Redireccionar
 		return res.redirect(urlDestino);
 	},
@@ -49,11 +59,13 @@ module.exports = {
 	comprar: async (req, res) => {
 		let usuarioID = req.session.usuarioLogeado.id;
 		let carritos = await carritoRepository.ObtenerTodos(usuarioID);
+		// Eliminar el carrito y disminuir el stock
 		for (n of carritos) {
-			carritoID = n.id
+			carritoID = n.id;
+			productoID = n.producto_id;
 			await carritoRepository.EliminarRegistro(carritoID);
+			await productoRepository.DisminuirStock(productoID);
 		}
-
 	},
 
 	contador: async (req, res) => {
@@ -63,7 +75,6 @@ module.exports = {
 			.then((n) => n.length.toString());
 		return res.json(contador);
 	},
-
 };
 
 const toThousand = (n) => {

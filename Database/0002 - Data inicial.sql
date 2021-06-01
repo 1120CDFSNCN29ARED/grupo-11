@@ -35,16 +35,16 @@ VALUES
 (2, 'Guitarras Eléctricas'),
 (3, 'Bajos');
 
-INSERT INTO productos (id, nombre, categoria_id, marca_id, modelo_id, precio, mas_vendido, novedades, creado_por, creado_en)
+INSERT INTO productos (id, nombre, categoria_id, marca_id, modelo_id, precio, mas_vendido, novedades, creado_por, creado_en, stock_disponible)
 VALUES 
-(1, 'Fender Stratocaster', 2, 1, 1, 100000, 1, 0, 1, '2021-04-21'),
-(2, 'Taylor GS Mini', 1, 2, 4, 75000, 1, 0, 1, '2021-04-21'),
-(3, 'Fender Telecaster', 2, 1, 2, 110000, 1, 0, 1, '2021-04-21'),
-(4, 'Jackson King V', 2, 4, 8, 80000, 1, 0, 1, '2021-04-21'),
-(5, 'Gibson Les Paul', 2, 3, 7, 100000, 0, 1, 1, '2021-04-21'),
-(6, 'Fender Precision', 3, 1, 3, 80000, 0, 1, 1, '2021-04-21'),
-(7, 'Gibson SG', 2, 3, 6, 100000, 0, 1, 1, '2021-04-21'),
-(8, 'Taylor 210ce Plus', 1, 2, 5, 90000, 0, 1, 1, '2021-04-21');
+(1, 'Fender Stratocaster', 2, 1, 1, 100000, 1, 0, 1, '2021-04-21', 100),
+(2, 'Taylor GS Mini', 1, 2, 4, 75000, 1, 0, 1, '2021-04-21', 100),
+(3, 'Fender Telecaster', 2, 1, 2, 110000, 1, 0, 1, '2021-04-21', 100),
+(4, 'Jackson King V', 2, 4, 8, 80000, 1, 0, 1, '2021-04-21', 100),
+(5, 'Gibson Les Paul', 2, 3, 7, 100000, 0, 1, 1, '2021-04-21', 100),
+(6, 'Fender Precision', 3, 1, 3, 80000, 0, 1, 1, '2021-04-21', 100),
+(7, 'Gibson SG', 2, 3, 6, 100000, 0, 1, 1, '2021-04-21', 100),
+(8, 'Taylor 210ce Plus', 1, 2, 5, 90000, 0, 1, 1, '2021-04-21', 100);
 
 INSERT INTO imagenes (id, producto_id, ruta)
 VALUES 
