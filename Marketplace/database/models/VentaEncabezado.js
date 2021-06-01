@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 
 module.exports = (sequelize) => {
-	const alias = "Venta";
+	const alias = "VentaEncabezado";
 	const columns = {
 		usuario_id: Sequelize.INTEGER,
 		numero_factura: Sequelize.INTEGER,
@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
 		importe: Sequelize.DECIMAL
 	};
 	const config = {
-		tableName: "ventas",
+		tableName: "ventas_encabezado",
 		createdAt: 'fecha_emision',
 		updatedAt: false
 	};
@@ -22,9 +22,9 @@ module.exports = (sequelize) => {
 			foreignKey: "usuario_id"
 		});
 		
-		Venta.hasOne(models.DetalleVenta, {
+		Venta.hasMany(models.DetalleVenta, {
 			as: "detalleVentas",
-			foreignKey: "venta_id"
+			foreignKey: "ventas_encabezado_id",
 		});
 	};
 		
