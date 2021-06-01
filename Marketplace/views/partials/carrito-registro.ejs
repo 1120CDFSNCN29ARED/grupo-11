@@ -1,11 +1,12 @@
 <section class="productos">
-	<p class="ocultar" id="carritoID"><%= carritoID %></p>
+	<p class="ocultar" id="carritoID"><%= carrito.id %></p>
+	<p class="ocultar" id="productoID"><%= producto.id %></p>
 	<img src="/images/products/<%= imagen.ruta %> " alt="<%= producto.nombre %>" class="imagen-de-producto">
 	<p class="nombre-de-producto"><%= producto.nombre %> </p>
 	<div id="cantidad-y-flechas">
 		<!--CANTIDAD-->
-		<input class="ocultar" name="carrito<%= numRegistro %>" type="number" value="<%= carritoID %>">
-		<input id="cantidad" name="cantidad<%= numRegistro %>" type="number" value="<%= cantidad %>">
+		<input class="ocultar" name="carrito<%= numRegistro %>" type="number" value="<%= carrito.id %>">
+		<input id="cantidad" name="cantidad<%= numRegistro %>" type="number" value="<%= carrito.cantidad %>">
 	</div>
 	<div class="valor">
 		<!--PRECIO UNITARIO-->
@@ -16,7 +17,7 @@
 	<div class="valor">
 		<!--PRECIO TOTAL-->
 		<p class="título">Valor Total</p>
-		<p class="valor" id="valorTotal">$ <%= toThousand(cantidad * producto.precio) %> </p>
+		<p class="valor" id="valorTotal">$ <%= toThousand(carrito.cantidad * producto.precio) %> </p>
 	</div>
 	<div>
 		<!--TRASH-->

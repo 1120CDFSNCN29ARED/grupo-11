@@ -82,7 +82,7 @@ CREATE TABLE `ventas_detalle` (
 	`producto_id` INT UNSIGNED NOT NULL,
 	`venta_encabezado_id` INT UNSIGNED NOT NULL,
 	`cantidad` INT UNSIGNED NOT NULL,
-	`precio` DECIMAL(13,2) UNSIGNED NOT NULL,
+	`precio` INT UNSIGNED NOT NULL,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`producto_id`) REFERENCES `productos`(`id`),
 	FOREIGN KEY (`venta_encabezado_id`) REFERENCES `ventas_encabezado`(`id`)

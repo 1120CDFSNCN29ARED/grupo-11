@@ -10,7 +10,6 @@ router.get("/agregar/1/:id", soloUsuarios, carritoController.agregarCarrito);
 router.get("/agregar/2/:id", soloUsuarios, carritoController.agregarCarrito);
 router.put("/actualizar", soloUsuarios, carritoController.actualizarCarrito);
 router.get("/borrar-carrito/:id", soloUsuarios, carritoController.eliminarCarrito);
-router.get("/comprar", soloUsuarios, carritoController.comprar);
 router.get("/", soloUsuarios, carritoController.listado);
 
 module.exports = router;

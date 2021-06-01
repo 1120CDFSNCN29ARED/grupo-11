@@ -41,4 +41,18 @@ module.exports = {
 		);
 	},
 
+	ImporteCarrito: async (usuarioID) => {
+		let carrito = await entidad.findAll({
+			include: ["producto"],
+			where: { usuario_id: usuarioID },
+		});
+		let acumulador = 0;
+		for (n of carrito) {
+			cant = n.cantidad;
+			precio = n.producto.precio;
+			acumulador = acumulador + cant * precio;
+		}
+		return acumulador;
+	},
+
 };
