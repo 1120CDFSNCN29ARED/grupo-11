@@ -5,9 +5,11 @@ const entidad = db.Usuario;
 
 module.exports = {
 	ObtenerTodos: () => {
-		return entidad.findAll({
-			include: ["rol"],
-		});
+		return entidad
+			.findAll({
+				include: ["rol"],
+			})
+			.then((n) => n.filter((m) => !m.borrado));
 	},
 	ObtenerPorId: (id) => {
 		return entidad.findByPk(id, {
