@@ -25,9 +25,7 @@ module.exports = {
 		// Averiguar si el carrito ya existe
 		let avanzar = await carritoRepository.CarritoYaExistente(usuarioID, productoID).then((n) => !n);
 		// Sumar al carrito
-		avanzar
-			? await carritoRepository.AgregarRegistro(usuarioID, productoID)
-			: "";
+		avanzar ? await carritoRepository.AgregarRegistro(usuarioID, productoID) : "";
 		// Redireccionar
 		return res.redirect(urlDestino);
 	},
