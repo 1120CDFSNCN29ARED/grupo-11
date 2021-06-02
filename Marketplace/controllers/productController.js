@@ -125,6 +125,20 @@ module.exports = {
 			baseSearchUrl += `search-value=${req.query['search-value']}`;
 		}
 
+		if (req.query.section) {
+			result = await productoRepository.BuscarPorSeccionPaginado(req.query.section, pageSize, offset);
+			if (req.query.section == "masVendido") {
+				resultadoBusqueda += "Mas vendidos";
+			} else {
+				resultadoBusqueda += "Novedades";
+			}
+		}
+
+		if (!result) {
+			result = await productoRepository.BuscarPorValorPaginado(null, pageSize, offset);
+			baseSearchUrl += `search-value=${req.query['search-value']}`;
+		}
+
 		let productos = result.rows;
 		let totalResults = result.count;
 		let pageSizes = [10, 25, 50, 100];

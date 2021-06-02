@@ -66,3 +66,12 @@ main {
 	font-weight: bold;
 	color: var(--price-color);
 }
+
+.view-more {
+	color: black;
+	text-decoration: none;
+}
+
+.view-more:visited {
+	color: black;
+}

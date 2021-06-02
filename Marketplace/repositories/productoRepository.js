@@ -116,5 +116,34 @@ module.exports = {
 			include: [ "imagenes" ],
 			distinct: true
 		});
+	},
+	BuscarPorSeccionPaginado: (section, limit, offset) => {
+		let where;
+
+		if (!section) {
+			where = {
+				borrado: false
+			}
+		} else {
+			if (section == "masVendido") {
+				where = {
+					mas_vendido: true,
+					borrado: false
+				}
+			} else {
+				where = {
+					novedades: true,
+					borrado: false
+				}
+			}
+		}
+
+		return entidad.findAndCountAll({
+			where: where,
+			limit: limit,
+			offset: offset,
+			include: [ "imagenes" ],
+			distinct: true
+		});
 	}
 };
