@@ -100,29 +100,45 @@ module.exports = {
 		res.redirect("/");
 	},
 	buscar: async (req, res) => {
-		let productos;
+		let result;
 		let resultadoBusqueda = "Resultado de la busqueda: ";
+		let pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 10;
+		let currentPage = req.query.page ? parseInt(req.query.page) : 1;
+		let offset = pageSize * (currentPage - 1);
+		let baseSearchUrl = "/producto/buscar?";
 
 		if (req.query.categoria) {
-			productos = await productoRepository.Buscar(req.query.categoria, null);
+			result = await productoRepository.Buscar(req.query.categoria, null, pageSize, offset);
 			categoria = await categoriaRepository.ObtenerPorId(req.query.categoria);
 			resultadoBusqueda += categoria.nombre;
+			baseSearchUrl += `categoria=${req.query.categoria}`;
 		}
 
 		if (req.query['search-value']) {
-			productos = await productoRepository.Buscar(null, req.query['search-value']);
+			result = await productoRepository.Buscar(null, req.query['search-value'], pageSize, offset);
 			resultadoBusqueda += req.query['search-value'];
+			baseSearchUrl += `search-value=${req.query['search-value']}`;
 		}
 
 		if (req.query['search-value'] === "") {
-			productos = await productoRepository.Buscar(null, null);
+			result = await productoRepository.Buscar(null, null, pageSize, offset);
+			baseSearchUrl += `search-value=${req.query['search-value']}`;
 		}
+
+		let productos = result.rows;
+		let totalResults = result.count;
+		let pageSizes = [10, 25, 50, 100];
 		
 		res.render("busqueda", {
 			titulo: "Resultado busqueda",
 			toThousand,
 			productos,
-			resultadoBusqueda
+			resultadoBusqueda,
+			totalResults,
+			pageSize,
+			currentPage,
+			pageSizes,
+			baseSearchUrl
 		});
 	}
 };

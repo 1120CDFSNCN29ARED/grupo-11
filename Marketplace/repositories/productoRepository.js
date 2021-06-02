@@ -71,7 +71,7 @@ module.exports = {
 			where: { id: id },
 		});
 	},
-	Buscar: (categoriaId, searchValue) => {
+	Buscar: (categoriaId, searchValue, limit, offset) => {
 		let where;
 
 		if (!categoriaId && !searchValue) {
@@ -96,9 +96,12 @@ module.exports = {
 			}
 		}
 
-		return entidad.findAll({
+		return entidad.findAndCountAll({
 			where: where,
-			include: [ "imagenes" ]
+			limit: limit,
+			offset: offset,
+			include: [ "imagenes" ],
+			distinct: true
 		});
 	}
 };

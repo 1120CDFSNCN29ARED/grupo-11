@@ -48,6 +48,31 @@ main {
 	width: 90%;
 	margin: auto;
 	margin-top: 10em;
+	justify-content: space-between;
+}
+
+#search-footer {
+	width: 90%;
+	margin: auto;
+	justify-content: space-between;
+}
+
+#search-result,
+#search-footer {
+	font-size: 1.2em;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+#pagination {
+	color: black;
+	text-decoration: none;
+}
+
+#pagination:visited {
+	color: black;
 }
 
 /* MEDIA QUERY */
