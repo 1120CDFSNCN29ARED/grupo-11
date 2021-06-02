@@ -28,7 +28,7 @@
 						<p>$ <%= toThousand(producto.precio) %></p>
 					</div>
 					<div class="flex-container">
-						<a href="/producto/<%= producto.id %>/editar" class="action-button edit">
+						<a href="/producto/<%= producto.id %>/editar">
 							<button id="modificar" type="text">Modificar</button>
 						</a>
 						<form  action="/producto/<%= producto.id %>/eliminar?_method=DELETE" method="POST">
@@ -36,9 +36,17 @@
 						</form>
 					</div>
 					<div>
-						<a href="/carrito/agregar/2/<%= producto.id %>" class="action-button edit">
+						<a href="/carrito/agregar/2/<%= producto.id %>">
 							<button id="carrito" type="text">Agregar al Carrito</button>
 						</a>
+					</div>
+					<div>
+						<% if (locals.usuarioLogeado.rol_id == 1) { %>
+							<a href="/api/ventas-por-producto/<%= producto.id %>">
+								<button id="carrito" type="text">Historial de Venta</button>
+							</a>
+						<% } %>
+
 					</div>
 				</article>
 			</div>
