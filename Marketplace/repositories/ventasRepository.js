@@ -9,18 +9,40 @@ module.exports = {
 		});
 	},
 
-	ObtenerPorUsuario: (usuarioID) => {
+	ObtenerDetallePorUsuario: (usuarioID) => {
 		return encabezado.findAll({
 			include: ["usuario", "detalleVenta"],
 			where: { usuario_id: usuarioID },
 		});
 	},
 
-	ObtenerPorProducto: (productoID) => {
+	ObtenerImportePorUsuario: async (usuarioID) => {
+		let detalleVenta = await encabezado.findAll({
+			where: { usuario_id: usuarioID },
+		});
+		let acumulador = 0;
+		for (n of detalleVenta) {
+			acumulador = acumulador + n.importe;
+		}
+		return acumulador;
+	},
+
+	ObtenerDetallePorProducto: (productoID) => {
 		return detalle.findAll({
 			include: ["producto", "venta_encabezado"],
 			where: { producto_id: productoID },
 		});
+	},
+
+	ObtenerImportePorProducto: async (productoID) => {
+		let detalleVenta = await detalle.findAll({
+			where: { producto_id: productoID },
+		});
+		let acumulador = 0;
+		for (n of detalleVenta) {
+			acumulador = acumulador + n.cantidad * n.precio;
+		}
+		return acumulador;
 	},
 
 	AgregarCabecera: async (usuarioID, importe) => {
