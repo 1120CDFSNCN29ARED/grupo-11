@@ -12,7 +12,7 @@ module.exports = {
 		let productos = await productoRepository.ObtenerTodos();
 		//return res.send(ventasDetalle)
 		// Armar la respuesta de detalle_de_venta
-		let detalle_de_venta=[]
+		let detalle_de_venta = [];
 		ventasDetalle.map((n) => {
 			detalle_de_venta.push({
 				numero_factura: n.numero_factura,
@@ -60,7 +60,9 @@ module.exports = {
 			mas_vendido: productoBD.mas_vendido,
 			novedades: productoBD.novedades,
 			creado_por:
-				productoBD.creadoPor.nombre + " " + productoBD.creadoPor.apellido,
+				productoBD.creadoPor.nombre +
+				" " +
+				productoBD.creadoPor.apellido,
 			creado_en: "2021-04-21",
 			borrado: false,
 		};
