@@ -35,7 +35,7 @@ module.exports = {
 			carritoID = n.id;
 			productoID = n.producto_id;
 			cantComprada = parseInt(n.cantidad);
-			await carritoRepository.EliminarRegistro(carritoID);
+			await carritoRepository.EliminarCarrito(carritoID);
 			await productoRepository.DisminuirStock(productoID, cantComprada);
 		}
 		res.redirect("/carrito");

@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
 		usuario_id: Sequelize.INTEGER,
 		numero_factura: Sequelize.INTEGER,
 		fecha_emision: Sequelize.DATE,
-		importe: Sequelize.DECIMAL
+		importe: Sequelize.INTEGER
 	};
 	const config = {
 		tableName: "ventas_encabezado",
@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
 		});
 		
 		entidad.hasMany(models.detalleVenta, {
-			as: "detalleVentas",
+			as: "detalleVenta",
 			foreignKey: "venta_encabezado_id",
 		});
 	};

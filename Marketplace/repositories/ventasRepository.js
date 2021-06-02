@@ -4,8 +4,22 @@ const detalle = db.detalleVenta;
 
 module.exports = {
 	ObtenerTodos: () => {
-		return entidad.findAll({
+		return encabezado.findAll({
 			include: ["usuario", "detalleVenta"],
+		});
+	},
+
+	ObtenerPorUsuario: (usuarioID) => {
+		return encabezado.findAll({
+			include: ["usuario", "detalleVenta"],
+			where: { usuario_id: usuarioID },
+		});
+	},
+
+	ObtenerPorProducto: (productoID) => {
+		return detalle.findAll({
+			include: ["producto", "venta_encabezado"],
+			where: { producto_id: productoID },
 		});
 	},
 

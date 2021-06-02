@@ -12,6 +12,7 @@ router.get("/productos/:id", apiProductController.detalle);
 router.get("/usuarios", apiUserController.listado);
 router.get("/usuarios/:id", apiUserController.detalle);
 router.get("/carrito/contador", apiCarritoController.contador);
-router.get("/historial-de-pedidos", apiVentaController.historial);
+router.get("/venta-por-cliente", apiVentaController.ventaPorCliente);
+router.get("/venta-por-producto", apiVentaController.ventaPorProducto);
 
 module.exports = router;

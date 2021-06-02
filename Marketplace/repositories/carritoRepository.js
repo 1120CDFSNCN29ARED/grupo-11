@@ -9,7 +9,7 @@ module.exports = {
 		});
 	},
 
-	EliminarRegistro: (carritoID) => {
+	EliminarCarrito: (carritoID) => {
 		return entidad.destroy({
 			where: { id: carritoID },
 		});
@@ -26,7 +26,7 @@ module.exports = {
 			.then((n) => n > 0);
 	},
 
-	AgregarRegistro: (usuarioID, productoID) => {
+	AgregarCarrito: (usuarioID, productoID) => {
 		return entidad.create({
 			usuario_id: usuarioID,
 			producto_id: productoID,
@@ -70,7 +70,7 @@ module.exports = {
 			}
 			// Elimina el producto del carrito si la cantidad pedida es cero o negativa
 			if (carrito.cantidad <= 0) {
-				await carritoRepository.EliminarRegistro(carrito.id);
+				await carritoRepository.EliminarCarrito(carrito.id);
 				cambio = true;
 			}
 		}
