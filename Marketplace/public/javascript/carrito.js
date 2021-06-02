@@ -5,9 +5,9 @@ window.addEventListener("load", async () => {
 	let importe = document.querySelector("#importe");
 	let eliminar = document.querySelectorAll("#eliminar");
 	let carritoID = document.querySelectorAll("#carritoID");
-	let comprar = document.querySelector("#comprar");
+	let comprar = document.querySelector("#comprar"); // Botón de "comprar"
 
-	// Obtener el stock de cada producto para compararlo vs el carrito
+	// Obtener el stock de cada producto para compararlo luego vs el carrito
 	let api = await fetch("/api/productos")
 		.then((n) => n.json())
 		.then((n) => n.products);
@@ -20,12 +20,12 @@ window.addEventListener("load", async () => {
 	}
 	// Rutinas por cada carrito
 	for (let i = 0; i < cantidad.length; i++) {
-		// Cambios en la cantidad
+		// Acciones ante cambios en la cantidad
 		cantidad[i].addEventListener("input", () => {
 			cant = parseInt(cantidad[i].value);
 			cant < 0 ? cant = 0 : cant > stock[i] ? cant = stock[i] : ""
-			actualizar(cant, i);
-			comprar.classList.add("ocultar");
+			actualizar(cant, i); // actualizar datos en la vista del carrito
+			comprar.classList.add("ocultar"); // ocultar el botón de comprar si se deben guardar los cambios
 		});
 		// Eliminar el carrito
 		eliminar[i].addEventListener("click", () => {

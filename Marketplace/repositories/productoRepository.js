@@ -67,6 +67,8 @@ module.exports = {
 			}
 		);
 	},
+
+	// Disminuye el stock disponible de un producto cuando se produce su venta
 	DisminuirStock: async (productoID, cantidad) => {
 		let stock_disponible = await entidad
 			.findByPk(productoID)

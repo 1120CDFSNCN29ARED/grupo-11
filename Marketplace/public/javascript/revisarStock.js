@@ -7,7 +7,7 @@ window.addEventListener("load", async () => {
 	let iconosCarrito = document.querySelectorAll("#averiguarStock");
 	let productosID = document.querySelectorAll("#averiguarID");
 
-	// Obtener el stock de cada producto y si es cero, ocultar el carrito
+	// Obtener el stock de cada producto y si es cero, ocultar el ícono del carrito en la imagen del producto
 	for (let i = 0; i < iconosCarrito.length; i++) {
 		productoID = productosID[i].innerHTML;
 		stockDisponible = data.find((m) => m.id == productoID).stock;

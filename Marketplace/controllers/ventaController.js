@@ -9,8 +9,8 @@ module.exports = {
 		let usuarioID = req.session.usuarioLogeado.id;
 		let carritos = await carritoRepository.ObtenerTodos(usuarioID);
 		let api = await productoRepository.ObtenerTodos()
-		let supera = await carritoRepository.VerificarStock(carritos, api)
-		supera ? res.redirect("/carrito") : ""
+		let cambio = await carritoRepository.VerificarStock(carritos, api)
+		cambio ? res.redirect("/carrito") : ""
 		// Obtener la cabecera de la venta
 		let importe = await carritoRepository.ImporteCarrito(usuarioID);
 		let cabeceraID = await ventasRepository.AgregarCabecera(

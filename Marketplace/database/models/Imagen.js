@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
 
 	const entidad = sequelize.define(alias,columns,config);
 	entidad.associate = function(models) {
-		
+
 		entidad.belongsTo(models.Producto, {
 			as: "productos",
 			foreignKey: "producto_id"
