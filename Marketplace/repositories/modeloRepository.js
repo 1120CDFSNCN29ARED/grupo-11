@@ -2,7 +2,7 @@ const db = require("../database/models");
 const entidad = db.Modelo;
 
 module.exports = {
-	ObtenerTodas: () => {
+	ObtenerTodos: () => {
 		return entidad.findAll({
 			    order:[['nombre','ASC']],
 		});

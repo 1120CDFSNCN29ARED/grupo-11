@@ -55,4 +55,21 @@ module.exports = {
 		return acumulador;
 	},
 
+	VerificarStock: async (carritos, api) => {
+		var supera = false;
+		for (n of carritos) {
+			ID = n.producto_id;
+			stockDisponible = api.find((m) => m.id == ID).stock_disponible;
+			if (n.cantidad > stockDisponible) {
+				let carritoID = n.id;
+				await entidad.update(
+					{ cantidad: stockDisponible },
+					{ where: { id: carritoID } }
+				);
+				supera = true;
+			}
+		}
+		return supera
+	}
+
 };

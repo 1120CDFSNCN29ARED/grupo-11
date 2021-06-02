@@ -14,8 +14,8 @@ module.exports = {
 		res.render("producto-crear-y-editar", {
 			titulo: "Crear un Producto",
 			producto: null,
-			marcas: await marcaRepository.ObtenerTodas(),
-			modelos: await modeloRepository.ObtenerTodas(),
+			marcas: await marcaRepository.ObtenerTodos(),
+			modelos: await modeloRepository.ObtenerTodos(),
 		});
 	},
 	crearGuardar: async (req, res) => {
@@ -32,8 +32,8 @@ module.exports = {
 			return res.render("producto-crear-y-editar", {
 				titulo: "Crear un Producto",
 				producto: null,
-				marcas: await marcaRepository.ObtenerTodas(),
-				modelos: await modeloRepository.ObtenerTodas(),
+				marcas: await marcaRepository.ObtenerTodos(),
+				modelos: await modeloRepository.ObtenerTodos(),
 				errores: validaciones.mapped(),
 				oldData: req.body,
 				precio,
@@ -63,8 +63,8 @@ module.exports = {
 		return res.render("producto-crear-y-editar", {
 			titulo: "Editar un Producto",
 			producto: await productoRepository.ObtenerPorId(req.params.id),
-			marcas: await marcaRepository.ObtenerTodas(),
-			modelos: await modeloRepository.ObtenerTodas(),
+			marcas: await marcaRepository.ObtenerTodos(),
+			modelos: await modeloRepository.ObtenerTodos(),
 		});
 	},
 	editarGuardar: async (req, res) => {
@@ -77,8 +77,8 @@ module.exports = {
 			return res.render("producto-crear-y-editar", {
 				titulo: "Editar un Producto",
 				producto: { id: req.params.id },
-				marcas: await marcaRepository.ObtenerTodas(),
-				modelos: await modeloRepository.ObtenerTodas(),
+				marcas: await marcaRepository.ObtenerTodos(),
+				modelos: await modeloRepository.ObtenerTodos(),
 				errores: validaciones.mapped(),
 				oldData: req.body,
 				precio,

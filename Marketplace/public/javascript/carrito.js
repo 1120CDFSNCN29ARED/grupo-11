@@ -7,14 +7,14 @@ window.addEventListener("load", async () => {
 	let carritoID = document.querySelectorAll("#carritoID");
 	let comprar = document.querySelector("#comprar");
 
-	// Obtener el stock de cada producto
+	// Obtener el stock de cada producto para compararlo vs el carrito
 	let api = await fetch("/api/productos")
-	.then((n) => n.json())
-	.then(n => n.products)
+		.then((n) => n.json())
+		.then((n) => n.products);
 	let productos = document.querySelectorAll("#productoID");
-	let stock = []
+	let stock = [];
 	for (n of productos) {
-		ID = n.innerHTML
+		ID = n.innerHTML;
 		stockDisponible = api.find((m) => m.id == ID).stock;
 		stock.push(stockDisponible);
 	}
@@ -23,14 +23,9 @@ window.addEventListener("load", async () => {
 		// Cambios en la cantidad
 		cantidad[i].addEventListener("input", () => {
 			cant = parseInt(cantidad[i].value);
-			if (cant < 0) {
-				cant = 0
-			} else
-			if (cant > stock[i]) {
-				cant = stock[i]
-			}
+			cant < 0 ? cant = 0 : cant > stock[i] ? cant = stock[i] : ""
 			actualizar(cant, i);
-			comprar.classList.add("ocultar")
+			comprar.classList.add("ocultar");
 		});
 		// Eliminar el carrito
 		eliminar[i].addEventListener("click", () => {

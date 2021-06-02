@@ -7,6 +7,10 @@ module.exports = {
 	kickOff: async (req, res) => {
 		let usuarioID = req.session.usuarioLogeado.id;
 		let carritos = await carritoRepository.ObtenerTodos(usuarioID);
+		// Comparar la compra vs el stock y si lo supera --> devolver al carrito
+		let api = await productoRepository.ObtenerTodos()
+		let supera = await carritoRepository.VerificarStock(carritos, api)
+		supera ? res.redirect("/carrito") : ""
 		// Obtener la cabecera de la venta
 		let importe = await carritoRepository.ImporteCarrito(usuarioID);
 		let cabeceraID = await ventasRepository.AgregarCabecera(
@@ -26,7 +30,7 @@ module.exports = {
 		for (registro of detalle) {
 			await ventasRepository.AgregarDetalle(registro);
 		}
-		// Eliminar el carrito y disminuir el stock
+		// Eliminar los carritos y disminuir el stock
 		for (n of carritos) {
 			carritoID = n.id;
 			productoID = n.producto_id;

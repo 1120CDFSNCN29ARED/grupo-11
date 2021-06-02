@@ -25,7 +25,7 @@ app.use(cors());
 app.use(validarUserLogged); // Para tener actualizada constantemente la variable res.locals.isLogged
 app.use(async (req, res, next) => {
     if (!app.locals.categoriasDeProductos) {
-        app.locals.categoriasDeProductos = await categoriaRepository.ObtenerTodas();
+        app.locals.categoriasDeProductos = await categoriaRepository.ObtenerTodos();
     }
     next();
 });
