@@ -19,19 +19,11 @@ module.exports = {
 		let productoID = parseInt(req.params.id);
 		// Definir a dónde se va a redireccionar
 		let urlOrigen = req.originalUrl.slice(1);
-		urlOrigen = urlOrigen.slice(
-			urlOrigen.indexOf("/") + 1,
-			urlOrigen.lastIndexOf("/")
-		);
-		if (urlOrigen == "agregar/1") {
-			urlDestino = "/";
-		} else if (urlOrigen == "agregar/2") {
-			urlDestino = "/producto/" + productoID + "/detalle";
-		}
+		urlOrigen = urlOrigen.slice(urlOrigen.indexOf("/") + 1, urlOrigen.lastIndexOf("/"));
+		if (urlOrigen == "agregar/1") {urlDestino = "/";} else 
+		if (urlOrigen == "agregar/2") {urlDestino = "/producto/" + productoID + "/detalle"}
 		// Averiguar si el carrito ya existe
-		let avanzar = await carritoRepository
-			.CarritoYaExistente(usuarioID, productoID)
-			.then((n) => !n);
+		let avanzar = await carritoRepository.CarritoYaExistente(usuarioID, productoID).then((n) => !n);
 		// Sumar al carrito
 		avanzar
 			? await carritoRepository.AgregarRegistro(usuarioID, productoID)
