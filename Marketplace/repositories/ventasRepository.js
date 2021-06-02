@@ -3,9 +3,15 @@ const encabezado = db.encabezadoVenta;
 const detalle = db.detalleVenta;
 
 module.exports = {
+	ObtenerTodos: () => {
+		return entidad.findAll({
+			include: ["usuario", "detalleVenta"],
+		});
+	},
+
 	AgregarCabecera: async (usuarioID, importe) => {
-		if (await encabezado.findAll().then(n => (n.length == 0))) {
-			var numeroFC = 1
+		if (await encabezado.findAll().then((n) => n.length == 0)) {
+			var numeroFC = 1;
 		} else {
 			var numeroFC = await encabezado
 				.findAll({ order: [["numero_factura", "DESC"]] })
@@ -26,7 +32,7 @@ module.exports = {
 
 	AgregarDetalle: (registro) => {
 		return detalle.create({
-			...registro
+			...registro,
 		});
 	},
 };

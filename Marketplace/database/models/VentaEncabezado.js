@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
 	entidad.associate = function(models) {
 
 		entidad.belongsTo(models.Usuario, {
-			as: "usuarios",
+			as: "usuario",
 			foreignKey: "usuario_id"
 		});
 		
