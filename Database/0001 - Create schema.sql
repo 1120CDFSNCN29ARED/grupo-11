@@ -72,7 +72,7 @@ CREATE TABLE `ventas_encabezado` (
 	`usuario_id` INT UNSIGNED NOT NULL,
 	`numero_factura` INT UNSIGNED NOT NULL,
 	`fecha_emision` DATE NOT NULL,
-	`importe` DECIMAL(13,2) UNSIGNED NOT NULL,
+	`importe` INT UNSIGNED NOT NULL,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
