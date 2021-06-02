@@ -5,9 +5,9 @@ const ventasRepository = require("../repositories/ventasRepository");
 
 module.exports = {
 	kickOff: async (req, res) => {
+		// Comparar la compra vs el stock y si lo supera --> devolver al carrito
 		let usuarioID = req.session.usuarioLogeado.id;
 		let carritos = await carritoRepository.ObtenerTodos(usuarioID);
-		// Comparar la compra vs el stock y si lo supera --> devolver al carrito
 		let api = await productoRepository.ObtenerTodos()
 		let supera = await carritoRepository.VerificarStock(carritos, api)
 		supera ? res.redirect("/carrito") : ""

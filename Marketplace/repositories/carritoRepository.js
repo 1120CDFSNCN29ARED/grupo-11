@@ -42,12 +42,12 @@ module.exports = {
 	},
 
 	ImporteCarrito: async (usuarioID) => {
-		let carrito = await entidad.findAll({
+		let carritos = await entidad.findAll({
 			include: ["producto"],
 			where: { usuario_id: usuarioID },
 		});
 		let acumulador = 0;
-		for (n of carrito) {
+		for (n of carritos) {
 			cant = n.cantidad;
 			precio = n.producto.precio;
 			acumulador = acumulador + cant * precio;
@@ -57,17 +57,21 @@ module.exports = {
 
 	VerificarStock: async (carritos, api) => {
 		var supera = false;
-		for (n of carritos) {
-			ID = n.producto_id;
+		for (carrito of carritos) {
+			ID = carrito.producto_id;
 			stockDisponible = api.find((m) => m.id == ID).stock_disponible;
-			if (n.cantidad > stockDisponible) {
-				let carritoID = n.id;
+			if (carrito.cantidad > stockDisponible) {
 				await entidad.update(
 					{ cantidad: stockDisponible },
-					{ where: { id: carritoID } }
+					{ where: { id: carrito.id } }
 				);
 				supera = true;
 			}
+			if (carrito.cantidad <= 0) {
+				await carritoRepository.EliminarRegistro(carrito.id);
+				supera = true;
+			}
+
 		}
 		return supera
 	}
