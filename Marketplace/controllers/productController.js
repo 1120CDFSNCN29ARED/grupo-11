@@ -108,20 +108,20 @@ module.exports = {
 		let baseSearchUrl = "/producto/buscar?";
 
 		if (req.query.categoria) {
-			result = await productoRepository.Buscar(req.query.categoria, null, pageSize, offset);
+			result = await productoRepository.BuscarPorCategoriaPaginado(req.query.categoria, pageSize, offset);
 			categoria = await categoriaRepository.ObtenerPorId(req.query.categoria);
 			resultadoBusqueda += categoria.nombre;
 			baseSearchUrl += `categoria=${req.query.categoria}`;
 		}
 
 		if (req.query['search-value']) {
-			result = await productoRepository.Buscar(null, req.query['search-value'], pageSize, offset);
+			result = await productoRepository.BuscarPorValorPaginado(req.query['search-value'], pageSize, offset);
 			resultadoBusqueda += req.query['search-value'];
 			baseSearchUrl += `search-value=${req.query['search-value']}`;
 		}
 
 		if (req.query['search-value'] === "") {
-			result = await productoRepository.Buscar(null, null, pageSize, offset);
+			result = await productoRepository.BuscarPorValorPaginado(null, pageSize, offset);
 			baseSearchUrl += `search-value=${req.query['search-value']}`;
 		}
 

@@ -71,28 +71,41 @@ module.exports = {
 			where: { id: id },
 		});
 	},
-	Buscar: (categoriaId, searchValue, limit, offset) => {
+	BuscarPorCategoriaPaginado: (categoriaId, limit, offset) => {
 		let where;
 
-		if (!categoriaId && !searchValue) {
+		if (!categoriaId) {
 			where = {
 				borrado: false
 			}
 		} else {
-			if (categoriaId) {
-				where = {
-					categoria_id: categoriaId,
-					borrado: false
-				}
+			where = {
+				categoria_id: categoriaId,
+				borrado: false
 			}
-			
-			if (searchValue) {
-				where = {
-					nombre: {
-						[Op.like]: '%' + searchValue + '%'
-					},
-					borrado: false
-				}
+		}
+
+		return entidad.findAndCountAll({
+			where: where,
+			limit: limit,
+			offset: offset,
+			include: [ "imagenes" ],
+			distinct: true
+		});
+	},
+	BuscarPorValorPaginado: (searchValue, limit, offset) => {
+		let where;
+
+		if (!searchValue) {
+			where = {
+				borrado: false
+			}
+		} else {			
+			where = {
+				nombre: {
+					[Op.like]: '%' + searchValue + '%'
+				},
+				borrado: false
 			}
 		}
 
