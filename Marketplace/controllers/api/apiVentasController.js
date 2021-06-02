@@ -15,7 +15,6 @@ module.exports = {
 		let detalle_de_venta=[]
 		ventasDetalle.map((n) => {
 			detalle_de_venta.push({
-				facturaID: n.id,
 				numero_factura: n.numero_factura,
 				importe: n.importe,
 				fechaEmision: n.fecha_emision,

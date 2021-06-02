@@ -56,8 +56,9 @@
 					<a href="/usuario/detalle">Detalle de Usuario</a>
 					<a href="/usuario/logout">Logout</a>
 					<hr>
+					<a href="/api/ventas-por-cliente">Ventas por Cliente</a>
 					<% if (locals.usuarioLogeado.rol_id == 1) { %>
-						<a href="/usuario/administrar/<%= locals.usuarioLogeado.id %> ">Administrar un Usuario</a>
+						<a href="/usuario/administrar/<%= locals.usuarioLogeado.id %>">Administrar un Usuario</a>
 						<a href="/producto/crear">Crear Producto</a>
 					<% } %>
 				<% } else { %>
