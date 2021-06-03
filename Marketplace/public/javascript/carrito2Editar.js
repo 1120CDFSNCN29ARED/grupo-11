@@ -5,6 +5,7 @@ window.addEventListener("load", () => {
 	let importe = document.querySelector("#importe");
 	let eliminar = document.querySelectorAll("#eliminar");
 	let registroID = document.querySelectorAll("#registroID");
+	let productos = document.querySelectorAll(".productos");
 
 	// Rutinas por cada registro
 	for (let i = 0; i < cantidad.length; i++) {
@@ -16,8 +17,8 @@ window.addEventListener("load", () => {
 		});
 		// Eliminar el registro
 		eliminar[i].addEventListener("click", async () => {
-			await fetch("/carrito/borrar-registro/" + registroID[i].innerHTML)
-			location.reload();
+			productos[i].classList.replace("productos", "ocultar");
+			await fetch("/carrito/borrar-registro/" + registroID[i].innerHTML);
 		});
 	}
 
@@ -25,11 +26,14 @@ window.addEventListener("load", () => {
 	window.addEventListener("click", () => {
 		let acumulador = 0;
 		for (let i = 0; i < cantidad.length; i++) {
-			cant = parseInt(cantidad[i].value);
-			price = parseInt(precio[i].innerHTML);
-			acumulador = acumulador + cant * price;
+			if (!productos[i].classList.contains("ocultar")) {
+				cant = parseInt(cantidad[i].value);
+				price = parseInt(precio[i].innerHTML);
+				acumulador = acumulador + cant * price;
+			}
 		}
-		importe.innerHTML = "$ " + toThousand(acumulador);
+		console.log(acumulador);
+		acumulador > 0 ? importe.innerHTML = "$ " + toThousand(acumulador) : location.reload()
 	});
 });
 

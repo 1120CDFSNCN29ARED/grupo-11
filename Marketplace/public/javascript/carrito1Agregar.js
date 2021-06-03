@@ -11,7 +11,6 @@ window.addEventListener("load", async () => {
 		agregar[i].addEventListener("click", async () => {
 			await fetch("/carrito/agregar/" + agregarLink[i].innerHTML)
 			contadorActual = await fetch("/carrito/contador").then((n) => {return n.json()})
-			console.log([contadorOriginal, contadorActual]);
 			if (contadorActual > contadorOriginal) {
 				contadorOriginal = contadorActual
 				contador.classList.remove("ocultar");

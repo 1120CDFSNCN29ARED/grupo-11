@@ -14,7 +14,8 @@ module.exports = {
 	eliminarRegistro: async (req, res) => {
 		let registroID = req.params.id;
 		await carritoRepository.EliminarRegistro(registroID);
-		res.redirect("/carrito");
+		// Fin de la rutina
+		return res.json(null);
 	},
 
 	agregarRegistro: async (req, res) => {
