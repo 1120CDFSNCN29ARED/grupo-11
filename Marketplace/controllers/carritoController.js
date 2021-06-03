@@ -25,9 +25,8 @@ module.exports = {
 		// Definir a dónde se va a redireccionar
 		let urlOrigen = req.originalUrl.slice(1)
 		urlOrigen = urlOrigen.slice(urlOrigen.indexOf("/")+1, urlOrigen.lastIndexOf("/"));
-		// Averiguar si el carrito ya existe
-		let avanzar = await carritoRepository.CarritoYaExistente(usuarioID, productoID).then(n => !n)
 		// Si el producto no estaba en el carrito, entonces agregarlo
+		let avanzar = await carritoRepository.CarritoYaExistente(usuarioID, productoID).then(n => !n)
 		avanzar ? await carritoRepository.AgregarRegistro(usuarioID, productoID) : ""
 		// Fin de la rutina
 		return res.json(null);
