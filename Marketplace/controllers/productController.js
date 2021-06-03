@@ -114,21 +114,21 @@ module.exports = {
 			baseSearchUrl += `categoria=${req.query.categoria}`;
 		}
 
-		if (req.query['search-value']) {
-			result = await productoRepository.BuscarPorValorPaginado(req.query['search-value'], pageSize, offset);
-			resultadoBusqueda += req.query['search-value'];
-			baseSearchUrl += `search-value=${req.query['search-value']}`;
+		if (req.query.searchValue) {
+			result = await productoRepository.BuscarPorValorPaginado(req.query.searchValue, pageSize, offset);
+			resultadoBusqueda += req.query.searchValue;
+			baseSearchUrl += `searchValue=${req.query.searchValue}`;
 		}
 
-		if (req.query['search-value'] === "") {
+		if (req.query.searchValue === "") {
 			result = await productoRepository.BuscarPorValorPaginado(null, pageSize, offset);
-			baseSearchUrl += `search-value=${req.query['search-value']}`;
+			baseSearchUrl += `searchValue=${req.query.searchValue}`;
 		}
 
 		if (req.query.section) {
 			result = await productoRepository.BuscarPorSeccionPaginado(req.query.section, pageSize, offset);
 			if (req.query.section == "masVendido") {
-				resultadoBusqueda += "Mas vendidos";
+				resultadoBusqueda += "Más vendidos";
 			} else {
 				resultadoBusqueda += "Novedades";
 			}
@@ -136,7 +136,7 @@ module.exports = {
 
 		if (!result) {
 			result = await productoRepository.BuscarPorValorPaginado(null, pageSize, offset);
-			baseSearchUrl += `search-value=${req.query['search-value']}`;
+			baseSearchUrl += `searchValue=${req.query.searchValue}`;
 		}
 
 		let productos = result.rows;
@@ -144,7 +144,7 @@ module.exports = {
 		let pageSizes = [10, 25, 50, 100];
 		
 		res.render("busqueda", {
-			titulo: "Resultado busqueda",
+			titulo: "Resultado búsqueda",
 			toThousand,
 			productos,
 			resultadoBusqueda,

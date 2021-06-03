@@ -8,7 +8,7 @@ module.exports = {
 		let seccionesProductos = [
 			{
 				section: "masVendido",
-				titulo: "Mas vendidos",
+				titulo: "Más vendidos",
 				productos: masVendidos
 			},
 			{

@@ -72,17 +72,12 @@ module.exports = {
 		});
 	},
 	BuscarPorCategoriaPaginado: (categoriaId, limit, offset) => {
-		let where;
+		let where = {
+			borrado: false
+		};
 
-		if (!categoriaId) {
-			where = {
-				borrado: false
-			}
-		} else {
-			where = {
-				categoria_id: categoriaId,
-				borrado: false
-			}
+		if (categoriaId) {
+			where.categoria_id = categoriaId;
 		}
 
 		return entidad.findAndCountAll({
@@ -94,19 +89,14 @@ module.exports = {
 		});
 	},
 	BuscarPorValorPaginado: (searchValue, limit, offset) => {
-		let where;
+		let where = {
+			borrado: false
+		};
 
-		if (!searchValue) {
-			where = {
-				borrado: false
-			}
-		} else {			
-			where = {
-				nombre: {
-					[Op.like]: '%' + searchValue + '%'
-				},
-				borrado: false
-			}
+		if (searchValue) {
+			where.nombre = {
+				[Op.like]: '%' + searchValue + '%'
+			};
 		}
 
 		return entidad.findAndCountAll({
@@ -118,23 +108,15 @@ module.exports = {
 		});
 	},
 	BuscarPorSeccionPaginado: (section, limit, offset) => {
-		let where;
+		let where = {
+			borrado: false
+		};
 
-		if (!section) {
-			where = {
-				borrado: false
-			}
-		} else {
+		if (section) {
 			if (section == "masVendido") {
-				where = {
-					mas_vendido: true,
-					borrado: false
-				}
+				where.mas_vendido = true;
 			} else {
-				where = {
-					novedades: true,
-					borrado: false
-				}
+				where.novedades = true;
 			}
 		}
 
