@@ -5,14 +5,24 @@ module.exports = {
 	ObtenerTodos: () => {
 		return entidad.findAll({
 			include: ["imagenes", "categoria", "marca", "modelo", "creadoPor"],
+			where: { borrado: false },
+
 		});
 	},
+
+	ObtenerTodosInclusoBorrados: () => {
+		return entidad.findAll({
+			include: ["imagenes", "categoria", "marca", "modelo"],
+		});
+	},
+
 	ObtenerPorId: (productoID) => {
 		return entidad.findByPk(productoID, {
 			include: ["imagenes", "categoria", "marca", "modelo", "creadoPor"],
 		});
 	},
-	ObtenerNovedades: () => {
+
+  ObtenerNovedades: () => {
 		return entidad.findAll({
 			where: {
 				novedades: true,
@@ -21,7 +31,8 @@ module.exports = {
 			include: ["imagenes"],
 		});
 	},
-	ObtenerMasVendidos: () => {
+
+  ObtenerMasVendidos: () => {
 		return entidad.findAll({
 			where: {
 				mas_vendido: true,
@@ -30,7 +41,16 @@ module.exports = {
 			include: ["imagenes"],
 		});
 	},
-	Eliminar: (idProducto, idUsuario) => {
+
+  ObtenerImagenes: async (id) => {
+		const producto = await entidad.findByPk(id, {
+			include: ["imagenes"],
+		});
+
+		return producto.imagenes;
+	},
+
+  Eliminar: (idProducto, idUsuario) => {
 		return entidad.update(
 			{
 				borrado: true,
@@ -41,7 +61,8 @@ module.exports = {
 			}
 		);
 	},
-	Crear: (infoProducto, precio, usuarioId) => {
+
+  Crear: (infoProducto, precio, usuarioId) => {
 		return entidad.create({
 			nombre: infoProducto.nombre,
 			descripcion: infoProducto.descripcion,
@@ -53,7 +74,8 @@ module.exports = {
 			creado_por: usuarioId,
 		});
 	},
-	Actualizar: (productoID, infoProducto, precio, usuarioId) => {
+
+  Actualizar: (productoID, infoProducto, precio, usuarioId) => {
 		return entidad.update(
 			{
 				nombre: infoProducto.nombre,
@@ -68,7 +90,7 @@ module.exports = {
 		);
 	},
 
-	// Disminuye el stock disponible de un producto cuando se produce su venta
+  // Disminuye el stock disponible de un producto cuando se produce su venta
 	DisminuirStock: async (productoID, cantidad) => {
 		let stock_disponible = await entidad
 			.findByPk(productoID)
@@ -79,5 +101,4 @@ module.exports = {
 			{where: { id: productoID }}
 		);
 	},
-	
 };

@@ -7,6 +7,12 @@ module.exports = {
 	ObtenerTodos: () => {
 		return entidad.findAll({
 			include: ["rol"],
+			where: { borrado: false },
+		});
+	},
+	ObtenerTodosInclusoBorrados: () => {
+		return entidad.findAll({
+			include: ["rol"],
 		});
 	},
 	ObtenerPorId: (id) => {
