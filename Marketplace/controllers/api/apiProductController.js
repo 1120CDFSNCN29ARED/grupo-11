@@ -5,7 +5,7 @@ module.exports = {
 	listado: async (req, res) => {
 		let data = null;
 		// *** PRODUCTOS ***
-		data = await productoRepository.ObtenerTodas();
+		data = await productoRepository.ObtenerTodos()
 		let productos = [];
 		data.map(n => {
 			productos.push({
