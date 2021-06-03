@@ -9,8 +9,10 @@ window.addEventListener("load", async () => {
 	for (let i = 0; i < agregar.length; i++) {
 		// Cambios si se hace click sobre algún canasto
 		agregar[i].addEventListener("click", async () => {
+			// Se agrega el producto al carrito
 			await fetch("/carrito/agregar/" + agregarLink[i].innerHTML)
-			contadorActual = await fetch("/carrito/contador").then((n) => {return n.json()})
+			// Si hubo cambios en la cantidad de productos en el carrito, se actualiza el contador
+			contadorActual = await fetch("/carrito/contador").then((n) => n.json())
 			if (contadorActual > contadorOriginal) {
 				contadorOriginal = contadorActual
 				contador.classList.remove("ocultar");

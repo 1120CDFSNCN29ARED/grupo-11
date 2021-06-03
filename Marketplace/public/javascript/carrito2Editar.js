@@ -7,10 +7,11 @@ window.addEventListener("load", () => {
 	let eliminar = document.querySelectorAll("#eliminar");
 	let registroID = document.querySelectorAll("#registroID");
 	let productos = document.querySelectorAll(".productos");
+	let contador = document.querySelector("#contador");
 
 	// RUTINAS POR CADA REGUSTRO
 	for (let i = 0; i < cantidad.length; i++) {
-		// 1. Cambios en la cantidad
+		// 1. Cambios en la cantidad de un producto
 		cantidad[i].addEventListener("input", () => {
 			cant = parseInt(cantidad[i].value);
 			cant < 0 ? (cant = 0) : "";
@@ -21,20 +22,15 @@ window.addEventListener("load", () => {
 			importe = cant * price;
 			valorParcial[i].innerHTML = "$ " + toThousand(importe);
 			// Calcular el valor Total
-			importeTotal = actualizarTotalCarrito(
-				productos,
-				cantidad,
-				precio,
-				valorTotal
-			);
+			actualizarTotalCarrito(productos, cantidad, precio, valorTotal);
 		});
-		
-		// 2. Eliminar el registro
+
+		// 2. Eliminar el registro y actualizar el contador
 		eliminar[i].addEventListener("click", async () => {
 			// Ocultar el producto
 			productos[i].classList.replace("productos", "ocultar");
 			// Calcular el valor Total
-			importeTotal = actualizarTotalCarrito(
+			quedanProductos = actualizarTotalCarrito(
 				productos,
 				cantidad,
 				precio,
@@ -42,9 +38,17 @@ window.addEventListener("load", () => {
 			);
 			// Eliminar el producto de la BD
 			await fetch("/carrito/borrar-registro/" + registroID[i].value);
-			console.log(registroID[i].value);
-			// Si se eliminó todo el carrito,  actualizar la página
-			!importeTotal ? location.reload() : "";
+			// Actualizar el contador o la página entera
+			if (quedanProductos) {
+				// Si quedan productos, actualizar el contador
+				contadorActual = await fetch("/carrito/contador").then((n) =>
+					n.json()
+				);
+				contador.innerHTML = contadorActual;
+			} else {
+				// Si no quedan productos, actualizar la página
+				location.reload();
+			}
 		});
 	}
 });
@@ -54,15 +58,17 @@ window.addEventListener("load", () => {
 // Actualizar el valor Total
 function actualizarTotalCarrito(productos, cantidad, precio, valorTotal) {
 	let acumulador = 0;
+	let quedanProductos = 0;
 	for (let i = 0; i < cantidad.length; i++) {
 		if (!productos[i].classList.contains("ocultar")) {
 			cant = parseInt(cantidad[i].value);
 			price = parseInt(precio[i].innerHTML);
 			acumulador = acumulador + cant * price;
+			quedanProductos = true;
 		}
 	}
 	valorTotal.innerHTML = "$ " + toThousand(acumulador);
-	return acumulador;
+	return quedanProductos;
 }
 
 // SIMELA
