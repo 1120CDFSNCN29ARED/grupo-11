@@ -50,6 +50,7 @@ body {
 	flex-grow: 1;
 }
 
+.fa-trash-alt,
 .fa-shopping-basket {
 	cursor: pointer;
 }

@@ -20,7 +20,6 @@ module.exports = {
 	},
 	crearGuardar: async (req, res) => {
 		let precio = parseFloat(req.body.precio);
-		// return res.send(precio.toString())
 		let validaciones = validationResult(req);
 		// Acciones a tomar si existe algún error de validación
 		if (validaciones.errors.length) {
@@ -65,7 +64,6 @@ module.exports = {
 	},
 	editarGuardar: async (req, res) => {
 		let precio = parseFloat(req.body.precio);
-		//return res.send(precio.toString())
 		let validaciones = validationResult(req);
 		// Acciones a tomar si existe algún error de validación
 		if (validaciones.errors.length) {

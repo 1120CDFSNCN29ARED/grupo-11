@@ -1,10 +1,9 @@
 <section class="productos">
-	<p class="ocultar" id="registroID"><%= registroID %></p>
 	<img src="/images/products/<%= imagen.ruta %> " alt="<%= producto.nombre %>" class="imagen-de-producto">
 	<p class="nombre-de-producto"><%= producto.nombre %> </p>
 	<div id="cantidad-y-flechas">
 		<!--CANTIDAD-->
-		<input class="ocultar" name="registro<%= numRegistro %>" type="number" value="<%= registroID %>">
+		<input id="registroID" class="ocultar" name="registro<%= numRegistro %>" type="number" value="<%= registroID %>">
 		<input id="cantidad" name="cantidad<%= numRegistro %>" type="number" value="<%= cantidad %>">
 	</div>
 	<div class="valor">
@@ -15,8 +14,8 @@
 	</div>
 	<div class="valor">
 		<!--PRECIO TOTAL-->
-		<p class="título">Valor Total</p>
-		<p class="valor" id="valorTotal">$ <%= toThousand(cantidad * producto.precio) %> </p>
+		<p class="título">Valor Parcial</p>
+		<p class="valor" id="valorParcial">$ <%= toThousand(cantidad * producto.precio) %> </p>
 	</div>
 	<div>
 		<!--TRASH-->
