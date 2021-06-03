@@ -24,14 +24,12 @@ module.exports = {
 		// Definir a dónde se va a redireccionar
 		let urlOrigen = req.originalUrl.slice(1)
 		urlOrigen = urlOrigen.slice(urlOrigen.indexOf("/")+1, urlOrigen.lastIndexOf("/"));
-		if (urlOrigen == "agregar/1") {(urlDestino = "/")} else
-		if (urlOrigen == "agregar/2") {urlDestino = "/producto/" + productoID + "/detalle"}
 		// Averiguar si el carrito ya existe
 		let avanzar = await carritoRepository.CarritoYaExistente(usuarioID, productoID).then(n => !n)
-		// Sumar al carrito
+		// Si el producto no estaba en el carrito, entonces agregarlo
 		avanzar ? await carritoRepository.AgregarRegistro(usuarioID, productoID) : ""
-		// Redireccionar
-		return res.redirect(urlDestino);
+		// Fin de la rutina
+		return res.json(null);
 	},
 
 	actualizarCarrito: async (req, res) => {

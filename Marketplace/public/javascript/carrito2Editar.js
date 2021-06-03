@@ -15,8 +15,9 @@ window.addEventListener("load", () => {
 			actualizar(cant, i);
 		});
 		// Eliminar el registro
-		eliminar[i].addEventListener("click", () => {
-			location = "/carrito/borrar-registro/" + registroID[i].innerHTML;
+		eliminar[i].addEventListener("click", async () => {
+			await fetch("/carrito/borrar-registro/" + registroID[i].innerHTML)
+			location.reload();
 		});
 	}
 
