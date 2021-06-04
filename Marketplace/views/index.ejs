@@ -7,7 +7,9 @@
 			<section class="products-group">
 				<div class="section-header flex-container">
 					<p class="section-title"><%= seccion.titulo %> </p>
-					<p class="view-more">Ver todos</p>
+					<a href="/producto/buscar?section=<%= seccion.section %>" class="view-more">
+						<p>Ver todos</p>
+					</a>
 				</div>
 				<div class="section-products flex-container">
 					<% for (const producto of seccion.productos) { %>

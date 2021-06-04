@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const db = require("../database/models");
 const entidad = db.Producto;
 
@@ -101,4 +102,63 @@ module.exports = {
 			{where: { id: productoID }}
 		);
 	},
+
+	BuscarPorCategoriaPaginado: (categoriaId, limit, offset) => {
+		let where = {
+			borrado: false
+		};
+
+		if (categoriaId) {
+			where.categoria_id = categoriaId;
+		}
+
+		return entidad.findAndCountAll({
+			where: where,
+			limit: limit,
+			offset: offset,
+			include: [ "imagenes" ],
+			distinct: true
+		});
+	},
+	BuscarPorValorPaginado: (searchValue, limit, offset) => {
+		let where = {
+			borrado: false
+		};
+
+		if (searchValue) {
+			where.nombre = {
+				[Op.like]: '%' + searchValue + '%'
+			};
+		}
+
+		return entidad.findAndCountAll({
+			where: where,
+			limit: limit,
+			offset: offset,
+			include: [ "imagenes" ],
+			distinct: true
+		});
+	},
+	BuscarPorSeccionPaginado: (section, limit, offset) => {
+		let where = {
+			borrado: false
+		};
+
+		if (section) {
+			if (section == "masVendido") {
+				where.mas_vendido = true;
+			} else {
+				where.novedades = true;
+			}
+		}
+
+		return entidad.findAndCountAll({
+			where: where,
+			limit: limit,
+			offset: offset,
+			include: [ "imagenes" ],
+			distinct: true
+		});
+	}
+
 };
