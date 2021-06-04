@@ -3,7 +3,13 @@ const db = require("../database/models");
 const entidad = db.Producto;
 
 module.exports = {
-	ObtenerTodas: () => {
+	ObtenerTodos: () => {
+		return entidad.findAll({
+			include: ["imagenes", "categoria", "marca", "modelo"],
+			where: { borrado: false },
+		});
+	},
+	ObtenerTodosInclusoBorrados: () => {
 		return entidad.findAll({
 			include: ["imagenes", "categoria", "marca", "modelo"],
 		});
@@ -17,35 +23,37 @@ module.exports = {
 		return entidad.findAll({
 			where: {
 				novedades: true,
-				borrado: false
+				borrado: false,
 			},
-			include: [ "imagenes" ]
+			include: ["imagenes"],
 		});
 	},
 	ObtenerMasVendidos: () => {
 		return entidad.findAll({
 			where: {
 				mas_vendido: true,
-				borrado: false
+				borrado: false,
 			},
-			include: [ "imagenes" ]
+			include: ["imagenes"],
 		});
 	},
 	ObtenerImagenes: async (id) => {
 		const producto = await entidad.findByPk(id, {
-			include: [ "imagenes" ]
+			include: ["imagenes"],
 		});
 
 		return producto.imagenes;
 	},
 	Eliminar: (idProducto, idUsuario) => {
-		return entidad.update({
-			borrado: true,
-			actualizado_por: idUsuario
-		},
-		{
-			where: { id: idProducto },
-		});
+		return entidad.update(
+			{
+				borrado: true,
+				actualizado_por: idUsuario,
+			},
+			{
+				where: { id: idProducto },
+			}
+		);
 	},
 	Crear: (infoProducto, precio, usuarioId) => {
 		return entidad.create({
@@ -60,17 +68,20 @@ module.exports = {
 		});
 	},
 	Actualizar: (id, infoProducto, precio, usuarioId) => {
-		return entidad.update({
-			nombre: infoProducto.nombre,
-			categoria_id: infoProducto.categoria,
-			descripcion: infoProducto.descripcion,
-			precio: precio,
-			actualizado_por: usuarioId
-		},
-		{
-			where: { id: id },
-		});
+		return entidad.update(
+			{
+				nombre: infoProducto.nombre,
+				categoria_id: infoProducto.categoria,
+				descripcion: infoProducto.descripcion,
+				precio: precio,
+				actualizado_por: usuarioId,
+			},
+			{
+				where: { id: id },
+			}
+		);
 	},
+
 	BuscarPorCategoriaPaginado: (categoriaId, limit, offset) => {
 		let where = {
 			borrado: false
