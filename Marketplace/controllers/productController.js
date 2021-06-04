@@ -120,11 +120,6 @@ module.exports = {
 			baseSearchUrl += `searchValue=${req.query.searchValue}`;
 		}
 
-		if (req.query.searchValue === "") {
-			result = await productoRepository.BuscarPorValorPaginado(null, pageSize, offset);
-			baseSearchUrl += `searchValue=${req.query.searchValue}`;
-		}
-
 		if (req.query.section) {
 			result = await productoRepository.BuscarPorSeccionPaginado(req.query.section, pageSize, offset);
 			if (req.query.section == "masVendido") {
