@@ -3,6 +3,7 @@ const productoRepository = require("../repositories/productoRepository");
 const marcaRepository = require("../repositories/marcaRepository");
 const modeloRepository = require("../repositories/modeloRepository");
 const imagenesRepository = require("../repositories/imagenRepository");
+const categoriaRepository = require("../repositories/categoriaRepository");
 const fs = require("fs");
 const path = require("path");
 const { validationResult } = require("express-validator");
@@ -98,6 +99,57 @@ module.exports = {
 		await EliminarProducto(req.params.id, req.session.usuarioLogeado.id);
 		res.redirect("/");
 	},
+	buscar: async (req, res) => {
+		let result;
+		let resultadoBusqueda = "Resultado de la busqueda: ";
+		let pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 10;
+		let currentPage = req.query.page ? parseInt(req.query.page) : 1;
+		let offset = pageSize * (currentPage - 1);
+		let baseSearchUrl = "/producto/buscar?";
+
+		if (req.query.categoria) {
+			result = await productoRepository.BuscarPorCategoriaPaginado(req.query.categoria, pageSize, offset);
+			categoria = await categoriaRepository.ObtenerPorId(req.query.categoria);
+			resultadoBusqueda += categoria.nombre;
+			baseSearchUrl += `categoria=${req.query.categoria}`;
+		}
+
+		if (req.query.searchValue) {
+			result = await productoRepository.BuscarPorValorPaginado(req.query.searchValue, pageSize, offset);
+			resultadoBusqueda += req.query.searchValue;
+			baseSearchUrl += `searchValue=${req.query.searchValue}`;
+		}
+
+		if (req.query.section) {
+			result = await productoRepository.BuscarPorSeccionPaginado(req.query.section, pageSize, offset);
+			if (req.query.section == "masVendido") {
+				resultadoBusqueda += "Más vendidos";
+			} else {
+				resultadoBusqueda += "Novedades";
+			}
+		}
+
+		if (!result) {
+			result = await productoRepository.BuscarPorValorPaginado(null, pageSize, offset);
+			baseSearchUrl += `searchValue=${req.query.searchValue}`;
+		}
+
+		let productos = result.rows;
+		let totalResults = result.count;
+		let pageSizes = [10, 25, 50, 100];
+		
+		res.render("busqueda", {
+			titulo: "Resultado búsqueda",
+			toThousand,
+			productos,
+			resultadoBusqueda,
+			totalResults,
+			pageSize,
+			currentPage,
+			pageSizes,
+			baseSearchUrl
+		});
+	}
 };
 
 const toThousand = (n) => {
