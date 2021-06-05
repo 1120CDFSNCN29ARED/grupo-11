@@ -21,5 +21,6 @@ router.delete("/eliminar", soloUsuarios, userController.eliminar);
 router.get("/login", soloVisitas, userController.loginForm);
 router.post("/login", validarLogin, userController.loginGrabar);
 router.get("/logout", soloUsuarios, userController.logout);
+router.get("/recupero", userController.recuperoContrasena);
 
 module.exports = router;
