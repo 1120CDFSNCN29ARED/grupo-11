@@ -45,15 +45,15 @@ module.exports = {
 		}
 		// Eliminar los carritos y disminuir el stock según la compra
 		for (n of carritos) {
-			carritoID = n.id;
 			// Eliminar los carritos
+			carritoID = n.id;
 			await carritoRepository.EliminarRegistro(carritoID);
-			productoID = n.producto_id;
-			cantComprada = parseInt(n.cantidad);
 			// Disminuir el stock
+			productoID = n.producto_id;
 			let stock_disponible = await productoRepository
 				.ObtenerPorId(productoID)
 				.then((n) => n.stock_disponible);
+			cantComprada = parseInt(n.cantidad);
 			let nuevoStock = stock_disponible - cantComprada;
 			await productoRepository.ActualizarStock(productoID, nuevoStock);
 		}
