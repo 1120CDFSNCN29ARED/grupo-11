@@ -43,13 +43,19 @@ module.exports = {
 		for (registro of detalle) {
 			await ventasRepository.AgregarDetalle(registro);
 		}
-		// Eliminar los carritos y disminuir el stock
+		// Eliminar los carritos y disminuir el stock según la compra
 		for (n of carritos) {
 			carritoID = n.id;
+			// Eliminar los carritos
+			await carritoRepository.EliminarRegistro(carritoID);
 			productoID = n.producto_id;
 			cantComprada = parseInt(n.cantidad);
-			await carritoRepository.EliminarRegistro(carritoID);
-			await productoRepository.DisminuirStock(productoID, cantComprada);
+			// Disminuir el stock
+			let stock_disponible = await productoRepository
+				.ObtenerPorId(productoID)
+				.then((n) => n.stock_disponible);
+			let nuevoStock = stock_disponible - cantComprada;
+			await productoRepository.ActualizarStock(productoID, nuevoStock);
 		}
 		res.redirect("/carrito");
 	},

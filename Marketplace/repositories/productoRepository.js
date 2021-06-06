@@ -4,7 +4,6 @@ const entidad = db.Producto;
 
 module.exports = {
 	ObtenerTodos: () => {
-
 		return entidad.findAll({
 			include: ["imagenes", "categoria", "marca", "modelo"],
 			where: { borrado: false },
@@ -91,21 +90,16 @@ module.exports = {
 		);
 	},
 
-	// Disminuye el stock disponible de un producto cuando se produce su venta
-	DisminuirStock: async (productoID, cantidad) => {
-		let stock_disponible = await entidad
-			.findByPk(productoID)
-			.then((n) => n.stock_disponible);
-		let nuevoStock = stock_disponible - cantidad;
+	ActualizarStock: async (productoID, nuevoStock) => {
 		return entidad.update(
-			{stock_disponible: nuevoStock},
-			{where: { id: productoID }}
+			{ stock_disponible: nuevoStock },
+			{ where: { id: productoID } }
 		);
 	},
 
 	BuscarPorCategoriaPaginado: (categoriaId, limit, offset) => {
 		let where = {
-			borrado: false
+			borrado: false,
 		};
 
 		if (categoriaId) {
@@ -116,33 +110,33 @@ module.exports = {
 			where: where,
 			limit: limit,
 			offset: offset,
-			include: [ "imagenes" ],
-			distinct: true
+			include: ["imagenes"],
+			distinct: true,
 		});
 	},
 
 	BuscarPorValorPaginado: (searchValue, limit, offset) => {
 		let where = {
-			borrado: false
+			borrado: false,
 		};
 
 		if (searchValue) {
 			where.nombre = {
-				[Op.like]: '%' + searchValue + '%'
+				[Op.like]: "%" + searchValue + "%",
 			};
 		}
 		return entidad.findAndCountAll({
 			where: where,
 			limit: limit,
 			offset: offset,
-			include: [ "imagenes" ],
-			distinct: true
+			include: ["imagenes"],
+			distinct: true,
 		});
 	},
 
 	BuscarPorSeccionPaginado: (section, limit, offset) => {
 		let where = {
-			borrado: false
+			borrado: false,
 		};
 
 		if (section) {
@@ -156,9 +150,8 @@ module.exports = {
 			where: where,
 			limit: limit,
 			offset: offset,
-			include: [ "imagenes" ],
-			distinct: true
+			include: ["imagenes"],
+			distinct: true,
 		});
-	}
-
+	},
 };
