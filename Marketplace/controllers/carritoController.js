@@ -46,8 +46,8 @@ module.exports = {
 		let api = await productoRepository.ObtenerTodos();
 		var cambio = false;
 		for (carrito of carritos) {
-			ID = carrito.producto_id;
-			stockDisponible = api.find((m) => m.id == ID).stock_disponible;
+			productoID = carrito.producto_id;
+			stockDisponible = api.find((m) => m.id == productoID).stock_disponible;
 			if (carrito.cantidad > stockDisponible) {
 				await carritoRepository.ActualizarCarrito(carrito.id, stockDisponible);
 				cambio = true;
