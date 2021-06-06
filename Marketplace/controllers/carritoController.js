@@ -40,11 +40,19 @@ module.exports = {
 				? await carritoRepository.ActualizarCarrito(carritoID, cantidad)
 				: await carritoRepository.EliminarCarrito(carritoID);
 		}
-		// Comparar la compra vs el stock y si lo supera --> devolver al carrito
+		// Comparar la compra vs el stock y si lo supera --> corregirlo y devolver al carrito
 		let usuarioID = req.session.usuarioLogeado.id;
 		let carritos = await carritoRepository.ObtenerTodos(usuarioID);
 		let api = await productoRepository.ObtenerTodos();
-		let cambio = await carritoRepository.VerificarStock(carritos, api);
+		var cambio = false;
+		for (carrito of carritos) {
+			productoID = carrito.producto_id;
+			stockDisponible = api.find((m) => m.id == productoID).stock_disponible;
+			if (carrito.cantidad > stockDisponible) {
+				await carritoRepository.ActualizarCarrito(carrito.id, stockDisponible);
+				cambio = true;
+			}
+		}
 		cambio ? res.redirect("/carrito") : "";
 		// Redireccionar
 		res.redirect("/carrito");

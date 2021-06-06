@@ -6,15 +6,15 @@
 				<i class="fas fa-bars" id="categoria-button"></i>
 				<div id="menu-categorias" class="dropdown-content">
 					<% for (let n of locals.categoriasDeProductos) { %> 
-						<a href="<%= n.link %>" class="menu-options"><%= n.nombre %></a>
+						<a href="/producto/buscar?categoria=<%= n.id %>" class="menu-options"><%= n.nombre %></a>
 					<% } %>
 				</div>
 			</div>
 		</section>
 		<!-- Opción de búsqueda rápida ------------------------>
 		<div id="search-container" class="flex-container">
-			<form action="/" method="GET" class="flex-container" id="search-form">
-				<input type="text" name="search-value" id="search-value">
+			<form action="/producto/buscar" method="GET" class="flex-container" id="search-form">
+				<input type="text" name="searchValue" id="searchValue">
 				<button type="submit" id="search-button">
 					<i class="fas fa-search"></i>
 				</button>

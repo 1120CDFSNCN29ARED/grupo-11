@@ -7,10 +7,12 @@ module.exports = {
 
 		let seccionesProductos = [
 			{
-				titulo: "Mas vendidos",
+				section: "masVendido",
+				titulo: "Más vendidos",
 				productos: masVendidos
 			},
 			{
+				section: "novedades",
 				titulo: "Novedades",
 				productos: novedades
 			}
