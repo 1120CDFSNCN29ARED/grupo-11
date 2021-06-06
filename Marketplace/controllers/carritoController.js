@@ -1,54 +1,67 @@
+// Requires ***********************************
 const carritoRepository = require("../repositories/carritoRepository");
+const productoRepository = require("../repositories/productoRepository");
 
 module.exports = {
 	listado: async (req, res) => {
 		let usuarioID = req.session.usuarioLogeado.id;
-		let registros = await carritoRepository.ObtenerTodos(usuarioID);
+		let carritos = await carritoRepository.ObtenerTodos(usuarioID);
 		res.render("carrito", {
 			titulo: "Carrito de Compras",
-			registros,
+			carritos,
 			toThousand,
 		});
 	},
 
-	eliminarRegistro: async (req, res) => {
-		let registroID = req.params.id;
-		await carritoRepository.EliminarRegistro(registroID);
-		res.redirect("/carrito");
-	},
-
-	agregarRegistro: async (req, res) => {
+	agregarCarrito: async (req, res) => {
 		// Variables de uso general
 		let usuarioID = req.session.usuarioLogeado.id;
 		let productoID = parseInt(req.params.id);
 		// Definir a dónde se va a redireccionar
-		let urlOrigen = req.originalUrl.slice(1)
-		urlOrigen = urlOrigen.slice(urlOrigen.indexOf("/")+1, urlOrigen.lastIndexOf("/"));
-		if (urlOrigen == "agregar/1") {(urlDestino = "/")} else
+		let urlOrigen = req.originalUrl.slice(1);
+		urlOrigen = urlOrigen.slice(urlOrigen.indexOf("/") + 1, urlOrigen.lastIndexOf("/"));
+		if (urlOrigen == "agregar/1") {urlDestino = "/"} else
 		if (urlOrigen == "agregar/2") {urlDestino = "/producto/" + productoID + "/detalle"}
 		// Averiguar si el carrito ya existe
-		let avanzar = await carritoRepository.CarritoYaExistente(usuarioID, productoID).then(n => !n)
+		let avanzar = await carritoRepository.CarritoYaExistente(usuarioID, productoID).then((n) => !n);
 		// Sumar al carrito
-		avanzar ? await carritoRepository.AgregarRegistro(usuarioID, productoID) : ""
+		avanzar ? await carritoRepository.AgregarRegistro(usuarioID, productoID) : "";
 		// Redireccionar
 		return res.redirect(urlDestino);
 	},
 
 	actualizarCarrito: async (req, res) => {
-
+		// Actualizar carrito
 		let cantRegistros = req.body.cantRegistros;
 		for (let i = 0; i < cantRegistros; i++) {
-			carritoID = req.body["registro" + i];
+			carritoID = req.body["carrito" + i];
 			cantidad = req.body["cantidad" + i];
-			await carritoRepository.ActualizarCarrito(carritoID, cantidad);
+			cantidad > 0
+				? await carritoRepository.ActualizarCarrito(carritoID, cantidad)
+				: await carritoRepository.EliminarRegistro(carritoID);
 		}
+		// Comparar la compra vs el stock y si lo supera --> corregirlo y devolver al carrito
+		let usuarioID = req.session.usuarioLogeado.id;
+		let carritos = await carritoRepository.ObtenerTodos(usuarioID);
+		let api = await productoRepository.ObtenerTodos();
+		var cambio = false;
+		for (carrito of carritos) {
+			productoID = carrito.producto_id;
+			stockDisponible = api.find((m) => m.id == productoID).stock_disponible;
+			if (carrito.cantidad > stockDisponible) {
+				await carritoRepository.ActualizarCarrito(carrito.id, stockDisponible);
+				cambio = true;
+			}
+		}
+		cambio ? res.redirect("/carrito") : "";
+		// Redireccionar
 		res.redirect("/carrito");
 	},
 
-	contador: async (req, res) => {
-		let usuarioID = req.session.usuarioLogeado.id;
-		let contador = await carritoRepository.ObtenerTodos(usuarioID).then(n => n.length.toString())
-		return res.json(contador)
+	eliminarCarrito: async (req, res) => {
+		let carritoID = req.params.id;
+		await carritoRepository.EliminarRegistro(carritoID);
+		res.redirect("/carrito");
 	},
 
 };

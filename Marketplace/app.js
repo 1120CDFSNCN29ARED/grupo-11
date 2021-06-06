@@ -25,7 +25,7 @@ app.use(cors());
 app.use(validarUserLogged); // Para tener actualizada constantemente la variable res.locals.isLogged
 app.use(async (req, res, next) => {
     if (!app.locals.categoriasDeProductos) {
-        app.locals.categoriasDeProductos = await categoriaRepository.ObtenerTodas();
+        app.locals.categoriasDeProductos = await categoriaRepository.ObtenerTodos();
     }
     next();
 });
@@ -47,10 +47,12 @@ const rutaProducto = require("./routers/product");
 const rutaUsuario = require("./routers/user");
 const rutaAPI = require("./routers/api");
 const rutaCarrito = require("./routers/carrito");
+const rutaVenta = require("./routers/venta");
 const rutaMain = require("./routers/main");
 // **************** Rutas *******************
 app.use("/producto", rutaProducto);
 app.use("/usuario", rutaUsuario);
 app.use("/api", rutaAPI);
 app.use("/carrito", rutaCarrito);
+app.use("/venta", rutaVenta);
 app.use("/", rutaMain);

@@ -55,6 +55,7 @@ main {
 	margin-left: 5px;
 	font-weight: bold;
 	color: blue;
+	cursor: pointer
 }
 
 #carrito .productos {

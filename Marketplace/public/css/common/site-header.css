@@ -80,7 +80,6 @@ header .dropdown-content {
 }
 header .dropdown-content a {
 	padding: 8px 16px;
-	text-decoration: none;
 	display: block;
 	color: var(--gray);
 	font-weight: bold;
@@ -128,4 +127,11 @@ header .imagenCuadrada {
 	padding: 2px 7px;
 	border-radius: 50%;
 	border: white 1px solid
+}
+
+.fa-bars,
+.fa-search,
+.fa-shopping-basket,
+#profile-container {
+	cursor: pointer
 }

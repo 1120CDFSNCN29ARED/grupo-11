@@ -2,17 +2,10 @@ const db = require("../database/models");
 const entidad = db.Carrito;
 
 module.exports = {
-
 	ObtenerTodos: (usuarioID) => {
 		return entidad.findAll({
 			include: ["producto", "imagen"],
 			where: { usuario_id: usuarioID },
-		});
-	},
-
-	EliminarRegistro: (registroID) => {
-		return entidad.destroy({
-			where: { id: registroID },
 		});
 	},
 
@@ -35,14 +28,31 @@ module.exports = {
 		});
 	},
 
-	ActualizarCarrito: (infoCarrito, cantRegistros) => {
-		for (let i = 0; i < cantRegistros; i++) {
-			entidad.update(
-				{ cantidad: infoCarrito["cantidad" + i] },
-				{ where: { id: infoCarrito["registro" + i] } }
-			);
-		}
-		return;
+	ActualizarCarrito: (carritoID, cantidad) => {
+		return entidad.update(
+			{ cantidad: cantidad },
+			{ where: { id: carritoID } }
+		);
 	},
-	
+
+	EliminarRegistro: (carritoID) => {
+		return entidad.destroy({
+			where: { id: carritoID },
+		});
+	},
+
+	ImporteCarrito: async (usuarioID) => {
+		let carritos = await entidad.findAll({
+			include: ["producto"],
+			where: { usuario_id: usuarioID },
+		});
+		let acumulador = 0;
+		for (n of carritos) {
+			cant = n.cantidad;
+			precio = n.producto.precio;
+			acumulador = acumulador + cant * precio;
+		}
+		return acumulador;
+	},
+
 };

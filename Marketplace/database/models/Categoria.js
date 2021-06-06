@@ -10,14 +10,14 @@ module.exports = (sequelize) => {
 		timestamps: false
 	};
 
-	const Categoria = sequelize.define(alias,columns,config);
+	const entidad = sequelize.define(alias,columns,config);
+	entidad.associate = function(models) {
 
-	Categoria.associate = function(models) {
-		Categoria.hasMany(models.Producto, {
+		entidad.hasMany(models.Producto, {
 			as: "productos",
 			foreignKey: "categoria_id"
 		});
 	};
 
-	return Categoria;
+	return entidad;
 };

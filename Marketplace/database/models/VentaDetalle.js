@@ -1,28 +1,29 @@
 const Sequelize = require("sequelize");
 
 module.exports = (sequelize) => {
-	const alias = "Carrito";
+	const alias = "detalleVenta";
 	const columns = {
-		usuario_id: Sequelize.INTEGER,
 		producto_id: Sequelize.INTEGER,
-		cantidad: Sequelize.INTEGER
+		venta_encabezado_id: Sequelize.INTEGER,
+		cantidad: Sequelize.INTEGER,
+		precio: Sequelize.INTEGER,
 	};
 	const config = {
-		tableName: "carrito",
-		timestamps: false
+		tableName: "ventas_detalle",
+		timestamps: false,
 	};
 
 	const entidad = sequelize.define(alias,columns,config);
 	entidad.associate = function(models) {
 
+		entidad.belongsTo(models.encabezadoVenta, {
+			as: "venta_encabezado",
+			foreignKey: "venta_encabezado_id",
+		});
+		
 		entidad.belongsTo(models.Producto, {
 			as: "producto",
 			foreignKey: "producto_id"
-		});
-
-		entidad.belongsTo(models.Imagen, {
-			as: "imagen",
-			foreignKey: "producto_id",
 		});
 	};
 

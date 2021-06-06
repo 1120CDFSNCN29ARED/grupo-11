@@ -1,26 +1,39 @@
-window.addEventListener("load", () => {
-	// Declarar lasvariables
+window.addEventListener("load", async () => {
+	// Declarar las variables
 	let cantidad = document.querySelectorAll("#cantidad");
 	let precio = document.querySelectorAll("#precio");
 	let importe = document.querySelector("#importe");
 	let eliminar = document.querySelectorAll("#eliminar");
-	let registroID = document.querySelectorAll("#registroID");
+	let carritoID = document.querySelectorAll("#carritoID");
+	let comprar = document.querySelector("#comprar"); // Botón de "comprar"
 
-	// Rutinas por cada registro
+	// Obtener el stock de cada producto para compararlo luego vs el carrito
+	let api = await fetch("/api/productos")
+		.then((n) => n.json())
+		.then((n) => n.products);
+	let productos = document.querySelectorAll("#productoID");
+	let stock = [];
+	for (n of productos) {
+		ID = n.innerHTML;
+		stockDisponible = api.find((m) => m.id == ID).stock;
+		stock.push(stockDisponible);
+	}
+	// Rutinas por cada carrito
 	for (let i = 0; i < cantidad.length; i++) {
-		// Cambios en la cantidad
+		// Acciones ante cambios en la cantidad
 		cantidad[i].addEventListener("input", () => {
 			cant = parseInt(cantidad[i].value);
-			cant < 0 ? (cant = 0) : "";
-			actualizar(cant, i);
+			cant < 0 ? cant = 0 : cant > stock[i] ? cant = stock[i] : ""
+			actualizar(cant, i); // actualizar datos en la vista del carrito
+			comprar.classList.add("ocultar"); // ocultar el botón de comprar si se deben guardar los cambios
 		});
-		// Eliminar el registro
+		// Eliminar el carrito
 		eliminar[i].addEventListener("click", () => {
-			location = "/carrito/borrar-registro/" + registroID[i].innerHTML;
+			location = "/carrito/borrar-carrito/" + carritoID[i].innerHTML;
 		});
 	}
 
-	// Rutina para el encabezado
+	// Importe a pagar
 	window.addEventListener("click", () => {
 		let acumulador = 0;
 		for (let i = 0; i < cantidad.length; i++) {

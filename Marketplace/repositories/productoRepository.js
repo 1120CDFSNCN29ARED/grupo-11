@@ -9,16 +9,19 @@ module.exports = {
 			where: { borrado: false },
 		});
 	},
+
 	ObtenerTodosInclusoBorrados: () => {
 		return entidad.findAll({
 			include: ["imagenes", "categoria", "marca", "modelo"],
 		});
 	},
-	ObtenerPorId: (id) => {
-		return entidad.findByPk(id, {
+
+	ObtenerPorId: (productoID) => {
+		return entidad.findByPk(productoID, {
 			include: ["imagenes", "categoria", "marca", "modelo"],
 		});
 	},
+
 	ObtenerNovedades: () => {
 		return entidad.findAll({
 			where: {
@@ -28,6 +31,7 @@ module.exports = {
 			include: ["imagenes"],
 		});
 	},
+
 	ObtenerMasVendidos: () => {
 		return entidad.findAll({
 			where: {
@@ -37,6 +41,7 @@ module.exports = {
 			include: ["imagenes"],
 		});
 	},
+
 	ObtenerImagenes: async (id) => {
 		const producto = await entidad.findByPk(id, {
 			include: ["imagenes"],
@@ -44,6 +49,7 @@ module.exports = {
 
 		return producto.imagenes;
 	},
+
 	Eliminar: (idProducto, idUsuario) => {
 		return entidad.update(
 			{
@@ -55,6 +61,7 @@ module.exports = {
 			}
 		);
 	},
+
 	Crear: (infoProducto, precio, usuarioId) => {
 		return entidad.create({
 			nombre: infoProducto.nombre,
@@ -67,7 +74,8 @@ module.exports = {
 			creado_por: usuarioId,
 		});
 	},
-	Actualizar: (id, infoProducto, precio, usuarioId) => {
+
+	Actualizar: (productoID, infoProducto, precio, usuarioId) => {
 		return entidad.update(
 			{
 				nombre: infoProducto.nombre,
@@ -77,14 +85,21 @@ module.exports = {
 				actualizado_por: usuarioId,
 			},
 			{
-				where: { id: id },
+				where: { id: productoID },
 			}
+		);
+	},
+
+	ActualizarStock: async (productoID, nuevoStock) => {
+		return entidad.update(
+			{ stock_disponible: nuevoStock },
+			{ where: { id: productoID } }
 		);
 	},
 
 	BuscarPorCategoriaPaginado: (categoriaId, limit, offset) => {
 		let where = {
-			borrado: false
+			borrado: false,
 		};
 
 		if (categoriaId) {
@@ -95,32 +110,33 @@ module.exports = {
 			where: where,
 			limit: limit,
 			offset: offset,
-			include: [ "imagenes" ],
-			distinct: true
+			include: ["imagenes"],
+			distinct: true,
 		});
 	},
+
 	BuscarPorValorPaginado: (searchValue, limit, offset) => {
 		let where = {
-			borrado: false
+			borrado: false,
 		};
 
 		if (searchValue) {
 			where.nombre = {
-				[Op.like]: '%' + searchValue + '%'
+				[Op.like]: "%" + searchValue + "%",
 			};
 		}
-
 		return entidad.findAndCountAll({
 			where: where,
 			limit: limit,
 			offset: offset,
-			include: [ "imagenes" ],
-			distinct: true
+			include: ["imagenes"],
+			distinct: true,
 		});
 	},
+
 	BuscarPorSeccionPaginado: (section, limit, offset) => {
 		let where = {
-			borrado: false
+			borrado: false,
 		};
 
 		if (section) {
@@ -130,13 +146,12 @@ module.exports = {
 				where.novedades = true;
 			}
 		}
-
 		return entidad.findAndCountAll({
 			where: where,
 			limit: limit,
 			offset: offset,
-			include: [ "imagenes" ],
-			distinct: true
+			include: ["imagenes"],
+			distinct: true,
 		});
-	}
+	},
 };
