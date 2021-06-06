@@ -9,12 +9,6 @@ module.exports = {
 		});
 	},
 
-	EliminarRegistro: (carritoID) => {
-		return entidad.destroy({
-			where: { id: carritoID },
-		});
-	},
-
 	CarritoYaExistente: (usuarioID, productoID) => {
 		return entidad
 			.count({
@@ -41,6 +35,12 @@ module.exports = {
 		);
 	},
 
+	EliminarRegistro: (carritoID) => {
+		return entidad.destroy({
+			where: { id: carritoID },
+		});
+	},
+
 	ImporteCarrito: async (usuarioID) => {
 		let carritos = await entidad.findAll({
 			include: ["producto"],
@@ -55,16 +55,4 @@ module.exports = {
 		return acumulador;
 	},
 
-	ActualizarStock: async (carrito, stockDisponible) => {
-		// Elimina el producto del carrito si la cantidad pedida es cero o negativa
-		if (carrito.cantidad <= 0) {
-			entidad.destroy({ where: { id: carrito.id } });
-		} else {
-			// Actualiza la cantidad del carrito para igualarla con la del stock
-			await entidad.update(
-				{ cantidad: stockDisponible },
-				{ where: { id: carrito.id } }
-			);
-		}
-	},
 };

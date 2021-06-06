@@ -23,7 +23,7 @@ module.exports = {
 		});
 	},
 
-  ObtenerNovedades: () => {
+	ObtenerNovedades: () => {
 		return entidad.findAll({
 			where: {
 				novedades: true,
@@ -33,7 +33,7 @@ module.exports = {
 		});
 	},
 
-  ObtenerMasVendidos: () => {
+	ObtenerMasVendidos: () => {
 		return entidad.findAll({
 			where: {
 				mas_vendido: true,
@@ -43,7 +43,7 @@ module.exports = {
 		});
 	},
 
-  ObtenerImagenes: async (id) => {
+	ObtenerImagenes: async (id) => {
 		const producto = await entidad.findByPk(id, {
 			include: ["imagenes"],
 		});
@@ -51,7 +51,7 @@ module.exports = {
 		return producto.imagenes;
 	},
 
-  Eliminar: (idProducto, idUsuario) => {
+	Eliminar: (idProducto, idUsuario) => {
 		return entidad.update(
 			{
 				borrado: true,
@@ -63,7 +63,7 @@ module.exports = {
 		);
 	},
 
-  Crear: (infoProducto, precio, usuarioId) => {
+	Crear: (infoProducto, precio, usuarioId) => {
 		return entidad.create({
 			nombre: infoProducto.nombre,
 			descripcion: infoProducto.descripcion,
@@ -76,7 +76,7 @@ module.exports = {
 		});
 	},
 
-  Actualizar: (productoID, infoProducto, precio, usuarioId) => {
+	Actualizar: (productoID, infoProducto, precio, usuarioId) => {
 		return entidad.update(
 			{
 				nombre: infoProducto.nombre,
@@ -91,7 +91,7 @@ module.exports = {
 		);
 	},
 
-  // Disminuye el stock disponible de un producto cuando se produce su venta
+	// Disminuye el stock disponible de un producto cuando se produce su venta
 	DisminuirStock: async (productoID, cantidad) => {
 		let stock_disponible = await entidad
 			.findByPk(productoID)
@@ -120,6 +120,7 @@ module.exports = {
 			distinct: true
 		});
 	},
+
 	BuscarPorValorPaginado: (searchValue, limit, offset) => {
 		let where = {
 			borrado: false
@@ -130,7 +131,6 @@ module.exports = {
 				[Op.like]: '%' + searchValue + '%'
 			};
 		}
-
 		return entidad.findAndCountAll({
 			where: where,
 			limit: limit,
@@ -139,6 +139,7 @@ module.exports = {
 			distinct: true
 		});
 	},
+
 	BuscarPorSeccionPaginado: (section, limit, offset) => {
 		let where = {
 			borrado: false
@@ -151,7 +152,6 @@ module.exports = {
 				where.novedades = true;
 			}
 		}
-
 		return entidad.findAndCountAll({
 			where: where,
 			limit: limit,
