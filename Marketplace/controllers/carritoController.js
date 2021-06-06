@@ -44,7 +44,15 @@ module.exports = {
 		let usuarioID = req.session.usuarioLogeado.id;
 		let carritos = await carritoRepository.ObtenerTodos(usuarioID);
 		let api = await productoRepository.ObtenerTodos();
-		let cambio = await carritoRepository.VerificarStock(carritos, api);
+		var cambio = false;
+		for (carrito of carritos) {
+			ID = carrito.producto_id;
+			stockDisponible = api.find((m) => m.id == ID).stock_disponible;
+			if (carrito.cantidad > stockDisponible) {
+				await carritoRepository.ActualizarStock(carrito, stockDisponible);
+				cambio = true;
+			}
+		}
 		cambio ? res.redirect("/carrito") : "";
 		// Redireccionar
 		res.redirect("/carrito");

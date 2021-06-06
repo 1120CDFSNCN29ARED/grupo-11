@@ -55,27 +55,16 @@ module.exports = {
 		return acumulador;
 	},
 
-	VerificarStock: async (carritos, api) => {
-		var cambio = false;
-		for (carrito of carritos) {
-			ID = carrito.producto_id;
-			stockDisponible = api.find((m) => m.id == ID).stock_disponible;
-			// Disminuye la cantidad del carrito para igualarla con el stock
-			if (carrito.cantidad > stockDisponible) {
-				await entidad.update(
-					{ cantidad: stockDisponible },
-					{ where: { id: carrito.id } }
-				);
-				cambio = true;
-			}
-			// Elimina el producto del carrito si la cantidad pedida es cero o negativa
-			if (carrito.cantidad <= 0) {
-				await carritoRepository.EliminarRegistro(carrito.id);
-				cambio = true;
-			}
+	ActualizarStock: async (carrito, stockDisponible) => {
+		// Elimina el producto del carrito si la cantidad pedida es cero o negativa
+		if (carrito.cantidad <= 0) {
+			entidad.destroy({ where: { id: carrito.id } });
+		} else {
+			// Actualiza la cantidad del carrito para igualarla con la del stock
+			await entidad.update(
+				{ cantidad: stockDisponible },
+				{ where: { id: carrito.id } }
+			);
 		}
-		// Avisa que se hizo algún cambio
-		return cambio
-	}
-
+	},
 };
