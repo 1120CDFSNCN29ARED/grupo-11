@@ -1,3 +1,4 @@
+// Requires ***********************************
 const productoRepository = require("../../repositories/productoRepository");
 const categoriaRepository = require("../../repositories/categoriaRepository");
 
@@ -7,7 +8,7 @@ module.exports = {
 		// *** PRODUCTOS ***
 		data = await productoRepository.ObtenerTodos();
 		let productos = [];
-		data.map(n => {
+		data.map((n) => {
 			productos.push({
 				id: n.id,
 				nombre: n.nombre,
@@ -15,7 +16,7 @@ module.exports = {
 				modelo: n.modelo.nombre,
 				descripcion: n.descripcion,
 				categoria: n.categoria.nombre,
-				imagenes: n.imagenes.map(m => "/images/products/" + m.ruta),
+				imagenes: n.imagenes.map((m) => "/images/products/" + m.ruta),
 				precio: n.precio,
 				stock: n.stock_disponible,
 				url: "/api/productos/" + n.id,
@@ -25,10 +26,10 @@ module.exports = {
 		// *** CATEGORÍAS ***
 		data = await categoriaRepository.ObtenerTodos();
 		let totales = [];
-		data.map(n => { 
+		data.map((n) => {
 			totales.push({
 				categoria: n.nombre,
-				total: n.productos.length
+				total: n.productos.length,
 			});
 		});
 		// *** FINAL ***
@@ -52,8 +53,8 @@ module.exports = {
 			modelo: data.modelo.nombre,
 			precio: data.precio,
 			stock: data.stock_disponible,
-			imagenes: data.imagenes.map(n => n.ruta),
+			imagenes: data.imagenes.map((n) => n.ruta),
 		};
 		res.json(producto);
 	},
-}
+};

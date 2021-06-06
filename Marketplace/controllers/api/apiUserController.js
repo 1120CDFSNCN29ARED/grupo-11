@@ -1,8 +1,9 @@
+// Requires ***********************************
 const usuarioRepository = require("../../repositories/usuarioRepository");
 
 module.exports = {
 	listado: async (req, res) => {
-		let usuarios = await usuarioRepository.ObtenerTodos()
+		let usuarios = await usuarioRepository.ObtenerTodos();
 		let usuarioRespuesta = usuarios.map((x) => {
 			return {
 				id: x.id,

@@ -5,8 +5,9 @@ const entidad = db.Producto;
 module.exports = {
 	ObtenerTodos: () => {
 		return entidad.findAll({
-			include: ["imagenes", "categoria", "marca", "modelo"],
+			include: ["imagenes", "categoria", "marca", "modelo", "creadoPor"],
 			where: { borrado: false },
+
 		});
 	},
 
@@ -18,7 +19,7 @@ module.exports = {
 
 	ObtenerPorId: (productoID) => {
 		return entidad.findByPk(productoID, {
-			include: ["imagenes", "categoria", "marca", "modelo"],
+			include: ["imagenes", "categoria", "marca", "modelo", "creadoPor"],
 		});
 	},
 

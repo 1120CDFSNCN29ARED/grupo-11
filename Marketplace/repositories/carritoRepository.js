@@ -20,7 +20,7 @@ module.exports = {
 			.then((n) => n > 0);
 	},
 
-	AgregarRegistro: (usuarioID, productoID) => {
+	AgregarCarrito: (usuarioID, productoID) => {
 		return entidad.create({
 			usuario_id: usuarioID,
 			producto_id: productoID,
@@ -35,7 +35,7 @@ module.exports = {
 		);
 	},
 
-	EliminarRegistro: (carritoID) => {
+	EliminarCarrito: (carritoID) => {
 		return entidad.destroy({
 			where: { id: carritoID },
 		});

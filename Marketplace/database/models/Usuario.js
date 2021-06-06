@@ -27,6 +27,11 @@ module.exports = (sequelize) => {
 			foreignKey: "rol_id"
 		});
 		
+		entidad.hasMany(models.Producto, {
+			as: "productosCreados",
+			foreignKey: "creado_por"
+		});
+
 		entidad.hasMany(models.Carrito, {
 			as: "carritos",
 			foreignKey: "usuario_id"

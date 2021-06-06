@@ -25,20 +25,20 @@ module.exports = {
 		// Averiguar si el carrito ya existe
 		let avanzar = await carritoRepository.CarritoYaExistente(usuarioID, productoID).then((n) => !n);
 		// Sumar al carrito
-		avanzar ? await carritoRepository.AgregarRegistro(usuarioID, productoID) : "";
+		avanzar ? await carritoRepository.AgregarCarrito(usuarioID, productoID) : "";
 		// Redireccionar
 		return res.redirect(urlDestino);
 	},
 
 	actualizarCarrito: async (req, res) => {
 		// Actualizar carrito
-		let cantRegistros = req.body.cantRegistros;
-		for (let i = 0; i < cantRegistros; i++) {
+		let cantCarritos = req.body.cantCarritos;
+		for (let i = 0; i < cantCarritos; i++) {
 			carritoID = req.body["carrito" + i];
 			cantidad = req.body["cantidad" + i];
 			cantidad > 0
 				? await carritoRepository.ActualizarCarrito(carritoID, cantidad)
-				: await carritoRepository.EliminarRegistro(carritoID);
+				: await carritoRepository.EliminarCarrito(carritoID);
 		}
 		// Comparar la compra vs el stock y si lo supera --> corregirlo y devolver al carrito
 		let usuarioID = req.session.usuarioLogeado.id;
@@ -60,7 +60,7 @@ module.exports = {
 
 	eliminarCarrito: async (req, res) => {
 		let carritoID = req.params.id;
-		await carritoRepository.EliminarRegistro(carritoID);
+		await carritoRepository.EliminarCarrito(carritoID);
 		res.redirect("/carrito");
 	},
 
