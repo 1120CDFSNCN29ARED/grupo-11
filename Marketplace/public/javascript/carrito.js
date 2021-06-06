@@ -2,60 +2,98 @@ window.addEventListener("load", async () => {
 	// Declarar las variables
 	let cantidad = document.querySelectorAll("#cantidad");
 	let precio = document.querySelectorAll("#precio");
-	let importe = document.querySelector("#importe");
+	let valorParcial = document.querySelectorAll("#valorParcial");
+	let valorTotal = document.querySelector("#importe");
 	let eliminar = document.querySelectorAll("#eliminar");
 	let carritoID = document.querySelectorAll("#carritoID");
 	let comprar = document.querySelector("#comprar"); // Botón de "comprar"
+	let productosSeccion = document.querySelectorAll(".productos");
+	let contador = document.querySelector("#contador");
 
 	// Obtener el stock de cada producto para compararlo luego vs el carrito
 	let api = await fetch("/api/productos")
 		.then((n) => n.json())
 		.then((n) => n.products);
-	let productos = document.querySelectorAll("#productoID");
+	let productosID = document.querySelectorAll("#productoID");
 	let stock = [];
-	for (n of productos) {
+	for (n of productosID) {
 		ID = n.innerHTML;
 		stockDisponible = api.find((m) => m.id == ID).stock;
 		stock.push(stockDisponible);
 	}
-	// Rutinas por cada carrito
+	// RUTINAS POR CADA REGISTRO
 	for (let i = 0; i < cantidad.length; i++) {
-		// Acciones ante cambios en la cantidad
+		// 1. Cambios en la cantidad de un producto
 		cantidad[i].addEventListener("input", () => {
+			cantidad[i].value == "" ? cantidad[i].value = 0 : "";
 			cant = parseInt(cantidad[i].value);
-			cant < 0 ? cant = 0 : cant > stock[i] ? cant = stock[i] : ""
-			actualizar(cant, i); // actualizar datos en la vista del carrito
+			cant < 0 ? cant = 0 : cant > stock[i] ? (cant = stock[i]) : "";
+			// Asegurarse de que la cantidad sea mayor a cero
+			cantidad[i].value = cant;
+			// Calcular el valor Parcial
+			price = parseInt(precio[i].innerHTML);
+			importe = cant * price;
+			valorParcial[i].innerHTML = "$ " + toThousand(importe);
+			// Calcular el valor Total
+			actualizarTotalCarrito(
+				productosSeccion,
+				cantidad,
+				precio,
+				valorTotal
+			);
 			comprar.classList.add("ocultar"); // ocultar el botón de comprar si se deben guardar los cambios
 		});
-		// Eliminar el carrito
-		eliminar[i].addEventListener("click", () => {
-			location = "/carrito/borrar-carrito/" + carritoID[i].innerHTML;
+
+		// 2. Eliminar el registro y actualizar el contador
+		eliminar[i].addEventListener("click", async () => {
+			// Ocultar el producto
+			productosSeccion[i].classList.replace("productos", "ocultar");
+			// Calcular el valor Total
+			quedanProductos = actualizarTotalCarrito(
+				productosSeccion,
+				cantidad,
+				precio,
+				valorTotal
+			);
+			// Eliminar el producto de la BD
+			await fetch("/carrito/borrar-carrito/" + carritoID[i].value);
+			// Actualizar el contador o la página entera
+			if (quedanProductos) {
+				// Si quedan productos, actualizar el contador
+				contadorActual = await fetch("/api/carrito/contador").then((n) => n.json());
+				contador.innerHTML = contadorActual;
+			} else {
+				// Si no quedan productos, actualizar la página
+				location.reload();
+			}
 		});
 	}
+});
 
-	// Importe a pagar
-	window.addEventListener("click", () => {
-		let acumulador = 0;
-		for (let i = 0; i < cantidad.length; i++) {
+// FUNCIONES
+
+// Actualizar el valor Total
+function actualizarTotalCarrito(
+	productosSeccion,
+	cantidad,
+	precio,
+	valorTotal
+) {
+	let acumulador = 0;
+	let quedanProductos = 0;
+	for (let i = 0; i < cantidad.length; i++) {
+		if (!productosSeccion[i].classList.contains("ocultar")) {
 			cant = parseInt(cantidad[i].value);
 			price = parseInt(precio[i].innerHTML);
 			acumulador = acumulador + cant * price;
+			quedanProductos = true;
 		}
-		importe.innerHTML = "$ " + toThousand(acumulador);
-	});
-});
-
-// Funciones
-function actualizar(cant, i) {
-	let cantidad = document.querySelectorAll("#cantidad");
-	let precio = document.querySelectorAll("#precio");
-	let valorTotal = document.querySelectorAll("#valorTotal");
-	cantidad[i].value = cant;
-	price = parseInt(precio[i].innerHTML);
-	importe = cant * price;
-	valorTotal[i].innerHTML = "$ " + toThousand(importe);
+	}
+	valorTotal.innerHTML = "$ " + toThousand(acumulador);
+	return quedanProductos;
 }
 
+// SIMELA
 function toThousand(n) {
 	return parseInt(n).toLocaleString("es-AR", { maximumFractionDigits: 0 });
 }
