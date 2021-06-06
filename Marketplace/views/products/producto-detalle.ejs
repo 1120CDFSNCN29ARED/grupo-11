@@ -36,8 +36,10 @@
 						</form>
 					</div>
 					<div>
-						<button id="agregar" type="text">Agregar al Carrito</button>
-						<p id="agregarLink" class="ocultar"><%= producto.id %></p>
+						<% if (locals.usuarioLogeado) { %>
+							<button id="agregar" type="text">Agregar al Carrito</button>
+							<p id="agregarLink" class="ocultar"><%= producto.id %></p>						
+						<% } %>
 					</div>
 				</article>
 			</div>

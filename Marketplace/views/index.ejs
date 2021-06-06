@@ -18,8 +18,10 @@
 								<a href="/producto/<%= producto.id %>/detalle">
 									<img src="/images/products/<%= producto.imagenes[0].ruta %>" alt="<%= producto.nombre %>" class="product-image">
 								</a>
-								<p id="agregar" class="fas fa-shopping-basket"></p>
-								<p id="agregarLink" class="ocultar"><%= producto.id %></p>
+								<% if (locals.usuarioLogeado) { %>
+									<p id="agregar" class="fas fa-shopping-basket"></p>
+									<p id="agregarLink" class="ocultar"><%= producto.id %></p>
+								<% } %> 
 							</div>
 							<div class="product-information">
 								<p class="product-description"><%= producto.nombre %></p>
