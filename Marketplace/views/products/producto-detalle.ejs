@@ -41,10 +41,8 @@
 						</a>
 					</div>
 					<div>
-						<% if (locals.usuarioLogeado.rol_id == 1) { %>
-							<a href="/api/ventas-por-producto/<%= producto.id %>">
+						<% if (locals.usuarioLogeado && locals.usuarioLogeado.rol_id == 1) { %>							<a href="/api/ventas-por-producto/<%= producto.id %>">
 								<button id="carrito" type="text">Historial de Venta</button>
-							</a>
 						<% } %>
 					</div>
 				</article>
