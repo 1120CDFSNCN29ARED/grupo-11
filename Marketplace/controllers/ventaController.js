@@ -11,12 +11,12 @@ module.exports = {
 		let api = await productoRepository.ObtenerTodos();
 		var cambio = false;
 		for (carrito of carritos) {
-			ID = carrito.producto_id;
-			stockDisponible = api.find((m) => m.id == ID).stock_disponible;
 			if (carrito.cantidad == 0) {
 				await carritoRepository.EliminarRegistro(carrito.id);
 				cambio = true;
 			} else 
+			ID = carrito.producto_id;
+			stockDisponible = api.find((m) => m.id == ID).stock_disponible;
 			if (carrito.cantidad > stockDisponible) {
 				await carritoRepository.ActualizarCarrito(carrito.id, stockDisponible);
 				cambio = true;
