@@ -51,6 +51,11 @@ body {
 }
 
 a {
-	cursor: pointer;
 	text-decoration: none;
+}
+
+a,
+.fa-trash-alt,
+.fa-shopping-basket {
+	cursor: pointer;
 }

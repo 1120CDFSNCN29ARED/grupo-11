@@ -20,16 +20,19 @@
 		<link rel="stylesheet" href="/css/home-body.css">
 		<link rel="stylesheet" href="/css/home-responsive.css">
 		<script src="/javascript/revisarStock.js"></script>
+		<script src="/javascript/carrito1Agregar.js"></script>
 	<% } %>
 	<% if (titulo == "Login") { %><link rel="stylesheet" href="/css/varios/login.css"><% } %>
 	<% if (titulo == "Carrito de Compras") { %>
 		<link rel="stylesheet" href="/css/varios/carrito.css">
 		<script src="/javascript/carrito.js"></script>
 	<% } %>
-
 	<% if (titulo == "Registro de Usuario" || titulo == "Edite su Usuario") { %><link rel="stylesheet" href="/css/users/usuario-crear-y-editar.css"><% } %>
 	<% if (titulo == "Detalle del Usuario" || titulo == "Administrar el Usuario") { %><link rel="stylesheet" href="/css/users/usuario-detalle.css"><% } %>
-	<% if (titulo == "Detalle del Producto") { %><link rel="stylesheet" href="/css/products/producto-detalle.css"><% } %>
+	<% if (titulo == "Detalle del Producto") { %>
+		<link rel="stylesheet" href="/css/products/producto-detalle.css">
+		<script src="/javascript/carrito1Agregar.js"></script>
+	<% } %>
 	<% if (titulo == "Crear un Producto" || titulo == "Editar un Producto") { %>
 		<link rel="stylesheet" href="/css/products/producto-crear-y-editar.css">
 		<script src="/javascript/formatoFormularios.js"></script>
@@ -46,6 +49,6 @@
 
 	<script src="/javascript/menuDesplegable.js"></script>
 	<script src="/javascript/avatarCircular.js"></script>
-	<script src="/javascript/contadorCarrito.js"></script>
+	<script src="/javascript/contador3Carrito.js"></script>
 	<script src="/javascript/home.js"></script>
 </head>

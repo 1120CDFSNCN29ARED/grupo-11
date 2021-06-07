@@ -51,7 +51,7 @@ img {
 	background-color: green;
 }
 
-.descripcion button#carrito {
+.descripcion button#agregar {
 	background-color: var(--gray);
 }
 

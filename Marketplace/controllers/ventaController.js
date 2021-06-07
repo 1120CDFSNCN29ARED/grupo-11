@@ -12,7 +12,7 @@ module.exports = {
 		var cambio = false;
 		for (carrito of carritos) {
 			if (carrito.cantidad == 0) {
-				await carritoRepository.EliminarRegistro(carrito.id);
+				await carritoRepository.EliminarCarrito(carrito.id);
 				cambio = true;
 			} else {
 				productoID = carrito.producto_id;
@@ -47,7 +47,7 @@ module.exports = {
 		for (n of carritos) {
 			// Eliminar los carritos
 			carritoID = n.id;
-			await carritoRepository.EliminarRegistro(carritoID);
+			await carritoRepository.EliminarCarrito(carritoID);
 			// Disminuir el stock
 			productoID = n.producto_id;
 			let stock_disponible = await productoRepository

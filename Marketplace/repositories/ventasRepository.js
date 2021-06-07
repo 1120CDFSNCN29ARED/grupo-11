@@ -66,9 +66,9 @@ module.exports = {
 			.then((n) => n.id);
 	},
 
-	AgregarDetalle: (registro) => {
+	AgregarDetalle: (carrito) => {
 		return detalle.create({
-			...registro,
+			...carrito,
 		});
 	},
 };

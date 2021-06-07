@@ -17,17 +17,11 @@ module.exports = {
 		// Variables de uso general
 		let usuarioID = req.session.usuarioLogeado.id;
 		let productoID = parseInt(req.params.id);
-		// Definir a dónde se va a redireccionar
-		let urlOrigen = req.originalUrl.slice(1);
-		urlOrigen = urlOrigen.slice(urlOrigen.indexOf("/") + 1, urlOrigen.lastIndexOf("/"));
-		if (urlOrigen == "agregar/1") {urlDestino = "/"} else
-		if (urlOrigen == "agregar/2") {urlDestino = "/producto/" + productoID + "/detalle"}
-		// Averiguar si el carrito ya existe
+		// Si el producto no estaba en el carrito, entonces agregarlo
 		let avanzar = await carritoRepository.CarritoYaExistente(usuarioID, productoID).then((n) => !n);
-		// Sumar al carrito
 		avanzar ? await carritoRepository.AgregarCarrito(usuarioID, productoID) : "";
-		// Redireccionar
-		return res.redirect(urlDestino);
+		// Fin de la rutina
+		return res.json(avanzar);
 	},
 
 	actualizarCarrito: async (req, res) => {
@@ -43,17 +37,16 @@ module.exports = {
 		// Comparar la compra vs el stock y si lo supera --> corregirlo y devolver al carrito
 		let usuarioID = req.session.usuarioLogeado.id;
 		let carritos = await carritoRepository.ObtenerTodos(usuarioID);
-		let api = await productoRepository.ObtenerTodos();
+		let productos = await productoRepository.ObtenerTodos();
 		var cambio = false;
 		for (carrito of carritos) {
 			productoID = carrito.producto_id;
-			stockDisponible = api.find((m) => m.id == productoID).stock_disponible;
+			stockDisponible = productos.find((m) => m.id == productoID).stock_disponible;
 			if (carrito.cantidad > stockDisponible) {
 				await carritoRepository.ActualizarCarrito(carrito.id, stockDisponible);
-				cambio = true;
+				cambio = true; // Este valor lo deberíamos insertar en un campo en la tabla del carrito, para indicar que no tenemos stock suficiente e informarlo en el tablero del carrito de compras
 			}
 		}
-		cambio ? res.redirect("/carrito") : "";
 		// Redireccionar
 		res.redirect("/carrito");
 	},
@@ -61,7 +54,8 @@ module.exports = {
 	eliminarCarrito: async (req, res) => {
 		let carritoID = req.params.id;
 		await carritoRepository.EliminarCarrito(carritoID);
-		res.redirect("/carrito");
+		// Fin de la rutina
+		return res.json(null);
 	},
 
 };

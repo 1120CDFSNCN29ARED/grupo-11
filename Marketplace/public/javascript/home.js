@@ -4,5 +4,5 @@ window.addEventListener("load", () => {
 		if (document.getElementById("searchValue").value != "") {
 			e.currentTarget.submit();
 		}
-	})	
+	})
 });

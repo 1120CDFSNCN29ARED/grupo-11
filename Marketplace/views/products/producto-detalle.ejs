@@ -36,13 +36,16 @@
 						</form>
 					</div>
 					<div>
-						<a href="/carrito/agregar/2/<%= producto.id %>">
-							<button id="carrito" type="text">Agregar al Carrito</button>
-						</a>
+						<% if (locals.usuarioLogeado) { %>
+							<button id="agregar" type="text">Agregar al Carrito</button>
+							<p id="agregarLink" class="ocultar"><%= producto.id %></p>
+						<% } %>
 					</div>
 					<div>
-						<% if (locals.usuarioLogeado && locals.usuarioLogeado.rol_id == 1) { %>							<a href="/api/ventas-por-producto/<%= producto.id %>">
-								<button id="carrito" type="text">Historial de Venta</button>
+						<% if (locals.usuarioLogeado && locals.usuarioLogeado.rol_id == 1) { %>
+							<a href="/api/ventas-por-producto/<%= producto.id %>">
+								<button id="agregar" type="text">Historial de Venta</button>
+							</a>
 						<% } %>
 					</div>
 				</article>

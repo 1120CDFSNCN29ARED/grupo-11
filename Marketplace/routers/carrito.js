@@ -6,8 +6,7 @@ const router = express.Router();
 const soloUsuarios = require("../middlewares/soloUsuarios");
 
 // Rutas
-router.get("/agregar/1/:id", soloUsuarios, carritoController.agregarCarrito);
-router.get("/agregar/2/:id", soloUsuarios, carritoController.agregarCarrito);
+router.get("/agregar/:id", soloUsuarios, carritoController.agregarCarrito);
 router.put("/actualizar", soloUsuarios, carritoController.actualizarCarrito);
 router.get("/borrar-carrito/:id", soloUsuarios, carritoController.eliminarCarrito);
 router.get("/", soloUsuarios, carritoController.listado);

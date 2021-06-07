@@ -1,23 +1,25 @@
 <section class="productos">
-	<p class="ocultar" id="carritoID"><%= carrito.id %></p>
+	<!-- Variables -->
+	<input class="ocultar" id="carritoID" name="carrito<%= numCarrito %>" type="number" value="<%= carrito.id %>">
 	<p class="ocultar" id="productoID"><%= producto.id %></p>
+	<p class="ocultar" id="precio"><%= producto.precio %> </p>
+
+	<!-- Vista -->
 	<img src="/images/products/<%= imagen.ruta %> " alt="<%= producto.nombre %>" class="imagen-de-producto">
 	<p class="nombre-de-producto"><%= producto.nombre %> </p>
 	<div id="cantidad-y-flechas">
 		<!--CANTIDAD-->
-		<input class="ocultar" name="carrito<%= numCarrito %>" type="number" value="<%= carrito.id %>">
 		<input id="cantidad" name="cantidad<%= numCarrito %>" type="number" value="<%= carrito.cantidad %>">
 	</div>
 	<div class="valor">
 		<!--PRECIO UNITARIO-->
 		<p class="título">$/un.</p>
 		<p class="valor">$ <%= toThousand(producto.precio) %> </p>
-		<p class="ocultar" id="precio"><%= producto.precio %> </p>
 	</div>
 	<div class="valor">
 		<!--PRECIO TOTAL-->
-		<p class="título">Valor Total</p>
-		<p class="valor" id="valorTotal">$ <%= toThousand(carrito.cantidad * producto.precio) %> </p>
+		<p class="título">Valor Parcial</p>
+		<p class="valor" id="valorParcial">$ <%= toThousand(carrito.cantidad * producto.precio) %> </p>
 	</div>
 	<div>
 		<!--TRASH-->
