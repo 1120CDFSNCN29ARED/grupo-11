@@ -63,9 +63,7 @@ window.addEventListener("load", async () => {
 			// Actualizar el contador o la página entera
 			if (quedanProductos) {
 				// Si quedan productos, actualizar el contador
-				contadorActual = await fetch("/api/carrito/contador").then(
-					(n) => n.json()
-				);
+				contadorActual = await fetch("/api/carrito/contador").then((n) => n.json());
 				contador.innerHTML = contadorActual;
 			} else {
 				// Si no quedan productos, actualizar la página
