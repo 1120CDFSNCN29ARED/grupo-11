@@ -4,6 +4,7 @@ const marcaRepository = require("../repositories/marcaRepository");
 const modeloRepository = require("../repositories/modeloRepository");
 const imagenesRepository = require("../repositories/imagenRepository");
 const categoriaRepository = require("../repositories/categoriaRepository");
+const carritoRepository = require("../repositories/carritoRepository");
 const fs = require("fs");
 const path = require("path");
 const { validationResult } = require("express-validator");
@@ -53,10 +54,18 @@ module.exports = {
 	detalle: async (req, res) => {
 		let titulo = "Detalle del Producto";
 		let producto = await productoRepository.ObtenerPorId(req.params.id);
+		let carritos=[]
+		if (req.session.usuarioLogeado) {
+			let usuarioID = req.session.usuarioLogeado.id;
+			carritos = await carritoRepository
+				.ObtenerTodos(usuarioID)
+				.then((n) => n.map((m) => m.producto_id));
+		}
 		return res.render("producto-detalle", {
 			producto,
 			toThousand,
 			titulo,
+			carritos,
 		});
 	},
 	editarForm: async (req, res) => {

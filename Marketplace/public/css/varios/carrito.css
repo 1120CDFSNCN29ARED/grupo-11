@@ -62,15 +62,9 @@ main {
 	width: 90%;
 	padding: 15px;
 	margin: 10px auto;
-}
-
-#carrito .productos {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
-
-#carrito .productos {
 	border: gray 2px solid;
 }
 

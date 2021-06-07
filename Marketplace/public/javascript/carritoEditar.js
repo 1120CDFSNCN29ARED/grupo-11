@@ -71,7 +71,7 @@ window.addEventListener("load", async () => {
 			}
 		});
 	}
-};);
+});
 
 // FUNCIONES
 

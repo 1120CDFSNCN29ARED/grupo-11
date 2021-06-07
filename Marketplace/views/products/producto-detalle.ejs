@@ -36,7 +36,7 @@
 						</form>
 					</div>
 					<div>
-						<% if (producto.stock_disponible && locals.usuarioLogeado) { %>
+						<% if (producto.stock_disponible && locals.usuarioLogeado && !carritos.find(n => n == producto.id)) { %>
 							<button id="agregar" type="text">Agregar al Carrito</button>
 							<p id="agregarLink" class="ocultar"><%= producto.id %></p>
 						<% } %>

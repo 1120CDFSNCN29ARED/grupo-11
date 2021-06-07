@@ -21,7 +21,7 @@
 								<% if (producto.stock_disponible && locals.usuarioLogeado) { %>
 									<p id="agregarLink" class="ocultar"><%= producto.id %></p>
 									<p id="agregar" 
-										<% if (!!carritos.find(n => n == producto.id)) { %>
+										<% if (carritos.find(n => n == producto.id)) { %>
 											class="fas fa-thumbs-up"
 										<% } else { %> 
 											class="fas fa-shopping-basket"
