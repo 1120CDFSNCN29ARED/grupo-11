@@ -58,7 +58,7 @@ window.addEventListener("load", async () => {
 				precio,
 				valorTotal
 			);
-			// Eliminar el producto de la BD
+			// Eliminar el producto del carrito en la BD
 			await fetch("/carrito/borrar-carrito/" + carritoID[i].value);
 			// Actualizar el contador o la página entera
 			if (quedanProductos) {

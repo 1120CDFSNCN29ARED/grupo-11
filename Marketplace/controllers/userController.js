@@ -15,7 +15,7 @@ const errorEmailRegistrado = "Este mail ya está registrado";
 module.exports = {
 	crearForm: (req, res) => {
 		res.render("usuario-crear-y-editar", { 
-			titulo: "Carrito de Usuario",
+			titulo: "Registro de Usuario",
 			usuario: null,
 		});
 	},
