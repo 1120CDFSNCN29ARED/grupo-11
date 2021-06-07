@@ -5,6 +5,7 @@ const path = require("path");
 const bcryptjs = require("bcryptjs");
 const { validationResult } = require("express-validator");
 const nodemailer = require("nodemailer");
+const { getMaxListeners } = require("process");
 
 // Archivos y Paths ****************************
 const imagesPath = path.join(__dirname, "../public/images/users/");
@@ -139,30 +140,53 @@ module.exports = {
 		req.session.destroy();
 		return res.redirect("/");
 	},
-	recuperoContrasena: async (req, res) => {
-		// Generate test SMTP service account from ethereal.email
-		// Only needed if you don't have a real mail account for testing
-		let testAccount = await nodemailer.createTestAccount();
-	  
-		// create reusable transporter object using the default SMTP transport
+	recuperoForm: (req, res) => {
+		res.render("recupero", { titulo: "Recuperar Contraseña" });
+	},	
+	recuperoGrabar: async (req, res) => {
+		let validaciones = validationResult(req);
+		if (validaciones.isEmpty()) {
+			// Verificar si el mail pertenecen a un usuario
+			var usuario = await usuarioRepository.ObtenerPorEmail(req.body.email);
+			if (usuario == undefined) {
+				validaciones.errors.push({msg: "Email Incorrecto"})
+			}
+		}
+		if (!validaciones.isEmpty()) {
+			return res.render("recupero", {
+				errores: validaciones.array(),
+				titulo: "Recuperar Contraseña",
+				oldData: req.body,
+			});
+		}
+		
+		
 		let transporter = nodemailer.createTransport({
-		  host: "smtp.ethereal.email",
-		  port: 587,
-		  secure: false, // true for 465, false for other ports
+		  service: 'gmail',
 		  auth: {
-			user: testAccount.user, // generated ethereal user
-			pass: testAccount.pass, // generated ethereal password
+			    user: 'app.guitar.shop@gmail.com', 
+			    pass: 'digitalhouse' 
 		  },
+		  tls: {
+			rejectUnauthorized: false
+		  }
 		});
-	  
-		// send mail with defined transport object
-		let info = await transporter.sendMail({
-		  from: "foo@example.com", // sender address
-		  to: "marianoezequielacevedo@hotmail.com", // list of receivers
-		  subject: "Hello ✔", // Subject line
-		  text: "Hello world?", // plain text body
-		  html: "<b>Hello world?</b>", // html body
+
+		let info = {
+			from: 'app.guitar.shop@gmail.com', 
+			to: req.body.email, 
+			subject: "Recupero de Contraseña", 
+			text: "hash", 
+	    };
+
+		transporter.sendMail(info, function(error, info){
+			if (error) {
+			  console.log(error);
+			} else {
+			  console.log('Email sent: ' + info.response);
+			}
 		});
+		res.redirect("/usuario/login");	
 	}	
 };
 

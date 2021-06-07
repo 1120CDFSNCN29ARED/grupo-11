@@ -8,6 +8,7 @@ const uploadFile = require(path.join(__dirname,"../middlewares/multerUsuario"));
 const validarUsuario = require(path.join(__dirname,"../middlewares/validarUsuario"));
 const validarImagen = require(path.join(__dirname,"../middlewares/validarImagen"));
 const validarLogin = require(path.join(__dirname,"../middlewares/validarLogin"));
+const validarRecupero = require(path.join(__dirname,"../middlewares/validarRecupero"));
 const soloVisitas = require("../middlewares/soloVisitas");
 const soloUsuarios = require("../middlewares/soloUsuarios");
 
@@ -21,6 +22,7 @@ router.delete("/eliminar", soloUsuarios, userController.eliminar);
 router.get("/login", soloVisitas, userController.loginForm);
 router.post("/login", validarLogin, userController.loginGrabar);
 router.get("/logout", soloUsuarios, userController.logout);
-router.get("/recupero", userController.recuperoContrasena);
+router.get("/recupero", userController.recuperoForm);
+router.post("/recupero", validarRecupero, userController.recuperoGrabar);
 
 module.exports = router;

@@ -1,0 +1,42 @@
+main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    
+}
+
+main form {
+	margin: 20px auto;
+	padding: 20px 30px;
+	background-color: gray;
+    width: 50%;
+    
+}
+
+main form div {
+	padding: 15px 0px;
+}
+
+main form input {
+	border: none;
+	width: 100%;
+}
+
+main form input,
+main form button {
+	padding: 5px 10px;
+	border-radius: 12px;
+	font-weight: bold;
+}
+
+main form div#button {
+	display: flex;
+	justify-content: center;
+}
+
+.titulo {
+    text-align: center;
+    font-weight: bold;
+}
+
+
