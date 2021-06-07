@@ -36,7 +36,7 @@
 						</form>
 					</div>
 					<div>
-						<% if (locals.usuarioLogeado) { %>
+						<% if (producto.stock_disponible && locals.usuarioLogeado) { %>
 							<button id="agregar" type="text">Agregar al Carrito</button>
 							<p id="agregarLink" class="ocultar"><%= producto.id %></p>
 						<% } %>

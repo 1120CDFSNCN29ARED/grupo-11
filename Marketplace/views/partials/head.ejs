@@ -25,7 +25,7 @@
 	<% if (titulo == "Login") { %><link rel="stylesheet" href="/css/varios/login.css"><% } %>
 	<% if (titulo == "Carrito de Compras") { %>
 		<link rel="stylesheet" href="/css/varios/carrito.css">
-		<script src="/javascript/carrito.js"></script>
+		<script src="/javascript/carrito2Editar.js"></script>
 	<% } %>
 	<% if (titulo == "Registro de Usuario" || titulo == "Edite su Usuario") { %><link rel="stylesheet" href="/css/users/usuario-crear-y-editar.css"><% } %>
 	<% if (titulo == "Detalle del Usuario" || titulo == "Administrar el Usuario") { %><link rel="stylesheet" href="/css/users/usuario-detalle.css"><% } %>
@@ -48,7 +48,9 @@
 	<title><%= titulo %></title>
 
 	<script src="/javascript/menuDesplegable.js"></script>
-	<script src="/javascript/avatarCircular.js"></script>
-	<script src="/javascript/contador3Carrito.js"></script>
 	<script src="/javascript/home.js"></script>
+	<% if (locals.usuarioLogeado) { %> 
+		<script src="/javascript/avatarCircular.js"></script>
+		<script src="/javascript/carrito3Contador.js"></script>
+	<% } %>
 </head>
