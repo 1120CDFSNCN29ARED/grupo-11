@@ -26,9 +26,9 @@ window.addEventListener("load", async () => {
 	for (let i = 0; i < cantidad.length; i++) {
 		// 1. Cambios en la cantidad de un producto
 		cantidad[i].addEventListener("input", () => {
-			cantidad[i].value == "" ? (cantidad[i].value = 0) : "";
+			cantidad[i].value == "" ? cantidad[i].value = 0 : "";
 			cant = parseInt(cantidad[i].value);
-			cant < 0 ? (cant = 0) : cant > stock[i] ? (cant = stock[i]) : "";
+			cant < 0 ? cant = 0 : cant > stock[i] ? cant = stock[i] : "";
 			// Ocultar el botón de comprar si se deben guardar los cambios
 			comprar.classList.add("ocultar");
 			guardarCambios.classList.remove("ocultar");
@@ -63,9 +63,7 @@ window.addEventListener("load", async () => {
 			// Actualizar el contador o la página entera
 			if (quedanProductos) {
 				// Si quedan productos, actualizar el contador
-				contadorActual = await fetch("/api/carrito/contador").then(
-					(n) => n.json()
-				);
+				contadorActual = await fetch("/api/carrito/contador").then((n) => n.json());
 				contador.innerHTML = contadorActual;
 			} else {
 				// Si no quedan productos, actualizar la página
