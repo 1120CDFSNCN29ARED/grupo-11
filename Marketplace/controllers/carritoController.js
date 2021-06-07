@@ -21,7 +21,7 @@ module.exports = {
 		let avanzar = await carritoRepository.CarritoYaExistente(usuarioID, productoID).then((n) => !n);
 		avanzar ? await carritoRepository.AgregarCarrito(usuarioID, productoID) : "";
 		// Fin de la rutina
-		return res.json(null);
+		return res.json(avanzar);
 	},
 
 	actualizarCarrito: async (req, res) => {

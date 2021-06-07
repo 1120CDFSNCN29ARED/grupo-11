@@ -4,8 +4,8 @@ const carritoRepository = require("../repositories/carritoRepository");
 
 module.exports = {
 	index: async (req, res) => {
-		let novedades = await productoRepository.ObtenerNovedades();
 		let masVendidos = await productoRepository.ObtenerMasVendidos();
+		let novedades = await productoRepository.ObtenerNovedades();
 		let seccionesProductos = [
 			{
 				section: "masVendido",
@@ -18,26 +18,17 @@ module.exports = {
 				productos: novedades,
 			},
 		];
-		let productos = [];
-		await productoRepository.ObtenerTodos().then(n => n.map(m => {
-			productos.push({
-				id: m.id,
-				stock: m.stock_disponible,
-			})
-		}));
+		let carritos=[]
 		if (req.session.usuarioLogeado) {
 			let usuarioID = req.session.usuarioLogeado.id;
-			var carritos = await carritoRepository
+			carritos = await carritoRepository
 				.ObtenerTodos(usuarioID)
-				.then((n) => n.producto_id);
-		} else {
-			var carritos = null;
+				.then((n) => n.map((m) => m.producto_id));
 		}
 		return res.render("index", {
 			seccionesProductos,
 			toThousand,
 			titulo: "Guitar Shop",
-			productos,
 			carritos,
 		});
 	},

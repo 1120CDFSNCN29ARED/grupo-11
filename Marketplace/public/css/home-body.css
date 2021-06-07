@@ -28,6 +28,7 @@ main {
 	position: relative;
 }
 
+.product .fa-thumbs-up,
 .product .fa-shopping-basket {
 	position: absolute;
 	top: 10px;
