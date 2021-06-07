@@ -28,7 +28,7 @@ window.addEventListener("load", async () => {
 		cantidad[i].addEventListener("input", () => {
 			cantidad[i].value == "" ? cantidad[i].value = 0 : "";
 			cant = parseInt(cantidad[i].value);
-			cant < 0 ? cant = 0 : cant > stock[i] ? cant = stock[i] : "";
+			cant < 0 ? cant = 0 : cant > stock[i] ? (cant = stock[i]) : "";
 			// Ocultar el botón de comprar si se deben guardar los cambios
 			comprar.classList.add("ocultar");
 			guardarCambios.classList.remove("ocultar");
