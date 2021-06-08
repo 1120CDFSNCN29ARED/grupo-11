@@ -12,19 +12,19 @@ module.exports = (sequelize) => {
 		timestamps: false
 	};
 
-	const Carrito = sequelize.define(alias,columns,config);
+	const entidad = sequelize.define(alias,columns,config);
+	entidad.associate = function(models) {
 
-	Carrito.associate = function(models) {
-		Carrito.belongsTo(models.Usuario, {
-			as: "usuarios",
-			foreignKey: "usuario_id"
+		entidad.belongsTo(models.Producto, {
+			as: "producto",
+			foreignKey: "producto_id"
 		});
 
-		Carrito.belongsTo(models.Producto, {
-			as: "productos",
-			foreignKey: "producto_id"
+		entidad.belongsTo(models.Imagen, {
+			as: "imagen",
+			foreignKey: "producto_id",
 		});
 	};
 
-	return Carrito;
+	return entidad;
 };

@@ -19,14 +19,21 @@
 	<% if (titulo == "Guitar Shop") { %>
 		<link rel="stylesheet" href="/css/home-body.css">
 		<link rel="stylesheet" href="/css/home-responsive.css">
+		<script src="/javascript/carritoRevisarStock.js"></script>
+		<script src="/javascript/carritoAgregar.js"></script>
 	<% } %>
 	<% if (titulo == "Login") { %><link rel="stylesheet" href="/css/varios/login.css"><% } %>
 	<% if (titulo == "Recuperar Contraseña") { %><link rel="stylesheet" href="/css/varios/recupero.css"><% } %>
-	<% if (titulo == "Carrito de Compras") { %><link rel="stylesheet" href="/css/varios/carrito.css"><% } %>
-	<% if (titulo == "Registro" || titulo == "Editar el Usuario") { %><link rel="stylesheet" href="/css/users/usuario-crear.css"><% } %>
-	<% if (titulo == "Detalle del Usuario") { %><link rel="stylesheet" href="/css/users/usuario-detalle.css"><% } %>
-	<% if (titulo == "Editar el Usuario") { %><link rel="stylesheet" href="/css/users/usuario-editar.css"><% } %>
-	<% if (titulo == "Detalle del Producto") { %><link rel="stylesheet" href="/css/products/producto-detalle.css"><% } %>
+	<% if (titulo == "Carrito de Compras") { %>
+		<link rel="stylesheet" href="/css/varios/carrito.css">
+		<script src="/javascript/carritoEditar.js"></script>
+	<% } %>
+	<% if (titulo == "Registro de Usuario" || titulo == "Edite su Usuario") { %><link rel="stylesheet" href="/css/users/usuario-crear-y-editar.css"><% } %>
+	<% if (titulo == "Detalle del Usuario" || titulo == "Administrar el Usuario") { %><link rel="stylesheet" href="/css/users/usuario-detalle.css"><% } %>
+	<% if (titulo == "Detalle del Producto") { %>
+		<link rel="stylesheet" href="/css/products/producto-detalle.css">
+		<script src="/javascript/carritoAgregar.js"></script>
+	<% } %>
 	<% if (titulo == "Crear un Producto" || titulo == "Editar un Producto") { %>
 		<link rel="stylesheet" href="/css/products/producto-crear-y-editar.css">
 		<script src="/javascript/formatoFormularios.js"></script>
@@ -34,8 +41,17 @@
 		<script src="/javascript/subirImagen.js"></script>
 	<% } %>
 	
+	<% if (titulo == "Resultado búsqueda") { %>
+		<link rel="stylesheet" href="/css/products/search.css">
+	<% } %>
+	
 	<!-- Título de la página -->
 	<title><%= titulo %></title>
 
-	<script src="/javascript/menuDesplegable.js"></script>
+	<script src="/javascript/headerMenuDesplegable.js"></script>
+	<script src="/javascript/headerBuscar.js"></script>
+	<% if (locals.usuarioLogeado) { %> 
+		<script src="/javascript/headerAvatarCircular.js"></script>
+		<script src="/javascript/headerCarritoContador.js"></script>
+	<% } %>
 </head>

@@ -19,24 +19,29 @@ module.exports = (sequelize) => {
 		updatedAt: 'actualizado_en'
 	};
 
-	const Usuario = sequelize.define(alias,columns,config);
-	
-	Usuario.associate = function(models) {
-		Usuario.belongsTo(models.Rol, {
-			as: "roles",
+	const entidad = sequelize.define(alias,columns,config);
+	entidad.associate = function(models) {
+
+		entidad.belongsTo(models.Roles, {
+			as: "rol",
 			foreignKey: "rol_id"
 		});
 		
-		Usuario.hasMany(models.Carrito, {
+		entidad.hasMany(models.Producto, {
+			as: "productosCreados",
+			foreignKey: "creado_por"
+		});
+
+		entidad.hasMany(models.Carrito, {
 			as: "carritos",
 			foreignKey: "usuario_id"
 		});
 		
-		Usuario.hasMany(models.Venta, {
+		entidad.hasMany(models.encabezadoVenta, {
 			as: "compras",
-			foreignKey: "usuario_id"
+			foreignKey: "usuario_id",
 		});
 	};
 
-	return Usuario;
+	return entidad;
 };

@@ -24,39 +24,44 @@ module.exports = (sequelize) => {
 		updatedAt: 'actualizado_en'
 	};
 
-	const Producto = sequelize.define(alias,columns,config);
+	const entidad = sequelize.define(alias,columns,config);
+	entidad.associate = function(models) {
 
-	Producto.associate = function(models) {
-		Producto.belongsTo(models.Categoria, {
+		entidad.belongsTo(models.Usuario, {
+			as: "creadoPor",
+			foreignKey: "creado_por"
+		});
+
+		entidad.belongsTo(models.Categoria, {
 			as: "categoria",
 			foreignKey: "categoria_id"
 		});
 		
-		Producto.belongsTo(models.Marca, {
-			as: "marcas",
+		entidad.belongsTo(models.Marca, {
+			as: "marca",
 			foreignKey: "marca_id"
 		});
 		
-		Producto.belongsTo(models.Modelo, {
-			as: "modelos",
+		entidad.belongsTo(models.Modelo, {
+			as: "modelo",
 			foreignKey: "modelo_id"
 		});
 		
-		Producto.hasMany(models.Imagen, {
+		entidad.hasMany(models.Imagen, {
 			as: "imagenes",
 			foreignKey: "producto_id"
 		});
 		
-		Producto.hasMany(models.Carrito, {
+		entidad.hasMany(models.Carrito, {
 			as: "carritos",
 			foreignKey: "producto_id"
 		});
 		
-		Producto.hasMany(models.DetalleVenta, {
+		entidad.hasMany(models.detalleVenta, {
 			as: "detalleVentas",
-			foreignKey: "producto_id"
+			foreignKey: "producto_id",
 		});
 	};
 
-	return Producto;
+	return entidad;
 };

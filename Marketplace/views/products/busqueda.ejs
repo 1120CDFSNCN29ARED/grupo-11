@@ -1,0 +1,54 @@
+<%- include('head') %>
+<body>
+	<%- include('header') %>
+	<main>
+		<div id="search-result" class="flex-container">
+			<div id="search-subtitle">
+				<%= resultadoBusqueda %>
+			</div>
+			<div id="page-size">
+				<select id="pageSize" onchange="location = this.value;">
+					<% for (let i = 0; i < pageSizes.length; i++) { %>
+						<option value="<%= baseSearchUrl %>&pageSize=<%= pageSizes[i] %>" 
+							<%= pageSizes[i] == pageSize ? "selected" : "" %>>
+							<%= pageSizes[i] %>
+						</option>
+					<% } %>
+				</select>
+			</div>
+		</div>
+		<div id="search" class="flex-container">
+			<div class="flex-container">
+				<% for (const producto of productos) { %>
+					<article class="product">
+						<div class="product-image-container">
+							<a href="/producto/<%= producto.id %>/detalle">
+								<img src="/images/products/<%= producto.imagenes[0].ruta %>" alt="<%= producto.nombre %>" class="product-image">
+							</a>
+						</div>
+						<div class="product-information">
+							<p class="product-description"><%= producto.nombre %></p>
+							<p class="product-price">$ <%= toThousand(producto.precio) %></p>
+						</div>
+					</article>
+				<% } %>
+			</div>
+		</div>
+		<div id="search-footer" class="flex-container">
+			<div>
+				Total de resultados: <%= totalResults %>
+			</div>
+			<div>
+				<% for (let i = 1; i < (totalResults / pageSize) + 1; i++) { %>
+					<a href="<%= baseSearchUrl %>&page=<%= i %>&pageSize=<%= pageSize %>"
+						class="<%= i == currentPage ? "bold" : "" %>" id="pagination">
+						<%= i %>
+					</a>
+				<% } %>
+			</div>
+		</div>
+	</main>
+	<%- include('footer') %>
+</body>
+
+</html>

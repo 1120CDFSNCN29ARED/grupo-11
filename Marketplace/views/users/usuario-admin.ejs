@@ -1,0 +1,56 @@
+<%- include('head') %>
+<body>
+	<%- include('header') %>
+	<main> 
+		<section id="imagen">
+			<% if (existeAvatar) { %> 
+				<img src="/images/users/<%= usuario.avatar %>">
+			<% } %> 
+		</section>
+		<form id="media-query" action="/usuario/administrar?_method=PUT" method="POST">
+			<div id="datos-del-usuario">
+				<article class="contenedor">
+					<h2>Dirección de mail</h2>
+					<select name="id" onchange="location = this.value;" id="id" class="formInput">
+						<% for (let n of usuarios) { %>
+							<option value="/usuario/administrar/<%= n.id %>" 
+								<%= n.id == usuario.id ? "selected" : "" %>>
+								<%= n.email %>
+							</option>
+						<% } %>
+					</select>
+				</article>
+				<article class="contenedor">
+					<h2>Nombre y Apellido</h2>
+					<p class="texto"><%= usuario.nombre %> <%= usuario.apellido %></p>
+				</article>
+				<article class="contenedor">
+					<h2>Rol</h2>
+					<select name="rol_id" id="rol" class="formInput">
+						<% for (let n of roles) { %>
+							<option value="<%= n.id %>" 
+								<%= n.id == usuario.rol_id ? "selected" : "" %>>
+								<%= n.nombre %>
+							</option>
+						<% } %>
+					</select>
+				</article>
+				<article class="contenedor">
+					<h2>Inactivo</h2>
+					<select name="borrado" id="borrado" class="formInput">
+						<option value = false <%= usuario.borrado == false ? "selected" : "" %>>NO</option>
+						<option value = true <%= usuario.borrado == true ? "selected" : "" %>>SI</option>
+					</select>
+				</article>
+			</div>
+			<div id="botones" class="flex-row" style="align-self: center;">
+				<a href="/usuario/editar" class="action-button edit">
+					<button id="modificar" type="submit">Guardar cambios</button>
+				</a>
+			</div>
+		</form>
+	</main>
+	<%- include('footer') %>
+</body>
+
+</html>

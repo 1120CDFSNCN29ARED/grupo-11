@@ -1,0 +1,11 @@
+#top-nav-bar {
+	background-color: #232f3e;
+	padding: 1.5em;
+}
+
+#nav-bar-title {
+	color: white;
+	font-family: "Lora", serif;
+	font-size: 2em;
+	font-style: bolder;
+}
