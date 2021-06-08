@@ -6,11 +6,10 @@
 			<div class="producto">
 				<h2><%= producto.nombre %></h2>
 			</div>
-			<div class="carrito">
-				<button class="icono-carrito"><i class="fas fa-shopping-cart"></i></button>
+			<div class="img">
 			</div>
 			<div class="img">
-				<article>
+				<article class="flex-row">
 					<img src="/images/products/<%= producto.imagenes[0].ruta %>" width="100%" alt="<%= producto.nombre %>">
 				</article>
 			</div>
@@ -20,19 +19,36 @@
 						<h4>Descripción</h4>
 					</div>
 					<div class="detalle">
-						<p><%= producto.categoria.nombre %></p>
+						<p>Categoría: <%= producto.categoria.nombre %></p>
+						<p>Modelo: <%= producto.modelo.nombre %></p>
+						<p>Marca: <%= producto.marca.nombre %></p>
 						<p><%= producto.descripcion %></p>
 					</div>
 					<div class="precio">
 						<p>$ <%= toThousand(producto.precio) %></p>
 					</div>
 					<div class="flex-container">
-						<a href="/producto/<%= producto.id %>/editar" class="action-button edit">
-							<button id="modificar" type="submit">Modificar</button>
-						</a>
-						<form  action="/producto/<%= producto.id %>/eliminar?_method=DELETE" method="POST">
-							<button id="eliminar" type="submit">Eliminar</button>
-						</form>
+						<% if (locals.usuarioLogeado && locals.usuarioLogeado.rol_id == 1) { %>
+							<a href="/producto/<%= producto.id %>/editar">
+								<button id="modificar" type="text">Modificar</button>
+							</a>
+							<form  action="/producto/<%= producto.id %>/eliminar?_method=DELETE" method="POST">
+								<button id="eliminar" type="submit">Eliminar</button>
+							</form>
+						<% } %>
+					</div>
+					<div>
+						<% if (producto.stock_disponible && locals.usuarioLogeado && !carritos.find(n => n == producto.id)) { %>
+							<button id="agregar" type="text">Agregar al Carrito</button>
+							<p id="agregarLink" class="ocultar"><%= producto.id %></p>
+						<% } %>
+					</div>
+					<div>
+						<% if (locals.usuarioLogeado && locals.usuarioLogeado.rol_id == 1) { %>
+							<a href="/api/ventas-por-producto/<%= producto.id %>">
+								<button id="agregar" type="text">Historial de Venta</button>
+							</a>
+						<% } %>
 					</div>
 				</article>
 			</div>

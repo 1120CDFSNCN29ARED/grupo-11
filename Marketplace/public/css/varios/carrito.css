@@ -55,21 +55,16 @@ main {
 	margin-left: 5px;
 	font-weight: bold;
 	color: blue;
+	cursor: pointer
 }
 
 #carrito .productos {
 	width: 90%;
 	padding: 15px;
 	margin: 10px auto;
-}
-
-#carrito .productos {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
-
-#carrito .productos {
 	border: gray 2px solid;
 }
 
@@ -114,4 +109,12 @@ main {
 
 #carrito .fa-trash-alt {
 	font-size: 1.1rem;
+}
+
+#carritoVacio {
+	text-align: center;
+	margin: 25px;
+	font-size: 1.2rem;
+	color: red;
+	font-weight: bold;
 }

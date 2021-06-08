@@ -1,0 +1,167 @@
+<%- include('head') %>
+<script src="/javascript/ojitoContrasena.js"></script>
+<script src="/javascript/validacionesUsuario.js"></script>
+<body>
+	<%- include('header') %>
+	<main>
+		<% if (usuario) { %>
+			<h1>Edite su usuario</h1>
+			<form action="/usuario/editar?_method=PUT" method="POST" id="formulario" enctype="multipart/form-data">
+		<% } else { %>
+			<h1>Registre su usuario</h1>
+			<form action="/usuario/crear" method="POST" id="formulario" enctype="multipart/form-data">
+		<% } %> 
+			<!-- Grupo Nombre -->
+			<section class="box grupo_nombre">
+				<label for="nombre" class="titulo">Nombre</label>
+				<div class="formulario-grupo-input">
+					<input type="text" class="input formulario__input nombre" 
+						name="nombre" placeholder="Ingrese su nombre"
+						value="<%= locals.oldData ? oldData.nombre : usuario ? usuario.nombre : null %>"
+					>
+					<% if (locals.errores) { %>
+						<% if (errores.nombre) { %>
+							<i class="fas fa-times-circle"></i>
+						<% } else { %>
+							<i class="fas fa-check-circle"></i>
+						<% } %>
+					<% } %>
+					<i class="formulario__validacion-estado fas fa-times-circle"></i>
+				    <p class="formulario__input-error">El nombre debe tener al menos 2 caracteres.</p>
+				</div>
+				<% if (locals.errores && errores.nombre) { %>
+					<p class="criterio input-error"><%= errores.nombre.msg %></p>
+				<% } %>
+			</section>
+
+			<!-- Grupo Apellido -->
+			<section class="box grupo_apellido">
+				<label for="apellido" class="titulo">Apellido</label>
+				<div class="formulario-grupo-input">
+					<input type="text" class="input formulario__input apellido" 
+						name="apellido" placeholder="Ingrese su apellido"
+						value="<%= locals.oldData ? oldData.apellido : usuario ? usuario.apellido : null %>"
+					>
+					<% if (locals.errores) { %>
+						<% if (errores.apellido) { %>
+							<i class="fas fa-times-circle"></i>
+						<% } else { %>
+							<i class="fas fa-check-circle"></i>
+						<% } %>
+					<% } %>
+					<i class="formulario__validacion-estado fas fa-times-circle"></i>
+				    <p class="formulario__input-error">El apellido debe tener al menos 2 caracteres.</p>
+				</div>
+				<% if (locals.errores && errores.apellido) { %>
+					<p class="criterio input-error"><%= errores.apellido.msg %></p>
+				<% } %>
+			</section>
+
+			<!-- Grupo Email -->
+			<section class="box grupo_email">
+				<label for="email" class="titulo">Correo Electrónico</label>
+				<div class="formulario-grupo-input">
+					<input type="text" class="input formulario__input email" 
+						name="email" placeholder="Ingrese su Correo Electrónico"
+						value="<%= locals.oldData ? oldData.email : usuario ? usuario.email : null %>"
+					>
+					<div id="be-mail">
+						<% if (locals.errores) { %>
+							<% if (errores.email) { %>
+								<i class="fas fa-times-circle"></i>
+								<p class="criterio input-error"><%= errores.email.msg %></p>
+							<% } else { %>
+								<i class="fas fa-check-circle"></i>
+							<% } %>
+						<% } %>
+					</div>
+					<i class="formulario__validacion-estado fas fa-times-circle"></i>
+				    <p class="formulario__input-error">Correo Electronico invalido.</p>
+				</div>
+			</section>
+
+			<!-- Grupo Imagen de perfil -->
+			<section class="box grupo_imagen">
+				<label for="imagen" class="titulo">Imagen de perfil</label>
+				<div class="formulario-grupo-input">
+					<input type="file" class="input formulario__input imagen" name="imagen">
+					<% if (locals.errores) { %>
+						<% if (errores.imagen) { %>
+							<i class="fas fa-times-circle"></i>
+						<% } else { %>
+							<i class="fas fa-check-circle"></i>
+						<% } %>
+					<% } %>
+					<i class="formulario__validacion-estado fas fa-times-circle"></i>
+				    <p class="formulario__input-error">La imagen debe ser un archivo válido (JPG, JPEG, PNG, GIF).</p>
+				</div>
+				<% if (locals.errores && errores.imagen) { %>
+					<p class="criterio input-error"><%= errores.imagen.msg %></p>
+				<% } %>
+			</section>
+
+			<!-- Grupo Contraseña -->
+			<section class="box grupo_contrasena">
+				<label for="contrasena" class="titulo">Contraseña</label>
+				<div class="formulario-grupo-input">
+					<input type="password" class="input formulario__input contrasena" 
+						name="contrasena" id="contrasena"
+						value="<%= locals.oldData ? oldData.contrasena : null %>"
+					>
+					<i class="formulario__validacion-estado fas fa-times-circle"></i>	
+					<i onclick="mostrar('contrasena', 'eye')" class="fas fa-eye-slash" id="eye"></i>
+					<% if (locals.errores) { %>
+						<% if (errores.contrasena) { %>
+							<i class="fas fa-times-circle"></i>
+						<% } else { %>
+							<i class="fas fa-check-circle"></i>
+						<% } %>
+					<% } %>
+					<p class="formulario__input-error">La contraseña debe tener entre 6 y 12 caracteres.</p>
+				</div>
+				<% if (locals.errores && errores.contrasena) { %>
+					<p class="criterio input-error"><%= errores.contrasena.msg %></p>
+				<% } else { %>
+					<% if (!locals.errores) { %>
+						<p class="criterio ocultar">La contraseña debe tener de 6 a 12 caracteres</p>
+					<% } %>
+				<% } %>
+			</section>
+
+			<!-- Grupo Repetir Contraseña -->
+			<section class="box grupo_contrasena2">
+				<label for="contrasena2" class="titulo">Repita su Contraseña</label>
+				<div class="formulario-grupo-input">
+					<input type="password" class="input formulario__input contrasena2" 
+						name="contrasena2" id="contrasena2"
+						value="<%= locals.oldData ? oldData.contrasena2 : null %>"
+					>
+					<i class="formulario__validacion-estado fas fa-times-circle"></i>	
+					<i onclick="mostrar('contrasena2', 'eye2')" class="fas fa-eye-slash" id="eye2"></i>
+					<% if (locals.errores) { %>
+						<% if (errores.contrasena2) { %>
+							<i class="fas fa-times-circle"></i>
+						<% } else { %>
+							<i class="fas fa-check-circle"></i>
+						<% } %>
+					<% } %>
+					<p class="formulario__input-error">Debe coincidir con la contraseña.</p>
+				</div>
+				<% if (locals.errores && errores.contrasena2) { %>
+					<p class="criterio input-error"><%= errores.contrasena2.msg %></p>
+				<% } %>
+			</section>
+
+			<!-- Submit -->
+			<section id="boton-registro">
+				<button class="button" type="submit">Envíe los datos</button>
+				<div class="contenedor-redes">
+					<button class="redes-sociales"></button>
+				</div>    
+			</section>
+
+		</form>
+	</main>
+	<%- include('footer') %>
+</body>
+</html>

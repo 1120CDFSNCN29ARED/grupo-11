@@ -16,14 +16,13 @@ main #imagen img {
 main #media-query {
 	display: flex;
 }
+main #media-query #datos-del-usuario .formInput,
 main #media-query #datos-del-usuario p {
 	font-size: 1.2rem;
 	margin-bottom: 20px;
 }
 main #media-query #botones {
 	margin-left: 40px;
-	display: flex;
-	flex-direction: column;
 }
 main #media-query #botones button {
 	padding: 10px;

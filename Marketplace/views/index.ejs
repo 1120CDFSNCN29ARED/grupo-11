@@ -7,20 +7,31 @@
 			<section class="products-group">
 				<div class="section-header flex-container">
 					<p class="section-title"><%= seccion.titulo %> </p>
-					<p class="view-more">Ver todos</p>
+					<a href="/producto/buscar?section=<%= seccion.section %>" class="view-more">
+						<p>Ver todos</p>
+					</a>
 				</div>
 				<div class="section-products flex-container">
-					<% for (const instrumento of seccion.productos) { %>
+					<% for (const producto of seccion.productos) { %>
 						<article class="product">
 							<div class="product-image-container">
-								<a href="/producto/<%= instrumento.id %>/detalle">
-									<img src="/images/products/<%= instrumento.imagenes[0].ruta %>" alt="<%= instrumento.nombre %>" class="product-image">
+								<a href="/producto/<%= producto.id %>/detalle">
+									<img src="/images/products/<%= producto.imagenes[0].ruta %>" alt="<%= producto.nombre %>" class="product-image">
 								</a>
-								<i class="fas fa-shopping-basket"></i>
+								<% if (producto.stock_disponible && locals.usuarioLogeado) { %>
+									<p id="agregarLink" class="ocultar"><%= producto.id %></p>
+									<p id="agregar" 
+										<% if (carritos.find(n => n == producto.id)) { %>
+											class="fas fa-thumbs-up"
+										<% } else { %> 
+											class="fas fa-shopping-basket"
+										<% } %>
+									></p>
+								<% } %>
 							</div>
 							<div class="product-information">
-								<p class="product-description"><%= instrumento.nombre %></p>
-								<p class="product-price">$ <%= toThousand(instrumento.precio) %></p>
+								<p class="product-description"><%= producto.nombre %></p>
+								<p class="product-price">$ <%= toThousand(producto.precio) %></p>
 							</div>
 						</article>
 					<% } %> 
