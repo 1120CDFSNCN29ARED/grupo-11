@@ -6,6 +6,7 @@ window.addEventListener("load", async () => {
 	let valorTotal = document.querySelector("#importe");
 	let eliminar = document.querySelectorAll("#eliminar");
 	let carritoID = document.querySelectorAll("#carritoID");
+	let guardarCambios = document.querySelector("#guardarCambios"); // Botón de "Guardar Cambios"
 	let comprar = document.querySelector("#comprar"); // Botón de "comprar"
 	let productosSeccion = document.querySelectorAll(".productos");
 	let contador = document.querySelector("#contador");
@@ -25,9 +26,12 @@ window.addEventListener("load", async () => {
 	for (let i = 0; i < cantidad.length; i++) {
 		// 1. Cambios en la cantidad de un producto
 		cantidad[i].addEventListener("input", () => {
-			cantidad[i].value == "" ? cantidad[i].value = 0 : "";
+			cantidad[i].value == "" ? (cantidad[i].value = 0) : "";
 			cant = parseInt(cantidad[i].value);
-			cant < 0 ? cant = 0 : cant > stock[i] ? (cant = stock[i]) : "";
+			cant < 0 ? (cant = 0) : cant > stock[i] ? (cant = stock[i]) : "";
+			// Ocultar el botón de comprar si se deben guardar los cambios
+			comprar.classList.add("ocultar");
+			guardarCambios.classList.remove("ocultar");
 			// Asegurarse de que la cantidad sea mayor a cero
 			cantidad[i].value = cant;
 			// Calcular el valor Parcial
@@ -41,7 +45,6 @@ window.addEventListener("load", async () => {
 				precio,
 				valorTotal
 			);
-			comprar.classList.add("ocultar"); // ocultar el botón de comprar si se deben guardar los cambios
 		});
 
 		// 2. Eliminar el registro y actualizar el contador
@@ -55,7 +58,7 @@ window.addEventListener("load", async () => {
 				precio,
 				valorTotal
 			);
-			// Eliminar el producto de la BD
+			// Eliminar el producto del carrito en la BD
 			await fetch("/carrito/borrar-carrito/" + carritoID[i].value);
 			// Actualizar el contador o la página entera
 			if (quedanProductos) {

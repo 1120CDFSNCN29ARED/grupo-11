@@ -4,20 +4,20 @@
 	<p class="ocultar" id="productoID"><%= producto.id %></p>
 	<p class="ocultar" id="precio"><%= producto.precio %> </p>
 
-	<!-- Vista -->
+	<!-- IMAGEN Y NOMBRE -->
 	<img src="/images/products/<%= imagen.ruta %> " alt="<%= producto.nombre %>" class="imagen-de-producto">
 	<p class="nombre-de-producto"><%= producto.nombre %> </p>
+	<!--CANTIDAD-->
 	<div id="cantidad-y-flechas">
-		<!--CANTIDAD-->
 		<input id="cantidad" name="cantidad<%= numCarrito %>" type="number" value="<%= carrito.cantidad %>">
 	</div>
+	<!--PRECIO UNITARIO-->
 	<div class="valor">
-		<!--PRECIO UNITARIO-->
 		<p class="título">$/un.</p>
 		<p class="valor">$ <%= toThousand(producto.precio) %> </p>
 	</div>
+	<!--PRECIO TOTAL-->
 	<div class="valor">
-		<!--PRECIO TOTAL-->
 		<p class="título">Valor Parcial</p>
 		<p class="valor" id="valorParcial">$ <%= toThousand(carrito.cantidad * producto.precio) %> </p>
 	</div>

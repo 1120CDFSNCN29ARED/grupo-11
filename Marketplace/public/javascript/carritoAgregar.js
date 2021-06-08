@@ -11,7 +11,10 @@ window.addEventListener("load", async () => {
 		agregar[i].addEventListener("click", async () => {
 			// Se agrega el producto al carrito
 			let avanzar = await fetch("/carrito/agregar/" + agregarLink[i].innerHTML).then(n => n.json())
-			avanzar ? agregar[i].classList.replace("fa-shopping-basket", "fa-thumbs-up") : ""
+			if (avanzar) {
+				agregar[i].classList.contains("fa-shopping-basket") ? agregar[i].classList.replace("fa-shopping-basket", "fa-thumbs-up") : ""
+				agregar[i].innerText == "Agregar al Carrito" ? agregar[i].classList.add("ocultar") : ""
+			}
 			// Si hubo cambios en la cantidad de productos en el carrito, se actualiza el contador
 			let contadorActual = await fetch("/api/carrito/contador").then((n) => n.json());
 			if (contadorActual > contadorOriginal) {
