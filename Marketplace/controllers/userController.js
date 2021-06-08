@@ -176,7 +176,7 @@ module.exports = {
 			from: 'app.guitar.shop@gmail.com', 
 			to: req.body.email, 
 			subject: "Recupero de Contraseña", 
-			text: "hash", 
+			text: "En breves nos contactaremos para pasarte el link de recupero de contraseña. ", 
 	    };
 
 		transporter.sendMail(info, function(error, info){
