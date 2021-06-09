@@ -39,4 +39,6 @@ main form div#button {
     font-weight: bold;
 }
 
-
+.error {
+	color: red
+}

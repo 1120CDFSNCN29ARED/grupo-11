@@ -146,10 +146,10 @@ module.exports = {
 	recuperoGrabar: async (req, res) => {
 		let validaciones = validationResult(req);
 		if (validaciones.isEmpty()) {
-			// Verificar si el mail pertenecen a un usuario
+			// Verificar si el mail pertenece a un usuario
 			var usuario = await usuarioRepository.ObtenerPorEmail(req.body.email);
 			if (usuario == undefined) {
-				validaciones.errors.push({msg: "Email Incorrecto"})
+				validaciones.errors.push({msg: "Ese mail no corresponde a un usuario activo"})
 			}
 		}
 		if (!validaciones.isEmpty()) {
@@ -176,7 +176,7 @@ module.exports = {
 			from: 'app.guitar.shop@gmail.com', 
 			to: req.body.email, 
 			subject: "Recupero de Contraseña", 
-			text: "En breves nos contactaremos para pasarte el link de recupero de contraseña. ", 
+			text: "En breve nos contactaremos para pasarte el link de recupero de contraseña. ", 
 	    };
 
 		transporter.sendMail(info, function(error, info){
