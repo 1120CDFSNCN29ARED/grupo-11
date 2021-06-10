@@ -4,7 +4,12 @@ const entidad = db.Carrito;
 module.exports = {
 	ObtenerTodos: (usuarioID) => {
 		return entidad.findAll({
-			include: ["producto", "imagen"],
+			include: ["producto",
+				{
+					association: "producto",
+					include: ["imagenes"],
+				},
+			],
 			where: { usuario_id: usuarioID },
 		});
 	},
