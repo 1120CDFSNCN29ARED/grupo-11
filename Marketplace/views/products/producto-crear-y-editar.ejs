@@ -1,0 +1,151 @@
+<%- include('head') %>
+<body>
+	<%- include('header') %>
+	<main>
+		<% if (producto) { %>
+			<form action="/producto/<%= producto.id %>/editar?_method=PUT" method="POST" enctype="multipart/form-data">
+				<h1>Editar un producto</h1>
+		<% } else { %>
+			<form action="/producto/crear" method="POST" enctype="multipart/form-data">
+				<h1>Crear un producto</h1>
+		<% } %> 
+			<div class="flex-row secciones">
+				<section>
+					<div class="modulo">
+						<label for="nombre">Nombre:</label>
+						<input name="nombre" type="text" id="nombre" class="formInput" 
+						value="<%= locals.oldData ? oldData.nombre : producto ? producto.nombre : null %>">
+					</div>
+					<i class="erroresFE error-fe fas fa-times-circle ocultar" id="mensaje_error_nombre"></i>
+					<div id="error-nombre-be">
+						<% if (locals.errores && errores.nombre) { %>
+							<i class="fas fa-times-circle"> <%= errores.nombre.msg %></i>
+						<% } %>	
+					</div>
+					<div class="modulo">
+						<label for="precio">Precio (AR$):</label>
+						<input name="precio" type="text" id="precio" class="formInput" 
+							value="<%= locals.oldData ? oldData.precio : producto ? producto.precio : null %>">
+					</div>
+					<i class="erroresFE error-fe fas fa-times-circle ocultar" id="mensaje_error_precio"></i>
+					<div id="error-precio-be">
+						<% if (locals.errores && errores.precio) { %>
+							<i class="fas fa-times-circle"> <%= errores.precio.msg %></i>
+						<% } %>	
+					</div>
+					<div class="modulo">
+						<label for="categoria" class="form-label">Categoría:</label>
+						<select name="categoria" id="categoria" class="formInput">
+							<option value="" class="ocultar"></option>
+							<% for (let n of locals.categoriasDeProductos) { %>
+								<option value="<%= n.id %>" 
+									<%= locals.oldData && oldData.categoria == n.id || !locals.oldData && producto && n.id == producto.categoria.id ? "selected" : "" %>>
+									<%= n.nombre %>
+								</option>
+							<% } %>
+						</select>
+					</div>
+					<i class="erroresFE error-fe fas fa-times-circle ocultar" id="mensaje_error_categoria"></i>
+					<div id="error-categoria-be">
+						<% if (locals.errores && errores.categoria) { %>
+							<i class="fas fa-times-circle"> <%= errores.categoria.msg %></i>
+						<% } %>	
+					</div>
+					<div class="modulo">
+						<label for="marca" class="form-label">Marca:</label>
+						<select name="marca" id="marca" class="formInput">
+							<option value="" class="ocultar"></option>
+							<% for (let n of marcas) { %>
+								<option value="<%= n.id %>" 
+									<%= locals.oldData && oldData.marca == n.id || !locals.oldData && producto && n.id == producto.marca_id ? "selected" : "" %>>
+									<%= n.nombre %>
+								</option>
+							<% } %>
+						</select>
+					</div>
+					<i class="erroresFE error-fe fas fa-times-circle ocultar" id="mensaje_error_marca"></i>
+					<div id="error-marca-be">
+						<% if (locals.errores && errores.marca) { %>
+							<i class="fas fa-times-circle"> <%= errores.marca.msg %></i>
+						<% } %>	
+					</div>
+					<div class="modulo">
+						<label for="modelo" class="form-label">Modelo:</label>
+						<select name="modelo" id="modelo" class="formInput">
+							<option value="" class="ocultar"></option>
+							<% for (let n of modelos) { %>
+								<option value="<%= n.id %>" 
+									<%= locals.oldData && oldData.modelo == n.id || !locals.oldData && producto && n.id == producto.modelo_id ? "selected" : "" %>>
+									<%= n.nombre %>
+								</option>
+							<% } %>
+						</select>
+					</div>
+					<i class="erroresFE error-fe fas fa-times-circle ocultar" id="mensaje_error_modelo"></i>
+					<div id="error-modelo-be">
+						<% if (locals.errores && errores.modelo) { %>
+							<i class="fas fa-times-circle"> <%= errores.modelo.msg %></i>
+						<% } %>	
+					</div>
+					<div class="modulo">
+						<label for="stock">Stock:</label>
+						<input name="stock" type="text" id="stock" class="formInput" 
+							value="<%= locals.oldData ? oldData.stock : producto ? producto.stock_disponible : null %>">
+					</div>
+					<i class="erroresFE error-fe fas fa-times-circle ocultar" id="mensaje_error_stock"></i>
+					<div id="error-stock-be">
+						<% if (locals.errores && errores.stock) { %>
+							<i class="fas fa-times-circle"> <%= errores.stock.msg %></i>
+						<% } %>	
+					</div>
+					<div class="modulo">
+						<label for="borrado" class="form-label">Inactivo:</label>
+						<select name="borrado" id="borrado" class="formInput">
+							<option value="" class="ocultar"></option>
+							<option value = 0
+								<%= locals.oldData && oldData.borrado === "0" || !locals.oldData && producto && producto.borrado == 0 ? "selected" : "" %>>
+								NO
+							</option>
+							<option value = 1
+								<%= locals.oldData && oldData.borrado === "1" || !locals.oldData && producto && producto.borrado == 1 ? "selected" : "" %>>
+								SI
+							</option>
+						</select>
+					</div>
+					<i class="erroresFE error-fe fas fa-times-circle ocultar" id="mensaje_error_borrado"></i>
+					<div id="error-borrado-be">
+						<% if (locals.errores && errores.borrado) { %>
+							<i class="fas fa-times-circle"> <%= errores.borrado.msg %></i>
+						<% } %>	
+					</div>
+				</section>
+				<section id="col-vacia">
+				</section>
+				<section class="flex-col grow">
+					<div class="imagen flex-col grow">
+						<label id="imagen">Imagen:</label>
+						<div class="flex-col" id="divImagen">
+							<label for="inputImagen" id="preview"></label>
+							<label for="inputImagen" class="formInput" id="labelImagen">Subí una imagen</label>
+							<input name="imagen" type="file" id="inputImagen" accept="image/*">
+						</div>
+						<div id="error-imagen-be">
+							<% if (locals.errores && errores.imagen) { %>
+								<i class="fas fa-times-circle"> <%= errores.imagen.msg %></i>
+							<% } %>
+						</div>
+					</div>
+				</section>
+			</div>
+			<div class="flex-row textarea">
+				<label for="descripcion" class="form-label">Descripción:</label>
+				<textarea name="descripcion" placeholder="Escribir..." id="description" class="formInput"><%= locals.oldData ? oldData.descripcion : producto ? producto.descripcion : "" %></textarea>
+			</div>	
+			<div id="button">
+				<button type="submit">Guardar los cambios</button>
+			</div>
+		</form>
+	</main>
+	<%- include('footer') %>
+</body>
+</html>

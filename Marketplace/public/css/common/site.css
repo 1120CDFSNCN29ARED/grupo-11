@@ -7,6 +7,7 @@
 	--price-color: #c6161d;
 	--black: #000000;
 	--gray: gray;
+	--celeste-claro: RGB(220,230,242);
 }
 
 * {
@@ -44,4 +45,17 @@ body {
 }
 .ocultar {
 	display: none;
+}
+.grow {
+	flex-grow: 1;
+}
+
+a {
+	text-decoration: none;
+}
+
+a,
+.fa-trash-alt,
+.fa-shopping-basket {
+	cursor: pointer;
 }

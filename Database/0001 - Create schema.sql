@@ -53,7 +53,7 @@ CREATE TABLE `productos` (
 	`precio` INT UNSIGNED NOT NULL,
 	`stock_disponible` INT UNSIGNED NOT NULL DEFAULT 0,
 	`mas_vendido` BOOLEAN NOT NULL DEFAULT 0 ,
-	`novedades` BOOLEAN NOT NULL DEFAULT 0,
+	`novedades` BOOLEAN NOT NULL DEFAULT 1,
 	`creado_por` INT UNSIGNED NOT NULL,
 	`creado_en` DATE NOT NULL,
 	`actualizado_por` INT UNSIGNED NULL,
@@ -67,25 +67,25 @@ CREATE TABLE `productos` (
 	FOREIGN KEY (`actualizado_por`) REFERENCES `usuarios`(`id`)	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ventas` (
+CREATE TABLE `ventas_encabezado` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`usuario_id` INT UNSIGNED NOT NULL,
 	`numero_factura` INT UNSIGNED NOT NULL,
 	`fecha_emision` DATE NOT NULL,
-	`importe` DECIMAL(13,2) UNSIGNED NOT NULL,
+	`importe` INT UNSIGNED NOT NULL,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `detalle_ventas` (
+CREATE TABLE `ventas_detalle` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`producto_id` INT UNSIGNED NOT NULL,
-	`venta_id` INT UNSIGNED NOT NULL,
+	`venta_encabezado_id` INT UNSIGNED NOT NULL,
 	`cantidad` INT UNSIGNED NOT NULL,
-	`precio` DECIMAL(13,2) UNSIGNED NOT NULL,
+	`precio` INT UNSIGNED NOT NULL,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`producto_id`) REFERENCES `productos`(`id`),
-	FOREIGN KEY (`venta_id`) REFERENCES `ventas`(`id`)
+	FOREIGN KEY (`venta_encabezado_id`) REFERENCES `ventas_encabezado`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `imagenes` (
