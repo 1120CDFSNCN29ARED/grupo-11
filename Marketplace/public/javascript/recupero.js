@@ -1,7 +1,7 @@
 window.addEventListener("load", function (){
 
-     let formulario = document.querySelector('.formulario');
-     let email = document.querySelector('.email');
+    let formulario = document.querySelector('.formulario');
+    let email = document.querySelector('.email');
 
      function validateEmail(email) {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -31,5 +31,5 @@ window.addEventListener("load", function (){
             document.querySelector(".grupo_email .formulario__input-error").classList.add('formulario__input-error-activo');
             e.preventDefault();
         }
-     })    
+    })    
 })
