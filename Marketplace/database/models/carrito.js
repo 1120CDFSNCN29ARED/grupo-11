@@ -19,11 +19,6 @@ module.exports = (sequelize) => {
 			as: "producto",
 			foreignKey: "producto_id"
 		});
-
-		entidad.belongsTo(models.Imagen, {
-			as: "imagen",
-			foreignKey: "producto_id",
-		});
 	};
 
 	return entidad;
