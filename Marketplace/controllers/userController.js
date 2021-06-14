@@ -6,7 +6,6 @@ const path = require("path");
 const bcryptjs = require("bcryptjs");
 const { validationResult } = require("express-validator");
 const nodemailer = require("nodemailer");
-const { getMaxListeners } = require("process");
 
 // Archivos y Paths ****************************
 const imagesPath = path.join(__dirname, "../public/images/users/");
@@ -141,8 +140,9 @@ module.exports = {
 		res.redirect("/usuario/administrar/" + id);
 	},
 	loginForm: (req, res) => {
-		res.render("login", { titulo: "Login", 
-		                      msg: "" 
+		res.render("login", { 
+			titulo: "Login", 
+		    msg: ""
 		});
 	},
 	loginGrabar: async (req, res) => {
@@ -197,26 +197,22 @@ module.exports = {
 				oldData: req.body,
 			});
 		}
-		
-		
 		let transporter = nodemailer.createTransport({
-		  service: 'gmail',
-		  auth: {
-			    user: 'app.guitar.shop@gmail.com', 
-			    pass: 'digitalhouse' 
-		  },
-		  tls: {
-			rejectUnauthorized: false
-		  }
+			service: 'gmail',
+			auth: {
+					user: 'app.guitar.shop@gmail.com', 
+					pass: 'digitalhouse' 
+			},
+			tls: {
+				rejectUnauthorized: false
+			}
 		});
-
 		let info = {
 			from: 'app.guitar.shop@gmail.com', 
 			to: req.body.email, 
 			subject: "Recupero de Contraseña", 
 			text: "En breve nos contactaremos para pasarte el link de recupero de contraseña. ", 
 	    };
-
 		transporter.sendMail(info, function(error, info){
 			if (error) {
 			  console.log(error);
@@ -226,7 +222,7 @@ module.exports = {
 		});
 		res.render("login",{
 			titulo: "Login",
-			msg: "Email Enviado Correctamente"
+			msg: "Email enviado correctamente"
 		})
 	},
 };
