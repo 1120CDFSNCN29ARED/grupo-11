@@ -188,7 +188,7 @@ module.exports = {
 		if (validaciones.isEmpty()) {
 			// Verificar si el mail pertenece a un usuario
 			var usuario = await usuarioRepository.ObtenerPorEmail(req.body.email);
-			usuario == undefined ? validaciones.errors.push({msg: "Ese mail no corresponde a un usuario activo"}) : "";
+			usuario == undefined ? validaciones.errors.push({msg: "Ese mail no corresponde a un usuario activo"}) : null;
 		}
 		if (!validaciones.isEmpty()) {
 			return res.render("recupero", {
