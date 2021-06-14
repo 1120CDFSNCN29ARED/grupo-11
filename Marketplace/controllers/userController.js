@@ -15,7 +15,7 @@ const errorEmailRegistrado = "Este mail ya está registrado";
 // Controlador ********************************
 module.exports = {
 	crearForm: (req, res) => {
-		res.render("usuario-crear-y-editar", { 
+		res.render("usuario-crear-y-editar", {
 			titulo: "Registro de Usuario",
 			usuario: null,
 		});
@@ -92,7 +92,7 @@ module.exports = {
 		}
 		// Acciones a tomar si existe algún error de validación
 		if (validaciones.errors.length) {
-			req.file ? BorrarArchivoDeImagen(req.file.filename) : null
+			req.file ? BorrarArchivoDeImagen(req.file.filename) : null;
 			return res.render("usuario-crear-y-editar", {
 				usuario,
 				errores: validaciones.mapped(),
@@ -102,7 +102,7 @@ module.exports = {
 		}
 		// Acciones a tomar si NO existe ningún error de validación
 		// 1. Si se cambió de avatar, borrar el original
-		req.file ? BorrarArchivoDeImagen(usuario.avatar) : null
+		req.file ? BorrarArchivoDeImagen(usuario.avatar) : null;
 		// 2. Asignarle a una variable el nombre del arhivo de imagen
 		let fileName = req.file ? req.file.filename : usuario.avatar;
 		// 3. Actualizar el registro en la BD y req.session.usuario
@@ -112,7 +112,9 @@ module.exports = {
 		res.redirect("/usuario/detalle");
 	},
 	eliminar: async (req, res) => {
-		let avatar = await usuarioRepository.ObtenerPorId(req.session.usuarioLogeado.id).then(n => n.avatar)
+		let avatar = await usuarioRepository
+			.ObtenerPorId(req.session.usuarioLogeado.id)
+			.then((n) => n.avatar);
 		BorrarArchivoDeImagen(avatar);
 		await usuarioRepository.Eliminar(req.session.usuarioLogeado.id);
 		res.redirect("/usuario/logout");
@@ -133,16 +135,16 @@ module.exports = {
 	},
 	adminGuardar: async (req, res) => {
 		let cadena = req.body.id;
-		let id = cadena.slice(cadena.lastIndexOf("/")+1)
+		let id = cadena.slice(cadena.lastIndexOf("/") + 1);
 		// Actualizar el registro en la BD
 		await usuarioRepository.ActualizarPorAdmin(id, req.body);
 		// 4. Redireccionar
 		res.redirect("/usuario/administrar/" + id);
 	},
 	loginForm: (req, res) => {
-		res.render("login", { 
-			titulo: "Login", 
-		    msg: ""
+		res.render("login", {
+			titulo: "Login",
+			msg: "",
 		});
 	},
 	loginGrabar: async (req, res) => {
@@ -151,7 +153,7 @@ module.exports = {
 			// Verificar si el mail y la contraseña pertenecen a un usuario
 			var usuario = await usuarioRepository.ObtenerPorEmail(req.body.email);
 			if (usuario == undefined || !bcryptjs.compareSync(req.body.contrasena, usuario.contrasena)) {
-				validaciones.errors.push({msg: "Credenciales inválidas"})
+				validaciones.errors.push({ msg: "Credenciales inválidas" });
 			} else if (usuario.borrado) {
 				validaciones.errors.push({
 					msg: "El usuario está inactivado",
@@ -164,13 +166,13 @@ module.exports = {
 				errores: validaciones.array(),
 				titulo: "Login",
 				oldData: req.body,
-				msg: ""
+				msg: "",
 			});
 		}
 		// Iniciar session
 		req.session.usuarioLogeado = usuario;
 		// Cookies
-		req.body.recordar != undefined ? res.cookie("recordar", usuario.email, { maxAge: 24 * 60 * 60 * 1000 }) : null
+		req.body.recordar != undefined ? res.cookie("recordar", usuario.email, { maxAge: 24 * 60 * 60 * 1000 }) : null;
 		res.redirect("/usuario/detalle");
 	},
 	logout: (req, res) => {
@@ -180,15 +182,13 @@ module.exports = {
 	},
 	recuperoForm: (req, res) => {
 		res.render("recupero", { titulo: "Recuperar Contraseña" });
-	},	
+	},
 	recuperoGrabar: async (req, res) => {
 		let validaciones = validationResult(req);
 		if (validaciones.isEmpty()) {
 			// Verificar si el mail pertenece a un usuario
 			var usuario = await usuarioRepository.ObtenerPorEmail(req.body.email);
-			if (usuario == undefined) {
-				validaciones.errors.push({msg: "Ese mail no corresponde a un usuario activo"})
-			}
+			usuario == undefined ? validaciones.errors.push({msg: "Ese mail no corresponde a un usuario activo"}) : "";
 		}
 		if (!validaciones.isEmpty()) {
 			return res.render("recupero", {
@@ -198,32 +198,32 @@ module.exports = {
 			});
 		}
 		let transporter = nodemailer.createTransport({
-			service: 'gmail',
+			service: "gmail",
 			auth: {
-					user: 'app.guitar.shop@gmail.com', 
-					pass: 'digitalhouse' 
+				user: "app.guitar.shop@gmail.com",
+				pass: "digitalhouse",
 			},
 			tls: {
-				rejectUnauthorized: false
-			}
+				rejectUnauthorized: false,
+			},
 		});
 		let info = {
-			from: 'app.guitar.shop@gmail.com', 
-			to: req.body.email, 
-			subject: "Recupero de Contraseña", 
-			text: "En breve nos contactaremos para pasarte el link de recupero de contraseña. ", 
-	    };
-		transporter.sendMail(info, function(error, info){
+			from: "app.guitar.shop@gmail.com",
+			to: req.body.email,
+			subject: "Recupero de Contraseña",
+			text: "En breve nos contactaremos para pasarte el link de recupero de contraseña. ",
+		};
+		transporter.sendMail(info, function (error, info) {
 			if (error) {
-			  console.log(error);
+				console.log(error);
 			} else {
-			  console.log('Email sent: ' + info.response);
+				console.log("Email sent: " + info.response);
 			}
 		});
-		res.render("login",{
+		res.render("login", {
 			titulo: "Login",
-			msg: "Email enviado correctamente"
-		})
+			msg: "Email enviado correctamente",
+		});
 	},
 };
 
