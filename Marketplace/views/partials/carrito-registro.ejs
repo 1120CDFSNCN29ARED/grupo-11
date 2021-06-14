@@ -5,7 +5,7 @@
 	<p class="ocultar" id="precio"><%= producto.precio %> </p>
 
 	<!-- IMAGEN Y NOMBRE -->
-	<img src="/images/products/<%= imagen.ruta %> " alt="<%= producto.nombre %>" class="imagen-de-producto">
+	<img src="/images/products/<%= producto.imagenes[0].ruta %> " alt="<%= producto.nombre %>" class="imagen-de-producto">
 	<p class="nombre-de-producto"><%= producto.nombre %> </p>
 	<!--CANTIDAD-->
 	<div id="cantidad-y-flechas">
