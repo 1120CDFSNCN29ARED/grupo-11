@@ -5,6 +5,7 @@
 	<main>
 		<form action="/usuario/login" method="POST" class="formulario">
 			<div>
+				<ul class="envio_mail"><%=msg%></ul>
 				<% if(typeof errores != 'undefined'){ %>
 					<p style="color: red">ERROR</p>
 					<ul>

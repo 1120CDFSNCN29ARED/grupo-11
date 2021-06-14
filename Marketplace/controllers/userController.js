@@ -111,7 +111,9 @@ module.exports = {
 		res.redirect("/usuario/logout");
 	},
 	loginForm: (req, res) => {
-		res.render("login", { titulo: "Login" });
+		res.render("login", { titulo: "Login", 
+		                      msg: "" 
+		});
 	},
 	loginGrabar: async (req, res) => {
 		let validaciones = validationResult(req);
@@ -127,6 +129,7 @@ module.exports = {
 				errores: validaciones.array(),
 				titulo: "Login",
 				oldData: req.body,
+				msg: ""
 			});
 		}
 		// Iniciar session
@@ -186,8 +189,11 @@ module.exports = {
 			  console.log('Email sent: ' + info.response);
 			}
 		});
-		res.redirect("/usuario/login");	
-	}	
+		res.render("login",{
+			titulo: "Login",
+			msg: "Email Enviado Correctamente"
+		})
+	},
 };
 
 async function EliminarUsuario(id) {

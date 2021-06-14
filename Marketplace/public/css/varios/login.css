@@ -89,3 +89,7 @@ main #google-facebook img {
 .formulario__grupo-input {
 	position: relative;
 }
+
+.envio_mail {
+	color: #1ed12d;
+}
