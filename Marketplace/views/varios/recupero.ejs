@@ -1,0 +1,34 @@
+<%- include('head') %>
+<body>
+	<%- include('header') %>
+	<script src="/javascript/recupero.js"></script>
+	<main>
+		<form action="/usuario/recupero" method="POST" class="formulario">
+			<div>
+				<% if(typeof errores != 'undefined'){ %>
+					<p class="error">ERROR</p>
+					<ul>
+						<% for(let i = 0; i < errores.length; i++){ %>
+							<li><%=errores[i].msg%></li>  
+						<%}%>
+					</ul>
+				<%}%>
+			</div>
+            <h3 class="titulo">Recuperar Contraseña</h3>            
+			<div class="grupo_email"><!--Dirección de mail-->
+				<div class="formulario__grupo-input">
+				     <input type="text" class="formulario__input email" name="email" placeholder="Dirección de mail"
+				      value="<%= locals.oldData && oldData.email ? oldData.email : '' %>">
+					 <i class="formulario__validacion-estado fas fa-times-circle"></i>
+			    </div>
+				<p class="formulario__input-error">Correo Electronico invalido.</p>
+			</div>
+			<div id="button">
+				<!--Buttons Enviar-->
+				<button type="submit">Enviar</button>
+	        </div>
+		</form>
+	</main>
+	<%- include('footer') %>
+</body>
+</html>

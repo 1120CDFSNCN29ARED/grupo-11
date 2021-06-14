@@ -5,6 +5,8 @@ const fs = require("fs");
 const path = require("path");
 const bcryptjs = require("bcryptjs");
 const { validationResult } = require("express-validator");
+const nodemailer = require("nodemailer");
+const { getMaxListeners } = require("process");
 
 // Archivos y Paths ****************************
 const imagesPath = path.join(__dirname, "../public/images/users/");
@@ -139,7 +141,9 @@ module.exports = {
 		res.redirect("/usuario/administrar/" + id);
 	},
 	loginForm: (req, res) => {
-		res.render("login", { titulo: "Login" });
+		res.render("login", { titulo: "Login", 
+		                      msg: "" 
+		});
 	},
 	loginGrabar: async (req, res) => {
 		let validaciones = validationResult(req);
@@ -160,6 +164,7 @@ module.exports = {
 				errores: validaciones.array(),
 				titulo: "Login",
 				oldData: req.body,
+				msg: ""
 			});
 		}
 		// Iniciar session
@@ -172,7 +177,58 @@ module.exports = {
 		res.clearCookie("recordar");
 		req.session.destroy();
 		return res.redirect("/");
-	}
+	},
+	recuperoForm: (req, res) => {
+		res.render("recupero", { titulo: "Recuperar Contraseña" });
+	},	
+	recuperoGrabar: async (req, res) => {
+		let validaciones = validationResult(req);
+		if (validaciones.isEmpty()) {
+			// Verificar si el mail pertenece a un usuario
+			var usuario = await usuarioRepository.ObtenerPorEmail(req.body.email);
+			if (usuario == undefined) {
+				validaciones.errors.push({msg: "Ese mail no corresponde a un usuario activo"})
+			}
+		}
+		if (!validaciones.isEmpty()) {
+			return res.render("recupero", {
+				errores: validaciones.array(),
+				titulo: "Recuperar Contraseña",
+				oldData: req.body,
+			});
+		}
+		
+		
+		let transporter = nodemailer.createTransport({
+		  service: 'gmail',
+		  auth: {
+			    user: 'app.guitar.shop@gmail.com', 
+			    pass: 'digitalhouse' 
+		  },
+		  tls: {
+			rejectUnauthorized: false
+		  }
+		});
+
+		let info = {
+			from: 'app.guitar.shop@gmail.com', 
+			to: req.body.email, 
+			subject: "Recupero de Contraseña", 
+			text: "En breve nos contactaremos para pasarte el link de recupero de contraseña. ", 
+	    };
+
+		transporter.sendMail(info, function(error, info){
+			if (error) {
+			  console.log(error);
+			} else {
+			  console.log('Email sent: ' + info.response);
+			}
+		});
+		res.render("login",{
+			titulo: "Login",
+			msg: "Email Enviado Correctamente"
+		})
+	},
 };
 
 function BorrarArchivoDeImagen(nombreDeArchivo) {

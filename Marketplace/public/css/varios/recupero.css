@@ -2,16 +2,19 @@ main {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+    
 }
 
 main form {
 	margin: 20px auto;
 	padding: 20px 30px;
 	background-color: gray;
+    width: 50%;
+    
 }
 
 main form div {
-	padding: 10px 0px;
+	padding: 15px 0px;
 }
 
 main form input {
@@ -26,30 +29,18 @@ main form button {
 	font-weight: bold;
 }
 
-#registrarse {
-	margin-left: 15px;
-}
-
 main form div#button {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 }
 
-main #google-facebook {
-	display: flex;
-	justify-content: space-around;
-	padding: 10px 0 0;
+.titulo {
+    text-align: center;
+    font-weight: bold;
 }
 
-main #google-facebook img {
-	height: 30px;
-}
-
-#recordar {
-	display: flex;
-	font-weight: bold;
-	align-items: center;
-	width: 40%;
+.error {
+	color: red
 }
 
 .formulario__grupo-incorrecto .formulario__input {
@@ -70,7 +61,7 @@ main #google-facebook img {
 .formulario__validacion-estado {
 	position: absolute;
 	right: 10px;
-	bottom: 15px;
+	bottom: 20px;
 	z-index: 100;
 	font-size: 16px;
 	opacity: 0;
@@ -88,8 +79,4 @@ main #google-facebook img {
 
 .formulario__grupo-input {
 	position: relative;
-}
-
-.envio_mail {
-	color: #1ed12d;
 }
